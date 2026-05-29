@@ -47,7 +47,7 @@ function MacBook({ src, alt, caption }: { src: string; alt: string; caption?: st
         <Image src={src} alt={alt} width={2200} height={1340}
           style={{ width: "100%", height: "auto", display: "block" }} />
         {caption && (
-          <p style={{ marginTop: "1rem", fontSize: ".82rem", color: "#86868b", textAlign: "center", lineHeight: 1.6 }}>{caption}</p>
+          <p style={{ marginTop: "1.25rem", fontSize: ".82rem", color: "rgba(255,255,255,.55)", textAlign: "center", lineHeight: 1.6 }}>{caption}</p>
         )}
       </div>
     </ScrollReveal>
@@ -168,17 +168,17 @@ export default function CVCPage() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          02 · DISCOVERY — off-white
+          02 · DISCOVERY — black (matches MacBook bg)
       ══════════════════════════════════════════════ */}
-      <section className="section-off-white" style={{ padding: "10rem 2rem" }}>
+      <section className="section-black" style={{ padding: "10rem 2rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "5rem" }}>
             <ScrollReveal>
-              <p className="t-eyebrow">02 — Discovery</p>
-              <h2 className="t-section-title" style={{ marginTop: "1rem", marginBottom: "1.5rem" }}>
+              <p className="t-eyebrow" style={{ color: "#0071e3" }}>02 — Discovery</p>
+              <h2 className="t-hero-white" style={{ fontSize: "clamp(2rem,5vw,4.5rem)", marginTop: "1rem", marginBottom: "1.5rem" }}>
                 Benchmarked the best.<br />Found the pattern.
               </h2>
-              <p className="t-body" style={{ maxWidth: 600, margin: "0 auto" }}>
+              <p className="t-body-white" style={{ maxWidth: 600, margin: "0 auto" }}>
                 Hopper 4.8, Kayak 4.8, Skyscanner 4.8, AvisaSales 4.7. Every top-rated travel app shared three structural decisions — and CVC was doing the opposite on all of them.
               </p>
             </ScrollReveal>
@@ -195,23 +195,23 @@ export default function CVCPage() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          03 · INFORMATION ARCHITECTURE — white
+          03 · INFORMATION ARCHITECTURE — black (matches MacBook bg)
       ══════════════════════════════════════════════ */}
-      <section className="section-white" style={{ padding: "10rem 2rem" }}>
+      <section className="section-black" style={{ padding: "10rem 2rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "5rem", alignItems: "start", marginBottom: "5rem" }}>
             <ScrollReveal>
-              <p className="t-eyebrow">03 — Architecture</p>
-              <h2 className="t-section-title" style={{ marginTop: "1rem" }}>
+              <p className="t-eyebrow" style={{ color: "#0071e3" }}>03 — Architecture</p>
+              <h2 className="t-hero-white" style={{ fontSize: "clamp(2rem,5vw,4.5rem)", marginTop: "1rem" }}>
                 Before vs after.<br />One decision at a time.
               </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <p className="t-body" style={{ marginBottom: "1.5rem" }}>
+              <p className="t-body-white" style={{ marginBottom: "1.5rem" }}>
                 The old flow bounced users through the search engine after every single input — departure, then search engine, then destination, then search engine again. Seven interruptions before seeing a result.
               </p>
-              <p className="t-body">
+              <p className="t-body-white">
                 The new flow collapses search into a single guided native step, then presents outbound and return as separate decisions. Loading time becomes a cross-sell moment. Every action moves forward.
               </p>
             </ScrollReveal>
@@ -298,24 +298,24 @@ export default function CVCPage() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          05 · VALIDATION — off-white
+          05 · VALIDATION — black (matches MacBook bg)
       ══════════════════════════════════════════════ */}
-      <section className="section-off-white" style={{ padding: "10rem 2rem" }}>
+      <section className="section-black" style={{ padding: "10rem 2rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "5rem", alignItems: "start", marginBottom: "5rem" }}>
             <ScrollReveal>
-              <p className="t-eyebrow">05 — Validation</p>
-              <h2 className="t-section-title" style={{ marginTop: "1rem" }}>
+              <p className="t-eyebrow" style={{ color: "#0071e3" }}>05 — Validation</p>
+              <h2 className="t-hero-white" style={{ fontSize: "clamp(2rem,5vw,4.5rem)", marginTop: "1rem" }}>
                 We tested it all.<br />The data decided.
               </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <p className="t-body" style={{ marginBottom: "1.5rem" }}>
-                The most contested decision was card density. The product team wanted more information above the fold. The data disagreed. <strong style={{ color: "#1d1d1f" }}>Compact cards won on time-to-select and conversion</strong> — by a margin big enough to ship without a second round of testing.
+              <p className="t-body-white" style={{ marginBottom: "1.5rem" }}>
+                The most contested decision was card density. The product team wanted more information above the fold. The data disagreed. <strong style={{ color: "#fff" }}>Compact cards won on time-to-select and conversion</strong> — by a margin big enough to ship without a second round of testing.
               </p>
-              <p className="t-body">
-                The loading animation cross-sell was the surprise. We expected it to feel intrusive. Users didn't skip it. They engaged with it. That became <strong style={{ color: "#1d1d1f" }}>+23% in hotel revenue</strong> from the same session.
+              <p className="t-body-white">
+                The loading animation cross-sell was the surprise. We expected it to feel intrusive. Users didn't skip it. They engaged with it. That became <strong style={{ color: "#fff" }}>+23% in hotel revenue</strong> from the same session.
               </p>
             </ScrollReveal>
           </div>
