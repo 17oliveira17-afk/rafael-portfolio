@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 /* ─── iPhone 15 Pro Mockup ─────────────────────────────── */
-function iPhone({ src, alt, width = 260, height = 532, style = {} }: {
+function IPhone({ src, alt, width = 260, height = 532, style = {} }: {
   src: string; alt: string; width?: number; height?: number; style?: React.CSSProperties;
 }) {
   return (
@@ -211,7 +211,7 @@ export default function CVCPage() {
           willChange: "transform",
         }}>
           <div style={{ position: "relative", height: 600, width: 620 }}>
-            <iPhone
+            <IPhone
               src="/cvc-screen-results.png"
               alt="Flight results"
               width={270} height={550}
@@ -221,7 +221,7 @@ export default function CVCPage() {
                 animation: "phoneIn1 1.2s cubic-bezier(0.16,1,0.3,1) 0.5s both",
               }}
             />
-            <iPhone
+            <IPhone
               src="/cvc-screen-filters.png"
               alt="Flight filters"
               width={240} height={490}
@@ -437,7 +437,7 @@ export default function CVCPage() {
             <div style={{ position: "absolute", bottom: -60, left: "50%", transform: "translateX(-50%)", width: 600, height: 200, background: "radial-gradient(ellipse, rgba(245,200,66,0.08) 0%, transparent 70%)", filter: "blur(30px)", pointerEvents: "none" }} />
 
             <div style={{ textAlign: "center" }}>
-              <iPhone src="/cvc-screen-results.png" alt="Results screen" width={220} height={450} />
+              <IPhone src="/cvc-screen-results.png" alt="Results screen" width={220} height={450} />
               <div style={{ marginTop: 16, fontSize: 12, color: "#555" }}>
                 <strong style={{ display: "block", color: "#aaa", fontSize: 13, marginBottom: 4 }}>Results</strong>
                 Compact cards · outbound first
@@ -445,7 +445,7 @@ export default function CVCPage() {
             </div>
 
             <div style={{ textAlign: "center" }}>
-              <iPhone src="/cover-cvc-flights.png" alt="Full app" width={260} height={532}
+              <IPhone src="/cover-cvc-flights.png" alt="Full app" width={260} height={532}
                 style={{ transform: "translateY(-20px)" }}
               />
               <div style={{ marginTop: 16, fontSize: 12, color: "#555" }}>
@@ -455,7 +455,7 @@ export default function CVCPage() {
             </div>
 
             <div style={{ textAlign: "center" }}>
-              <iPhone src="/cvc-screen-filters.png" alt="Filters screen" width={220} height={450} />
+              <IPhone src="/cvc-screen-filters.png" alt="Filters screen" width={220} height={450} />
               <div style={{ marginTop: 16, fontSize: 12, color: "#555" }}>
                 <strong style={{ display: "block", color: "#aaa", fontSize: 13, marginBottom: 4 }}>Filters</strong>
                 Price histogram · stops · airlines
