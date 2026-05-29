@@ -6,34 +6,24 @@ interface Props {
   delay?: number;
   className?: string;
   style?: CSSProperties;
-  type?: "y" | "x";
+  type?: "up" | "in";
 }
 
-export default function ScrollReveal({ children, delay = 0, className = "", style = {}, type = "y" }: Props) {
+export default function ScrollReveal({ children, delay = 0, className = "", style = {}, type = "up" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => el.classList.add("in"), delay);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        setTimeout(() => el.classList.add("visible"), delay);
+        obs.unobserve(el);
+      }
+    }, { threshold: 0.12 });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [delay]);
-
   return (
-    <div
-      ref={ref}
-      className={`${type === "x" ? "reveal-x" : "reveal"} ${className}`}
-      style={style}
-    >
+    <div ref={ref} className={`${type === "in" ? "fade-in" : "fade-up"} ${className}`} style={style}>
       {children}
     </div>
   );
