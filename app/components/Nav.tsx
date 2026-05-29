@@ -1,81 +1,81 @@
 "use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const links = [
+  { label: "Work",    href: "/#work" },
+  { label: "About",   href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        padding: "1.5rem 3rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        transition: "all 0.4s ease",
-        background: scrolled ? "rgba(8,8,8,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
-      }}
-    >
-      <span
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "1.1rem",
-          fontWeight: 700,
-          letterSpacing: "-0.02em",
-        }}
-      >
-        Rafael<span style={{ color: "var(--accent)" }}>.</span>
-      </span>
+    <>
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 200,
+        padding: "1.4rem 3rem",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        transition: "background .4s ease, border-color .4s ease",
+        background: scrolled ? "rgba(8,8,8,.88)" : "transparent",
+        backdropFilter: scrolled ? "blur(24px)" : "none",
+        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+      }}>
+        {/* Logo */}
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <span style={{
+            fontFamily: "var(--font-display)", fontSize: "1.15rem",
+            fontWeight: 800, letterSpacing: "-.03em", color: "var(--text)",
+          }}>
+            RG<span style={{ color: "var(--accent)" }}>.</span>
+          </span>
+        </Link>
 
-      <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-        {["Work", "About", "Contact"].map((item) => (
-          <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
-            className="label"
-            style={{ color: "var(--text-muted)", textDecoration: "none", letterSpacing: "0.12em" }}
+        {/* Desktop links */}
+        <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
+          {links.map(l => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`nav-link ${pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href.split("#")[0])) ? "active" : ""}`}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            style={{
+              padding: ".45rem 1.2rem",
+              border: "1px solid var(--accent)",
+              borderRadius: "100px",
+              color: "var(--accent)",
+              textDecoration: "none",
+              fontSize: ".7rem", fontWeight: 600, letterSpacing: ".12em", textTransform: "uppercase",
+              transition: "background .2s ease, color .2s ease",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = "var(--accent)";
+              (e.currentTarget as HTMLElement).style.color = "#000";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = "transparent";
+              (e.currentTarget as HTMLElement).style.color = "var(--accent)";
+            }}
           >
-            {item}
-          </a>
-        ))}
-        <a
-          href="mailto:rafael@rafaelgdesign.com"
-          style={{
-            padding: "0.5rem 1.2rem",
-            border: "1px solid var(--accent)",
-            borderRadius: "100px",
-            color: "var(--accent)",
-            textDecoration: "none",
-            fontSize: "0.72rem",
-            fontWeight: 500,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            transition: "all 0.2s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.target as HTMLElement).style.background = "var(--accent)";
-            (e.target as HTMLElement).style.color = "#000";
-          }}
-          onMouseLeave={(e) => {
-            (e.target as HTMLElement).style.background = "transparent";
-            (e.target as HTMLElement).style.color = "var(--accent)";
-          }}
-        >
-          Hire me
-        </a>
-      </div>
-    </nav>
+            Hire me
+          </Link>
+        </div>
+      </nav>
+    </>
   );
 }
