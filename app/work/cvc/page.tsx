@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
+import IPhone from "../../components/IPhone";
+import MacBookSvg from "../../components/MacBook";
 
 /* ════════════════════════════════════════════════════════
    Hook: scroll progress within a sticky section
@@ -119,7 +121,7 @@ function CinematicHero() {
             opacity: 0.4 + p * 0.2,
             filter: "blur(2px)",
           }}>
-            <Phone src="/cvc-phone-cal.png" alt="" w={240} />
+            <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
           </div>
           <div style={{
             position: "absolute",
@@ -127,7 +129,7 @@ function CinematicHero() {
             opacity: 0.4 + p * 0.2,
             filter: "blur(2px)",
           }}>
-            <Phone src="/cvc-phone-confirma.png" alt="" w={240} />
+            <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
           </div>
 
           {/* Mid layer */}
@@ -136,14 +138,14 @@ function CinematicHero() {
             transform: `translate(-140px, 0px) rotate(-6deg)`,
             opacity: 0.85,
           }}>
-            <Phone src="/cvc-phone-search.png" alt="" w={280} />
+            <Phone src="/screens-mobile/search.png" alt="" w={280} />
           </div>
           <div style={{
             position: "absolute",
             transform: `translate(140px, 0px) rotate(6deg)`,
             opacity: 0.85,
           }}>
-            <Phone src="/cvc-phone-filters.png" alt="" w={280} />
+            <Phone src="/screens-mobile/filters.png" alt="" w={280} />
           </div>
 
           {/* Front hero phone */}
@@ -152,7 +154,7 @@ function CinematicHero() {
             zIndex: 10,
             filter: `drop-shadow(0 60px 100px rgba(0,113,227,0.3)) drop-shadow(0 30px 60px rgba(0,0,0,0.6))`,
           }}>
-            <Phone src="/cvc-phone-resultado.png" alt="CVC flight results" w={320} />
+            <Phone src="/screens-mobile/resultado.png" alt="CVC flight results" w={320} />
           </div>
         </div>
 
@@ -403,7 +405,7 @@ export default function CVCPage() {
           </ScrollReveal>
 
           <ScrollReveal type="scale">
-            <MacBook src="/mbp-benchmark.png" alt="Benchmark" />
+            <MacBook src="/screens-desktop/benchmark.png" alt="Benchmark" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Competitive benchmark · The 4 top-rated travel apps in 2021
             </p>
@@ -412,7 +414,7 @@ export default function CVCPage() {
           <div style={{ height: "5rem" }} />
 
           <ScrollReveal type="scale">
-            <MacBook src="/mbp-dynamics.png" alt="Research" />
+            <MacBook src="/screens-desktop/dynamics.png" alt="Research" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Pain/opportunity matrix · Built from existing CVC usability tests and analytics
             </p>
@@ -447,13 +449,13 @@ export default function CVCPage() {
           </div>
 
           <ScrollReveal type="scale">
-            <MacBook src="/mbp-before-after.png" alt="Before/after" />
+            <MacBook src="/screens-desktop/before-after.png" alt="Before/after" />
           </ScrollReveal>
 
           <div style={{ height: "5rem" }} />
 
           <ScrollReveal type="scale">
-            <MacBook src="/mbp-wireframes.png" alt="Wireframes" />
+            <MacBook src="/screens-desktop/wireframes.png" alt="Wireframes" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Wireframe flow · Home → Search → Calendar → Loading → Outbound → Return → Upsell → Confirmation
             </p>
@@ -463,7 +465,7 @@ export default function CVCPage() {
 
       {/* ═══════════ STICKY PHONE REVEAL — Search ═══════════ */}
       <StickyPhoneReveal
-        phoneSrc="/cvc-phone-search.png"
+        phoneSrc="/screens-mobile/search.png"
         eyebrow="Solution · 01"
         title={<>One field. <em style={{ color: "#0071e3", fontStyle: "italic" }}>One decision.</em></>}
         body={<>Native autocomplete. Ida e volta or só ida. Departure, destination — that&apos;s it. No bouncing between screens, no losing state.</>}
@@ -471,7 +473,7 @@ export default function CVCPage() {
 
       {/* ═══════════ STICKY PHONE REVEAL — Calendar ═══════════ */}
       <StickyPhoneReveal
-        phoneSrc="/cvc-phone-cal.png"
+        phoneSrc="/screens-mobile/calendar.png"
         eyebrow="Solution · 02"
         title={<>A calendar<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>that feels native.</em></>}
         body={<>Range selection with proper highlighting. Months rendered ahead so scroll never breaks. CTA stays glued to the bottom with live context.</>}
@@ -495,15 +497,15 @@ export default function CVCPage() {
           {/* Massive 3x3 grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3rem 2rem" }}>
             {[
-              { src: "/cvc-phone-search.png",      label: "Search",          desc: "Native autocomplete" },
-              { src: "/cvc-phone-cal.png",         label: "Calendar",        desc: "Range with context CTA" },
-              { src: "/cvc-phone-passageiros.png", label: "Passengers",      desc: "Adults · Children · Class" },
-              { src: "/cvc-phone-resultado.png",   label: "Results — Outbound", desc: "Compact cards · Smart labels" },
-              { src: "/cvc-phone-resultado2.png",  label: "Smart Labels",    desc: "Context-aware per card" },
-              { src: "/cvc-phone-volta.png",       label: "Results — Return", desc: "Outbound pinned · Running total" },
-              { src: "/cvc-phone-filters.png",     label: "Filters",         desc: "Price histogram · Live count" },
-              { src: "/cvc-phone-detail.png",      label: "Expanded Card",   desc: "Return inline · Itinerary" },
-              { src: "/cvc-phone-upgrade.png",     label: "Native Upsell",   desc: "Básico · Intermediário · Premium" },
+              { src: "/screens-mobile/search.png",      label: "Search",          desc: "Native autocomplete" },
+              { src: "/screens-mobile/calendar.png",         label: "Calendar",        desc: "Range with context CTA" },
+              { src: "/screens-mobile/passengers.png", label: "Passengers",      desc: "Adults · Children · Class" },
+              { src: "/screens-mobile/resultado.png",   label: "Results — Outbound", desc: "Compact cards · Smart labels" },
+              { src: "/screens-mobile/resultado2.png",  label: "Smart Labels",    desc: "Context-aware per card" },
+              { src: "/screens-mobile/volta.png",       label: "Results — Return", desc: "Outbound pinned · Running total" },
+              { src: "/screens-mobile/filters.png",     label: "Filters",         desc: "Price histogram · Live count" },
+              { src: "/screens-mobile/detail.png",      label: "Expanded Card",   desc: "Return inline · Itinerary" },
+              { src: "/screens-mobile/upgrade.png",     label: "Native Upsell",   desc: "Básico · Intermediário · Premium" },
             ].map((p, i) => (
               <ScrollReveal key={i} delay={(i % 3) * 100}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -559,7 +561,7 @@ export default function CVCPage() {
           </div>
 
           <ScrollReveal type="scale">
-            <MacBook src="/mbp-heuristica.png" alt="Heuristic" />
+            <MacBook src="/screens-desktop/heuristica.png" alt="Heuristic" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Dynamics analysis · Impediments (red) · Suggestions (yellow) · Possible (green)
             </p>

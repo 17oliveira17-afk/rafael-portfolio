@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
+import IPhone from "./components/IPhone";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -133,7 +134,7 @@ function CVCShowcase() {
           zIndex: 1,
           willChange: "transform",
         }}>
-          <Phone src="/cvc-phone-cal.png" alt="" w={240} />
+          <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
         </div>
         {/* Near left */}
         <div style={{
@@ -144,7 +145,7 @@ function CVCShowcase() {
           zIndex: 2,
           willChange: "transform",
         }}>
-          <Phone src="/cvc-phone-search.png" alt="" w={260} />
+          <Phone src="/screens-mobile/search.png" alt="" w={260} />
         </div>
 
         {/* Near right */}
@@ -156,7 +157,7 @@ function CVCShowcase() {
           zIndex: 2,
           willChange: "transform",
         }}>
-          <Phone src="/cvc-phone-filters.png" alt="" w={260} />
+          <Phone src="/screens-mobile/filters.png" alt="" w={260} />
         </div>
         {/* Far right */}
         <div style={{
@@ -167,7 +168,7 @@ function CVCShowcase() {
           zIndex: 1,
           willChange: "transform",
         }}>
-          <Phone src="/cvc-phone-confirma.png" alt="" w={240} />
+          <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
         </div>
 
         {/* HERO PHONE (phase 0) — center, big, with intense shadow */}
@@ -178,7 +179,7 @@ function CVCShowcase() {
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.15 + phase1 * 0.15})) drop-shadow(0 40px 80px rgba(0,0,0,${0.5 + phase2 * 0.2}))`,
           willChange: "transform",
         }}>
-          <Phone src="/cvc-phone-resultado.png" alt="CVC native flight booking" w={320} />
+          <Phone src="/screens-mobile/resultado.png" alt="CVC native flight booking" w={320} />
         </div>
 
         {/* STATS (phase 2) — fade in from bottom */}
@@ -279,7 +280,7 @@ export default function Home() {
             opacity: 0.18, filter: "blur(3px)",
             transform: "rotate(-18deg) scale(0.9)",
           }}>
-            <Phone src="/cvc-phone-search.png" alt="" w={300} />
+            <Phone src="/screens-mobile/search.png" alt="" w={300} />
           </div>
           {/* Far right phone — subtle bg */}
           <div style={{
@@ -287,7 +288,7 @@ export default function Home() {
             opacity: 0.18, filter: "blur(3px)",
             transform: "rotate(18deg) scale(0.95)",
           }}>
-            <Phone src="/cvc-phone-filters.png" alt="" w={300} />
+            <Phone src="/screens-mobile/filters.png" alt="" w={300} />
           </div>
           {/* Bottom left */}
           <div style={{
@@ -295,7 +296,7 @@ export default function Home() {
             opacity: 0.12, filter: "blur(4px)",
             transform: "rotate(-8deg)",
           }}>
-            <Phone src="/cvc-phone-cal.png" alt="" w={240} />
+            <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
           </div>
           {/* Bottom right */}
           <div style={{
@@ -303,7 +304,7 @@ export default function Home() {
             opacity: 0.12, filter: "blur(4px)",
             transform: "rotate(8deg)",
           }}>
-            <Phone src="/cvc-phone-confirma.png" alt="" w={240} />
+            <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
           </div>
         </div>
 
