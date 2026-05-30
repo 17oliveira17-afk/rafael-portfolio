@@ -5,8 +5,9 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import IPhone from "../../components/IPhone";
 import MacBookSvg from "../../components/MacBook";
-import { useIsMobile } from "../../components/useIsMobile";
-import PhoneCarousel from "../../components/PhoneCarousel";
+import useIsMobile from "../../components/useIsMobile";
+import HorizontalCarousel from "../../components/HorizontalCarousel";
+import BigImageReveal from "../../components/BigImageReveal";
 
 /* ════════════════════════════════════════════════════════
    Hook: scroll progress within a sticky section
@@ -347,6 +348,27 @@ export default function CVCPage() {
       {/* ═══════════ CINEMATIC HERO ═══════════ */}
       <CinematicHero />
 
+      {/* ═══════════ CINEMATIC IMAGE — airport sunset ═══════════ */}
+      <BigImageReveal
+        src="/cinematic/airport-sunset.jpg"
+        alt="Airplane wing at sunset"
+        minHeight="80vh"
+        overlay={
+          <ScrollReveal>
+            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.85)", marginBottom: "1.25rem" }}>
+              30 million customers
+            </p>
+            <h2 style={{
+              fontSize: "clamp(2rem, 6vw, 5rem)", fontWeight: 700,
+              letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
+              maxWidth: 900, margin: "0 auto",
+            }}>
+              Built for the people who actually travel.
+            </h2>
+          </ScrollReveal>
+        }
+      />
+
       {/* ═══════════ IMPACT STRIP — big numbers ═══════════ */}
       <ImpactStrip />
 
@@ -511,17 +533,29 @@ export default function CVCPage() {
 
           {/* Phone gallery — carousel on mobile, grid on desktop */}
           {isMobile ? (
-            <PhoneCarousel slides={[
-              { src: "/screens-mobile/search.png",      label: "Search",            desc: "Native autocomplete" },
-              { src: "/screens-mobile/calendar.png",    label: "Calendar",          desc: "Range with context CTA" },
-              { src: "/screens-mobile/passengers.png",  label: "Passengers",        desc: "Adults · Children · Class" },
-              { src: "/screens-mobile/resultado.png",   label: "Results — Outbound", desc: "Compact cards · Smart labels" },
-              { src: "/screens-mobile/resultado2.png",  label: "Smart Labels",      desc: "Context-aware per card" },
-              { src: "/screens-mobile/volta.png",       label: "Results — Return",  desc: "Outbound pinned · Running total" },
-              { src: "/screens-mobile/filters.png",     label: "Filters",           desc: "Price histogram · Live count" },
-              { src: "/screens-mobile/detail.png",      label: "Expanded Card",     desc: "Return inline · Itinerary" },
-              { src: "/screens-mobile/upgrade.png",     label: "Native Upsell",     desc: "Básico · Intermediário · Premium" },
-            ]} />
+            <HorizontalCarousel
+              itemWidth={260}
+              gap={20}
+              items={[
+                { src: "/screens-mobile/search.png",      label: "Search",            desc: "Native autocomplete" },
+                { src: "/screens-mobile/calendar.png",    label: "Calendar",          desc: "Range with context CTA" },
+                { src: "/screens-mobile/passengers.png",  label: "Passengers",        desc: "Adults · Children · Class" },
+                { src: "/screens-mobile/resultado.png",   label: "Results — Outbound", desc: "Compact cards · Smart labels" },
+                { src: "/screens-mobile/resultado2.png",  label: "Smart Labels",      desc: "Context-aware per card" },
+                { src: "/screens-mobile/volta.png",       label: "Results — Return",  desc: "Outbound pinned · Running total" },
+                { src: "/screens-mobile/filters.png",     label: "Filters",           desc: "Price histogram · Live count" },
+                { src: "/screens-mobile/detail.png",      label: "Expanded Card",     desc: "Return inline · Itinerary" },
+                { src: "/screens-mobile/upgrade.png",     label: "Native Upsell",     desc: "Básico · Intermediário · Premium" },
+              ].map((p, i) => (
+                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", color: "#fff" }}>
+                  <div style={{ filter: "drop-shadow(0 30px 60px rgba(0,113,227,0.12)) drop-shadow(0 15px 30px rgba(0,0,0,0.5))" }}>
+                    <Phone src={p.src} alt={p.label} w={220} />
+                  </div>
+                  <p style={{ fontSize: ".95rem", color: "#fff", marginTop: "1.25rem", fontWeight: 500 }}>{p.label}</p>
+                  <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.55)", marginTop: ".35rem" }}>{p.desc}</p>
+                </div>
+              ))}
+            />
           ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3rem 2rem" }}>
             {[
@@ -597,6 +631,28 @@ export default function CVCPage() {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* ═══════════ CINEMATIC IMAGE — traveler ═══════════ */}
+      <BigImageReveal
+        src="/cinematic/traveler-window.jpg"
+        alt="Traveler looking out window"
+        minHeight="75vh"
+        overlay={
+          <ScrollReveal>
+            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.8)", marginBottom: "1.25rem" }}>
+              Shipped in 4 months
+            </p>
+            <h2 style={{
+              fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
+              letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
+              maxWidth: 900, margin: "0 auto",
+            }}>
+              The journey starts<br />
+              with one tap.
+            </h2>
+          </ScrollReveal>
+        }
+      />
 
       {/* ═══════════ FINAL IMPACT — massive numbers ═══════════ */}
       <section style={{ background: "#000", padding: "12rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", textAlign: "center" }}>

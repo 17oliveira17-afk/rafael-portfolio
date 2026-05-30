@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export function useIsMobile(breakpoint = 860) {
-  const [m, setM] = useState(false);
+export default function useIsMobile(breakpoint = 860): boolean {
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const fn = () => setM(window.innerWidth <= breakpoint);
-    fn();
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
+    const check = () => setIsMobile(window.innerWidth <= breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, [breakpoint]);
-  return m;
+  return isMobile;
 }

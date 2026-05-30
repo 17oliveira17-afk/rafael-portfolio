@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import IPhone from "./components/IPhone";
-import { useIsMobile } from "./components/useIsMobile";
+import useIsMobile from "./components/useIsMobile";
+import BigImageReveal from "./components/BigImageReveal";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -421,6 +422,30 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════
+          CINEMATIC IMAGE — design at scale
+      ══════════════════════════════════════════════════ */}
+      <BigImageReveal
+        src="/cinematic/design-system.jpg"
+        alt="Design at scale"
+        minHeight="70vh"
+        overlay={
+          <ScrollReveal>
+            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.85)", marginBottom: "1.25rem" }}>
+              Design at scale
+            </p>
+            <h2 style={{
+              fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
+              letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
+              maxWidth: 900, margin: "0 auto",
+            }}>
+              Where strategy<br />
+              meets the craft.
+            </h2>
+          </ScrollReveal>
+        }
+      />
 
       {/* ══════════════════════════════════════════════════
           INTRO — white, statement
