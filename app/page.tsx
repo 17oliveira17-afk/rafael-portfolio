@@ -101,7 +101,7 @@ function CVCShowcase() {
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem", filter: "drop-shadow(0 30px 60px rgba(0,113,227,.25)) drop-shadow(0 20px 40px rgba(0,0,0,.5))" }}>
-              <Phone src="/screens-mobile/resultado.png" alt="" w={240} />
+              <Phone src="/screens-mobile/ip-resultado.png" alt="" w={240} />
             </div>
           </ScrollReveal>
           <ScrollReveal delay={250}>
@@ -180,7 +180,7 @@ function CVCShowcase() {
           zIndex: 1,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
+          <Phone src="/screens-mobile/ip-calendar.png" alt="" w={240} />
         </div>
         {/* Near left */}
         <div style={{
@@ -191,7 +191,7 @@ function CVCShowcase() {
           zIndex: 2,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/search.png" alt="" w={260} />
+          <Phone src="/screens-mobile/ip-search.png" alt="" w={260} />
         </div>
 
         {/* Near right */}
@@ -203,7 +203,7 @@ function CVCShowcase() {
           zIndex: 2,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/filters.png" alt="" w={260} />
+          <Phone src="/screens-mobile/ip-filters.png" alt="" w={260} />
         </div>
         {/* Far right */}
         <div style={{
@@ -214,7 +214,7 @@ function CVCShowcase() {
           zIndex: 1,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
+          <Phone src="/screens-mobile/ip-confirma.png" alt="" w={240} />
         </div>
 
         {/* HERO PHONE (phase 0) — center, big; shrinks and rises in phase 2 to reveal stats */}
@@ -225,7 +225,7 @@ function CVCShowcase() {
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.15 + phase1 * 0.15})) drop-shadow(0 40px 80px rgba(0,0,0,${0.5 + phase2 * 0.2}))`,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/resultado.png" alt="CVC native flight booking" w={320} />
+          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={320} />
         </div>
 
         {/* STATS (phase 2) — fade in centered where phones used to be */}
@@ -330,7 +330,7 @@ export default function Home() {
             opacity: 0.18, filter: "blur(3px)",
             transform: "rotate(-18deg) scale(0.9)",
           }}>
-            <Phone src="/screens-mobile/search.png" alt="" w={300} />
+            <Phone src="/screens-mobile/ip-search.png" alt="" w={300} />
           </div>
           {/* Far right phone — subtle bg */}
           <div style={{
@@ -338,7 +338,7 @@ export default function Home() {
             opacity: 0.18, filter: "blur(3px)",
             transform: "rotate(18deg) scale(0.95)",
           }}>
-            <Phone src="/screens-mobile/filters.png" alt="" w={300} />
+            <Phone src="/screens-mobile/ip-filters.png" alt="" w={300} />
           </div>
           {/* Bottom left */}
           <div style={{
@@ -346,7 +346,7 @@ export default function Home() {
             opacity: 0.12, filter: "blur(4px)",
             transform: "rotate(-8deg)",
           }}>
-            <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
+            <Phone src="/screens-mobile/ip-calendar.png" alt="" w={240} />
           </div>
           {/* Bottom right */}
           <div style={{
@@ -354,7 +354,7 @@ export default function Home() {
             opacity: 0.12, filter: "blur(4px)",
             transform: "rotate(8deg)",
           }}>
-            <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
+            <Phone src="/screens-mobile/ip-confirma.png" alt="" w={240} />
           </div>
         </div>
         )}
@@ -367,7 +367,7 @@ export default function Home() {
             opacity: 0.22, filter: "blur(2px)",
             pointerEvents: "none",
           }}>
-            <Phone src="/screens-mobile/resultado.png" alt="" w={300} />
+            <Phone src="/screens-mobile/ip-resultado.png" alt="" w={300} />
           </div>
         )}
 
