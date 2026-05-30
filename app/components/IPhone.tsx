@@ -1,9 +1,8 @@
 "use client";
-import Image from "next/image";
 
 /**
  * iPhone 17 Pro Deep Blue — PNG já inclui device frame + conteúdo.
- * Renderiza exatamente o PNG, sem overlay, sem clip, sem distorção.
+ * Usa <img> nativo para preservar 100% o PNG original sem conversão.
  * Dimensões reais: 908 × 1880 px
  */
 export default function IPhone({
@@ -21,11 +20,10 @@ export default function IPhone({
   if (!src) return null;
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={src}
       alt={alt}
-      width={908}
-      height={1880}
       style={{
         width,
         height: "auto",

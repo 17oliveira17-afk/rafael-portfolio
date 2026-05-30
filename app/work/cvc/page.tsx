@@ -207,13 +207,13 @@ function CinematicHero() {
           </p>
         </div>
 
-        {/* Floating phones — mix-blend-mode:lighten removes black background, translateY moves them to bottom half */}
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: "0", transform: `scale(${1 + p * 0.3}) translateY(${p * -60}px)`, opacity: 1 - p * 0.8 }}>
-          <div style={{ position: "absolute", transform: `translate(-320px, 0px) rotate(-12deg)`, opacity: 0.55, filter: "blur(1.5px)", mixBlendMode: "lighten", bottom: "-8%" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={210} /></div>
-          <div style={{ position: "absolute", transform: `translate(320px, 0px) rotate(12deg)`, opacity: 0.55, filter: "blur(1.5px)", mixBlendMode: "lighten", bottom: "-8%" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={210} /></div>
-          <div style={{ position: "absolute", transform: `translate(-175px, 0px) rotate(-6deg)`, opacity: 0.8, mixBlendMode: "lighten", bottom: "-4%" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={250} /></div>
-          <div style={{ position: "absolute", transform: `translate(175px, 0px) rotate(6deg)`, opacity: 0.8, mixBlendMode: "lighten", bottom: "-4%" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={250} /></div>
-          <div style={{ position: "relative", zIndex: 10, mixBlendMode: "lighten", marginBottom: "-5%" }}>
+        {/* Floating phones */}
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", justifyContent: "center", transform: `scale(${1 + p * 0.3}) translateY(${p * -60}px)`, opacity: 1 - p * 0.8 }}>
+          <div style={{ position: "absolute", transform: `translate(-320px, 0px) rotate(-12deg)`, opacity: 0.55, filter: "blur(1.5px)", bottom: "-8%" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={210} /></div>
+          <div style={{ position: "absolute", transform: `translate(320px, 0px) rotate(12deg)`, opacity: 0.55, filter: "blur(1.5px)", bottom: "-8%" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={210} /></div>
+          <div style={{ position: "absolute", transform: `translate(-175px, 0px) rotate(-6deg)`, opacity: 0.85, bottom: "-4%" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={250} /></div>
+          <div style={{ position: "absolute", transform: `translate(175px, 0px) rotate(6deg)`, opacity: 0.85, bottom: "-4%" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={250} /></div>
+          <div style={{ position: "relative", zIndex: 10, filter: "drop-shadow(0 0 60px rgba(0,113,227,0.6)) drop-shadow(0 0 120px rgba(0,113,227,0.3))", marginBottom: "-5%" }}>
             <IPhone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" width={290} />
           </div>
         </div>
