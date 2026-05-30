@@ -213,7 +213,7 @@ function CinematicHero() {
           <div style={{ position: "absolute", transform: `translate(320px, 0px) rotate(12deg)`, opacity: 0.55, filter: "blur(1.5px)", mixBlendMode: "lighten", bottom: "-8%" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={210} /></div>
           <div style={{ position: "absolute", transform: `translate(-175px, 0px) rotate(-6deg)`, opacity: 0.8, mixBlendMode: "lighten", bottom: "-4%" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={250} /></div>
           <div style={{ position: "absolute", transform: `translate(175px, 0px) rotate(6deg)`, opacity: 0.8, mixBlendMode: "lighten", bottom: "-4%" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={250} /></div>
-          <div style={{ position: "relative", zIndex: 10, filter: "drop-shadow(0 -20px 60px rgba(0,113,227,0.25))", marginBottom: "-5%" }}>
+          <div style={{ position: "relative", zIndex: 10, mixBlendMode: "lighten", marginBottom: "-5%" }}>
             <IPhone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" width={290} />
           </div>
         </div>
