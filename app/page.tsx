@@ -571,42 +571,156 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          ABOUT — black with photo
+          THE PROCESS — full-bleed working photo
+      ══════════════════════════════════════════════════ */}
+      <BigImageReveal
+        src="/rafael-working.jpg"
+        alt="Rafael designing"
+        minHeight="85vh"
+        overlay={
+          <ScrollReveal>
+            <p style={{ fontSize: ".72rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>
+              The process
+            </p>
+            <h2 style={{
+              fontSize: "clamp(2rem, 6vw, 5.5rem)", fontWeight: 700,
+              letterSpacing: "-.035em", lineHeight: 1.02, color: "#fff",
+              maxWidth: 1000, margin: "0 auto",
+            }}>
+              Strategy. Research.<br />
+              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Pixels that ship.</em>
+            </h2>
+            <p style={{
+              fontSize: "clamp(1rem,1.3vw,1.15rem)", color: "rgba(255,255,255,.75)",
+              maxWidth: 580, margin: "2rem auto 0", lineHeight: 1.7, fontWeight: 300,
+            }}>
+              Every decision tied to an outcome. Every screen tested before it shipped. Every team aligned on the same north star.
+            </p>
+          </ScrollReveal>
+        }
+      />
+
+      {/* ══════════════════════════════════════════════════
+          ABOUT — cinematic portrait
       ══════════════════════════════════════════════════ */}
       <section className="section-black" style={{ padding: "10rem 2rem", position: "relative", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 60% 40% at 80% 30%, rgba(0,113,227,.1) 0%, transparent 60%)",
+          background: `
+            radial-gradient(ellipse 80% 60% at 25% 50%, rgba(0,113,227,.18) 0%, transparent 55%),
+            radial-gradient(ellipse 50% 50% at 80% 20%, rgba(0,113,227,.08) 0%, transparent 50%)
+          `,
           pointerEvents: "none",
         }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
+
+        {/* Subtle grain */}
+        <div style={{
+          position: "absolute", inset: 0, opacity: 0.25, mixBlendMode: "overlay", pointerEvents: "none",
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E\")",
+        }} />
+
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
+
+          {/* Portrait — cinematic frame */}
           <ScrollReveal type="scale">
-            <div style={{ borderRadius: 24, overflow: "hidden", position: "relative" }}>
-              <Image src="/rafael.jpg" alt="Rafael Guimarães" width={600} height={750}
-                style={{ width: "100%", height: "auto", display: "block", filter: "grayscale(0.15)" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,.7) 100%)" }} />
-              <div style={{ position: "absolute", bottom: "2rem", left: "2rem" }}>
-                <p style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff" }}>Rafael Guimarães</p>
-                <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.65)", marginTop: ".25rem" }}>São Paulo, Brazil</p>
+            <div style={{ position: "relative" }}>
+              {/* Blue glow behind */}
+              <div style={{
+                position: "absolute",
+                inset: "-30px",
+                background: "radial-gradient(ellipse 70% 70% at 30% 50%, rgba(0,113,227,.4) 0%, transparent 60%)",
+                filter: "blur(40px)",
+                pointerEvents: "none",
+                zIndex: 0,
+              }} />
+
+              <div style={{
+                borderRadius: 24,
+                overflow: "hidden",
+                position: "relative",
+                zIndex: 1,
+                boxShadow: "0 60px 120px rgba(0,0,0,.6), 0 30px 60px rgba(0,113,227,.15)",
+              }}>
+                <Image
+                  src="/rafael-portrait.jpg"
+                  alt="Rafael Guimarães"
+                  width={1600}
+                  height={1600}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  priority
+                />
+                {/* Gradient overlay for legibility */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(180deg, transparent 60%, rgba(0,0,0,.85) 100%)",
+                  pointerEvents: "none",
+                }} />
+                {/* Caption on photo */}
+                <div style={{ position: "absolute", bottom: "2rem", left: "2rem", right: "2rem" }}>
+                  <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff", letterSpacing: "-.01em" }}>
+                    Rafael Guimarães
+                  </p>
+                  <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.65)", marginTop: ".25rem", letterSpacing: ".02em" }}>
+                    Product Design Lead · São Paulo, Brazil
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating stat card */}
+              <div style={{
+                position: "absolute",
+                bottom: "-30px",
+                right: "-20px",
+                background: "rgba(20,20,22,.85)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,.08)",
+                borderRadius: 16,
+                padding: "1rem 1.4rem",
+                zIndex: 2,
+                boxShadow: "0 20px 40px rgba(0,0,0,.4)",
+              }}>
+                <p style={{ fontSize: ".65rem", color: "rgba(255,255,255,.5)", letterSpacing: ".15em", textTransform: "uppercase", marginBottom: ".25rem" }}>
+                  Currently
+                </p>
+                <p style={{ fontSize: ".95rem", color: "#fff", fontWeight: 600 }}>
+                  Lead @ Thoughtworks
+                </p>
               </div>
             </div>
           </ScrollReveal>
 
+          {/* Bio content */}
           <ScrollReveal delay={150}>
             <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1.5rem" }}>About</p>
             <h2 style={{
-              fontSize: "clamp(2rem,4vw,3.5rem)", fontWeight: 700, color: "#fff",
-              letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "2rem",
+              fontSize: "clamp(2.2rem,4.5vw,4rem)", fontWeight: 700, color: "#fff",
+              letterSpacing: "-.035em", lineHeight: 1.02, marginBottom: "2rem",
             }}>
               Brazilian designer.<br />
               <em style={{ color: "#0071e3", fontStyle: "italic" }}>Working globally.</em>
             </h2>
-            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,.7)", lineHeight: 1.7, marginBottom: "1rem" }}>
+            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.75)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
               Currently Product Design Lead at <span style={{ color: "#fff", fontWeight: 500 }}>Thoughtworks Brasil</span>, designing URPI PRO — a B2B credit origination platform for MiBanco.
             </p>
-            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, marginBottom: "2.5rem" }}>
+            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, marginBottom: "2rem" }}>
               Previously at Rappi (fintech/growth) and CVC Corp (travel). I love snowboarding, road trips, and building things that matter.
             </p>
+
+            {/* Quick-fact cards */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "1px", marginBottom: "2.5rem", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden" }}>
+              {[
+                { num: "14", label: "Years in design" },
+                { num: "12", label: "Countries served" },
+                { num: "30M+", label: "Users impacted" },
+                { num: "8", label: "Years cross-cultural" },
+              ].map((s, i) => (
+                <div key={i} style={{ background: "#0a0a0a", padding: "1.25rem 1rem" }}>
+                  <div style={{ fontSize: "1.6rem", fontWeight: 700, color: "#0071e3", letterSpacing: "-.02em", lineHeight: 1 }}>{s.num}</div>
+                  <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", marginTop: ".4rem", letterSpacing: ".05em" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+
             <Link href="/about" className="btn-blue">Full story →</Link>
           </ScrollReveal>
         </div>
