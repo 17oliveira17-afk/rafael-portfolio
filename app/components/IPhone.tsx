@@ -2,8 +2,7 @@
 
 /**
  * iPhone 17 Pro Deep Blue — PNG já inclui device frame + conteúdo.
- * mix-blend-mode: screen faz o preto (#000) virar transparente em qualquer fundo,
- * preservando a borda do device e o conteúdo da tela 100%.
+ * Renderiza o PNG 100% sem nenhum blend mode ou filtro.
  */
 export default function IPhone({
   src,
@@ -24,13 +23,7 @@ export default function IPhone({
     <img
       src={src}
       alt={alt}
-      style={{
-        width,
-        height: "auto",
-        display: "block",
-        mixBlendMode: "screen",
-        ...style,
-      }}
+      style={{ width, height: "auto", display: "block", ...style }}
     />
   );
 }

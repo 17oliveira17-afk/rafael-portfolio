@@ -194,7 +194,8 @@ function CinematicHero() {
   return (
     <div ref={ref} style={{ height: "220vh", position: "relative" }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "#000", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,113,227,${.18 - p * .12}) 0%, transparent 65%)` }} />
+        {/* Glow only at bottom — doesn't create contrast with phone edges */}
+        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 40% at 50% 100%, rgba(0,113,227,${.35 - p * .2}) 0%, transparent 70%)` }} />
 
         {/* Headline — top half, above phones */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 20, textAlign: "center", padding: "7rem 2rem 3rem", opacity: 1 - p * 1.8, transform: `translateY(${p * -40}px)`, pointerEvents: p > 0.5 ? "none" : "auto", background: "linear-gradient(to bottom, rgba(0,0,0,0.9) 60%, transparent 100%)" }}>
