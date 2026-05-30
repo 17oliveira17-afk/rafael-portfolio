@@ -31,16 +31,9 @@ function Counter({ n, suffix = "+" }: { n: number; suffix?: string }) {
   return <div ref={ref}>{v}{suffix}</div>;
 }
 
-/* ══════════════════════════════════════════════════════════
-   Phone helper
-   ══════════════════════════════════════════════════════════ */
+/* Phone wraps the SVG IPhone mockup */
 function Phone({ src, alt, w = 280, style = {} }: { src: string; alt: string; w?: number; style?: React.CSSProperties }) {
-  const ratio = 1324 / 644;
-  return (
-    <div style={{ width: w, height: w * ratio, position: "relative", ...style }}>
-      <Image src={src} alt={alt} fill style={{ objectFit: "contain" }} priority />
-    </div>
-  );
+  return <IPhone src={src} alt={alt} width={w} style={style} />;
 }
 
 /* ══════════════════════════════════════════════════════════

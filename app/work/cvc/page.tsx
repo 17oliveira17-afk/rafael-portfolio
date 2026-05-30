@@ -52,26 +52,16 @@ function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string
   return <span ref={ref}>{prefix}{v}{suffix}</span>;
 }
 
-/* ════════════════════════════════════════════════════════
-   Phone component
-   ════════════════════════════════════════════════════════ */
+/* Phone wraps the SVG IPhone mockup */
 function Phone({ src, alt, w = 280, style = {} }: { src: string; alt: string; w?: number; style?: React.CSSProperties }) {
-  const ratio = 1324 / 644;
-  return (
-    <div style={{ width: w, height: w * ratio, position: "relative", ...style }}>
-      <Image src={src} alt={alt} fill style={{ objectFit: "contain" }} priority />
-    </div>
-  );
+  return <IPhone src={src} alt={alt} width={w} style={style} />;
 }
 
-/* ════════════════════════════════════════════════════════
-   MacBook component
-   ════════════════════════════════════════════════════════ */
+/* MacBook wraps the SVG MacBook mockup */
 function MacBook({ src, alt }: { src: string; alt: string }) {
   return (
-    <div style={{ position: "relative", width: "100%", maxWidth: 1200, margin: "0 auto" }}>
-      <Image src={src} alt={alt} width={2200} height={1340}
-        style={{ width: "100%", height: "auto", display: "block" }} priority={false} />
+    <div style={{ width: "100%", maxWidth: 1200, margin: "0 auto" }}>
+      <MacBookSvg src={src} alt={alt} width={1200} color="space-black" />
     </div>
   );
 }
