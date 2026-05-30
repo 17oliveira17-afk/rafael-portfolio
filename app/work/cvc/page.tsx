@@ -207,13 +207,14 @@ function CinematicHero() {
           </p>
         </div>
 
-        {/* Floating phones — laterais atrás, central na frente */}
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", justifyContent: "center", transform: `scale(${1 + p * 0.3}) translateY(${p * -60}px)`, opacity: 1 - p * 0.8 }}>
-          <div style={{ position: "absolute", transform: `translate(-330px, 0px) rotate(-12deg)`, opacity: 0.4, filter: "blur(2px)", zIndex: 1, bottom: "-8%" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={200} /></div>
-          <div style={{ position: "absolute", transform: `translate(330px, 0px) rotate(12deg)`, opacity: 0.4, filter: "blur(2px)", zIndex: 1, bottom: "-8%" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={200} /></div>
-          <div style={{ position: "absolute", transform: `translate(-175px, 0px) rotate(-6deg)`, opacity: 0.65, filter: "blur(0.5px)", zIndex: 2, bottom: "-4%" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={245} /></div>
-          <div style={{ position: "absolute", transform: `translate(175px, 0px) rotate(6deg)`, opacity: 0.65, filter: "blur(0.5px)", zIndex: 2, bottom: "-4%" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={245} /></div>
-          <div style={{ position: "relative", zIndex: 10, filter: "drop-shadow(0 0 60px rgba(0,113,227,0.6)) drop-shadow(0 0 120px rgba(0,113,227,0.3))", marginBottom: "-5%" }}>
+        {/* Laterais — ficam atrás do central no DOM */}
+        <div style={{ position: "absolute", inset: 0, transform: `scale(${1 + p * 0.3}) translateY(${p * -60}px)`, opacity: 1 - p * 0.8 }}>
+          <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(calc(-50% - 330px), 8%) rotate(-12deg)", opacity: 0.4, filter: "blur(2px)" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={200} /></div>
+          <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(calc(-50% + 330px), 8%) rotate(12deg)", opacity: 0.4, filter: "blur(2px)" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={200} /></div>
+          <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(calc(-50% - 175px), 4%) rotate(-6deg)", opacity: 0.65, filter: "blur(0.5px)" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={245} /></div>
+          <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(calc(-50% + 175px), 4%) rotate(6deg)", opacity: 0.65, filter: "blur(0.5px)" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={245} /></div>
+          {/* Central — último no DOM = na frente de todos */}
+          <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(-50%, 5%)", filter: "drop-shadow(0 0 50px rgba(0,113,227,0.7)) drop-shadow(0 0 100px rgba(0,113,227,0.35))" }}>
             <IPhone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" width={300} />
           </div>
         </div>
