@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import IPhone from "./components/IPhone";
+import { useIsMobile } from "./components/useIsMobile";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -62,18 +63,69 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
 function CVCShowcase() {
   const ref = useRef<HTMLDivElement>(null);
   const p = useScrollProgress(ref);
+  const isMobile = useIsMobile();
 
   // Phase 0: 0–0.33 — Single phone zooms in from far
   // Phase 1: 0.33–0.66 — More phones fan out from sides
   // Phase 2: 0.66–1.0 — Stats fade in, CTA appears
 
-  const phase0 = Math.min(1, p / 0.33);            // 0 to 1 in first third
-  const phase1 = Math.max(0, Math.min(1, (p - 0.33) / 0.33)); // fanout phase
-  const phase2 = Math.max(0, Math.min(1, (p - 0.66) / 0.34)); // stats phase
+  const phase0 = Math.min(1, p / 0.33);
+  const phase1 = Math.max(0, Math.min(1, (p - 0.33) / 0.33));
+  const phase2 = Math.max(0, Math.min(1, (p - 0.66) / 0.34));
 
-  const heroScale = 0.4 + phase0 * 0.6;            // 0.4 → 1.0
-  const heroRotate = 15 - phase0 * 15;             // 15° → 0°
+  const heroScale = 0.4 + phase0 * 0.6;
+  const heroRotate = 15 - phase0 * 15;
   const heroOpacity = 0.3 + phase0 * 0.7;
+
+  /* Mobile: simplified showcase, no sticky scroll */
+  if (isMobile) {
+    return (
+      <section style={{ background: "#000", padding: "5rem 1.5rem", position: "relative", overflow: "hidden" }}>
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse 100% 60% at 50% 40%, rgba(0,113,227,.12) 0%, transparent 60%)",
+        }} />
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 480, margin: "0 auto", textAlign: "center" }}>
+          <ScrollReveal>
+            <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".75rem" }}>
+              Featured Case Study
+            </p>
+            <h2 style={{
+              fontSize: "clamp(2rem,11vw,3rem)", fontWeight: 700, letterSpacing: "-.035em",
+              color: "#f5f5f7", lineHeight: 1.03, marginBottom: "2.5rem",
+            }}>
+              From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />
+              to category-defining.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={150}>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem", filter: "drop-shadow(0 30px 60px rgba(0,113,227,.25)) drop-shadow(0 20px 40px rgba(0,0,0,.5))" }}>
+              <Phone src="/screens-mobile/resultado.png" alt="" w={240} />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={250}>
+            <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
+              {[
+                { v: "2 → 4.6★", l: "App rating" },
+                { v: "+212%", l: "Conversion" },
+                { v: "+23%", l: "Cross-sell" },
+              ].map((s, i) => (
+                <div key={i} style={{ textAlign: "center", minWidth: 90 }}>
+                  <div style={{ fontSize: "1.2rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em", lineHeight: 1 }}>{s.v}</div>
+                  <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.5)", marginTop: ".35rem", letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Link href="/work/cvc" className="btn-blue">
+                See full case study →
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div ref={ref} style={{ height: "350vh", position: "relative" }}>
@@ -217,8 +269,10 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const phonesRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    if (isMobile) return; // skip parallax on mobile (perf + visual)
     const fn = () => {
       const y = window.scrollY;
       if (heroRef.current) {
@@ -234,7 +288,7 @@ export default function Home() {
     };
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
-  }, []);
+  }, [isMobile]);
 
   return (
     <main className="page-in">
@@ -262,7 +316,8 @@ export default function Home() {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
         }} />
 
-        {/* Floating phones — background ambient */}
+        {/* Floating phones — background ambient (desktop only) */}
+        {!isMobile && (
         <div ref={phonesRef} style={{
           position: "absolute", inset: 0, pointerEvents: "none", willChange: "transform",
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -300,6 +355,19 @@ export default function Home() {
             <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
           </div>
         </div>
+        )}
+
+        {/* MOBILE: single floating phone with depth */}
+        {isMobile && (
+          <div style={{
+            position: "absolute", left: "50%", top: "60%",
+            transform: "translateX(-50%)",
+            opacity: 0.22, filter: "blur(2px)",
+            pointerEvents: "none",
+          }}>
+            <Phone src="/screens-mobile/resultado.png" alt="" w={300} />
+          </div>
+        )}
 
         {/* Hero content */}
         <div ref={heroRef} style={{ position: "relative", zIndex: 1, maxWidth: 920, textAlign: "center", willChange: "transform" }}>
@@ -562,9 +630,9 @@ export default function Home() {
         }
         @media (max-width: 860px) {
           section { padding: 5rem 1.5rem !important; }
-          [style*="grid-template-columns: 1fr 1.2fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          [style*="grid-template-columns: repeat(4"] { grid-template-columns: repeat(2,1fr) !important; }
-          [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+          [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          [style*="grid-template-columns:repeat(4"] { grid-template-columns: repeat(2,1fr) !important; gap: 1px !important; }
+          [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </main>

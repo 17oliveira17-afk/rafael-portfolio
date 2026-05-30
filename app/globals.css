@@ -244,8 +244,130 @@ body {
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
 .pulse { animation: pulse 2s ease infinite; }
 
-/* ── Responsive ── */
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — mobile-first device tiers
+   ══════════════════════════════════════════════════════════ */
+
+/* Tablet & smaller */
+@media (max-width: 1024px) {
+  .apple-grid-3 { grid-template-columns: repeat(2,1fr); }
+}
+
+/* Mobile (≤768px) */
 @media (max-width: 768px) {
-  .apple-grid-2, .apple-grid-3 { grid-template-columns: 1fr; }
+  /* Layout */
+  .apple-grid-2, .apple-grid-3 { grid-template-columns: 1fr; gap: 1rem; }
   .apple-nav-inner { padding: 0 1.25rem; }
+
+  /* Cursor: disable on touch */
+  body { cursor: auto; }
+  body * { cursor: auto !important; }
+  .cursor { display: none !important; }
+
+  /* Typography — tighter ramp for mobile */
+  .t-hero, .t-hero-white {
+    font-size: clamp(2.4rem, 12vw, 4rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.03em !important;
+  }
+  .t-section-title {
+    font-size: clamp(1.75rem, 8vw, 2.6rem) !important;
+    line-height: 1.05 !important;
+  }
+  .t-headline {
+    font-size: clamp(1.2rem, 5.5vw, 1.6rem) !important;
+  }
+  .t-body, .t-body-white {
+    font-size: 1rem !important;
+    line-height: 1.65 !important;
+  }
+  .t-num-giant {
+    font-size: clamp(3rem, 18vw, 5rem) !important;
+  }
+  .t-eyebrow {
+    font-size: .68rem !important;
+    letter-spacing: .12em !important;
+  }
+
+  /* Buttons — bigger touch targets */
+  .btn-blue, .btn-blue-ghost, .btn-white-ghost {
+    padding: .85rem 1.75rem;
+    font-size: .95rem;
+    min-height: 44px;
+  }
+
+  /* Sections — uniform mobile padding */
+  section, .section-white, .section-off-white, .section-black, .section-dark {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* Phone (≤480px) */
+@media (max-width: 480px) {
+  .t-hero, .t-hero-white {
+    font-size: clamp(2rem, 11vw, 3rem) !important;
+  }
+  .t-section-title {
+    font-size: clamp(1.55rem, 7.5vw, 2.2rem) !important;
+  }
+}
+
+
+/* ─── Aggressive mobile overrides for inline-styled sections ─── */
+@media (max-width: 768px) {
+  /* All 2-col grids → 1col */
+  [style*="grid-template-columns: 1fr 1.4fr"],
+  [style*="grid-template-columns: 1.2fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.2fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+  /* 3-col and 4-col grids → 1col on phone, 2col on tablet */
+  [style*="grid-template-columns: repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: .5rem !important;
+  }
+  [style*="grid-template-columns: repeat(4,1fr)"],
+  [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2,1fr) !important;
+    gap: .5rem !important;
+  }
+  /* Massive paddings → mobile-friendly */
+  [style*="padding: \"10rem"], [style*="padding: \"12rem"], [style*="padding: \"8rem"] {
+    padding: 4rem 1.25rem !important;
+  }
+  /* Big gaps → smaller */
+  [style*="gap: \"6rem\""], [style*="gap: \"5rem\""], [style*="gap: \"4rem\""] {
+    gap: 2rem !important;
+  }
+  /* Tighter h2 on mobile */
+  h2 { line-height: 1.1 !important; }
+  /* Pull quote text on mobile */
+  section p[style*="font-size: clamp(1.8rem"] {
+    font-size: clamp(1.5rem, 6.5vw, 2rem) !important;
+  }
+  /* Big numbers cards */
+  [style*="padding: \"4rem 2rem\""], [style*="padding: \"3.5rem 2rem\""], [style*="padding: \"56px 32px\""] {
+    padding: 2rem 1.25rem !important;
+  }
+}
+
+/* Tablet specific (480-860px) */
+@media (max-width: 860px) and (min-width: 481px) {
+  [style*="grid-template-columns: repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }

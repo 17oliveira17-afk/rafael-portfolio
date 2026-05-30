@@ -5,6 +5,8 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import IPhone from "../../components/IPhone";
 import MacBookSvg from "../../components/MacBook";
+import { useIsMobile } from "../../components/useIsMobile";
+import PhoneCarousel from "../../components/PhoneCarousel";
 
 /* ════════════════════════════════════════════════════════
    Hook: scroll progress within a sticky section
@@ -71,8 +73,85 @@ function MacBook({ src, alt }: { src: string; alt: string }) {
    ════════════════════════════════════════════════════════ */
 function CinematicHero() {
   const ref = useRef<HTMLDivElement>(null);
-  const p = useScrollProgress(ref);
+  const isMobile = useIsMobile();
+  const pDesktop = useScrollProgress(ref);
+  const p = isMobile ? 0 : pDesktop; // disable parallax on mobile
 
+  // ───────── MOBILE HERO — simpler, one phone, big text, no sticky ─────────
+  if (isMobile) {
+    return (
+      <section style={{
+        minHeight: "100vh", position: "relative", overflow: "hidden",
+        background: "#000",
+        display: "flex", flexDirection: "column",
+        padding: "8rem 1.5rem 3rem",
+      }}>
+        {/* Background glow */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse 90% 50% at 50% 50%, rgba(0,113,227,.18) 0%, transparent 60%)",
+        }} />
+
+        {/* Text block */}
+        <div style={{ textAlign: "center", position: "relative", zIndex: 2, marginBottom: "3rem" }}>
+          <p className="t-eyebrow" style={{
+            color: "#0071e3", marginBottom: "1.25rem",
+            opacity: 0, animation: "fadeUp .9s ease .2s forwards",
+          }}>
+            Case Study · CVC · 2021
+          </p>
+          <h1 style={{
+            fontSize: "clamp(2.5rem, 11vw, 4rem)", fontWeight: 700,
+            color: "#fff", letterSpacing: "-.035em", lineHeight: 1,
+            marginBottom: "1.25rem",
+            opacity: 0, animation: "fadeUp 1.1s ease .4s forwards",
+          }}>
+            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />
+            to category-defining.
+          </h1>
+          <p style={{
+            fontSize: "1rem", color: "rgba(255,255,255,.65)",
+            lineHeight: 1.6, fontWeight: 300, padding: "0 .5rem",
+            opacity: 0, animation: "fadeUp .9s ease .6s forwards",
+          }}>
+            Brazil&apos;s largest travel company. A flight booking app that actually works.
+          </p>
+        </div>
+
+        {/* Single big centered phone */}
+        <div style={{
+          flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+          position: "relative", zIndex: 1,
+          opacity: 0, animation: "fadeUp 1.2s ease .9s forwards",
+        }}>
+          <div style={{ filter: "drop-shadow(0 40px 80px rgba(0,113,227,0.3)) drop-shadow(0 20px 40px rgba(0,0,0,0.7))" }}>
+            <Phone src="/screens-mobile/resultado.png" alt="CVC flight results" w={260} />
+          </div>
+        </div>
+
+        {/* Stats row at bottom */}
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem",
+          marginTop: "2rem", padding: "1.5rem 0",
+          borderTop: "1px solid rgba(255,255,255,.08)",
+          opacity: 0, animation: "fadeUp .9s ease 1.1s forwards",
+        }}>
+          {[
+            { v: "4.6★", l: "Rating" },
+            { v: "+212%", l: "Conversion" },
+            { v: "6s", l: "Load time" },
+          ].map((s, i) => (
+            <div key={i} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em" }}>{s.v}</div>
+              <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.5)", marginTop: ".3rem", textTransform: "uppercase", letterSpacing: ".1em" }}>{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // ───────── DESKTOP HERO — original cinematic ─────────
   return (
     <div ref={ref} style={{ height: "200vh", position: "relative" }}>
       <div style={{
@@ -80,7 +159,6 @@ function CinematicHero() {
         background: "#000",
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>
-        {/* Massive gradient bg */}
         <div style={{
           position: "absolute", inset: 0,
           background: `
@@ -89,112 +167,54 @@ function CinematicHero() {
           `,
         }} />
 
-        {/* Grain overlay */}
         <div style={{
           position: "absolute", inset: 0, opacity: 0.4, mixBlendMode: "overlay",
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
           pointerEvents: "none",
         }} />
 
-        {/* Floating phones — cinematic cluster */}
         <div style={{
           position: "absolute", inset: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
           transform: `scale(${1 + p * 0.4}) translateY(${-p * 80}px)`,
           opacity: 1 - p * 0.7,
-          transition: "none",
         }}>
-          {/* Back layer phones */}
-          <div style={{
-            position: "absolute",
-            transform: `translate(-220px, 40px) rotate(-12deg) translateY(${p * -30}px)`,
-            opacity: 0.4 + p * 0.2,
-            filter: "blur(2px)",
-          }}>
+          <div style={{ position: "absolute", transform: `translate(-220px, 40px) rotate(-12deg) translateY(${p * -30}px)`, opacity: 0.4 + p * 0.2, filter: "blur(2px)" }}>
             <Phone src="/screens-mobile/calendar.png" alt="" w={240} />
           </div>
-          <div style={{
-            position: "absolute",
-            transform: `translate(220px, 50px) rotate(12deg) translateY(${p * -30}px)`,
-            opacity: 0.4 + p * 0.2,
-            filter: "blur(2px)",
-          }}>
+          <div style={{ position: "absolute", transform: `translate(220px, 50px) rotate(12deg) translateY(${p * -30}px)`, opacity: 0.4 + p * 0.2, filter: "blur(2px)" }}>
             <Phone src="/screens-mobile/confirma.png" alt="" w={240} />
           </div>
-
-          {/* Mid layer */}
-          <div style={{
-            position: "absolute",
-            transform: `translate(-140px, 0px) rotate(-6deg)`,
-            opacity: 0.85,
-          }}>
+          <div style={{ position: "absolute", transform: `translate(-140px, 0px) rotate(-6deg)`, opacity: 0.85 }}>
             <Phone src="/screens-mobile/search.png" alt="" w={280} />
           </div>
-          <div style={{
-            position: "absolute",
-            transform: `translate(140px, 0px) rotate(6deg)`,
-            opacity: 0.85,
-          }}>
+          <div style={{ position: "absolute", transform: `translate(140px, 0px) rotate(6deg)`, opacity: 0.85 }}>
             <Phone src="/screens-mobile/filters.png" alt="" w={280} />
           </div>
-
-          {/* Front hero phone */}
-          <div style={{
-            position: "relative",
-            zIndex: 10,
-            filter: `drop-shadow(0 60px 100px rgba(0,113,227,0.3)) drop-shadow(0 30px 60px rgba(0,0,0,0.6))`,
-          }}>
+          <div style={{ position: "relative", zIndex: 10, filter: `drop-shadow(0 60px 100px rgba(0,113,227,0.3)) drop-shadow(0 30px 60px rgba(0,0,0,0.6))` }}>
             <Phone src="/screens-mobile/resultado.png" alt="CVC flight results" w={320} />
           </div>
         </div>
 
-        {/* Text overlay — fades and translates */}
         <div style={{
-          position: "relative", zIndex: 20, textAlign: "center", maxWidth: 900,
-          padding: "0 2rem",
-          opacity: 1 - p * 1.4,
-          transform: `translateY(${p * -60}px)`,
+          position: "relative", zIndex: 20, textAlign: "center", maxWidth: 900, padding: "0 2rem",
+          opacity: 1 - p * 1.4, transform: `translateY(${p * -60}px)`,
           pointerEvents: p > 0.5 ? "none" : "auto",
         }}>
-          <p className="t-eyebrow" style={{
-            color: "#0071e3", marginBottom: "1.5rem",
-            opacity: 0, animation: "fadeUp .9s ease .3s forwards",
-          }}>
+          <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1.5rem", opacity: 0, animation: "fadeUp .9s ease .3s forwards" }}>
             Case Study · CVC Corp · 2021—2022
           </p>
-          <h1 style={{
-            fontSize: "clamp(3rem,8vw,8rem)", fontWeight: 700,
-            color: "#fff", letterSpacing: "-.035em", lineHeight: 0.95,
-            marginBottom: "1.75rem",
-            opacity: 0, animation: "fadeUp 1.1s ease .55s forwards",
-          }}>
-            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />
-            to category-defining.
+          <h1 style={{ fontSize: "clamp(3rem,8vw,8rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.035em", lineHeight: 0.95, marginBottom: "1.75rem", opacity: 0, animation: "fadeUp 1.1s ease .55s forwards" }}>
+            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />to category-defining.
           </h1>
-          <p style={{
-            fontSize: "clamp(1rem,1.4vw,1.2rem)", color: "rgba(255,255,255,.65)",
-            maxWidth: 600, margin: "0 auto", lineHeight: 1.7, fontWeight: 300,
-            opacity: 0, animation: "fadeUp .9s ease .8s forwards",
-          }}>
+          <p style={{ fontSize: "clamp(1rem,1.4vw,1.2rem)", color: "rgba(255,255,255,.65)", maxWidth: 600, margin: "0 auto", lineHeight: 1.7, fontWeight: 300, opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
             Brazil&apos;s largest travel company needed a mobile flight booking experience that actually worked. I rebuilt it from the architecture up.
           </p>
         </div>
 
-        {/* Scroll cue */}
-        <div style={{
-          position: "absolute", bottom: "3rem", left: 0, right: 0,
-          display: "flex", justifyContent: "center",
-          opacity: 1 - p * 3,
-        }}>
-          <div style={{
-            width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.4)",
-            borderRadius: 12, position: "relative",
-          }}>
-            <div style={{
-              position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)",
-              width: 3, height: 8, background: "rgba(255,255,255,.7)", borderRadius: 2,
-              animation: "scrollMouse 2s ease infinite",
-            }} />
+        <div style={{ position: "absolute", bottom: "3rem", left: 0, right: 0, display: "flex", justifyContent: "center", opacity: 1 - p * 3 }}>
+          <div style={{ width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.4)", borderRadius: 12, position: "relative" }}>
+            <div style={{ position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)", width: 3, height: 8, background: "rgba(255,255,255,.7)", borderRadius: 2, animation: "scrollMouse 2s ease infinite" }} />
           </div>
         </div>
       </div>
@@ -259,47 +279,50 @@ function StickyPhoneReveal({
   phoneSrc, eyebrow, title, body,
 }: { phoneSrc: string; eyebrow: string; title: ReactNode; body: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const p = useScrollProgress(ref);
+  const isMobile = useIsMobile();
+  const pDesktop = useScrollProgress(ref);
+  const p = isMobile ? 0 : pDesktop;
 
+  // MOBILE: simple stacked layout, no sticky, no 3D
+  if (isMobile) {
+    return (
+      <section style={{ background: "#000", padding: "5rem 1.5rem", textAlign: "center" }}>
+        <ScrollReveal>
+          <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1rem" }}>{eyebrow}</p>
+          <h2 style={{ fontSize: "clamp(1.8rem,7vw,2.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.025em", lineHeight: 1.1, marginBottom: "1.25rem" }}>
+            {title}
+          </h2>
+          <div style={{ fontSize: ".95rem", color: "rgba(255,255,255,.65)", lineHeight: 1.65, marginBottom: "2.5rem" }}>{body}</div>
+        </ScrollReveal>
+        <ScrollReveal type="scale">
+          <div style={{ display: "inline-block", filter: "drop-shadow(0 30px 60px rgba(0,113,227,0.2)) drop-shadow(0 15px 30px rgba(0,0,0,0.5))" }}>
+            <Phone src={phoneSrc} alt="" w={240} />
+          </div>
+        </ScrollReveal>
+      </section>
+    );
+  }
+
+  // DESKTOP: original sticky scaling
   return (
     <div ref={ref} style={{ height: "200vh", position: "relative", background: "#000" }}>
-      <div style={{
-        position: "sticky", top: 0, height: "100vh", overflow: "hidden",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}>
-        {/* Gradient */}
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,113,227,.12) 0%, transparent 60%)" }} />
         <div style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,113,227,.12) 0%, transparent 60%)",
-        }} />
-
-        {/* Phone — scales and rotates with scroll */}
-        <div style={{
-          position: "absolute",
-          left: "50%", top: "50%",
+          position: "absolute", left: "50%", top: "50%",
           transform: `translate(-50%, -50%) scale(${0.5 + p * 0.7}) perspective(1500px) rotateY(${15 - p * 15}deg)`,
           filter: `drop-shadow(0 ${40 + p * 40}px ${60 + p * 40}px rgba(0,0,0,.5))`,
           willChange: "transform",
         }}>
           <Phone src={phoneSrc} alt="" w={380} />
         </div>
-
-        {/* Text — overlays, fades */}
-        <div style={{
-          position: "relative", zIndex: 5, padding: "0 2rem", maxWidth: 1200,
-          width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem",
-          alignItems: "center",
-        }}>
+        <div style={{ position: "relative", zIndex: 5, padding: "0 2rem", maxWidth: 1200, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
           <div style={{ opacity: 1 - p * 0.5 }}>
             <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1rem" }}>{eyebrow}</p>
-            <h2 style={{
-              fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700,
-              color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05,
-              marginBottom: "1.5rem",
-            }}>{title}</h2>
+            <h2 style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>{title}</h2>
             <div style={{ fontSize: "1.05rem", color: "rgba(255,255,255,.65)", lineHeight: 1.7 }}>{body}</div>
           </div>
-          <div /> {/* spacer for phone */}
+          <div />
         </div>
       </div>
     </div>
@@ -310,6 +333,8 @@ function StickyPhoneReveal({
    PAGE
    ════════════════════════════════════════════════════════ */
 export default function CVCPage() {
+  const isMobile = useIsMobile();
+
   /* Dark cursor */
   useEffect(() => {
     document.body.classList.add("dark-cursor");
@@ -484,7 +509,20 @@ export default function CVCPage() {
             </div>
           </ScrollReveal>
 
-          {/* Massive 3x3 grid */}
+          {/* Phone gallery — carousel on mobile, grid on desktop */}
+          {isMobile ? (
+            <PhoneCarousel slides={[
+              { src: "/screens-mobile/search.png",      label: "Search",            desc: "Native autocomplete" },
+              { src: "/screens-mobile/calendar.png",    label: "Calendar",          desc: "Range with context CTA" },
+              { src: "/screens-mobile/passengers.png",  label: "Passengers",        desc: "Adults · Children · Class" },
+              { src: "/screens-mobile/resultado.png",   label: "Results — Outbound", desc: "Compact cards · Smart labels" },
+              { src: "/screens-mobile/resultado2.png",  label: "Smart Labels",      desc: "Context-aware per card" },
+              { src: "/screens-mobile/volta.png",       label: "Results — Return",  desc: "Outbound pinned · Running total" },
+              { src: "/screens-mobile/filters.png",     label: "Filters",           desc: "Price histogram · Live count" },
+              { src: "/screens-mobile/detail.png",      label: "Expanded Card",     desc: "Return inline · Itinerary" },
+              { src: "/screens-mobile/upgrade.png",     label: "Native Upsell",     desc: "Básico · Intermediário · Premium" },
+            ]} />
+          ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3rem 2rem" }}>
             {[
               { src: "/screens-mobile/search.png",      label: "Search",          desc: "Native autocomplete" },
@@ -521,6 +559,7 @@ export default function CVCPage() {
               </ScrollReveal>
             ))}
           </div>
+          )}
         </div>
       </section>
 
@@ -678,10 +717,9 @@ export default function CVCPage() {
         }
         @media (max-width: 860px) {
           section { padding: 5rem 1.5rem !important; }
-          [style*="grid-template-columns: 1fr 1.4fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
-          [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
-          [style*="grid-template-columns: repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
+          [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          [style*="grid-template-columns:repeat(2"] { grid-template-columns: 1fr !important; }
+          [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </main>
