@@ -196,33 +196,29 @@ function CinematicHero() {
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "#000", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,113,227,${.18 - p * .12}) 0%, transparent 65%)` }} />
 
-        {/* Floating phones background */}
+        {/* Floating phones — mix-blend-mode:lighten removes black background */}
         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${1 + p * 0.4}) translateY(${-p * 80}px)`, opacity: 1 - p * 0.7 }}>
-          <div style={{ position: "absolute", transform: `translate(-280px, 40px) rotate(-14deg) translateY(${p * -30}px)`, opacity: 0.35, filter: "blur(2px)" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={230} /></div>
-          <div style={{ position: "absolute", transform: `translate(280px, 50px) rotate(14deg) translateY(${p * -30}px)`, opacity: 0.35, filter: "blur(2px)" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={230} /></div>
-          <div style={{ position: "absolute", transform: `translate(-155px, 0px) rotate(-7deg)`, opacity: 0.8 }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={270} /></div>
-          <div style={{ position: "absolute", transform: `translate(155px, 0px) rotate(7deg)`, opacity: 0.8 }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={270} /></div>
-          <div style={{ position: "relative", zIndex: 10, filter: "drop-shadow(0 60px 100px rgba(0,113,227,0.3)) drop-shadow(0 30px 60px rgba(0,0,0,0.6))" }}>
-            <IPhone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" width={310} />
+          <div style={{ position: "absolute", transform: `translate(-300px, 40px) rotate(-14deg) translateY(${p * -30}px)`, opacity: 0.5, filter: "blur(1.5px)", mixBlendMode: "lighten" }}><IPhone src="/screens-mobile/ip-calendar.png" alt="" width={220} /></div>
+          <div style={{ position: "absolute", transform: `translate(300px, 50px) rotate(14deg) translateY(${p * -30}px)`, opacity: 0.5, filter: "blur(1.5px)", mixBlendMode: "lighten" }}><IPhone src="/screens-mobile/ip-upgrade.png" alt="" width={220} /></div>
+          <div style={{ position: "absolute", transform: `translate(-165px, 0px) rotate(-7deg)`, opacity: 0.75, mixBlendMode: "lighten" }}><IPhone src="/screens-mobile/ip-search.png" alt="" width={260} /></div>
+          <div style={{ position: "absolute", transform: `translate(165px, 0px) rotate(7deg)`, opacity: 0.75, mixBlendMode: "lighten" }}><IPhone src="/screens-mobile/ip-filters.png" alt="" width={260} /></div>
+          <div style={{ position: "relative", zIndex: 10, filter: "drop-shadow(0 60px 100px rgba(0,113,227,0.35))" }}>
+            <IPhone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" width={300} />
           </div>
         </div>
 
-        {/* Headline */}
-        <div style={{ position: "relative", zIndex: 20, textAlign: "center", maxWidth: 900, padding: "0 2rem", opacity: 1 - p * 1.4, transform: `translateY(${p * -60}px)`, pointerEvents: p > 0.5 ? "none" : "auto" }}>
-          <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1.5rem", opacity: 0, animation: "fadeUp .9s ease .3s forwards" }}>Case Study · CVC Corp · 2021—2022</p>
-          <h1 style={{ fontSize: "clamp(3rem,8vw,8rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.035em", lineHeight: 0.95, marginBottom: "1.75rem", opacity: 0, animation: "fadeUp 1.1s ease .55s forwards" }}>
+        {/* Headline — bottom of screen, não compete com phones */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 20, textAlign: "center", padding: "0 2rem 6rem", opacity: 1 - p * 1.8, transform: `translateY(${p * -40}px)`, pointerEvents: p > 0.5 ? "none" : "auto", background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)" }}>
+          <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1rem", opacity: 0, animation: "fadeUp .9s ease .3s forwards" }}>Case Study · CVC Corp · 2021—2022</p>
+          <h1 style={{ fontSize: "clamp(2.2rem,5.5vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.035em", lineHeight: 1, marginBottom: "1.25rem", opacity: 0, animation: "fadeUp 1.1s ease .55s forwards", textShadow: "0 2px 40px rgba(0,0,0,0.8)" }}>
             From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />to category-defining.
           </h1>
-          <p style={{ fontSize: "clamp(1rem,1.4vw,1.2rem)", color: "rgba(255,255,255,.65)", maxWidth: 600, margin: "0 auto", lineHeight: 1.7, opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
+          <p style={{ fontSize: "clamp(.9rem,1.2vw,1.1rem)", color: "rgba(255,255,255,.8)", maxWidth: 540, margin: "0 auto", lineHeight: 1.6, opacity: 0, animation: "fadeUp .9s ease .8s forwards", textShadow: "0 1px 20px rgba(0,0,0,0.9)" }}>
             Brazil&apos;s largest travel company needed a mobile flight booking experience that actually worked. I rebuilt it from the architecture up.
           </p>
         </div>
 
-        <div style={{ position: "absolute", bottom: "3rem", left: 0, right: 0, display: "flex", justifyContent: "center", opacity: 1 - p * 3 }}>
-          <div style={{ width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.4)", borderRadius: 12, position: "relative" }}>
-            <div style={{ position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)", width: 3, height: 8, background: "rgba(255,255,255,.7)", borderRadius: 2, animation: "scrollMouse 2s ease infinite" }} />
-          </div>
-        </div>
+
       </div>
     </div>
   );
