@@ -442,7 +442,7 @@ export default function CVCPage() {
           </ScrollReveal>
 
           <ScrollReveal type="scale">
-            <MacBook src="/screens-desktop/benchmark.png" alt="Benchmark" />
+            <MacBook src="/screens-desktop/mac-benchmark.png" alt="Benchmark" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Competitive benchmark · The 4 top-rated travel apps in 2021
             </p>
@@ -451,7 +451,7 @@ export default function CVCPage() {
           <div style={{ height: "5rem" }} />
 
           <ScrollReveal type="scale">
-            <MacBook src="/screens-desktop/dynamics.png" alt="Research" />
+            <MacBook src="/screens-desktop/mac-dynamics.png" alt="Research" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Pain/opportunity matrix · Built from existing CVC usability tests and analytics
             </p>
@@ -486,13 +486,13 @@ export default function CVCPage() {
           </div>
 
           <ScrollReveal type="scale">
-            <MacBook src="/screens-desktop/before-after.png" alt="Before/after" />
+            <MacBook src="/screens-desktop/mac-flow.png" alt="Before/after" />
           </ScrollReveal>
 
           <div style={{ height: "5rem" }} />
 
           <ScrollReveal type="scale">
-            <MacBook src="/screens-desktop/wireframes.png" alt="Wireframes" />
+            <MacBook src="/screens-desktop/mac-wireframes.png" alt="Wireframes" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Wireframe flow · Home → Search → Calendar → Loading → Outbound → Return → Upsell → Confirmation
             </p>
@@ -624,7 +624,7 @@ export default function CVCPage() {
           </div>
 
           <ScrollReveal type="scale">
-            <MacBook src="/screens-desktop/heuristica.png" alt="Heuristic" />
+            <MacBook src="/screens-desktop/mac-heuristica.png" alt="Heuristic" />
             <p style={{ marginTop: "1.5rem", fontSize: ".82rem", color: "rgba(255,255,255,.5)", textAlign: "center" }}>
               Dynamics analysis · Impediments (red) · Suggestions (yellow) · Possible (green)
             </p>
