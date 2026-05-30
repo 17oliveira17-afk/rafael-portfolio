@@ -64,7 +64,7 @@ function Phone({ src, alt, w = 280, style = {} }: { src: string; alt: string; w?
 function MacBook({ src, alt }: { src: string; alt: string }) {
   return (
     <div style={{ width: "100%", maxWidth: 1200, margin: "0 auto" }}>
-      <MacBookSvg src={src} alt={alt} width={1200} color="space-black" />
+      <MacBookSvg src={src} alt={alt} width={1200} />
     </div>
   );
 }
