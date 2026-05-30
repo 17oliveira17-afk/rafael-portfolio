@@ -2,8 +2,8 @@
 
 /**
  * iPhone 17 Pro Deep Blue — PNG já inclui device frame + conteúdo.
- * Usa <img> nativo para preservar 100% o PNG original sem conversão.
- * Dimensões reais: 908 × 1880 px
+ * mix-blend-mode: screen faz o preto (#000) virar transparente em qualquer fundo,
+ * preservando a borda do device e o conteúdo da tela 100%.
  */
 export default function IPhone({
   src,
@@ -28,6 +28,7 @@ export default function IPhone({
         width,
         height: "auto",
         display: "block",
+        mixBlendMode: "screen",
         ...style,
       }}
     />
