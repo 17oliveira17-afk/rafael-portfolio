@@ -149,7 +149,7 @@ export default function AboutPage() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #000 0%, transparent 30%)", zIndex: 1 }} />
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(to top, #000 0%, transparent 100%)", zIndex: 1 }} />
           <Image
-            src="/rafael-portrait.jpg"
+            src="/rafael-portrait-v2.png"
             alt="Rafael Guimarães"
             fill
             style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.85 }}
