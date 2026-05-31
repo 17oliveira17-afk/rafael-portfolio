@@ -296,7 +296,7 @@ export default function AboutPage() {
       {/* ═══ PHOTO BREAK ═══ */}
       <section style={{ position: "relative", height: "60vh", overflow: "hidden" }}>
         <Image src="/rafael-working.jpg" alt="Rafael working" fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, #0a0a0a 0%, transparent 30%, transparent 70%, #000 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
           <ScrollReveal>
             <p style={{ fontSize: "clamp(1.5rem,4vw,3.5rem)", fontWeight: 700, color: "#fff", textAlign: "center", letterSpacing: "-.03em", lineHeight: 1.2, textShadow: "0 2px 40px rgba(0,0,0,0.8)", maxWidth: 800, padding: "0 2rem" }}>
