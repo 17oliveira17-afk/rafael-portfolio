@@ -299,8 +299,8 @@ export default function Home() {
           HERO — cinematic with floating phones
       ══════════════════════════════════════════════════ */}
       <section className="section-black" style={{
-        minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
-        position: "relative", overflow: "hidden", padding: "8rem 2rem 6rem",
+        height: "100svh", minHeight: 600, maxHeight: 1200, display: "flex", alignItems: "center", justifyContent: "center",
+        position: "relative", overflow: "hidden", padding: "clamp(5rem,10vh,9rem) 2rem clamp(4rem,8vh,6rem)",
       }}>
         {/* Background gradient layer */}
         <div ref={heroBgRef} style={{
@@ -381,7 +381,7 @@ export default function Home() {
             Product Design Lead · São Paulo → Globally
           </p>
           <h1 style={{
-            fontSize: "clamp(3rem, 9vw, 8.5rem)", fontWeight: 700,
+            fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
             letterSpacing: "-.035em", lineHeight: 0.95, color: "#fff",
             marginBottom: "2rem",
             opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
