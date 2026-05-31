@@ -149,28 +149,57 @@ export default function AboutPage() {
         `}</style>
       </section>
 
-      {/* ═══ LOGOS STRIP ═══ */}
-      <section style={{ background: "#000", padding: "3rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <p style={{ fontSize: ".65rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2rem" }}>Companies</p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "3rem", flexWrap: "wrap" }}>
+      {/* ═══ LOGOS CAROUSEL ═══ */}
+      <section style={{ background: "#000", padding: "4rem 0", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
+        <p style={{ fontSize: ".65rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2.5rem" }}>Companies</p>
+        <div style={{ position: "relative" }}>
+          {/* Fade edges */}
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          {/* Track */}
+          <div style={{ display: "flex", gap: "4rem", alignItems: "center", animation: "logoScroll 28s linear infinite", width: "max-content" }}>
             {[
-              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks", h: 32 },
-              { src: "/logos/logo-rappi.png", alt: "Rappi", h: 36 },
-              { src: "/logos/logo-cvc.png", alt: "CVC Corp", h: 32 },
-              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens", h: 28 },
+              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
+              { src: "/logos/logo-rappi.png", alt: "Rappi" },
+              { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
+              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
+              { src: "/logos/logo-almundo.png", alt: "Almundo" },
+              { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
+              { src: "/logos/logo-biblos.png", alt: "Biblos" },
+              { src: "/logos/logo-experimento.png", alt: "Experimento" },
+              { src: "/logos/logo-ola.png", alt: "Ola" },
+              { src: "/logos/logo-visual.png", alt: "Visual" },
+              { src: "/logos/logo-rexture.png", alt: "Rexture" },
+              { src: "/logos/logo-trend.png", alt: "Trend" },
+              { src: "/logos/logo-frame1.png", alt: "Company" },
+              { src: "/logos/logo-2.png", alt: "Company" },
+              { src: "/logos/logo-5.png", alt: "Company" },
+              // Duplicate for seamless loop
+              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
+              { src: "/logos/logo-rappi.png", alt: "Rappi" },
+              { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
+              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
+              { src: "/logos/logo-almundo.png", alt: "Almundo" },
+              { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
+              { src: "/logos/logo-biblos.png", alt: "Biblos" },
+              { src: "/logos/logo-experimento.png", alt: "Experimento" },
+              { src: "/logos/logo-ola.png", alt: "Ola" },
+              { src: "/logos/logo-visual.png", alt: "Visual" },
+              { src: "/logos/logo-rexture.png", alt: "Rexture" },
+              { src: "/logos/logo-trend.png", alt: "Trend" },
+              { src: "/logos/logo-frame1.png", alt: "Company" },
+              { src: "/logos/logo-2.png", alt: "Company" },
+              { src: "/logos/logo-5.png", alt: "Company" },
             ].map((logo, i) => (
-              <ScrollReveal key={i} delay={i * 80}>
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={120}
-                  height={logo.h}
-                  style={{ height: logo.h, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s" }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.9")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.45")}
-                />
-              </ScrollReveal>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={i}
+                src={logo.src}
+                alt={logo.alt}
+                style={{ height: 48, width: "auto", opacity: 0.4, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
+                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
+                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.4")}
+              />
             ))}
           </div>
         </div>
@@ -336,6 +365,10 @@ export default function AboutPage() {
 
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes logoScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
         @media (max-width: 860px) {
           [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
           [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
