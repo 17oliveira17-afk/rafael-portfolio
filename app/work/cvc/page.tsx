@@ -194,8 +194,10 @@ function CinematicHero() {
   return (
     <div ref={ref} style={{ height: "220vh", position: "relative" }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "#000", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        {/* Glow only at bottom — doesn't create contrast with phone edges */}
-        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 40% at 50% 100%, rgba(0,113,227,${.35 - p * .2}) 0%, transparent 70%)` }} />
+        {/* Pure #000 background — PNG black edges blend perfectly */}
+        <div style={{ position: "absolute", inset: 0, background: "#000" }} />
+        {/* Blue glow ONLY under phones as a separate element */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "50%", background: `radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0,113,227,${.4 - p * .25}) 0%, transparent 80%)`, pointerEvents: "none" }} />
 
         {/* Headline — top half, above phones */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 20, textAlign: "center", padding: "7rem 2rem 3rem", opacity: 1 - p * 1.8, transform: `translateY(${p * -40}px)`, pointerEvents: p > 0.5 ? "none" : "auto", background: "linear-gradient(to bottom, rgba(0,0,0,0.9) 60%, transparent 100%)" }}>
