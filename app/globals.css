@@ -27,26 +27,24 @@ body {
 /* ── Cursor ── */
 .cursor {
   position: fixed; width: 10px; height: 10px;
-  background: #fff;
+  background: #0071e3;
   border-radius: 50%;
   pointer-events: none; z-index: 9999;
   transform: translate(-50%,-50%);
-  mix-blend-mode: difference;
   box-shadow:
-    0 0 0 3px rgba(255,255,255,.2),
+    0 0 0 3px rgba(0,113,227,.2),
     0 0 12px 4px rgba(0,113,227,.6),
     0 0 28px 8px rgba(0,113,227,.3),
     0 0 48px 16px rgba(0,113,227,.12);
-  transition: width .25s ease, height .25s ease, box-shadow .25s ease, opacity .2s ease;
+  transition: width .25s ease, height .25s ease, background .2s ease, box-shadow .25s ease, opacity .2s ease;
 }
 .cursor.expand {
-  width: 48px; height: 48px;
-  background: #fff;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.1);
+  border: 1.5px solid rgba(255,255,255,.5);
   box-shadow:
-    0 0 0 2px rgba(255,255,255,.15),
-    0 0 20px 8px rgba(0,113,227,.45),
-    0 0 50px 20px rgba(0,113,227,.2),
-    0 0 80px 30px rgba(0,113,227,.08);
+    0 0 12px 4px rgba(0,113,227,.3),
+    0 0 30px 10px rgba(0,113,227,.15);
 }
 
 /* ── Scrollbar ── */
