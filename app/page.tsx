@@ -600,11 +600,12 @@ export default function Home() {
                 boxShadow: "0 60px 120px rgba(0,0,0,.6), 0 30px 60px rgba(0,113,227,.15)",
               }}>
                 <Image
-                  src="/rafael-portrait-v3.png"
+                  src="/rg-photo-2026.png"
                   alt="Rafael Guimarães"
                   width={1600}
                   height={1600}
                   style={{ width: "100%", height: "auto", display: "block" }}
+                  unoptimized
                   priority
                 />
                 {/* Gradient overlay for legibility */}
