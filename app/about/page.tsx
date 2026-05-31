@@ -129,7 +129,7 @@ export default function AboutPage() {
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
             <Link href="/contact" className="btn-blue" style={{ fontSize: ".95rem" }}>Get in touch</Link>
-            <a href="https://rafaelgdesign.com/wp-content/uploads/2026/03/CV-Rafael-Guimaraes-2026-03.pdf" target="_blank" rel="noopener noreferrer" className="btn-white-ghost" style={{ fontSize: ".95rem" }}>Download CV</a>
+            <a href="/CV-Rafael_Guimaraes-2026.pdf" target="_blank" rel="noopener noreferrer" className="btn-white-ghost" style={{ fontSize: ".95rem" }}>Download CV</a>
           </div>
         </div>
 
