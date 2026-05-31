@@ -166,48 +166,37 @@ export default function AboutPage() {
         <div style={{ position: "relative" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <div style={{ display: "flex", gap: "6rem", alignItems: "center", animation: "logoScroll 28s linear infinite", width: "max-content" }}>
-            {[
-              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
-              { src: "/logos/logo-rappi.png", alt: "Rappi" },
-              { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
-              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
-              { src: "/logos/logo-almundo.png", alt: "Almundo" },
-              { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
-              { src: "/logos/logo-biblos.png", alt: "Biblos" },
-              { src: "/logos/logo-experimento.png", alt: "Experimento" },
-              { src: "/logos/logo-ola.png", alt: "Ola" },
-              { src: "/logos/logo-visual.png", alt: "Visual" },
-              { src: "/logos/logo-rexture.png", alt: "Rexture" },
-              { src: "/logos/logo-trend.png", alt: "Trend" },
-              { src: "/logos/logo-frame1.png", alt: "Company" },
-              { src: "/logos/logo-2.png", alt: "Company" },
-              { src: "/logos/logo-5.png", alt: "Company" },
-              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
-              { src: "/logos/logo-rappi.png", alt: "Rappi" },
-              { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
-              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
-              { src: "/logos/logo-almundo.png", alt: "Almundo" },
-              { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
-              { src: "/logos/logo-biblos.png", alt: "Biblos" },
-              { src: "/logos/logo-experimento.png", alt: "Experimento" },
-              { src: "/logos/logo-ola.png", alt: "Ola" },
-              { src: "/logos/logo-visual.png", alt: "Visual" },
-              { src: "/logos/logo-rexture.png", alt: "Rexture" },
-              { src: "/logos/logo-trend.png", alt: "Trend" },
-              { src: "/logos/logo-frame1.png", alt: "Company" },
-              { src: "/logos/logo-2.png", alt: "Company" },
-              { src: "/logos/logo-5.png", alt: "Company" },
-            ].map((logo, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={i}
-                src={logo.src}
-                alt={logo.alt}
-                style={{ height: 128, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.4")}
-              />
+          <div style={{ display: "flex", overflow: "hidden" }}>
+            {[0, 1].map(copy => (
+              <div key={copy} aria-hidden={copy === 1} style={{ display: "flex", gap: "5rem", alignItems: "center", animation: "logoScroll 32s linear infinite", flexShrink: 0 }}>
+                {[
+                  { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
+                  { src: "/logos/logo-rappi.png", alt: "Rappi" },
+                  { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
+                  { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
+                  { src: "/logos/logo-almundo.png", alt: "Almundo" },
+                  { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
+                  { src: "/logos/logo-biblos.png", alt: "Biblos" },
+                  { src: "/logos/logo-experimento.png", alt: "Experimento" },
+                  { src: "/logos/logo-ola.png", alt: "Ola" },
+                  { src: "/logos/logo-visual.png", alt: "Visual" },
+                  { src: "/logos/logo-rexture.png", alt: "Rexture" },
+                  { src: "/logos/logo-trend.png", alt: "Trend" },
+                  { src: "/logos/logo-frame1.png", alt: "Company" },
+                  { src: "/logos/logo-2.png", alt: "Company" },
+                  { src: "/logos/logo-5.png", alt: "Company" },
+                ].map((logo, i) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={i}
+                    src={logo.src}
+                    alt={logo.alt}
+                    style={{ height: 90, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
+                    onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.4")}
+                  />
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -408,7 +397,7 @@ export default function AboutPage() {
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-100%); }
         }
         @media (max-width: 860px) {
           [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
