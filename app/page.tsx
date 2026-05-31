@@ -58,25 +58,23 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   CINEMATIC CVC SHOWCASE
-   3-phase sticky scroll: zoom in → reveal full product → present stats
+   CINEMATIC CVC SHOWCASE — Apple-style
+   Phase 0: title fades in
+   Phase 1: phone rises and scales to hero size
+   Phase 2: phone shrinks to top, stats slide up one by one
    ══════════════════════════════════════════════════════════ */
 function CVCShowcase() {
   const ref = useRef<HTMLDivElement>(null);
   const p = useScrollProgress(ref);
   const isMobile = useIsMobile();
 
-  // Phase 0: 0–0.33 — Single phone zooms in from far
-  // Phase 1: 0.33–0.66 — More phones fan out from sides
-  // Phase 2: 0.66–1.0 — Stats fade in, CTA appears
+  // Phase 0: 0–0.25 — title visible, phone small at bottom
+  // Phase 1: 0.25–0.55 — phone scales up and centers
+  // Phase 2: 0.55–1.0 — phone moves to top, stats appear below
 
-  const phase0 = Math.min(1, p / 0.33);
-  const phase1 = Math.max(0, Math.min(1, (p - 0.33) / 0.33));
-  const phase2 = Math.max(0, Math.min(1, (p - 0.66) / 0.34));
-
-  const heroScale = 0.4 + phase0 * 0.6;
-  const heroRotate = 15 - phase0 * 15;
-  const heroOpacity = 0.3 + phase0 * 0.7;
+  const phase0 = Math.min(1, p / 0.25);
+  const phase1 = Math.max(0, Math.min(1, (p - 0.25) / 0.3));
+  const phase2 = Math.max(0, Math.min(1, (p - 0.55) / 0.45));
 
   /* Mobile: simplified showcase, no sticky scroll */
   if (isMobile) {
@@ -128,134 +126,94 @@ function CVCShowcase() {
     );
   }
 
+  // Apple-style: phone scale from small→big→small, stats appear below cleanly
+  const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+
+  // Phone: starts small at center, grows in phase1, shrinks+moves up in phase2
+  const phoneScale = 0.55 + ease(phase1) * 0.45 - phase2 * 0.28;
+  const phoneY = 30 - ease(phase1) * 30 - phase2 * 120;
+
+  // Stats stagger — each stat fades in at different phase2 thresholds
+  const stat0Op = Math.max(0, Math.min(1, (phase2 - 0.0) / 0.35));
+  const stat1Op = Math.max(0, Math.min(1, (phase2 - 0.2) / 0.35));
+  const stat2Op = Math.max(0, Math.min(1, (phase2 - 0.4) / 0.35));
+  const ctaOp   = Math.max(0, Math.min(1, (phase2 - 0.65) / 0.35));
+
   return (
-    <div ref={ref} style={{ height: "350vh", position: "relative" }}>
+    <div ref={ref} style={{ height: "320vh", position: "relative" }}>
       <div style={{
         position: "sticky", top: 0, height: "100vh", overflow: "hidden",
         background: "#000",
-        display: "flex", alignItems: "center", justifyContent: "center",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
       }}>
-        {/* Massive animated radial gradient */}
+        {/* Background glow */}
         <div style={{
-          position: "absolute", inset: 0,
-          background: `
-            radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0,113,227,${.08 + phase1 * .1}) 0%, transparent 60%),
-            radial-gradient(ellipse 50% 80% at 30% 80%, rgba(0,113,227,${phase2 * .08}) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 80% at 70% 80%, rgba(0,113,227,${phase2 * .08}) 0%, transparent 50%)
-          `,
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: `radial-gradient(ellipse 60% 50% at 50% 40%, rgba(0,113,227,${0.06 + phase1 * 0.1}) 0%, transparent 65%)`,
+        }} />
+
+        {/* Title — fades out as phase1 progresses */}
+        <div style={{
+          position: "absolute", top: "9%", left: 0, right: 0, textAlign: "center", zIndex: 5,
+          opacity: Math.max(0, 1 - ease(phase1) * 2),
+          transform: `translateY(${-ease(phase1) * 24}px)`,
           pointerEvents: "none",
-        }} />
-
-        {/* Grain */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.35, mixBlendMode: "overlay", pointerEvents: "none",
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E\")",
-        }} />
-
-        {/* Eyebrow + title — fade out as phones appear */}
-        <div style={{
-          position: "absolute", top: "12%", left: 0, right: 0, textAlign: "center", zIndex: 5,
-          opacity: Math.max(0, 1 - p * 2.5),
-          transform: `translateY(${p * -40}px)`,
         }}>
-          <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".75rem" }}>
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".75rem" }}>
             Featured Case Study
           </p>
-          <h2 style={{
-            fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.035em",
-            color: "#f5f5f7", lineHeight: 1.03,
-          }}>
-            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />
-            to category-defining.
+          <h2 style={{ fontSize: "clamp(2rem,4.5vw,4.5rem)", fontWeight: 700, letterSpacing: "-.035em", color: "#f5f5f7", lineHeight: 1.05 }}>
+            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />to category-defining.
           </h2>
         </div>
 
-        {/* SIDE PHONES (phase 1) — fan out, then shrink and rise in phase 2 */}
-        {/* Far left */}
+        {/* PHONE — center stage, scale and lift */}
         <div style={{
           position: "absolute",
-          transform: `translate(${-100 - phase1 * 280}px, ${20 + phase1 * 30 - phase2 * 140}px) rotate(${-phase1 * 14}deg) scale(${(0.7 + phase1 * 0.15) * (1 - phase2 * 0.35)})`,
-          opacity: phase1 * 0.8 * (1 - phase2 * 0.4),
-          filter: `blur(${(1 - phase1) * 4}px) drop-shadow(0 30px 60px rgba(0,0,0,.5))`,
-          zIndex: 1,
+          top: "50%", left: "50%",
+          transform: `translate(-50%, calc(-50% + ${phoneY}px)) scale(${phoneScale})`,
+          transformOrigin: "center center",
+          zIndex: 3,
+          filter: `drop-shadow(0 40px 80px rgba(0,113,227,${0.1 + phase1 * 0.2})) drop-shadow(0 20px 60px rgba(0,0,0,0.6))`,
           willChange: "transform",
+          transition: "filter .1s",
         }}>
-          <Phone src="/screens-mobile/ip-calendar.png" alt="" w={240} />
-        </div>
-        {/* Near left */}
-        <div style={{
-          position: "absolute",
-          transform: `translate(${-50 - phase1 * 160}px, ${10 - phase1 * 10 - phase2 * 140}px) rotate(${-phase1 * 7}deg) scale(${(0.8 + phase1 * 0.1) * (1 - phase2 * 0.35)})`,
-          opacity: phase1 * 0.95 * (1 - phase2 * 0.35),
-          filter: `blur(${(1 - phase1) * 2}px) drop-shadow(0 40px 70px rgba(0,113,227,0.15)) drop-shadow(0 20px 40px rgba(0,113,227,.4))`,
-          zIndex: 2,
-          willChange: "transform",
-        }}>
-          <Phone src="/screens-mobile/ip-search.png" alt="" w={260} />
+          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={340} />
         </div>
 
-        {/* Near right */}
+        {/* STATS — appear below phone as it rises, each staggered */}
         <div style={{
           position: "absolute",
-          transform: `translate(${50 + phase1 * 160}px, ${10 - phase1 * 10 - phase2 * 140}px) rotate(${phase1 * 7}deg) scale(${(0.8 + phase1 * 0.1) * (1 - phase2 * 0.35)})`,
-          opacity: phase1 * 0.95 * (1 - phase2 * 0.35),
-          filter: `blur(${(1 - phase1) * 2}px) drop-shadow(0 40px 70px rgba(0,113,227,0.15)) drop-shadow(0 20px 40px rgba(0,0,0,.5))`,
-          zIndex: 2,
-          willChange: "transform",
-        }}>
-          <Phone src="/screens-mobile/ip-filters.png" alt="" w={260} />
-        </div>
-        {/* Far right */}
-        <div style={{
-          position: "absolute",
-          transform: `translate(${100 + phase1 * 280}px, ${20 + phase1 * 30 - phase2 * 140}px) rotate(${phase1 * 14}deg) scale(${(0.7 + phase1 * 0.15) * (1 - phase2 * 0.35)})`,
-          opacity: phase1 * 0.8 * (1 - phase2 * 0.4),
-          filter: `blur(${(1 - phase1) * 4}px) drop-shadow(0 30px 60px rgba(0,0,0,.5))`,
-          zIndex: 1,
-          willChange: "transform",
-        }}>
-          <Phone src="/screens-mobile/ip-confirma.png" alt="" w={240} />
-        </div>
-
-        {/* HERO PHONE (phase 0) — center, big; shrinks and rises in phase 2 to reveal stats */}
-        <div style={{
-          position: "relative", zIndex: 3,
-          transform: `translateY(${-phase2 * 140}px) scale(${heroScale * (1 - phase2 * 0.4)}) perspective(1500px) rotateY(${heroRotate}deg)`,
-          opacity: heroOpacity * (1 - phase2 * 0.25),
-          filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.15 + phase1 * 0.15})) drop-shadow(0 40px 80px rgba(0,0,0,${0.5 + phase2 * 0.2}))`,
-          willChange: "transform",
-        }}>
-          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={320} />
-        </div>
-
-        {/* STATS (phase 2) — fade in centered where phones used to be */}
-        <div style={{
-          position: "absolute", top: "50%", left: 0, right: 0,
-          transform: `translateY(${-50 + (1 - phase2) * 30}%)`,
-          display: "flex", justifyContent: "center", gap: "clamp(2.5rem, 8vw, 7rem)",
-          opacity: phase2,
-          zIndex: 5,
-          flexWrap: "wrap", padding: "0 2rem",
+          bottom: "8%", left: 0, right: 0,
+          display: "flex", justifyContent: "center",
+          gap: "clamp(3rem, 8vw, 8rem)",
+          zIndex: 5, padding: "0 2rem",
           pointerEvents: phase2 > 0.5 ? "auto" : "none",
         }}>
           {[
-            { v: "2.0 → 4.6★", l: "App Store Rating" },
-            { v: "+212%", l: "Checkout Conversion" },
-            { v: "+23%", l: "Hotel Cross-sell" },
+            { v: "2.0 → 4.6★", l: "App Store Rating", op: stat0Op },
+            { v: "+212%",       l: "Checkout Conversion", op: stat1Op },
+            { v: "+23%",        l: "Hotel Cross-sell", op: stat2Op },
           ].map((s, i) => (
-            <div key={i} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-.035em", color: "#f5f5f7", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".78rem", color: "rgba(255,255,255,.55)", marginTop: ".8rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{s.l}</div>
+            <div key={i} style={{
+              textAlign: "center",
+              opacity: s.op,
+              transform: `translateY(${(1 - s.op) * 20}px)`,
+              transition: "none",
+            }}>
+              <div style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", marginTop: ".75rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
         </div>
 
-        {/* CTA (phase 2 late) */}
+        {/* CTA */}
         <div style={{
-          position: "absolute", bottom: "3.5%", left: "50%", transform: "translateX(-50%)",
-          opacity: Math.max(0, (phase2 - 0.3) * 1.5), zIndex: 6,
+          position: "absolute", bottom: "2.5%", left: "50%", transform: "translateX(-50%)",
+          opacity: ctaOp, zIndex: 6,
+          pointerEvents: ctaOp > 0.5 ? "auto" : "none",
         }}>
-          <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.25rem", fontSize: ".95rem" }}>
+          <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.25rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>
             See full case study →
           </Link>
         </div>
