@@ -50,7 +50,7 @@ export default function BigImageReveal({
           {overlay && (
             <div style={{
               position: "absolute", inset: 0,
-              background: "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.7) 100%)",
+              background: "linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.65) 50%, rgba(0,0,0,.82) 100%)",
               pointerEvents: "none",
             }} />
           )}
