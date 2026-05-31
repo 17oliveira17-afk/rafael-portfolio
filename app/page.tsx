@@ -58,29 +58,19 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   CINEMATIC CVC SHOWCASE — Apple iPhone-page style
-   
-   Apple reference: apple.com/iphone
-   - Section starts with headline centered
-   - Phone drops in from above, full bleed
-   - Screen content zooms OUT revealing the full device
-   - Device floats to left, stats materialise on right
+   CVC SHOWCASE
+   Phase 0: headline centered
+   Phase 1: phone rises + scales up from below
+   Phase 2: phone lifts to top-center, 3 stats + CTA fade in below
    ══════════════════════════════════════════════════════════ */
 function CVCShowcase() {
   const ref = useRef<HTMLDivElement>(null);
   const p = useScrollProgress(ref);
   const isMobile = useIsMobile();
 
-  // p: 0 → 1 across 400vh
-  // Phase A 0–0.2  : headline fades in, phone enters from top (far, small)
-  // Phase B 0.2–0.5: phone expands to fill screen (screen content zooms in)
-  // Phase C 0.5–0.7: phone recedes — zoom out, reveals full device frame
-  // Phase D 0.7–1.0: device glides left, stats + CTA appear on right
-
-  const phA = Math.min(1, p / 0.2);
-  const phB = Math.max(0, Math.min(1, (p - 0.2) / 0.3));
-  const phC = Math.max(0, Math.min(1, (p - 0.5) / 0.2));
-  const phD = Math.max(0, Math.min(1, (p - 0.7) / 0.3));
+  const ph0 = Math.min(1, p / 0.3);
+  const ph1 = Math.max(0, Math.min(1, (p - 0.3) / 0.35));
+  const ph2 = Math.max(0, Math.min(1, (p - 0.65) / 0.35));
 
   /* Mobile: simplified showcase, no sticky scroll */
   if (isMobile) {
@@ -132,49 +122,37 @@ function CVCShowcase() {
     );
   }
 
-  const ease  = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-  const easeO = (t: number) => 1 - Math.pow(1-t, 3); // ease-out cubic
+  const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  // ── Screen zoom: fills viewport in phB, then recedes in phC
-  // Apple trick: the *screen content* zooms in while device stays put,
-  // then both zoom out together revealing the physical frame
-  const screenScale = 1 + easeO(phB) * 6 - phC * 6;       // 1 → 7 → 1
-  const screenOp    = phA;
+  // Phone: starts below+small, rises and grows in ph1, lifts in ph2
+  const phoneScale = 0.3 + easeOut(ph0) * 0.4 + easeOut(ph1) * 0.35 - ph2 * 0.15;
+  const phoneY     = 120 - easeOut(ph0) * 60 - easeOut(ph1) * 80 - ph2 * 100;
 
-  // ── Device frame: hidden during zoom-in, appears as zoom recedes
-  const frameOp     = easeO(phC);
-
-  // ── Horizontal slide: device drifts left in phD, stats enter right
-  const deviceX     = -phD * 22;   // % of viewport width
-  const statsOp     = easeO(phD);
-
-  // ── Stats stagger
-  const s0 = Math.max(0, Math.min(1, (phD - 0.0) / 0.45));
-  const s1 = Math.max(0, Math.min(1, (phD - 0.2) / 0.45));
-  const s2 = Math.max(0, Math.min(1, (phD - 0.4) / 0.45));
-  const ct = Math.max(0, Math.min(1, (phD - 0.65) / 0.35));
-
-  // ── Background glow intensity
-  const glowI = phB * 0.18 - phC * 0.08 + phD * 0.04;
+  // Stats stagger bottom
+  const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
+  const s1 = Math.max(0, Math.min(1, (ph2 - 0.2) / 0.4));
+  const s2 = Math.max(0, Math.min(1, (ph2 - 0.4) / 0.4));
+  const ct = Math.max(0, Math.min(1, (ph2 - 0.65) / 0.35));
 
   return (
-    <div ref={ref} style={{ height: "420vh", position: "relative" }}>
+    <div ref={ref} style={{ height: "380vh", position: "relative" }}>
       <div style={{
         position: "sticky", top: 0, height: "100vh", overflow: "hidden",
-        background: "#000",
+        background: "#000", display: "flex", alignItems: "center", justifyContent: "center",
       }}>
-        {/* Ambient glow */}
+        {/* Glow */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background: `radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,113,227,${glowI}) 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,113,227,${0.05 + ph1 * 0.12}) 0%, transparent 65%)`,
         }} />
 
-        {/* ── HEADLINE — fades out as phone fills screen */}
+        {/* Headline — fades out as phone grows */}
         <div style={{
           position: "absolute", top: "10%", left: 0, right: 0,
-          textAlign: "center", zIndex: 6, pointerEvents: "none",
-          opacity: Math.max(0, 1 - easeO(phB) * 3),
-          transform: `translateY(${-easeO(phB) * 32}px)`,
+          textAlign: "center", zIndex: 5, pointerEvents: "none",
+          opacity: Math.max(0, 1 - easeOut(ph1) * 2.5),
+          transform: `translateY(${-easeOut(ph1) * 28}px)`,
         }}>
           <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>
             Featured Case Study
@@ -184,78 +162,52 @@ function CVCShowcase() {
           </h2>
         </div>
 
-        {/* ── DEVICE WRAPPER — slides left in phD */}
+        {/* Phone — rises and grows from below */}
         <div style={{
           position: "absolute",
-          top: "50%", left: `calc(50% + ${deviceX}vw)`,
-          transform: "translate(-50%, -50%)",
+          top: "50%", left: "50%",
+          transform: `translate(-50%, calc(-50% + ${phoneY}px)) scale(${phoneScale})`,
+          transformOrigin: "center bottom",
           zIndex: 3,
+          filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.08 + ph1 * 0.2})) drop-shadow(0 30px 60px rgba(0,0,0,.7))`,
           willChange: "transform",
         }}>
-          {/* Screen content — zooms dramatically in phB then out phC */}
-          <div style={{
-            position: "absolute",
-            top: "50%", left: "50%",
-            transform: `translate(-50%, -50%) scale(${screenScale})`,
-            opacity: screenOp * (1 - easeO(phC) * 0.3),
-            transformOrigin: "center center",
-            willChange: "transform",
-            borderRadius: 16,
-            overflow: "hidden",
-            width: 280, height: 560,
-            zIndex: 1,
-          }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/screens-mobile/ip-resultado.png"
-              alt="CVC app screen"
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
-            />
-          </div>
-
-          {/* Phone frame — appears as zoom recedes */}
-          <div style={{ opacity: frameOp, transition: "none" }}>
-            <Phone
-              src="/screens-mobile/ip-resultado.png"
-              alt="CVC native flight booking"
-              w={320}
-              style={{
-                filter: `drop-shadow(0 40px 80px rgba(0,113,227,${0.15 + phD * 0.1})) drop-shadow(0 20px 60px rgba(0,0,0,.7))`,
-              }}
-            />
-          </div>
+          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC flight booking" w={320} />
         </div>
 
-        {/* ── STATS + CTA — right side, appears in phD */}
+        {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute",
-          right: "5%", top: "50%",
-          transform: `translateY(-50%)`,
-          display: "flex", flexDirection: "column", alignItems: "flex-start",
-          gap: "2.2rem",
-          zIndex: 5,
-          opacity: statsOp,
-          pointerEvents: phD > 0.5 ? "auto" : "none",
-          width: "clamp(220px, 26vw, 360px)",
+          position: "absolute", bottom: "8%", left: 0, right: 0,
+          display: "flex", justifyContent: "center",
+          gap: "clamp(3rem, 8vw, 8rem)",
+          zIndex: 5, padding: "0 2rem",
+          pointerEvents: ph2 > 0.5 ? "auto" : "none",
         }}>
           {[
-            { v: "2.0 → 4.6★", l: "App Store Rating", op: s0 },
-            { v: "+212%",       l: "Checkout Conversion", op: s1 },
-            { v: "+23%",        l: "Hotel Cross-sell",    op: s2 },
+            { v: "2.0 → 4.6★", l: "App Store Rating",    op: s0 },
+            { v: "+212%",       l: "Checkout Conversion",  op: s1 },
+            { v: "+23%",        l: "Hotel Cross-sell",     op: s2 },
           ].map((s, i) => (
             <div key={i} style={{
+              textAlign: "center",
               opacity: s.op,
-              transform: `translateX(${(1 - s.op) * 30}px)`,
+              transform: `translateY(${(1 - s.op) * 24}px)`,
             }}>
-              <div style={{ fontSize: "clamp(1.8rem, 3.2vw, 3rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.4)", marginTop: ".6rem", letterSpacing: ".14em", textTransform: "uppercase" }}>{s.l}</div>
+              <div style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".7rem", color: "rgba(255,255,255,.45)", marginTop: ".75rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
-          <div style={{ opacity: ct, transform: `translateX(${(1 - ct) * 20}px)`, marginTop: ".5rem" }}>
-            <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.25rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>
-              See full case study →
-            </Link>
-          </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{
+          position: "absolute", bottom: "2%", left: "50%", transform: "translateX(-50%)",
+          opacity: ct, zIndex: 6,
+          pointerEvents: ct > 0.5 ? "auto" : "none",
+        }}>
+          <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.5rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>
+            See full case study →
+          </Link>
         </div>
       </div>
     </div>
