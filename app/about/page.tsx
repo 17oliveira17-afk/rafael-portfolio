@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "../components/ScrollReveal";
+import { Zap, Crosshair, ScanSearch } from "lucide-react";
 
 const exp = [
   {
@@ -39,9 +40,9 @@ const exp = [
 ];
 
 const aiSkills = [
-  { icon: "⚡", title: "Prototype at production speed", desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days." },
-  { icon: "🎯", title: "AI-first product thinking", desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful." },
-  { icon: "🔄", title: "Reduce bias, increase signal", desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal." },
+  { Icon: Zap, title: "Prototype at production speed", desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days." },
+  { Icon: Crosshair, title: "AI-first product thinking", desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful." },
+  { Icon: ScanSearch, title: "Reduce bias, increase signal", desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal." },
 ];
 
 const principles = [
@@ -260,7 +261,7 @@ export default function AboutPage() {
                   onMouseEnter={e => (e.currentTarget.style.background = "#0a0a1a")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#050510")}
                 >
-                  <div style={{ fontSize: "1.75rem", marginBottom: "1.25rem" }}>{s.icon}</div>
+                  <div style={{ marginBottom: "1.25rem" }}><s.Icon size={28} color="#0071e3" strokeWidth={1.5} /></div>
                   <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{s.title}</h3>
                   <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7 }}>{s.desc}</p>
                 </div>
