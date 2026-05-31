@@ -130,7 +130,7 @@ function CVCShowcase() {
   const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
 
   // Phone: starts small at center, grows in phase1, shrinks+moves up in phase2
-  const phoneScale = 0.55 + ease(phase1) * 0.45 - phase2 * 0.28;
+  const phoneScale = 0.55 + ease(phase1) * 0.45 - phase2 * 0.12;
   const phoneY = 30 - ease(phase1) * 30 - phase2 * 120;
 
   // Stats stagger — each stat fades in at different phase2 thresholds
@@ -167,10 +167,10 @@ function CVCShowcase() {
           </h2>
         </div>
 
-        {/* PHONE — center stage, scale and lift */}
+        {/* PHONE — left of center, stays large */}
         <div style={{
           position: "absolute",
-          top: "50%", left: "50%",
+          top: "50%", left: "35%",
           transform: `translate(-50%, calc(-50% + ${phoneY}px)) scale(${phoneScale})`,
           transformOrigin: "center center",
           zIndex: 3,
@@ -178,19 +178,20 @@ function CVCShowcase() {
           willChange: "transform",
           transition: "filter .1s",
         }}>
-          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={340} />
+          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={360} />
         </div>
 
-        {/* STATS + CTA — right side, stacked vertically */}
+        {/* STATS + CTA — right side, vertically centered */}
         <div style={{
           position: "absolute",
-          right: "6%", top: "50%",
+          right: "5%", top: "50%",
           transform: `translateY(calc(-50% + ${(1 - phase2) * 30}px))`,
           display: "flex", flexDirection: "column", alignItems: "flex-start",
-          gap: "2.5rem",
+          gap: "2rem",
           zIndex: 5,
           opacity: phase2,
           pointerEvents: phase2 > 0.5 ? "auto" : "none",
+          width: "clamp(220px, 28vw, 380px)",
         }}>
           {[
             { v: "2.0 → 4.6★", l: "App Store Rating", op: stat0Op },
