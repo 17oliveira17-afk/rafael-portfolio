@@ -8,29 +8,15 @@ const exp = [
     year: "2025 —",
     role: "Product Design Lead",
     company: "Thoughtworks",
-    logo: "/logos/logo-thoughtworks.png",
-    bullets: [
-      "Formally designated 'Leader of the UX Front' and added to the Extended Client Leadership Team (CLT) within 2 months of joining — rated Consistently Exceeded Expectations at Senior level, performing at Lead grade.",
-      "Transformed a high-conflict, chaotic design front into a stable, high-trust operation: diagnosed root causes, designed and implemented a 5-phase governance process and 3-week sprint cadence — moving the client from leaving meetings to validating the plan as 'solid and leading to excellent results.'",
-      "Implemented a dual-track Discovery & Delivery workflow to resolve a team skill mismatch — leveraging each designer's strengths, clarifying ownership, and protecting delivery continuity under constant client-side pressure.",
-      "Restructured the design process inside Jira to give full visibility into delivery, reduce rework, and strengthen documentation — personally managed roll-off and onboarding plans to protect account financial and operational health.",
-      "Navigated complex stakeholder negotiations in Spanish (non-native language), de-escalating a high-conflict client relationship and securing cross-functional buy-in from PMs, Tech Leads, and client Design Lead.",
-      "Translated complex credit logic, underwriting rules, and compliance requirements into clear user flows for a regulated B2B mobile lending platform serving micro-entrepreneurs across Latin America.",
-    ],
-    tags: ["B2B", "Fintech", "AI First", "Leadership", "Regulated"],
+    story: "Joined into one of the most turbulent design fronts I've seen — no process, constant escalations, a client who was leaving meetings mid-call. In under two months, I diagnosed the root causes, built and negotiated a 5-phase governance model with PMs, Tech Leads, and the client's own design leadership, and turned it into a stable, high-trust operation. The same client who walked out of meetings later described the new plan as 'solid and leading to excellent results.' I was formally designated Leader of the UX Front and added to the Client Leadership Team — rated Consistently Exceeded Expectations, performing at Lead grade. All of this while navigating complex stakeholder negotiations in Spanish.",
+    tags: ["B2B", "Fintech", "Regulated", "Leadership", "LatAm"],
     c: "#0071e3",
   },
   {
     year: "2022 — 25",
     role: "Senior Product Designer",
     company: "Rappi",
-    logo: "/logos/logo-rappi.png",
-    bullets: [
-      "Led fintech and growth products across Latin America — onboarding, activation, retention, and merchant experience.",
-      "Redesigned restaurant onboarding increasing conversion +53.4% and lead verification +135.4%.",
-      "Built and evolved Design System components adopted across multiple squads.",
-      "Collaborated with PMs and engineering across concurrent squads in a fast-paced, high-stakes environment.",
-    ],
+    story: "Three years designing fintech and growth products at one of Latin America's most demanding tech companies. I led the full redesign of restaurant onboarding — a product used by hundreds of thousands of merchants — driving +53% conversion and +135% lead verification. Alongside that, I shaped the activation and retention experience for Rappi's financial products, built and evolved Design System components adopted across multiple squads, and collaborated with PMs and engineering on concurrent workstreams under real pressure. The environment was fast, the stakes were high, and the impact was measurable.",
     tags: ["Fintech", "Growth", "Design System", "LatAm"],
     c: "#ff6b00",
   },
@@ -38,27 +24,24 @@ const exp = [
     year: "2018 — 22",
     role: "Product Designer",
     company: "CVC Corp",
-    logo: "/logos/logo-cvc.png",
-    bullets: [
-      "Full redesign of the mobile flight booking experience from webview to native.",
-      "App Store rating 2.0 → 4.6★. Checkout conversion 6% → 20% (+212%). Hotel cross-sell +23%. Load time 40s → 6s.",
-      "Released the first loyalty program and led Design System refinements across the platform.",
-    ],
-    tags: ["Travel", "Mobile", "Design System"],
+    story: "I inherited a mobile app with a 2.0 App Store rating, a 40-second load time, and a checkout that converted at 6%. What followed was a full native redesign of the flight booking experience — from research and architecture to UI and launch. The app came out with a 4.6★ rating, a 6-second load, and checkout conversion at 20%. I also led the launch of CVC's first loyalty program and contributed to Design System maturation across the platform. It was the project that showed me what design leadership with real business stakes looks like.",
+    tags: ["Travel", "Mobile", "Design System", "Conversion"],
     c: "#b8ab00",
   },
   {
     year: "Until 2018",
     role: "UX / UI / Web Designer",
     company: "Agencies",
-    logo: null,
-    bullets: [
-      "Digital design across e-commerce, web, and multimedia for multiple clients.",
-      "Built foundation in front-end development, 3D visualization, and visual communication.",
-    ],
-    tags: ["E-commerce", "Web", "UI"],
+    story: "Seven years across digital agencies — e-commerce, multimedia, web, and brand. Where I built the craft: front-end intuition, visual communication, 3D visualization, and a habit of shipping under tight deadlines for demanding clients. The foundation everything else is built on.",
+    tags: ["E-commerce", "Web", "UI", "Brand"],
     c: "#6e6e73",
   },
+];
+
+const aiSkills = [
+  { icon: "⚡", title: "Prototype at production speed", desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days." },
+  { icon: "🎯", title: "AI-first product thinking", desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful." },
+  { icon: "🔄", title: "Reduce bias, increase signal", desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal." },
 ];
 
 const principles = [
@@ -160,26 +143,16 @@ export default function AboutPage() {
             style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.85 }}
             priority
           />
-          {/* Blue glow */}
           <div style={{ position: "absolute", bottom: "10%", left: "20%", width: "60%", height: "40%", background: "radial-gradient(ellipse, rgba(0,113,227,0.3) 0%, transparent 70%)", zIndex: 2 }} />
         </div>
-
-        {/* Mobile fallback */}
-        <style>{`
-          @media (max-width: 860px) {
-            section[data-hero] { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* ═══ LOGOS CAROUSEL ═══ */}
       <section style={{ background: "#000", padding: "4rem 0", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
         <p style={{ fontSize: ".65rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2.5rem" }}>Companies</p>
         <div style={{ position: "relative" }}>
-          {/* Fade edges */}
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          {/* Track */}
           <div style={{ display: "flex", gap: "6rem", alignItems: "center", animation: "logoScroll 28s linear infinite", width: "max-content" }}>
             {[
               { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
@@ -197,7 +170,6 @@ export default function AboutPage() {
               { src: "/logos/logo-frame1.png", alt: "Company" },
               { src: "/logos/logo-2.png", alt: "Company" },
               { src: "/logos/logo-5.png", alt: "Company" },
-              // Duplicate for seamless loop
               { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
               { src: "/logos/logo-rappi.png", alt: "Rappi" },
               { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
@@ -265,6 +237,39 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ═══ AI FIRST ═══ */}
+      <section style={{ background: "#050510", padding: "8rem 2rem", borderTop: "1px solid rgba(0,113,227,.15)", borderBottom: "1px solid rgba(0,113,227,.15)", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,113,227,.07) 0%, transparent 70%)" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <ScrollReveal>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem" }}>
+              <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3" }}>AI-First Practice</p>
+              <span style={{ padding: ".15rem .6rem", background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".65rem", color: "#0071e3", fontWeight: 600, letterSpacing: ".08em" }}>NEW</span>
+            </div>
+            <h2 style={{ fontSize: "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
+              Prototyping at<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>production quality.</em>
+            </h2>
+            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 680, marginBottom: "4rem" }}>
+              I prototype with AI tools that generate near-production-quality interfaces — collapsing validation cycles from weeks to days. Less time in Figma limbo, more time testing with real users on something that actually looks and behaves like the product. It also changes how I think: AI-first design means designing for models as collaborators, not just features.
+            </p>
+          </ScrollReveal>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "rgba(0,113,227,.12)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(0,113,227,.15)" }}>
+            {aiSkills.map((s, i) => (
+              <ScrollReveal key={i} delay={i * 80}>
+                <div style={{ background: "#050510", padding: "2.5rem", height: "100%", transition: "background .3s" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#0a0a1a")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#050510")}
+                >
+                  <div style={{ fontSize: "1.75rem", marginBottom: "1.25rem" }}>{s.icon}</div>
+                  <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{s.title}</h3>
+                  <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7 }}>{s.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ PRINCIPLES ═══ */}
       <section style={{ background: "#0a0a0a", padding: "8rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -317,15 +322,7 @@ export default function AboutPage() {
                 <div>
                   <h3 style={{ fontWeight: 600, fontSize: "1.2rem", color: "#fff", marginBottom: ".5rem", letterSpacing: "-.01em" }}>{e.role}</h3>
                   <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500, marginBottom: "1.5rem" }}>{e.company}</p>
-                  {/* Bullets */}
-                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.5rem 0", display: "flex", flexDirection: "column", gap: ".75rem" }}>
-                    {e.bullets.map((b, j) => (
-                      <li key={j} style={{ display: "flex", gap: ".75rem", fontSize: ".92rem", color: "rgba(255,255,255,.55)", lineHeight: 1.65 }}>
-                        <span style={{ color: "#0071e3", flexShrink: 0, marginTop: ".15em" }}>·</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p style={{ fontSize: ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>{e.story}</p>
                   <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
                     {e.tags.map(t => (
                       <span key={t} style={{ padding: ".2rem .7rem", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
