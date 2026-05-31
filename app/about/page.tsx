@@ -7,24 +7,43 @@ const exp = [
   {
     year: "2025 —",
     role: "Product Design Lead",
-    company: "Thoughtworks Brasil",
-    detail: "Leading end-to-end design for URPI PRO — a B2B credit origination platform for MiBanco connecting field advisors with micro-entrepreneurs across Latin America. AI First mindset. Recovered a delayed roadmap and built the design workflow from scratch.",
-    tags: ["B2B", "Fintech", "AI", "Leadership"],
+    company: "Thoughtworks",
+    logo: "/logos/logo-thoughtworks.png",
+    bullets: [
+      "Acting as Product Design Lead on the Expert side, driving end-to-end experience of MiBanco's B2B mobile credit-lending platform for micro-entrepreneurs in a highly regulated financial environment.",
+      "Translating complex credit logic, underwriting rules, and compliance requirements into clear, intuitive user flows and information architecture that support secure and efficient decision-making.",
+      "Collaborating closely with Product, Engineering, Compliance, Operations, and Data teams to ensure alignment between financial regulations, business objectives, and operational constraints.",
+      "Driving product-level UX strategy, contributing to system-level decisions and influencing roadmap priorities beyond individual features.",
+      "Reorganized the design process and created a structured workflow inside Jira — giving full visibility into delivery, improving team organization, and strengthening documentation across squads.",
+      "Played a key role in stabilizing a previously fragmented stakeholder landscape, reducing rework, improving communication, and strengthening long-term partnerships across financial and operational teams.",
+    ],
+    tags: ["B2B", "Fintech", "AI First", "Leadership", "Regulated"],
     c: "#0071e3",
   },
   {
     year: "2022 — 25",
     role: "Senior Product Designer",
     company: "Rappi",
-    detail: "Led fintech and growth products across Latin America. Redesigned restaurant onboarding increasing conversion +53.4%. Improved lead verification +135.4%. Built design system components. Collaborated with PMs and eng across multiple squads simultaneously.",
-    tags: ["Fintech", "Growth", "Design System"],
+    logo: "/logos/logo-rappi.png",
+    bullets: [
+      "Led fintech and growth products across Latin America — onboarding, activation, retention, and merchant experience.",
+      "Redesigned restaurant onboarding increasing conversion +53.4% and lead verification +135.4%.",
+      "Built and evolved Design System components adopted across multiple squads.",
+      "Collaborated with PMs and engineering across concurrent squads in a fast-paced, high-stakes environment.",
+    ],
+    tags: ["Fintech", "Growth", "Design System", "LatAm"],
     c: "#ff6b00",
   },
   {
     year: "2018 — 22",
     role: "Product Designer",
     company: "CVC Corp",
-    detail: "Full redesign of the mobile flight booking experience. App rating 2.0 → 4.6★. Checkout conversion 6% → 20% (+212%). Hotel cross-sell +23%. Load time 40s → 6s. First loyalty program released. Design System refinements.",
+    logo: "/logos/logo-cvc.png",
+    bullets: [
+      "Full redesign of the mobile flight booking experience from webview to native.",
+      "App Store rating 2.0 → 4.6★. Checkout conversion 6% → 20% (+212%). Hotel cross-sell +23%. Load time 40s → 6s.",
+      "Released the first loyalty program and led Design System refinements across the platform.",
+    ],
     tags: ["Travel", "Mobile", "Design System"],
     c: "#b8ab00",
   },
@@ -32,7 +51,11 @@ const exp = [
     year: "Until 2018",
     role: "UX / UI / Web Designer",
     company: "Agencies",
-    detail: "Digital design across e-commerce, web, and multimedia. Built foundation in front-end development, 3D, and visual communication.",
+    logo: null,
+    bullets: [
+      "Digital design across e-commerce, web, and multimedia for multiple clients.",
+      "Built foundation in front-end development, 3D visualization, and visual communication.",
+    ],
     tags: ["E-commerce", "Web", "UI"],
     c: "#6e6e73",
   },
@@ -289,12 +312,27 @@ export default function AboutPage() {
             <ScrollReveal key={i} delay={i * 60}>
               <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "3rem", padding: "3.5rem 0", borderBottom: i < exp.length - 1 ? "1px solid rgba(255,255,255,.08)" : "none" }}>
                 <div>
-                  <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", marginBottom: ".5rem" }}>{e.year}</p>
+                  <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)" }}>{e.year}</p>
                 </div>
                 <div>
-                  <h3 style={{ fontWeight: 600, fontSize: "1.2rem", color: "#fff", marginBottom: ".4rem", letterSpacing: "-.01em" }}>{e.role}</h3>
-                  <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500, marginBottom: "1.25rem" }}>{e.company}</p>
-                  <p style={{ fontSize: ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, maxWidth: 560, marginBottom: "1.25rem" }}>{e.detail}</p>
+                  <h3 style={{ fontWeight: 600, fontSize: "1.2rem", color: "#fff", marginBottom: ".5rem", letterSpacing: "-.01em" }}>{e.role}</h3>
+                  {/* Company name + logo */}
+                  <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: "1.5rem" }}>
+                    {e.logo && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={e.logo} alt={e.company} style={{ height: 20, width: "auto", opacity: 0.7, filter: "grayscale(1) brightness(2)" }} />
+                    )}
+                    <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500 }}>{e.company}</p>
+                  </div>
+                  {/* Bullets */}
+                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.5rem 0", display: "flex", flexDirection: "column", gap: ".75rem" }}>
+                    {e.bullets.map((b, j) => (
+                      <li key={j} style={{ display: "flex", gap: ".75rem", fontSize: ".92rem", color: "rgba(255,255,255,.55)", lineHeight: 1.65 }}>
+                        <span style={{ color: "#0071e3", flexShrink: 0, marginTop: ".15em" }}>·</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                   <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
                     {e.tags.map(t => (
                       <span key={t} style={{ padding: ".2rem .7rem", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
