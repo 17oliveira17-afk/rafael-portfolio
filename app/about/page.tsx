@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "../components/ScrollReveal";
-import { Zap, Crosshair, ScanSearch } from "lucide-react";
 
 const exp = [
   {
@@ -40,9 +39,21 @@ const exp = [
 ];
 
 const aiSkills = [
-  { Icon: Zap, title: "Prototype at production speed", desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days." },
-  { Icon: Crosshair, title: "AI-first product thinking", desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful." },
-  { Icon: ScanSearch, title: "Reduce bias, increase signal", desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal." },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+    title: "Prototype at production speed",
+    desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days.",
+  },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>,
+    title: "AI-first product thinking",
+    desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful.",
+  },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/><path d="m12 12 4 10 1.7-4.3L22 16Z"/></svg>,
+    title: "Reduce bias, increase signal",
+    desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal.",
+  },
 ];
 
 const principles = [
@@ -255,13 +266,13 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "rgba(0,113,227,.12)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(0,113,227,.15)" }}>
-            {aiSkills.map(({ Icon, title, desc }, i) => (
+            {aiSkills.map(({ svg, title, desc }, i) => (
               <ScrollReveal key={i} delay={i * 80}>
                 <div style={{ background: "#050510", padding: "2.5rem", height: "100%", transition: "background .3s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#0a0a1a")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#050510")}
                 >
-                  <div style={{ marginBottom: "1.25rem" }}><Icon size={28} color="#0071e3" strokeWidth={1.5} /></div>
+                  <div style={{ marginBottom: "1.25rem" }}>{svg}</div>
                   <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{title}</h3>
                   <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7 }}>{desc}</p>
                 </div>
