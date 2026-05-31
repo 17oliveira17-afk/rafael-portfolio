@@ -316,14 +316,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 style={{ fontWeight: 600, fontSize: "1.2rem", color: "#fff", marginBottom: ".5rem", letterSpacing: "-.01em" }}>{e.role}</h3>
-                  {/* Company name + logo */}
-                  <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: "1.5rem" }}>
-                    {e.logo && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={e.logo} alt={e.company} style={{ height: 20, width: "auto", opacity: 0.7, filter: "grayscale(1) brightness(2)" }} />
-                    )}
-                    <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500 }}>{e.company}</p>
-                  </div>
+                  <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500, marginBottom: "1.5rem" }}>{e.company}</p>
                   {/* Bullets */}
                   <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.5rem 0", display: "flex", flexDirection: "column", gap: ".75rem" }}>
                     {e.bullets.map((b, j) => (
