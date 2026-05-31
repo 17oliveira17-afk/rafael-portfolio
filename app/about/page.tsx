@@ -8,7 +8,7 @@ const exp = [
     year: "2025 —",
     role: "Product Design Lead",
     company: "Thoughtworks",
-    story: "Joined into one of the most turbulent design fronts I've seen — no process, constant escalations, a client who was leaving meetings mid-call. In under two months, I diagnosed the root causes, built and negotiated a 5-phase governance model with PMs, Tech Leads, and the client's own design leadership, and turned it into a stable, high-trust operation. The same client who walked out of meetings later described the new plan as 'solid and leading to excellent results.' I was formally designated Leader of the UX Front and added to the Client Leadership Team — rated Consistently Exceeded Expectations, performing at Lead grade. All of this while navigating complex stakeholder negotiations in Spanish.",
+    story: "Joined into one of the most turbulent design fronts I've seen — a team delivering 1–2 months late, no defined process, bad design decisions, and endless uncontrolled changes. In under two months, I diagnosed the root causes and replaced that chaos with a structured 3-week design sprint cadence covering all 5 phases with quality gates — cutting delivery cycles from months to weeks and making the output actually predictable. I also introduced an AI-first prototyping workflow that reduced operational overhead and accelerated validation. The same client who walked out of meetings later described the new plan as 'solid and leading to excellent results.' I was formally designated Leader of the UX Front, added to the Client Leadership Team, and rated Consistently Exceeded Expectations — performing at Lead grade. All navigated in Spanish.",
     tags: ["B2B", "Fintech", "Regulated", "Leadership", "LatAm"],
     c: "#0071e3",
   },
