@@ -255,15 +255,15 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "rgba(0,113,227,.12)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(0,113,227,.15)" }}>
-            {aiSkills.map((s, i) => (
+            {aiSkills.map(({ Icon, title, desc }, i) => (
               <ScrollReveal key={i} delay={i * 80}>
                 <div style={{ background: "#050510", padding: "2.5rem", height: "100%", transition: "background .3s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#0a0a1a")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#050510")}
                 >
-                  <div style={{ marginBottom: "1.25rem" }}><s.Icon size={28} color="#0071e3" strokeWidth={1.5} /></div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{s.title}</h3>
-                  <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7 }}>{s.desc}</p>
+                  <div style={{ marginBottom: "1.25rem" }}><Icon size={28} color="#0071e3" strokeWidth={1.5} /></div>
+                  <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{title}</h3>
+                  <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7 }}>{desc}</p>
                 </div>
               </ScrollReveal>
             ))}
