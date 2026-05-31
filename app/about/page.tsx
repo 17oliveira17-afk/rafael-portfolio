@@ -180,7 +180,7 @@ export default function AboutPage() {
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 120, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           {/* Track */}
-          <div style={{ display: "flex", gap: "4rem", alignItems: "center", animation: "logoScroll 28s linear infinite", width: "max-content" }}>
+          <div style={{ display: "flex", gap: "6rem", alignItems: "center", animation: "logoScroll 28s linear infinite", width: "max-content" }}>
             {[
               { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
               { src: "/logos/logo-rappi.png", alt: "Rappi" },
@@ -219,7 +219,7 @@ export default function AboutPage() {
                 key={i}
                 src={logo.src}
                 alt={logo.alt}
-                style={{ height: 48, width: "auto", opacity: 0.4, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
+                style={{ height: 64, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
                 onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
                 onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.4")}
               />
