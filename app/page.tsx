@@ -181,13 +181,15 @@ function CVCShowcase() {
           <Phone src="/screens-mobile/ip-resultado.png" alt="CVC native flight booking" w={340} />
         </div>
 
-        {/* STATS — appear below phone as it rises, each staggered */}
+        {/* STATS + CTA — right side, stacked vertically */}
         <div style={{
           position: "absolute",
-          bottom: "8%", left: 0, right: 0,
-          display: "flex", justifyContent: "center",
-          gap: "clamp(3rem, 8vw, 8rem)",
-          zIndex: 5, padding: "0 2rem",
+          right: "6%", top: "50%",
+          transform: `translateY(calc(-50% + ${(1 - phase2) * 30}px))`,
+          display: "flex", flexDirection: "column", alignItems: "flex-start",
+          gap: "2.5rem",
+          zIndex: 5,
+          opacity: phase2,
           pointerEvents: phase2 > 0.5 ? "auto" : "none",
         }}>
           {[
@@ -196,26 +198,21 @@ function CVCShowcase() {
             { v: "+23%",        l: "Hotel Cross-sell", op: stat2Op },
           ].map((s, i) => (
             <div key={i} style={{
-              textAlign: "center",
               opacity: s.op,
               transform: `translateY(${(1 - s.op) * 20}px)`,
               transition: "none",
             }}>
-              <div style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", marginTop: ".75rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
+              <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 3.2rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".68rem", color: "rgba(255,255,255,.45)", marginTop: ".6rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
-        </div>
 
-        {/* CTA */}
-        <div style={{
-          position: "absolute", bottom: "2.5%", left: "50%", transform: "translateX(-50%)",
-          opacity: ctaOp, zIndex: 6,
-          pointerEvents: ctaOp > 0.5 ? "auto" : "none",
-        }}>
-          <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.25rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>
-            See full case study →
-          </Link>
+          {/* CTA below stats */}
+          <div style={{ opacity: ctaOp, transform: `translateY(${(1 - ctaOp) * 15}px)`, transition: "none", marginTop: ".5rem" }}>
+            <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.25rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>
+              See full case study →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
