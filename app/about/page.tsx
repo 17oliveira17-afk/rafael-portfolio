@@ -149,6 +149,33 @@ export default function AboutPage() {
         `}</style>
       </section>
 
+      {/* ═══ LOGOS STRIP ═══ */}
+      <section style={{ background: "#000", padding: "3rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <p style={{ fontSize: ".65rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2rem" }}>Companies</p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "3rem", flexWrap: "wrap" }}>
+            {[
+              { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks", h: 32 },
+              { src: "/logos/logo-rappi.png", alt: "Rappi", h: 36 },
+              { src: "/logos/logo-cvc.png", alt: "CVC Corp", h: 32 },
+              { src: "/logos/logo-submarino.png", alt: "Submarino Viagens", h: 28 },
+            ].map((logo, i) => (
+              <ScrollReveal key={i} delay={i * 80}>
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={120}
+                  height={logo.h}
+                  style={{ height: logo.h, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s" }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.9")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.45")}
+                />
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ METRICS STRIP ═══ */}
       <section style={{ background: "#0a0a0a", padding: "5rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
