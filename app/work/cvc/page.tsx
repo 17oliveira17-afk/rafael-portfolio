@@ -180,7 +180,7 @@ function CinematicHero() {
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem", marginTop: "2rem", padding: "1.5rem 0", borderTop: "1px solid rgba(255,255,255,.08)", opacity: 0, animation: "fadeUp .9s ease 1.1s forwards" }}>
-          {[{ v: "4.6★", l: "Rating" }, { v: "+212%", l: "Conversion" }, { v: "6s", l: "Load time" }].map((s, i) => (
+          {[{ v: "4.6★", l: "Rating (2.0 → 3.2 → 4.6)" }, { v: "+212%", l: "Conversion" }, { v: "6s", l: "Load time" }].map((s, i) => (
             <div key={i} style={{ textAlign: "center" }}>
               <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff" }}>{s.v}</div>
               <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.5)", marginTop: ".3rem", textTransform: "uppercase", letterSpacing: ".1em" }}>{s.l}</div>
@@ -234,7 +234,7 @@ function ImpactStrip() {
     <section style={{ background: "#000", padding: "6rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "3rem", textAlign: "center" }}>
         {[
-          { num: 4.6, label: "App Store rating", sub: "from 2.0 ★", color: "#0071e3" },
+          { num: 4.6, label: "App Store rating", sub: "2.0 → 3.2★ in 1 month → 4.6★ at full rollout", color: "#0071e3" },
           { num: 212, label: "Checkout conversion", sub: "from 6% → 20%", color: "#0071e3", prefix: "+", suffix: "%" },
           { num: 23, label: "Hotel cross-sell", sub: "same-session revenue", color: "#0071e3", prefix: "+", suffix: "%" },
         ].map((m, i) => (
@@ -287,7 +287,7 @@ export default function CVCPage() {
 
       {/* PULL QUOTE 1 */}
       <PullQuote>
-        It started with a <em style={{ color: "#0071e3", fontStyle: "italic" }}>2-star rating</em>, 40-second loads,<br />and a checkout conversion stuck at 6%.
+        It started with a <em style={{ color: "#0071e3", fontStyle: "italic" }}>2.0★ rating</em>, 40-second loads,<br />and a checkout conversion stuck at 6%.
       </PullQuote>
 
       {/* ═══ 01 · CONTEXT ═══ */}
@@ -620,7 +620,7 @@ export default function CVCPage() {
           </ScrollReveal>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 24, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
             {[
-              { label: "App Store Rating", num: "4.6★", sub: "from 2.0", detail: "+130% improvement" },
+              { label: "App Store Rating", num: "4.6★", sub: "2.0 → 3.2★ (1 month) → 4.6★ (full rollout)", detail: "+130% improvement" },
               { label: "Checkout Conversion", num: "+212%", sub: "from 6% → 20%", detail: "shipped in 4 months" },
               { label: "Hotel cross-sell", num: "+23%", sub: "same session", detail: "loading-screen bet" },
               { label: "Load time", num: "6s", sub: "from 40s", detail: "85% reduction" },

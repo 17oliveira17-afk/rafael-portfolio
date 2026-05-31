@@ -25,7 +25,7 @@ const exp = [
     year: "2018 — 22",
     role: "Product Designer",
     company: "CVC Corp",
-    story: "I inherited a mobile app with a 2.0 App Store rating, a 40-second load time, and a checkout that converted at 6%. What followed was a full native redesign of the flight booking experience — from research and architecture to UI and launch. The app came out with a 4.6★ rating, a 6-second load, and checkout conversion at 20%. I also led the launch of CVC's first loyalty program and contributed to Design System maturation across the platform. It was the project that showed me what design leadership with real business stakes looks like.",
+    story: "I inherited a mobile app with a 2.0★ App Store rating, a 40-second load time, and a checkout that converted at 6%. What followed was a full native redesign of the flight booking experience — from research and architecture to UI and launch. Within one month of the flights redesign going live, the rating jumped to 3.2★. After rolling out across all products, it reached 4.6★. Checkout conversion went from 6% to 20% (+212%), load time dropped from 40s to 6s. I also led CVC's first loyalty program and contributed to Design System maturation. The project that showed me what design leadership with real business stakes looks like.",
     tags: ["Travel", "Mobile", "Design System", "Conversion"],
     c: "#b8ab00",
   },
@@ -107,7 +107,7 @@ const metrics = [
   { n: "+212%", label: "Checkout conversion at CVC" },
   { n: "+53%", label: "Onboarding conversion at Rappi" },
   { n: "+135%", label: "Lead verification at Rappi" },
-  { n: "4.6★", label: "App Store rating from 2.0" },
+  { n: "4.6★", label: "App Store rating (2.0 → 3.2 → 4.6)" },
 ];
 
 export default function AboutPage() {
