@@ -192,7 +192,7 @@ export default function AboutPage() {
                 key={i}
                 src={logo.src}
                 alt={logo.alt}
-                style={{ height: 109, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
+                style={{ height: 128, width: "auto", opacity: 0.45, filter: "grayscale(1) brightness(2)", transition: "opacity .3s", flexShrink: 0 }}
                 onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
                 onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.4")}
               />
