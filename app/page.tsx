@@ -476,21 +476,88 @@ export default function Home() {
       <CVCShowcase />
 
       {/* ══════════════════════════════════════════════════
-          MORE WORK
+          MORE WORK — Leadership case + coming soon cards
       ══════════════════════════════════════════════════ */}
       <section className="section-off-white" style={{ padding: "8rem 2rem" }}>
         <div style={{ maxWidth: 1024, margin: "0 auto" }}>
           <ScrollReveal>
-            <div style={{ marginBottom: "3rem", textAlign: "center" }}>
+            <div style={{ marginBottom: "3rem" }}>
               <p className="t-eyebrow" style={{ marginBottom: "1rem" }}>More case studies</p>
               <h2 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.02em" }}>
-                Coming soon
+                Leadership in practice.
               </h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
+
+          {/* Featured leadership case */}
+          <ScrollReveal delay={80}>
+            <Link href="/work/leadership" style={{ textDecoration: "none", display: "block", marginBottom: "1.5rem" }}>
+              <div style={{
+                padding: "3rem", background: "#000", borderRadius: 24,
+                border: "1px solid rgba(255,255,255,.06)",
+                position: "relative", overflow: "hidden",
+                transition: "transform .3s ease, box-shadow .3s ease",
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 24px 60px rgba(0,0,0,.35)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}>
+                {/* Background glow */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,113,227,.1) 0%, transparent 60%)",
+                  pointerEvents: "none",
+                }} />
+                <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "2rem" }}>
+                  <div style={{ maxWidth: 580 }}>
+                    <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+                      {["Design Leadership", "B2B · Fintech", "Bank · NDA"].map((t, i) => (
+                        <span key={i} style={{
+                          fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
+                          padding: ".3rem .85rem", borderRadius: 100,
+                          background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
+                        }}>{t}</span>
+                      ))}
+                    </div>
+                    <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.035em", lineHeight: 1.1, marginBottom: "1rem" }}>
+                      From chaos to<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>high-performing team.</em>
+                    </h3>
+                    <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.75 }}>
+                      How I stepped into a fractured design practice at a Latin American bank — no process, no ceremonies, 3–4× rework — and rebuilt it from scratch, leading a team of 3 designers to formal recognition in under 2 months.
+                    </p>
+                    <p style={{ marginTop: "2rem", fontSize: ".88rem", color: "#0071e3", fontWeight: 600 }}>
+                      Read case study →
+                    </p>
+                  </div>
+                  {/* Metrics column */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: ".75rem", minWidth: 200 }}>
+                    {[
+                      { value: "~100×", label: "faster disbursement" },
+                      { value: "0→7", label: "ceremonies created" },
+                      { value: "0× rework", label: "post-governance" },
+                      { value: "< 2 mo", label: "to Lead designation" },
+                    ].map((m, i) => (
+                      <div key={i} style={{
+                        padding: "1rem 1.25rem", borderRadius: 14,
+                        background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.07)",
+                      }}>
+                        <div style={{ fontSize: "1.2rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em" }}>{m.value}</div>
+                        <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.38)", marginTop: ".2rem", letterSpacing: ".04em", textTransform: "uppercase" }}>{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </ScrollReveal>
+
+          {/* Coming soon cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
             {[
-              { brand: "MiBanco", project: "URPI PRO · Credit origination", tag: "Fintech B2B" },
               { brand: "Rappi", project: "LATAM onboarding redesign", tag: "Growth" },
               { brand: "Thoughtworks", project: "Banking platform design system", tag: "Systems" },
             ].map((c, i) => (
