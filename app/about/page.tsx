@@ -128,7 +128,7 @@ export default function AboutPage() {
       {/* ═══ HERO ═══ */}
       <section style={{ minHeight: "100vh", background: "#000", display: "grid", gridTemplateColumns: "1fr 1fr", position: "relative", overflow: "hidden" }}>
         {/* Left — text */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "10rem 4rem 6rem 6rem", position: "relative", zIndex: 2 }}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem 0 6rem", position: "relative", zIndex: 2 }}>
           <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem", opacity: 0, animation: "fadeUp .9s ease .2s forwards" }}>
             Product Design Lead · São Paulo, Brazil
           </p>
