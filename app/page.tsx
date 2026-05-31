@@ -600,7 +600,7 @@ export default function Home() {
                 boxShadow: "0 60px 120px rgba(0,0,0,.6), 0 30px 60px rgba(0,113,227,.15)",
               }}>
                 <Image
-                  src="/rg-photo-2026.png"
+                  src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-2026.png"
                   alt="Rafael Guimarães"
                   width={1600}
                   height={1600}
