@@ -130,7 +130,7 @@ export default function CVCCasePage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
               {[
                 { n: "25", l: "Engineers" },
                 { n: "1", l: "Designer (me)" },
@@ -229,7 +229,7 @@ export default function CVCCasePage() {
                 <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "2rem" }}>
                   The combined outbound+return card was the default. Everyone assumed it was correct. I ran a Maze A/B test with 10 users before committing to hi-fi.
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem" }}>
                   <div style={{ padding: "1.5rem", border: "1px solid rgba(255,255,255,.08)", borderRadius: 12, background: "#0a0a0a" }}>
                     <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".1em", color: "rgba(255,255,255,.3)", textTransform: "uppercase", marginBottom: ".75rem" }}>B — Combined</p>
                     <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "rgba(255,255,255,.5)", letterSpacing: "-.03em" }}>18.9s</p>
@@ -342,7 +342,7 @@ export default function CVCCasePage() {
                 { src: "/screens-mobile/ip-filters.png", title: "Filters", body: "Price range, duration, stops — clean sheet without modal interruption." },
                 { src: "/screens-mobile/ip-detail.png", title: "Flight detail", body: "Expanded inline — no page navigation. Return suggestions shown before commitment." },
               ].map((item, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2rem", alignItems: "center" }}>
+                <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto 1fr", gap: isMobile ? "1.5rem" : "2rem", alignItems: "center" }}>
                   <IPhone src={item.src} alt={item.title} width={180} />
                   <div>
                     <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem" }}>{item.title}</h3>

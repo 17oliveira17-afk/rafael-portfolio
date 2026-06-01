@@ -172,7 +172,7 @@ export default function RappiCasePage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "1fr 1fr", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
               {[
                 { n: "9", l: "Countries" },
                 { n: "8", l: "Engineers" },

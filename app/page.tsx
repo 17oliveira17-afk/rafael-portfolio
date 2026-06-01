@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
+import useIsMobile from "./components/useIsMobile";
 import IPhone from "./components/IPhone";
 import useIsMobile from "./components/useIsMobile";
 import BigImageReveal from "./components/BigImageReveal";
@@ -218,6 +219,7 @@ function CVCShowcase() {
    HOME PAGE
    ══════════════════════════════════════════════════════════ */
 export default function Home() {
+  const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const phonesRef = useRef<HTMLDivElement>(null);
@@ -424,7 +426,7 @@ export default function Home() {
       ══════════════════════════════════════════════════ */}
       <section className="section-off-white" style={{ padding: "5rem 2rem" }}>
         <div style={{ maxWidth: 1024, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "#d2d2d7", borderRadius: 20, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: "1px", background: "#d2d2d7", borderRadius: 20, overflow: "hidden" }}>
             {[
               { n: 14, l: "Years in\ndigital design" },
               { n: 8,  l: "Years in\nproduct design" },
@@ -447,7 +449,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           WORK INTRO — building anticipation
       ══════════════════════════════════════════════════ */}
-      <section id="work" style={{ background: "#000", padding: "10rem 2rem 0", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+      <section id="work" style={{ background: "#000", padding: isMobile ? "4rem 0 0" : "10rem 2rem 0", borderTop: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <ScrollReveal>
             <p style={{
@@ -590,7 +592,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           ABOUT — cinematic portrait
       ══════════════════════════════════════════════════ */}
-      <section className="section-black" style={{ padding: "10rem 2rem", position: "relative", overflow: "hidden" }}>
+      <section className="section-black" style={{ padding: isMobile ? "5rem 1.5rem" : "10rem 2rem", position: "relative", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
           background: `
@@ -606,7 +608,7 @@ export default function Home() {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E\")",
         }} />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.1fr 1fr", gap: isMobile ? "3rem" : "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
 
           {/* Portrait — cinematic frame */}
           <ScrollReveal type="scale">
@@ -755,12 +757,6 @@ export default function Home() {
           0% { opacity: 1; transform: translate(-50%, 0); }
           50% { opacity: 0.3; transform: translate(-50%, 14px); }
           100% { opacity: 1; transform: translate(-50%, 0); }
-        }
-        @media (max-width: 860px) {
-          section { padding: 5rem 1.5rem !important; }
-          [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          [style*="grid-template-columns:repeat(4"] { grid-template-columns: repeat(2,1fr) !important; gap: 1px !important; }
-          [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </main>
