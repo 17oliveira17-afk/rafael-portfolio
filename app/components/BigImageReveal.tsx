@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRef, ReactNode } from "react";
 import ScrollReveal from "./ScrollReveal";
+import useIsMobile from "./useIsMobile";
 
 /**
  * Apple-style full-bleed image with scale-in reveal.
@@ -21,6 +22,8 @@ export default function BigImageReveal({
   minHeight?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const effectiveHeight = isMobile ? "100svh" : minHeight;
 
   return (
     <section style={{ background: "#000", padding: 0, position: "relative" }}>
@@ -30,7 +33,7 @@ export default function BigImageReveal({
           style={{
             position: "relative",
             width: "100%",
-            minHeight,
+            minHeight: effectiveHeight,
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
