@@ -26,8 +26,8 @@ export default function BigImageReveal({
   const effectiveHeight = isMobile ? "100svh" : minHeight;
 
   return (
-    <section style={{ background: "#000", padding: 0, position: "relative" }}>
-      <ScrollReveal type="scale">
+    <section style={{ background: "#000", padding: 0, position: "relative", overflow: "hidden" }}>
+      <ScrollReveal type={isMobile ? "in" : "scale"}>
         <div
           ref={ref}
           style={{
