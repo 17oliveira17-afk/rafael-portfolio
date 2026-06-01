@@ -126,37 +126,46 @@ export default function AboutPage() {
     <main className="page-in" style={{ background: "#000" }}>
 
       {/* ═══ HERO ═══ */}
-      <section style={{ minHeight: "100vh", background: "#000", display: "grid", gridTemplateColumns: "1fr 1fr", position: "relative", overflow: "hidden" }}>
-        {/* Left — text */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem 0 6rem", position: "relative", zIndex: 2 }}>
-          <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem", opacity: 0, animation: "fadeUp .9s ease .2s forwards" }}>
+      <section style={{ minHeight: "100svh", background: "#000", position: "relative", overflow: "hidden", display: "flex", alignItems: "stretch" }}>
+
+        {/* Photo — full bg on mobile, right half on desktop */}
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-2026.png"
+            unoptimized
+            alt="Rafael Guimarães"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.55 }}
+            priority
+          />
+          {/* Mobile: dark gradient bottom-up so text is readable */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.95) 100%)" }} />
+          {/* Desktop: dark left half */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,.92) 0%, rgba(0,0,0,.7) 45%, transparent 70%)" }} />
+          {/* Blue glow */}
+          <div style={{ position: "absolute", bottom: "10%", left: "20%", width: "60%", height: "40%", background: "radial-gradient(ellipse, rgba(0,113,227,.2) 0%, transparent 70%)", pointerEvents: "none" }} />
+        </div>
+
+        {/* Text — bottom on mobile, left-center on desktop */}
+        <div style={{
+          position: "relative", zIndex: 2,
+          display: "flex", flexDirection: "column", justifyContent: "flex-end",
+          padding: "clamp(5rem,10vw,8rem) clamp(1.5rem,6vw,6rem) clamp(3rem,6vw,6rem)",
+          maxWidth: 680,
+        }}>
+          <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem", opacity: 0, animation: "fadeUp .9s ease .2s forwards" }}>
             Product Design Lead · São Paulo, Brazil
           </p>
-          <h1 style={{ fontSize: "clamp(3rem,5vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1, marginBottom: "2rem", opacity: 0, animation: "fadeUp 1.1s ease .4s forwards" }}>
+          <h1 style={{ fontSize: "clamp(2.8rem,9vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1, marginBottom: "1.25rem", opacity: 0, animation: "fadeUp 1.1s ease .4s forwards" }}>
             Rafael<br />Guimarães.
           </h1>
-          <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.65)", lineHeight: 1.7, maxWidth: 400, marginBottom: "3rem", opacity: 0, animation: "fadeUp .9s ease .6s forwards" }}>
+          <p style={{ fontSize: "clamp(.95rem,2vw,1.1rem)", color: "rgba(255,255,255,.65)", lineHeight: 1.75, maxWidth: 420, marginBottom: "2.5rem", opacity: 0, animation: "fadeUp .9s ease .6s forwards" }}>
             14+ years designing digital products. I turn complexity into clarity — fintech, B2B platforms, and mobile experiences that actually move metrics.
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
             <Link href="/contact" className="btn-blue" style={{ fontSize: ".95rem" }}>Get in touch</Link>
             <a href="/CV-Rafael_Guimaraes-2026.pdf" target="_blank" rel="noopener noreferrer" className="btn-white-ghost" style={{ fontSize: ".95rem" }}>Download CV</a>
           </div>
-        </div>
-
-        {/* Right — photo */}
-        <div style={{ position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #000 0%, transparent 30%)", zIndex: 1 }} />
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(to top, #000 0%, transparent 100%)", zIndex: 1 }} />
-          <Image
-            src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-2026.png"
-            unoptimized
-            alt="Rafael Guimarães"
-            fill
-            style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.85 }}
-            priority
-          />
-          <div style={{ position: "absolute", bottom: "10%", left: "20%", width: "60%", height: "40%", background: "radial-gradient(ellipse, rgba(0,113,227,0.3) 0%, transparent 70%)", zIndex: 2 }} />
         </div>
       </section>
 
