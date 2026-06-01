@@ -504,12 +504,12 @@ export default function Home() {
                     <span key={i} style={{
                       fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
                       padding: ".3rem .85rem", borderRadius: 100,
-                      background: "rgba(255,82,0,.08)", border: "1px solid rgba(255,82,0,.2)", color: "#e04e00",
+                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
                     }}>{t}</span>
                   ))}
                 </div>
                 <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1rem" }}>
-                  Rappi · <em style={{ color: "#e04e00", fontStyle: "italic" }}>Growth & Fintech</em>
+                  Rappi · <em style={{ color: "#0071e3", fontStyle: "italic" }}>Growth & Fintech</em>
                 </h3>
                 <p style={{ fontSize: "1rem", color: "#86868b", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
                   Onboarding redesign and fintech product design for one of Latin America&apos;s largest super-apps — 25M+ users across 9 countries.
