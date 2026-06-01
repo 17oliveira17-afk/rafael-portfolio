@@ -177,7 +177,7 @@ function CVCShowcase() {
 
         {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute", bottom: "16%", left: 0, right: 0,
+          position: "absolute", bottom: "12%", left: 0, right: 0,
           display: "flex", justifyContent: "center",
           gap: "clamp(3rem, 8vw, 8rem)",
           zIndex: 5, padding: "0 2rem",
