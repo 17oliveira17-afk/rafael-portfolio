@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
-import IPhone from "./components/IPhone";
 import useIsMobile from "./components/useIsMobile";
+import IPhone from "./components/IPhone";
 import BigImageReveal from "./components/BigImageReveal";
 
 /* ══════════════════════════════════════════════════════════
@@ -218,10 +218,10 @@ function CVCShowcase() {
    HOME PAGE
    ══════════════════════════════════════════════════════════ */
 export default function Home() {
+  const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const phonesRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (isMobile) return; // skip parallax on mobile (perf + visual)
@@ -424,7 +424,7 @@ export default function Home() {
       ══════════════════════════════════════════════════ */}
       <section className="section-off-white" style={{ padding: "5rem 2rem" }}>
         <div style={{ maxWidth: 1024, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "#d2d2d7", borderRadius: 20, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: "1px", background: "#d2d2d7", borderRadius: 20, overflow: "hidden" }}>
             {[
               { n: 14, l: "Years in\ndigital design" },
               { n: 8,  l: "Years in\nproduct design" },
@@ -447,7 +447,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           WORK INTRO — building anticipation
       ══════════════════════════════════════════════════ */}
-      <section id="work" style={{ background: "#000", padding: "10rem 2rem 0", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+      <section id="work" style={{ background: "#000", padding: isMobile ? "4rem 0 0" : "10rem 2rem 0", borderTop: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <ScrollReveal>
             <p style={{
@@ -476,47 +476,84 @@ export default function Home() {
       <CVCShowcase />
 
       {/* ══════════════════════════════════════════════════
-          MORE WORK
+          MORE WORK — Rappi + Leadership
       ══════════════════════════════════════════════════ */}
       <section className="section-off-white" style={{ padding: "8rem 2rem" }}>
         <div style={{ maxWidth: 1024, margin: "0 auto" }}>
           <ScrollReveal>
-            <div style={{ marginBottom: "3rem", textAlign: "center" }}>
+            <div style={{ marginBottom: "3rem" }}>
               <p className="t-eyebrow" style={{ marginBottom: "1rem" }}>More case studies</p>
               <h2 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.02em" }}>
-                Coming soon
+                More work.
               </h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
-            {[
-              { brand: "MiBanco", project: "URPI PRO · Credit origination", tag: "Fintech B2B" },
-              { brand: "Rappi", project: "LATAM onboarding redesign", tag: "Growth" },
-              { brand: "Thoughtworks", project: "Banking platform design system", tag: "Systems" },
-            ].map((c, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div style={{
-                  padding: "2.5rem 2rem", background: "#fff", borderRadius: 20,
-                  border: "1px solid #d2d2d7", height: "100%",
-                  transition: "transform .3s ease, box-shadow .3s ease",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = "0 12px 30px rgba(0,0,0,.08)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}>
-                  <p style={{ fontSize: ".7rem", color: "#0071e3", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem" }}>{c.tag}</p>
-                  <h3 style={{ fontSize: "1.4rem", fontWeight: 600, color: "#1d1d1f", marginBottom: ".5rem", letterSpacing: "-.01em" }}>{c.brand}</h3>
-                  <p style={{ fontSize: ".95rem", color: "#86868b", lineHeight: 1.55 }}>{c.project}</p>
-                  <p style={{ fontSize: ".75rem", color: "#c0c0c0", marginTop: "2rem" }}>In progress</p>
+
+          {/* ── Rappi card ── */}
+          <ScrollReveal delay={80}>
+            <div style={{
+              background: "#fff", borderRadius: 24, border: "1px solid #d2d2d7",
+              overflow: "hidden", marginBottom: "1.5rem",
+              transition: "transform .3s ease, box-shadow .3s ease",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(0,0,0,.1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ padding: "3rem" }}>
+                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+                  {["Growth · Fintech", "LATAM", "Rappi"].map((t, i) => (
+                    <span key={i} style={{
+                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
+                      padding: ".3rem .85rem", borderRadius: 100,
+                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
+                    }}>{t}</span>
+                  ))}
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1rem" }}>
+                  Rappi · <em style={{ color: "#0071e3", fontStyle: "italic" }}>Growth & Fintech</em>
+                </h3>
+                <p style={{ fontSize: "1rem", color: "#86868b", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
+                  Onboarding redesign and fintech product design for one of Latin America&apos;s largest super-apps — 25M+ users across 9 countries.
+                </p>
+                <Link href="/work/rappi" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
+                  See full case study →
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* ── Leadership card ── */}
+          <ScrollReveal delay={140}>
+            <div style={{
+              background: "#000", borderRadius: 24, border: "1px solid rgba(255,255,255,.08)",
+              overflow: "hidden", position: "relative",
+              transition: "transform .3s ease, box-shadow .3s ease",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 24px 60px rgba(0,0,0,.4)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+              <div style={{ padding: "3rem", position: "relative", zIndex: 1 }}>
+                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+                  {["Design Leadership", "B2B · Fintech", "Bank · NDA"].map((t, i) => (
+                    <span key={i} style={{
+                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
+                      padding: ".3rem .85rem", borderRadius: 100,
+                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
+                    }}>{t}</span>
+                  ))}
+                </div>
+                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.035em", lineHeight: 1.1, marginBottom: "1rem" }}>
+                  From chaos to<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>high-performing team.</em>
+                </h3>
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
+                  How I stepped into a fractured design practice at a Latin American bank — no process, no ceremonies, 3–4× rework — and rebuilt it from scratch, leading a team of 3 designers to formal recognition in under 2 months.
+                </p>
+                <Link href="/work/leadership" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
+                  See full case study →
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+
         </div>
       </section>
 
@@ -553,7 +590,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           ABOUT — cinematic portrait
       ══════════════════════════════════════════════════ */}
-      <section className="section-black" style={{ padding: "10rem 2rem", position: "relative", overflow: "hidden" }}>
+      <section className="section-black" style={{ padding: isMobile ? "5rem 1.5rem" : "10rem 2rem", position: "relative", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
           background: `
@@ -569,7 +606,7 @@ export default function Home() {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E\")",
         }} />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.1fr 1fr", gap: isMobile ? "3rem" : "5rem", alignItems: "center", position: "relative", zIndex: 1 }}>
 
           {/* Portrait — cinematic frame */}
           <ScrollReveal type="scale">
@@ -718,12 +755,6 @@ export default function Home() {
           0% { opacity: 1; transform: translate(-50%, 0); }
           50% { opacity: 0.3; transform: translate(-50%, 14px); }
           100% { opacity: 1; transform: translate(-50%, 0); }
-        }
-        @media (max-width: 860px) {
-          section { padding: 5rem 1.5rem !important; }
-          [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          [style*="grid-template-columns:repeat(4"] { grid-template-columns: repeat(2,1fr) !important; gap: 1px !important; }
-          [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </main>

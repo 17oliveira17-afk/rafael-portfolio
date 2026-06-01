@@ -1,0 +1,531 @@
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useRef, useState, useEffect, ReactNode } from "react";
+import ScrollReveal from "../../components/ScrollReveal";
+import useIsMobile from "../../components/useIsMobile";
+
+/* ── SVG Icons ── */
+const IconCalendar = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+);
+const IconMap = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+    <line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
+  </svg>
+);
+const IconZap = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </svg>
+);
+const IconGrid = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+    <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+  </svg>
+);
+const IconUsers = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </svg>
+);
+const IconSearch = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+);
+const IconArrow = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+  </svg>
+);
+const IconAward = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+  </svg>
+);
+const IconCheck = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+);
+const IconStar = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </svg>
+);
+const IconGlobe = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+  </svg>
+);
+const IconBot = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/>
+    <path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/>
+  </svg>
+);
+const IconLink = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
+);
+const IconLock = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+  </svg>
+);
+
+/* ── Animated counter ── */
+function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const [v, setV] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const done = useRef(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !done.current) {
+        done.current = true;
+        const dur = 2400, s = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - s) / dur, 1);
+          setV(Math.round((1 - Math.pow(1 - p, 4)) * to));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [to]);
+  return <span ref={ref}>{v}{suffix}</span>;
+}
+
+function Label({ children }: { children: ReactNode }) {
+  return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>{children}</p>;
+}
+function Divider() {
+  return <div style={{ height: 1, background: "rgba(255,255,255,.07)", margin: "0 2rem" }} />;
+}
+function Tag({ children, bg = "rgba(0,113,227,.15)", border = "rgba(0,113,227,.3)", color = "#0071e3" }: { children: ReactNode; bg?: string; border?: string; color?: string }) {
+  return <span style={{ fontSize: ".72rem", fontWeight: 600, letterSpacing: ".08em", textTransform: "uppercase", padding: ".35rem .85rem", borderRadius: 100, background: bg, border: `1px solid ${border}`, color }}>{children}</span>;
+}
+function Metric({ before, after, label }: { before: string; after: string; label: string }) {
+  return (
+    <div style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 20, padding: "1.75rem" }}>
+      <p style={{ fontSize: ".65rem", fontWeight: 600, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.35)", marginBottom: ".85rem" }}>{label}</p>
+      <div style={{ display: "flex", alignItems: "center", gap: ".6rem", flexWrap: "wrap" }}>
+        <span style={{ fontSize: "1.3rem", fontWeight: 700, color: "rgba(255,255,255,.28)", textDecoration: "line-through" }}>{before}</span>
+        <span style={{ color: "#0071e3" }}>→</span>
+        <span style={{ fontSize: "1.6rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em" }}>{after}</span>
+      </div>
+    </div>
+  );
+}
+function Quote({ text, author, role }: { text: string; author: string; role: string }) {
+  return (
+    <div style={{ background: "rgba(0,113,227,.06)", border: "1px solid rgba(0,113,227,.18)", borderRadius: 20, padding: "2.25rem" }}>
+      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "rgba(255,255,255,.78)", fontStyle: "italic", fontWeight: 300 }}>{text}</p>
+      <div style={{ marginTop: "1.25rem" }}>
+        <span style={{ fontSize: ".88rem", fontWeight: 600, color: "#f5f5f7", display: "block" }}>{author}</span>
+        <span style={{ fontSize: ".75rem", color: "rgba(255,255,255,.38)" }}>{role}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── Icon box ── */
+function IconBox({ icon, color = "rgba(0,113,227,.2)" }: { icon: ReactNode; color?: string }) {
+  return (
+    <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: color, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      {icon}
+    </div>
+  );
+}
+
+export default function LeadershipCasePage() {
+  const isMobile = useIsMobile();
+  const pad = isMobile ? "5rem 1.5rem" : "8rem 6rem";
+  const padNarrow = isMobile ? "5rem 1.5rem" : "8rem max(6rem, calc(50% - 430px))";
+
+  return (
+    <main className="page-in dark-cursor" style={{ background: "#000" }}>
+
+      {/* ═══ NAV ═══ */}
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, padding: isMobile ? "1.25rem 1.5rem" : "1.75rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 50, background: "rgba(0,0,0,.75)", backdropFilter: "blur(20px)" }}>
+        <Link href="/" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.5)", textDecoration: "none" }}>← Back</Link>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          <Link href="/work/cvc" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>CVC</Link>
+          <Link href="/work/rappi" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>Rappi</Link>
+        </div>
+      </div>
+
+      {/* ═══ 01 · HERO ═══ */}
+      <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "6rem 1.5rem 3.5rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image src="/cinematic/design-system.jpg" alt="Design leadership" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.7) 55%, rgba(0,0,0,.97) 100%)" }} />
+        </div>
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
+            <Tag>Design Leadership</Tag>
+            <Tag>Process & Ops</Tag>
+            <Tag bg="rgba(255,255,255,.07)" border="rgba(255,255,255,.12)" color="rgba(255,255,255,.45)">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: ".35rem" }}><IconLock />Bank · NDA</span>
+            </Tag>
+          </div>
+          <h1 style={{ fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 860, marginBottom: "1.25rem" }}>
+            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>8 weeks</em><br />to 3 weeks.
+          </h1>
+          <p style={{ fontSize: isMobile ? ".93rem" : "1.2rem", color: "rgba(255,255,255,.58)", maxWidth: 520, lineHeight: 1.75, fontWeight: 300, marginBottom: ".75rem" }}>
+            How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half.
+          </p>
+          <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.22)", marginBottom: "2.5rem" }}>Client name under NDA.</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: ".85rem", maxWidth: isMobile ? "100%" : 560 }}>
+            {[
+              { v: "8w → 3w", l: "Delivery cycle" },
+              { v: "3 designers", l: "Team led" },
+              { v: "0 → 7", l: "Ceremonies" },
+              { v: "< 2 months", l: "To Lead role" },
+            ].map((s, i) => (
+              <div key={i} style={{ borderLeft: "2px solid rgba(0,113,227,.4)", paddingLeft: ".85rem" }}>
+                <div style={{ fontSize: isMobile ? "1rem" : "1.3rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: ".63rem", color: "rgba(255,255,255,.35)", marginTop: ".3rem", letterSpacing: ".05em", textTransform: "uppercase" }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 02 · CONTEXT ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>The situation</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1.5rem", lineHeight: 1.1 }}>
+              No process. No roadmap.<br />No ceremonies. Just fire.
+            </h2>
+            <p style={{ fontSize: isMobile ? ".93rem" : "1.05rem", color: "rgba(255,255,255,.62)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
+              When I joined the project at a major Latin American bank, the design team was operating in pure survival mode. Deliveries took 8 weeks on average. Scope changed constantly mid-sprint. The client was frustrated and trust had eroded completely. There was no planning structure, no roadmap visible to anyone, and no design ceremonies connecting the team.
+            </p>
+            <p style={{ fontSize: isMobile ? ".93rem" : "1.05rem", color: "rgba(255,255,255,.62)", lineHeight: 1.85 }}>
+              My goal wasn't to redesign the product. It was to redesign how the team worked — and make the results speak for themselves.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: ".75rem" }}>
+              {[
+                "Delivery cycles of 8+ weeks with no predictability",
+                "No sprint planning — work was reactive, not intentional",
+                "Constant mid-sprint scope changes with no governance",
+                "No design roadmap shared with PMs or stakeholders",
+                "Skill mismatch inside the team causing bottlenecks",
+                "Client trust completely eroded",
+              ].map((label, i) => (
+                <div key={i} style={{ display: "flex", gap: ".85rem", alignItems: "flex-start", padding: "1rem 1.25rem", background: "rgba(255,40,40,.04)", border: "1px solid rgba(255,40,40,.1)", borderRadius: 12 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,80,80,.5)" strokeWidth="2.5" strokeLinecap="round" style={{ flexShrink: 0, marginTop: ".15rem" }}>
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                  <span style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.55 }}>{label}</span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══ BIG NUMBER ═══ */}
+      <section style={{ padding: isMobile ? "4rem 1.5rem" : "7rem 6rem", background: "rgba(255,255,255,.015)" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>The headline result</Label>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "1.25rem" }}>
+              <div style={{ fontSize: isMobile ? ".85rem" : ".95rem", color: "rgba(255,255,255,.38)", letterSpacing: ".08em", textTransform: "uppercase", fontWeight: 600 }}>Design delivery cycle</div>
+              <div style={{ display: "flex", alignItems: "center", gap: isMobile ? "1.25rem" : "3rem", flexWrap: "wrap", justifyContent: "center" }}>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: isMobile ? "3.5rem" : "7rem", fontWeight: 700, color: "rgba(255,255,255,.18)", letterSpacing: "-.05em", lineHeight: 1, textDecoration: "line-through" }}>8w</div>
+                  <div style={{ fontSize: ".7rem", color: "rgba(255,255,255,.22)", marginTop: ".4rem", letterSpacing: ".1em", textTransform: "uppercase" }}>Before</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", color: "#0071e3" }}><IconArrow /></div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: isMobile ? "5rem" : "9rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.06em", lineHeight: 1 }}>
+                    <Counter to={3} suffix="w" />
+                  </div>
+                  <div style={{ fontSize: ".7rem", color: "#0071e3", marginTop: ".4rem", letterSpacing: ".1em", textTransform: "uppercase", fontWeight: 600 }}>After</div>
+                </div>
+              </div>
+              <p style={{ fontSize: isMobile ? ".95rem" : "1.1rem", color: "rgba(255,255,255,.45)", fontWeight: 300, maxWidth: 420, lineHeight: 1.75 }}>
+                More than <strong style={{ color: "#f5f5f7", fontWeight: 700 }}>60% reduction</strong> in delivery cycle — through planning, governance, and a stable sprint structure.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ WHAT I BUILT ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>The intervention</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
+              Four systems that changed everything.
+            </h2>
+            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "3rem" }}>
+              I didn't just redesign screens. I redesigned how the team planned, communicated, and delivered.
+            </p>
+          </ScrollReveal>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+
+            {/* 01 */}
+            <ScrollReveal delay={0}>
+              <div style={{ padding: isMobile ? "2rem 1.5rem" : "2.5rem", background: "rgba(0,113,227,.05)", border: "1px solid rgba(0,113,227,.18)", borderRadius: 24 }}>
+                <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+                  <IconBox icon={<IconCalendar />} color="rgba(0,113,227,.2)" />
+                  <div>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".5rem" }}>01 — Sprint Planning</p>
+                    <h3 style={{ fontSize: isMobile ? "1.05rem" : "1.2rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".75rem" }}>Planning to eliminate overwork</h3>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".97rem", color: "rgba(255,255,255,.6)", lineHeight: 1.8 }}>
+                      I introduced structured sprint planning sessions — something the team had never had. Each cycle started with explicit capacity planning: what we could actually commit to, what was out of scope, and what moved to the next sprint. This single change stopped the pattern of constant overload and made delivery predictable for the first time.
+                    </p>
+                    <div style={{ display: "flex", gap: ".6rem", marginTop: "1.25rem", flexWrap: "wrap" }}>
+                      {["Weekly planning", "Capacity mapping", "Scope protection", "3-week cadence"].map((t, i) => (
+                        <span key={i} style={{ fontSize: ".68rem", fontWeight: 600, padding: ".28rem .8rem", borderRadius: 8, background: "rgba(0,113,227,.12)", border: "1px solid rgba(0,113,227,.25)", color: "#0071e3" }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 02 */}
+            <ScrollReveal delay={60}>
+              <div style={{ padding: isMobile ? "2rem 1.5rem" : "2.5rem", background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 24 }}>
+                <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+                  <IconBox icon={<IconMap />} color="rgba(255,255,255,.06)" />
+                  <div>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".5rem" }}>02 — Design Roadmap</p>
+                    <h3 style={{ fontSize: isMobile ? "1.05rem" : "1.2rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".75rem" }}>Roadmap visible to all PMs and stakeholders</h3>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".97rem", color: "rgba(255,255,255,.6)", lineHeight: 1.8 }}>
+                      I created and maintained the first design roadmap in the project's history — and made it a shared artifact. Every Product Manager could see what design was working on, what was coming next, and how design decisions connected to product delivery. This eliminated the "what is design doing?" friction and turned design into a predictable, strategic partner instead of a reactive service.
+                    </p>
+                    <div style={{ display: "flex", gap: ".6rem", marginTop: "1.25rem", flexWrap: "wrap" }}>
+                      {["Shared with all PMs", "Delivery milestones", "Quarterly view", "Design dependencies"].map((t, i) => (
+                        <span key={i} style={{ fontSize: ".68rem", fontWeight: 600, padding: ".28rem .8rem", borderRadius: 8, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.48)" }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 03 */}
+            <ScrollReveal delay={100}>
+              <div style={{ padding: isMobile ? "2rem 1.5rem" : "2.5rem", background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 24 }}>
+                <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+                  <IconBox icon={<IconZap />} color="rgba(255,255,255,.06)" />
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".5rem" }}>03 — AI & Design Jira</p>
+                    <h3 style={{ fontSize: isMobile ? "1.05rem" : "1.2rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".75rem" }}>AI-powered cards to standardize every process</h3>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".97rem", color: "rgba(255,255,255,.6)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+                      I built a dedicated Design Jira board with AI-generated ticket templates for each design phase. Instead of writing cards from scratch every sprint, the team used structured templates — automatically populated with the right fields, acceptance criteria, and definition of done for that type of task. This standardized how we documented work, reduced back-and-forth with Engineering, and made handoffs predictable and consistent across the entire team.
+                    </p>
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: ".75rem" }}>
+                      {[
+                        { icon: <IconBot />, title: "AI card templates", desc: "Auto-populated per design phase" },
+                        { icon: <IconCheck />, title: "Standardized handoff", desc: "Same format every sprint" },
+                        { icon: <IconLink />, title: "Engineering alignment", desc: "No more ambiguous specs" },
+                      ].map((item, i) => (
+                        <div key={i} style={{ padding: "1rem 1.1rem", background: "rgba(255,255,255,.04)", borderRadius: 12, border: "1px solid rgba(255,255,255,.06)", display: "flex", gap: ".75rem", alignItems: "flex-start" }}>
+                          <div style={{ marginTop: ".1rem", flexShrink: 0 }}>{item.icon}</div>
+                          <div>
+                            <div style={{ fontSize: ".82rem", fontWeight: 600, color: "#f5f5f7", marginBottom: ".2rem" }}>{item.title}</div>
+                            <div style={{ fontSize: ".75rem", color: "rgba(255,255,255,.38)", lineHeight: 1.5 }}>{item.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 04 */}
+            <ScrollReveal delay={140}>
+              <div style={{ padding: isMobile ? "2rem 1.5rem" : "2.5rem", background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 24 }}>
+                <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+                  <IconBox icon={<IconGrid />} color="rgba(255,255,255,.06)" />
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".5rem" }}>04 — 7 Ceremonies</p>
+                    <h3 style={{ fontSize: isMobile ? "1.05rem" : "1.2rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".75rem" }}>7 alignment spaces where there were zero</h3>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".97rem", color: "rgba(255,255,255,.6)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+                      I established the full ceremony stack: sprint planning, design critique, usability test review, cross-team alignment with Product and Engineering, weekly client sync, desk checks, and retrospectives. Each ceremony had a clear owner, agenda, and outcome. The 3-week sprint cadence gave everyone — including the client — a rhythm they could count on.
+                    </p>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: ".75rem" }}>
+                      {[{ n: "0 → 7", l: "Ceremonies" }, { n: "3-wk", l: "Sprint cadence" }, { n: "0×", l: "Rework" }, { n: "100%", l: "Alignment" }].map((m, i) => (
+                        <div key={i} style={{ padding: "1rem", background: "rgba(255,255,255,.04)", borderRadius: 12, border: "1px solid rgba(255,255,255,.06)", textAlign: "center" }}>
+                          <div style={{ fontSize: "1.2rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em" }}>{m.n}</div>
+                          <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.35)", marginTop: ".2rem", textTransform: "uppercase", letterSpacing: ".05em" }}>{m.l}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+          </div>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ TEAM ═══ */}
+      <section style={{ padding: pad, background: "rgba(255,255,255,.015)" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>Team & people</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
+              Built and led a team of 3.
+            </h2>
+            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
+              Managing people and the process at the same time — while working in Spanish, not my native language.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={80}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+              {[
+                { track: "Discovery Track", role: "Research, usability testing, future-sprint preparation", icon: <IconSearch />, color: "rgba(0,200,150,.07)", border: "rgba(0,200,150,.18)" },
+                { track: "Delivery Track", role: "UI design, handoff to Engineering, client alignment", icon: <IconArrow />, color: "rgba(0,113,227,.07)", border: "rgba(0,113,227,.22)" },
+              ].map((t, i) => (
+                <div key={i} style={{ padding: isMobile ? "1.5rem" : "2rem", borderRadius: 20, background: t.color, border: `1px solid ${t.border}`, display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                  <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 10, background: "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>{t.icon}</div>
+                  <div>
+                    <h4 style={{ fontSize: ".97rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".3rem" }}>{t.track}</h4>
+                    <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.48)", lineHeight: 1.6 }}>{t.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <div style={{ padding: isMobile ? "1.5rem" : "2rem", background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)", borderRadius: 20 }}>
+              <p style={{ fontSize: isMobile ? ".88rem" : ".97rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>
+                Beyond the workflow split, I led recruitment — personally interviewing and onboarding a third designer — and managed the full transition plan: roll-off for the outgoing designer, onboarding structure for the new hire. All while protecting the account's delivery continuity and maintaining client confidence through the transition.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ OUTCOMES ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>Results</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "3rem", lineHeight: 1.1 }}>
+              Team efficiency. Process health.<br />Client trust rebuilt.
+            </h2>
+          </ScrollReveal>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "1rem", marginBottom: "2.5rem" }}>
+            <ScrollReveal delay={0}><Metric before="8 weeks" after="3 weeks" label="Design delivery cycle" /></ScrollReveal>
+            <ScrollReveal delay={60}><Metric before="0 ceremonies" after="7" label="Alignment spaces created" /></ScrollReveal>
+            <ScrollReveal delay={100}><Metric before="Reactive" after="Planned" label="Sprint structure" /></ScrollReveal>
+            <ScrollReveal delay={140}><Metric before="No roadmap" after="Shared roadmap" label="Visibility across all PMs" /></ScrollReveal>
+            <ScrollReveal delay={180}><Metric before="Manual cards" after="AI templates" label="Jira standardization" /></ScrollReveal>
+            <ScrollReveal delay={220}><Metric before="High conflict" after="100% trust" label="Client relationship" /></ScrollReveal>
+          </div>
+          <ScrollReveal delay={80}>
+            <div style={{ padding: isMobile ? "2.5rem 1.5rem" : "4rem", background: "linear-gradient(135deg, rgba(0,113,227,.1) 0%, rgba(0,113,227,.03) 100%)", border: "1px solid rgba(0,113,227,.22)", borderRadius: 28, textAlign: "center" }}>
+              <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(0,113,227,.75)", marginBottom: "2rem" }}>Delivery cycle reduction</p>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: isMobile ? "1.5rem" : "3.5rem", flexWrap: "wrap" }}>
+                {[{ n: <Counter to={8} suffix="w" />, l: "Before" }, { n: <Counter to={3} suffix="w" />, l: "After" }, { n: <><Counter to={60} suffix="%" /></>, l: "Reduction" }].map((s, i) => (
+                  <div key={i} style={{ textAlign: "center" }}>
+                    <div style={{ fontSize: isMobile ? "3rem" : "5rem", fontWeight: 700, color: i === 0 ? "rgba(255,255,255,.25)" : "#f5f5f7", letterSpacing: "-.05em", lineHeight: 1 }}>{s.n}</div>
+                    <div style={{ fontSize: ".7rem", color: i === 0 ? "rgba(255,255,255,.3)" : "#0071e3", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase", fontWeight: 600 }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ RECOGNITION ═══ */}
+      <section style={{ padding: pad, background: "rgba(255,255,255,.015)" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>Recognition</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
+              Validated from every direction.
+            </h2>
+            <p style={{ fontSize: isMobile ? ".88rem" : "1.05rem", color: "rgba(255,255,255,.45)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
+              Formally designated <strong style={{ color: "#f5f5f7" }}>Leader of the UX Front</strong> and added to the Extended Client Leadership Team — in under two months.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={60}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: ".85rem", marginBottom: "2.5rem" }}>
+              {[
+                { icon: <IconAward />, title: "Designated Leader of the UX Front", by: "Formally by delivery principal" },
+                { icon: <IconCheck />, title: "Extended Client Leadership Team", by: "Rare for a designer at Senior grade" },
+                { icon: <IconStar />, title: "Consistently Exceeded Expectations", by: "Annual assessment 2025–2026" },
+                { icon: <IconGlobe />, title: "All negotiations in Spanish", by: "Not my native language — Portuguese" },
+              ].map((b, i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", padding: isMobile ? "1.25rem" : "1.5rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
+                  <div style={{ flexShrink: 0, marginTop: ".1rem" }}>{b.icon}</div>
+                  <div>
+                    <h4 style={{ fontSize: isMobile ? ".88rem" : ".95rem", fontWeight: 600, color: "#f5f5f7", lineHeight: 1.4, marginBottom: ".3rem" }}>{b.title}</h4>
+                    <p style={{ fontSize: ".75rem", color: "rgba(255,255,255,.32)" }}>{b.by}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
+            <ScrollReveal delay={0}>
+              <Quote text="You didn't just identify the chaos — you solved it. The 5-phase plan, the sprint structure, the roadmap — the most important part was how you built it: by involving PMs, Tech Leads, and the client for validation. That isn't the work of an executor; it's the work of a leader." author="Mafer Escudero" role="Delivery Principal · Thoughtworks" />
+            </ScrollReveal>
+            <ScrollReveal delay={80}>
+              <Quote text="Your performance doesn't just meet — it consistently exceeds the expectations of the Senior grade. You are unequivocally operating at a Lead level. Your formal designation as Leader of the UX front is the obvious and deserved recognition of that fact." author="Pamela Nunez" role="Principal PM · Thoughtworks" />
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ NEXT ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center" }}>
+          <ScrollReveal>
+            <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Next case study</p>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.8rem)" : "clamp(2rem,5vw,4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "2.5rem" }}>
+              From two stars<br />to <em style={{ color: "#0071e3", fontStyle: "italic" }}>category-defining.</em>
+            </h2>
+            <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.5rem", fontSize: ".92rem" }}>CVC · Flights App →</Link>
+          </ScrollReveal>
+        </div>
+        <footer style={{ marginTop: "5rem", paddingTop: "2.5rem", borderTop: "1px solid rgba(255,255,255,.06)", display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap" }}>
+          {[["Home", "/"], ["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["About", "/about"]].map(([l, h]) => (
+            <Link key={h} href={h} style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", textDecoration: "none" }}>{l}</Link>
+          ))}
+        </footer>
+      </section>
+
+    </main>
+  );
+}
