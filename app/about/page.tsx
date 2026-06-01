@@ -146,17 +146,16 @@ export default function AboutPage() {
 
         {/* Right — photo */}
         <div style={{ position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #000 0%, transparent 30%)", zIndex: 1 }} />
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(to top, #000 0%, transparent 100%)", zIndex: 1 }} />
+          <div className="about-overlay-left" style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #000 0%, transparent 30%)", zIndex: 1 }} />
+          <div className="about-overlay-bottom" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(to top, #000 0%, transparent 100%)", zIndex: 1 }} />
           <Image
-            src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-2026.png"
+            src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-profile.jpg"
             unoptimized
             alt="Rafael Guimarães"
             fill
-            style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.85 }}
+            style={{ objectFit: "cover", objectPosition: "center top" }}
             priority
           />
-          <div style={{ position: "absolute", bottom: "10%", left: "20%", width: "60%", height: "40%", background: "radial-gradient(ellipse, rgba(0,113,227,0.3) 0%, transparent 70%)", zIndex: 2 }} />
         </div>
       </section>
 
@@ -398,6 +397,9 @@ export default function AboutPage() {
         @keyframes logoScroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-100%); }
+        }
+        @media (min-width: 861px) {
+          .about-overlay-left, .about-overlay-bottom { display: none !important; }
         }
         @media (max-width: 860px) {
           [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
