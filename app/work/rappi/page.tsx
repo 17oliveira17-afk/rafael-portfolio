@@ -58,7 +58,9 @@ function MediaPlaceholder({
       gap: "0.75rem",
       padding: "2rem",
     }}>
-      <div style={{ fontSize: "2rem" }}>📁</div>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+      </svg>
       <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#ff6600", textAlign: "center", letterSpacing: "-.01em" }}>
         {label}
       </p>
