@@ -134,20 +134,32 @@ export default function AboutPage() {
             </div>
           </div>
           <div style={{ position: "relative", overflow: "hidden" }}>
+            {/* Blurred backdrop — stretched copy of the photo to extend the background
+                behind Rafael toward the centre without moving the subject */}
+            <Image
+              src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-profile.jpg"
+              unoptimized alt="" fill aria-hidden
+              style={{
+                objectFit: "cover", objectPosition: "left top",
+                transform: "scaleX(1.6) translateX(-22%)", transformOrigin: "left center",
+                filter: "blur(38px) brightness(0.7)",
+              }}
+            />
+            {/* Sharp foreground — Rafael; left edge dissolves into the blurred backdrop */}
             <Image
               src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-profile.jpg"
               unoptimized alt="Rafael Guimarães" fill
               style={{
                 objectFit: "cover", objectPosition: "center top",
-                WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 6%, #000 18%)",
-                maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 6%, #000 18%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 18%, rgba(0,0,0,0.75) 34%, #000 50%)",
+                maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 18%, rgba(0,0,0,0.75) 34%, #000 50%)",
               }}
               priority
             />
-            {/* Soft black feather over the left seam only — keeps subject clear */}
+            {/* Gentle darkening over the seam so it melts into the black left column */}
             <div style={{
               position: "absolute", inset: 0, pointerEvents: "none",
-              background: "linear-gradient(to right, #000 0%, rgba(0,0,0,0.6) 5%, transparent 16%)",
+              background: "linear-gradient(to right, #000 0%, rgba(0,0,0,0.55) 14%, transparent 42%)",
             }} />
           </div>
         </section>
