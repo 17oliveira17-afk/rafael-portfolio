@@ -106,16 +106,16 @@ export default function LeadershipCasePage() {
     <main className="page-in dark-cursor" style={{ background: "#000" }}>
 
       {/* ═══ NAV ═══ */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, padding: isMobile ? "1.5rem" : "2rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 50, background: "rgba(0,0,0,.7)", backdropFilter: "blur(20px)" }}>
-        <Link href="/" style={{ fontSize: ".85rem", color: "rgba(255,255,255,.55)", textDecoration: "none" }}>← Rafael Guimarães</Link>
-        <div style={{ display: "flex", gap: "2rem" }}>
-          <Link href="/work/cvc" style={{ fontSize: ".85rem", color: "rgba(255,255,255,.4)", textDecoration: "none" }}>CVC</Link>
-          <Link href="/work/rappi" style={{ fontSize: ".85rem", color: "rgba(255,255,255,.4)", textDecoration: "none" }}>Rappi</Link>
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, padding: isMobile ? "1.25rem 1.5rem" : "2rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 50, background: "rgba(0,0,0,.7)", backdropFilter: "blur(20px)" }}>
+        <Link href="/" style={{ fontSize: ".85rem", color: "rgba(255,255,255,.55)", textDecoration: "none" }}>← Back</Link>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          <Link href="/work/cvc" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.4)", textDecoration: "none" }}>CVC</Link>
+          <Link href="/work/rappi" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.4)", textDecoration: "none" }}>Rappi</Link>
         </div>
       </div>
 
       {/* ═══ 01 · HERO ═══ */}
-      <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "6rem 1.5rem 3.5rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
         {/* Hero photo */}
         <div style={{ position: "absolute", inset: 0 }}>
           <Image src="/cinematic/design-system.jpg" alt="Design leadership" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
@@ -123,32 +123,40 @@ export default function LeadershipCasePage() {
         </div>
 
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+          <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
             <Tag>Design Leadership</Tag>
-            <Tag>Process & Operations</Tag>
-            <Tag bg="rgba(255,255,255,.08)" border="rgba(255,255,255,.15)" color="rgba(255,255,255,.6)">Bank · NDA 🔒</Tag>
+            <Tag>Process & Ops</Tag>
+            <Tag bg="rgba(255,255,255,.08)" border="rgba(255,255,255,.15)" color="rgba(255,255,255,.5)">Bank · NDA 🔒</Tag>
           </div>
 
-          <h1 style={{ fontSize: isMobile ? "clamp(2.4rem,10vw,3.5rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 900, marginBottom: "1.5rem" }}>
+          <h1 style={{
+            fontSize: isMobile ? "clamp(2.4rem,10vw,3.2rem)" : "clamp(3rem,6vw,6rem)",
+            fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 900, marginBottom: "1.25rem",
+          }}>
             From <em style={{ color: "#0071e3", fontStyle: "italic" }}>8 weeks</em><br />to 3 weeks.
           </h1>
 
-          <p style={{ fontSize: isMobile ? "1.05rem" : "1.2rem", color: "rgba(255,255,255,.6)", maxWidth: 580, lineHeight: 1.75, fontWeight: 300 }}>
-            How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting the delivery cycle by more than half.
+          <p style={{ fontSize: isMobile ? ".95rem" : "1.2rem", color: "rgba(255,255,255,.6)", maxWidth: 540, lineHeight: 1.75, fontWeight: 300, marginBottom: ".75rem" }}>
+            How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half.
           </p>
-          <p style={{ marginTop: "1rem", fontSize: ".78rem", color: "rgba(255,255,255,.3)" }}>Client name under NDA.</p>
+          <p style={{ fontSize: ".75rem", color: "rgba(255,255,255,.25)", marginBottom: "2.5rem" }}>Client name under NDA.</p>
 
-          {/* Hero stats */}
-          <div style={{ marginTop: "4rem", display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: "1.5rem", maxWidth: 720 }}>
+          {/* Stats — 2x2 on mobile, 4 cols on desktop */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, auto)",
+            gap: "1rem",
+            maxWidth: isMobile ? "100%" : 680,
+          }}>
             {[
-              { v: "8w→3w", l: "Delivery cycle" },
+              { v: "8w → 3w", l: "Delivery cycle" },
               { v: "3", l: "Designers led" },
-              { v: "0→7", l: "Ceremonies created" },
-              { v: "< 2mo", l: "To Lead designation" },
+              { v: "0 → 7", l: "Ceremonies" },
+              { v: "< 2mo", l: "To Lead role" },
             ].map((s, i) => (
-              <div key={i} style={{ borderLeft: "2px solid rgba(0,113,227,.4)", paddingLeft: "1rem" }}>
-                <div style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1 }}>{s.v}</div>
-                <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".35rem", letterSpacing: ".04em", textTransform: "uppercase" }}>{s.l}</div>
+              <div key={i} style={{ borderLeft: "2px solid rgba(0,113,227,.4)", paddingLeft: ".85rem" }}>
+                <div style={{ fontSize: isMobile ? "1.1rem" : "1.4rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: ".65rem", color: "rgba(255,255,255,.38)", marginTop: ".3rem", letterSpacing: ".05em", textTransform: "uppercase" }}>{s.l}</div>
               </div>
             ))}
           </div>

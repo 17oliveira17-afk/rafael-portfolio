@@ -101,47 +101,56 @@ export default function RappiCasePage() {
 
       {/* ═══ 01 · HERO ═══ */}
       <section style={{
-        minHeight: "100vh", display: "flex", flexDirection: "column",
-        justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem",
+        minHeight: "100svh", display: "flex", flexDirection: "column",
+        justifyContent: "flex-end", padding: isMobile ? "7rem 1.5rem 3.5rem" : "10rem 6rem 6rem",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(255,102,0,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
-            <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+            <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
               {["B2B", "Onboarding", "9 markets", "Solo designer"].map(t => (
-                <span key={t} style={{ padding: ".3rem .9rem", border: "1px solid rgba(255,102,0,.3)", borderRadius: 100, fontSize: ".7rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
+                <span key={t} style={{ padding: ".3rem .85rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
               ))}
             </div>
-            <h1 style={{ fontSize: isMobile ? "2.8rem" : "clamp(3rem,7vw,6.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}>
+            <h1 style={{
+              fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,7vw,6.5rem)",
+              fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "1.25rem",
+            }}>
               Rappi Merchant<br />
-              <em style={{ color: "#ff6600", fontStyle: "italic" }}>Onboarding.</em>
+              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Onboarding.</em>
             </h1>
-            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "3rem" }}>
+            <p style={{ fontSize: isMobile ? ".97rem" : "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
               The onboarding was losing 30% of merchants at the menu step alone. 2 weeks to open a store. I changed the roadmap, shipped 3 releases, and cut that to 2 days.
             </p>
-            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-              <div>
-                <p style={{ fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#ff6600", letterSpacing: "-.04em", lineHeight: 1 }}>2 weeks</p>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase" }}>→ 2 days to open</p>
-              </div>
-              <div style={{ width: 1, background: "rgba(255,255,255,.1)", margin: "0 .5rem" }} />
-              <div>
-                <p style={{ fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#ff6600", letterSpacing: "-.04em", lineHeight: 1 }}>+53%</p>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase" }}>Onboarding conversion</p>
-              </div>
-              <div style={{ width: 1, background: "rgba(255,255,255,.1)", margin: "0 .5rem" }} />
-              <div>
-                <p style={{ fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#ff6600", letterSpacing: "-.04em", lineHeight: 1 }}>+135%</p>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase" }}>Lead verification</p>
-              </div>
+            {/* Stats — grid on mobile, row on desktop */}
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : "auto auto auto",
+              gap: isMobile ? "1rem" : "0",
+              alignItems: "center",
+            }}>
+              {[
+                { v: "2d", label: "To open a store", sub: "Was 2 weeks" },
+                { v: "+53%", label: "Conversion", sub: "Onboarding" },
+                { v: "+135%", label: "Lead verify", sub: "" },
+              ].map((s, i) => (
+                <div key={i} style={{
+                  paddingLeft: isMobile ? 0 : i > 0 ? "2rem" : 0,
+                  borderLeft: isMobile ? "none" : i > 0 ? "1px solid rgba(255,255,255,.1)" : "none",
+                  marginLeft: isMobile ? 0 : i > 0 ? "2rem" : 0,
+                }}>
+                  <p style={{ fontSize: isMobile ? "1.8rem" : "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1 }}>{s.v}</p>
+                  <p style={{ fontSize: ".7rem", color: "rgba(255,255,255,.4)", marginTop: ".4rem", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.4 }}>{s.label}{s.sub && <><br /><span style={{ color: "rgba(255,255,255,.25)" }}>{s.sub}</span></>}</p>
+                </div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
         {/* Scroll cue */}
-        <div style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: ".5rem", opacity: .4 }}>
-          <p style={{ fontSize: ".65rem", letterSpacing: ".12em", textTransform: "uppercase", color: "#fff" }}>Scroll</p>
-          <div style={{ width: 1, height: 40, background: "rgba(255,255,255,.4)" }} />
+        <div style={{ position: "absolute", bottom: "2rem", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: ".5rem", opacity: .35 }}>
+          <p style={{ fontSize: ".62rem", letterSpacing: ".12em", textTransform: "uppercase", color: "#fff" }}>Scroll</p>
+          <div style={{ width: 1, height: 32, background: "rgba(255,255,255,.4)" }} />
         </div>
       </section>
 
