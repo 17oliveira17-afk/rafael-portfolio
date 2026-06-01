@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import IPhone from "../../components/IPhone";
 import useIsMobile from "../../components/useIsMobile";
+import Icon from "../../components/Icon";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -43,7 +44,7 @@ function MediaPlaceholder({
       borderRadius: 16, display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center", gap: ".75rem", padding: "2rem",
     }}>
-      <div style={{ fontSize: "2rem" }}>📁</div>
+      <div style={{ color: "#0071e3", display: "flex" }}><Icon name="folder" size={32} /></div>
       <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#0071e3", textAlign: "center", letterSpacing: "-.01em" }}>{label}</p>
       <code style={{ fontSize: ".75rem", color: "rgba(0,113,227,.8)", background: "rgba(0,113,227,.1)", padding: ".25rem .6rem", borderRadius: 6 }}>
         /public/{filename}
@@ -173,7 +174,7 @@ export default function CVCCasePage() {
                 { symptom: "No reason to install", cause: "Same experience as desktop website, but worse" },
               ].map((r, i) => (
                 <div key={i} style={{ padding: "1.25rem 1.5rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 12, background: "#0a0a0a" }}>
-                  <p style={{ fontSize: ".78rem", fontWeight: 600, color: "rgba(255,69,0,.8)", marginBottom: ".4rem" }}>❌ {r.symptom}</p>
+                  <p style={{ fontSize: ".78rem", fontWeight: 600, color: "rgba(255,69,0,.8)", marginBottom: ".4rem", display: "inline-flex", alignItems: "center", gap: ".4rem" }}><Icon name="close" size={15} /> {r.symptom}</p>
                   <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.45)" }}>→ {r.cause}</p>
                 </div>
               ))}
@@ -237,7 +238,7 @@ export default function CVCCasePage() {
                     <p style={{ fontSize: ".78rem", color: "rgba(255,69,0,.7)", marginTop: ".5rem", fontStyle: "italic" }}>&ldquo;Too much info&rdquo;</p>
                   </div>
                   <div style={{ padding: "1.5rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 12, background: "rgba(0,113,227,.05)" }}>
-                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".1em", color: "#0071e3", textTransform: "uppercase", marginBottom: ".75rem" }}>A — Separated 🏆</p>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".1em", color: "#0071e3", textTransform: "uppercase", marginBottom: ".75rem", display: "inline-flex", alignItems: "center", gap: ".4rem" }}>A — Separated <Icon name="trophy" size={14} /></p>
                     <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff", letterSpacing: "-.03em" }}>9.4s</p>
                     <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.5)", marginTop: ".4rem" }}>Score: 97–100</p>
                     <p style={{ fontSize: ".78rem", color: "#0071e3", marginTop: ".5rem", fontStyle: "italic" }}>&ldquo;Practical, no back and forth&rdquo;</p>
@@ -295,7 +296,7 @@ export default function CVCCasePage() {
           {/* GIF: Usability test */}
           <ScrollReveal delay={150}>
             <div style={{ marginBottom: "4rem" }}>
-              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem" }}>📹 Full flow — usability test in hi-fi prototype</p>
+              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Full flow — usability test in hi-fi prototype</p>
               <MediaPlaceholder
                 label="GIF/Video — Usability test: full flow walkthrough (Slide 17 do PDF CVC)"
                 filename="cvc/cvc-usability-test.gif"
@@ -317,7 +318,7 @@ export default function CVCCasePage() {
                 </p>
               </div>
               <div>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem" }}>🎬 Loading animation — before vs after</p>
+                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="film" size={15} /> Loading animation — before vs after</p>
                 <MediaPlaceholder
                   label="GIF/Video — Loading animation before vs after (Slide 20 do PDF CVC)"
                   filename="cvc/cvc-loading-animation.gif"

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
+import Icon from "../../components/Icon";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -277,8 +278,8 @@ export default function RappiCasePage() {
           {/* PLACEHOLDER: Prototype high-fi test video */}
           <ScrollReveal delay={100}>
             <div style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem" }}>
-                📹 Usability test — prototype walkthrough
+              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
+                <Icon name="video" size={15} /> Usability test — prototype walkthrough
               </p>
               <MediaPlaceholder
                 label="GIF/Video — High-fi prototype usability test (Slide 9 do PDF Rappi)"
@@ -406,8 +407,8 @@ export default function RappiCasePage() {
               </div>
               {/* PLACEHOLDER: Login animation GIF */}
               <div>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem" }}>
-                  🎬 Login flow animation
+                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
+                  <Icon name="film" size={15} /> Login flow animation
                 </p>
                 <MediaPlaceholder
                   label="GIF/Video — Login animation (Slide 36 do PDF Rappi)"
