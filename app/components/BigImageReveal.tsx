@@ -27,7 +27,7 @@ export default function BigImageReveal({
 
   return (
     <section style={{ background: "#000", padding: 0, position: "relative", overflow: "hidden" }}>
-      <ScrollReveal type={isMobile ? "in" : "scale"} style={{ width: "100%", display: "block" }}>
+      <ScrollReveal type="in" style={{ width: "100%", display: "block" }}>
         <div
           ref={ref}
           style={{
