@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import useIsMobile from "./components/useIsMobile";
 import IPhone from "./components/IPhone";
-import useIsMobile from "./components/useIsMobile";
 import BigImageReveal from "./components/BigImageReveal";
 
 /* ══════════════════════════════════════════════════════════
@@ -223,7 +222,6 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const phonesRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (isMobile) return; // skip parallax on mobile (perf + visual)
