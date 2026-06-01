@@ -626,6 +626,7 @@ export default function Home() {
                 overflow: "hidden",
                 position: "relative",
                 zIndex: 1,
+                aspectRatio: isMobile ? "4 / 5" : undefined,
                 boxShadow: "0 60px 120px rgba(0,0,0,.6), 0 30px 60px rgba(0,113,227,.15)",
               }}>
                 <Image
@@ -633,7 +634,7 @@ export default function Home() {
                   alt="Rafael Guimarães"
                   width={1600}
                   height={1600}
-                  style={{ width: "100%", height: "auto", display: "block" }}
+                  style={{ width: "100%", height: isMobile ? "100%" : "auto", objectFit: "cover", objectPosition: "center top", display: "block" }}
                   unoptimized
                   priority
                 />
@@ -644,7 +645,7 @@ export default function Home() {
                   pointerEvents: "none",
                 }} />
                 {/* Caption on photo */}
-                <div style={{ position: "absolute", bottom: "2rem", left: "2rem", right: "2rem" }}>
+                <div style={{ position: "absolute", bottom: isMobile ? "3.75rem" : "2rem", left: "2rem", right: "2rem" }}>
                   <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff", letterSpacing: "-.01em" }}>
                     Rafael Guimarães
                   </p>
@@ -657,8 +658,8 @@ export default function Home() {
               {/* Floating stat card */}
               <div style={{
                 position: "absolute",
-                bottom: "-30px",
-                right: "-20px",
+                bottom: isMobile ? "-18px" : "-30px",
+                right: isMobile ? "8px" : "-20px",
                 background: "rgba(20,20,22,.85)",
                 backdropFilter: "blur(20px)",
                 border: "1px solid rgba(255,255,255,.08)",
