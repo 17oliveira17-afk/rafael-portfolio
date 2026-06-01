@@ -137,8 +137,18 @@ export default function AboutPage() {
             <Image
               src="https://raw.githubusercontent.com/17oliveira17-afk/rafael-portfolio/main/public/photos/rafael-profile.jpg"
               unoptimized alt="Rafael Guimarães" fill
-              style={{ objectFit: "cover", objectPosition: "center top" }} priority
+              style={{
+                objectFit: "cover", objectPosition: "center top",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 6%, #000 18%)",
+                maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 6%, #000 18%)",
+              }}
+              priority
             />
+            {/* Soft black feather over the left seam only — keeps subject clear */}
+            <div style={{
+              position: "absolute", inset: 0, pointerEvents: "none",
+              background: "linear-gradient(to right, #000 0%, rgba(0,0,0,0.6) 5%, transparent 16%)",
+            }} />
           </div>
         </section>
       )}
