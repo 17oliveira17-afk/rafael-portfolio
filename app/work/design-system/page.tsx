@@ -107,7 +107,7 @@ export default function DesignSystemCasePage() {
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".7rem", flexWrap: "wrap", marginBottom: "2rem" }}>
               <Tag>Design Systems</Tag>
-              <Tag color="#ff6600">Mobile</Tag>
+              <Tag color="#0071e3">Mobile</Tag>
               <Tag color="#7e48ff">B2B & B2C</Tag>
             </div>
             <h1 style={{ fontSize: isMobile ? "2.7rem" : "clamp(3rem,7vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}>
@@ -154,12 +154,12 @@ export default function DesignSystemCasePage() {
 
       {/* ═══ 03 · CONTEXT A — RAPPI (zero to one) ═══ */}
       <section style={{ padding: pad, background: "#050505", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(255,102,0,.08) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,113,227,.08) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <ScrollReveal>
-            <Label color="#ff6600">Context A · Rappi — zero to one</Label>
+            <Label color="#0071e3">Context A · Rappi — zero to one</Label>
             <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
-              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(255,102,0,.16)", border: "1px solid rgba(255,102,0,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ff6600" }}><IconSeed /></div>
+              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,113,227,.16)", border: "1px solid rgba(0,113,227,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3" }}><IconSeed /></div>
               <h2 style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2.2rem)" : "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1 }}>
                 A fragmented system, no DS team.<br />So we built it collaboratively.
               </h2>
@@ -175,7 +175,7 @@ export default function DesignSystemCasePage() {
           {/* Text field as the seed */}
           <ScrollReveal delay={80}>
             <div style={{ marginBottom: "2.5rem" }}>
-              <MediaPlaceholder accent="#ff6600"
+              <MediaPlaceholder accent="#0071e3"
                 label="Text field — single main component, every variation inside"
                 filename="ds/rappi-text-field-variants.png"
                 hint="Board do text field: anatomia + todos os estados (default, hover, focus, focus w/ placeholder, filling, filled, disabled, disabled filled, error) e tipos (ícone esquerda/direita/ambos, text area, code validation, chips). Exporte do Figma."
@@ -192,7 +192,7 @@ export default function DesignSystemCasePage() {
                 { k: "Solution", t: "Everything in one component + docs.", d: "Consolidated all states and types into a single main component, then wrote full documentation — intro, anatomy, specs, usage rules and max-width guidance — so the whole team applied it consistently." },
               ].map((c, i) => (
                 <div key={i} style={{ padding: "1.75rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
-                  <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#ff6600", marginBottom: ".9rem" }}>{c.k}</p>
+                  <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".9rem" }}>{c.k}</p>
                   <h4 style={{ fontSize: ".98rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".5rem", lineHeight: 1.25 }}>{c.t}</h4>
                   <p style={{ fontSize: ".86rem", color: "rgba(255,255,255,.5)", lineHeight: 1.65 }}>{c.d}</p>
                 </div>
@@ -209,7 +209,7 @@ export default function DesignSystemCasePage() {
                 { n: "Unified", l: "Brand consistency", sub: "Strengthened across B2B products" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#ff6600", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
+                  <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
                   <p style={{ fontSize: ".86rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem" }}>{m.l}</p>
                   <p style={{ fontSize: ".76rem", color: "rgba(255,255,255,.4)", lineHeight: 1.5 }}>{m.sub}</p>
                 </div>
