@@ -109,6 +109,7 @@ export default function RappiCasePage() {
         position: "relative", overflow: "hidden",
       }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div className="aurora" style={{ opacity: 0.36, mixBlendMode: "screen" }} />
         <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
@@ -121,7 +122,7 @@ export default function RappiCasePage() {
               fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "1.25rem",
             }}>
               Rappi Merchant<br />
-              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Onboarding.</em>
+              <em className="text-gradient" style={{ fontStyle: "italic" }}>Onboarding.</em>
             </h1>
             <p style={{ fontSize: isMobile ? ".97rem" : "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
               The onboarding was losing 30% of merchants at the menu step alone. 2 weeks to open a store. I changed the roadmap, shipped 3 releases, and cut that to 2 days.

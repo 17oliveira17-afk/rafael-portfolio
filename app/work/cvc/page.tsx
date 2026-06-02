@@ -79,6 +79,7 @@ export default function CVCCasePage() {
         position: "relative", overflow: "hidden",
       }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div className="aurora" style={{ opacity: 0.38, mixBlendMode: "screen" }} />
         <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
@@ -88,7 +89,7 @@ export default function CVCCasePage() {
             </div>
             <h1 style={{ fontSize: isMobile ? "2.8rem" : "clamp(3rem,7vw,6.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}>
               CVC Flight<br />
-              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Booking Redesign.</em>
+              <em className="text-gradient" style={{ fontStyle: "italic" }}>Booking Redesign.</em>
             </h1>
             <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "3rem" }}>
               Brazil's largest travel app had a 2.0★ rating, 40-second loads, and 6% checkout conversion. I proposed a 1-month A/B bet instead of a 6-month redesign — and delivered results in the first month.
@@ -270,7 +271,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>05 — The product</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              Guided search. One flight at a time.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>Confirmation before checkout.</em>
+              Guided search. One flight at a time.<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>Confirmation before checkout.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               The new flow replaced a fragmented multi-step search with a linear 3-step guided experience — destination, details, dates. Results show one flight at a time, outbound then return. Flight details expand inline without leaving the list. Confirmation appears before checkout, not inside it.
@@ -378,7 +379,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>07 — Outcomes</Label>
             <h2 style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}>
-              Results after 1 month live.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>A/B tested 50/50 in production.</em>
+              Results after 1 month live.<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>A/B tested 50/50 in production.</em>
             </h2>
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "4rem", letterSpacing: ".06em" }}>Tracked via Mixpanel</p>
           </ScrollReveal>
