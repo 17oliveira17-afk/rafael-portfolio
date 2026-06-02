@@ -220,6 +220,55 @@ function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; 
   );
 }
 
+/* ── Editorial side-bleed device: huge notebook entering from one page edge, text in the open space ── */
+function SideShot({ src, alt, side, eyebrow, title, body, glow, isMobile }:
+  { src: string; alt: string; side: "left" | "right"; eyebrow: string; title: ReactNode; body: string; glow?: keyof typeof GLOWS; isMobile: boolean }) {
+  const glowBg = glow ? GLOWS[glow] : null;
+  const img = (
+    <div style={{ position: "relative", zIndex: 0 }}>
+      {glowBg && <div aria-hidden style={{ position: "absolute", inset: "-14%", background: glowBg, filter: "blur(65px)", pointerEvents: "none" }} />}
+      <Image src={src} alt={alt} width={1430} height={866} unoptimized sizes="70vw"
+        style={{ width: "100%", height: "auto", display: "block", position: "relative", filter: "drop-shadow(0 40px 70px rgba(0,0,0,.55))" }} />
+    </div>
+  );
+  const txt = (
+    <div style={{ maxWidth: 430 }}>
+      <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".9rem" }}>{eyebrow}</p>
+      <h3 style={{ fontSize: isMobile ? "1.5rem" : "clamp(1.6rem,2.6vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.12, marginBottom: "1rem" }}>{title}</h3>
+      <p style={{ fontSize: isMobile ? ".92rem" : "1.02rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>{body}</p>
+    </div>
+  );
+
+  if (isMobile) {
+    return (
+      <ScrollReveal type="up">
+        <div style={{ padding: "0 1.5rem" }}>
+          {txt}
+          <div style={{ marginTop: "1.75rem", marginRight: side === "right" ? "-1.5rem" : 0, marginLeft: side === "left" ? "-1.5rem" : 0 }}>{img}</div>
+        </div>
+      </ScrollReveal>
+    );
+  }
+
+  return (
+    <ScrollReveal type="up">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "clamp(2rem,5vw,5rem)", maxWidth: 1400, margin: "0 auto" }}>
+        {side === "left" ? (
+          <>
+            <div style={{ marginLeft: "-15%", marginRight: "-3%" }}>{img}</div>
+            <div style={{ paddingRight: "clamp(1rem,4vw,4rem)" }}>{txt}</div>
+          </>
+        ) : (
+          <>
+            <div style={{ paddingLeft: "clamp(1rem,4vw,4rem)", display: "flex", justifyContent: "flex-end" }}>{txt}</div>
+            <div style={{ marginRight: "-15%", marginLeft: "-3%" }}>{img}</div>
+          </>
+        )}
+      </div>
+    </ScrollReveal>
+  );
+}
+
 /* ── Elegant NDA placeholder — used where a real screenshot would be illegible ── */
 function Artifact({ icon, title, note }: { icon?: ReactNode; title: string; note: string }) {
   return (
@@ -509,28 +558,34 @@ export default function LeadershipCasePage() {
         caption="The entire credit platform mapped end-to-end on a single board — every flow, state, and dependency in one place." />
 
       {/* ═══ WHAT I DELIVERED — process gallery ═══ */}
-      <section className="aurora-wrap" style={{ padding: pad, background: "#040406" }}>
+      <section className="aurora-wrap" style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#040406", overflow: "hidden" }}>
         <div className="aurora aurora-soft" />
-        <div className="aurora-content" style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <ScrollReveal>
-            <Label>What I delivered</Label>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
-              System thinking,<br /><span className="text-gradient">made visible.</span>
-            </h2>
-            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.5)", lineHeight: 1.75, marginBottom: "3.5rem", maxWidth: 640 }}>
-              Process artifacts and screen evolution across every stage of the credit platform — benchmark to handoff.
-            </p>
-          </ScrollReveal>
+        <div className="aurora-content">
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: isMobile ? "0 1.5rem" : "0 6rem" }}>
+            <ScrollReveal>
+              <Label>What I delivered</Label>
+              <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
+                System thinking,<br /><span className="text-gradient">made visible.</span>
+              </h2>
+              <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.5)", lineHeight: 1.75, maxWidth: 640 }}>
+                Process artifacts and screen evolution across every stage of the credit platform — benchmark to handoff.
+              </p>
+            </ScrollReveal>
+          </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "4rem" : "6rem" }}>
-            <Shot src="/work/tw/benchmark.png" alt="Competitive benchmark of lending apps" glow="violet"
-              eyebrow="01 · Benchmark" caption="Benchmarking how leading banks and fintechs structure credit flows — the reference point for every decision." />
-            <Shot src="/work/tw/user-journey.png" alt="End-to-end user journey board" glow="blue"
-              eyebrow="02 · User journey" caption="The full field-advisor journey — from client search to credit simulation, transfer and collections." />
-            <Shot src="/work/tw/wireframes.png" alt="Low-fidelity wireframes board" glow="green"
-              eyebrow="03 · Wireframes" caption="Rapid low-fidelity wireframes — validated before a single pixel of UI was committed." />
-            <Shot src="/work/tw/evolution.png" alt="Screen evolution across iterations" glow="pink"
-              eyebrow="04 · Evolution" caption="Screen evolution across iterations — every design rationale documented and traceable." />
+          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "5rem" : "clamp(6rem,11vw,10rem)", marginTop: isMobile ? "3.5rem" : "6rem" }}>
+            <SideShot isMobile={isMobile} side="right" glow="violet" src="/work/tw/benchmark.png" alt="Competitive benchmark of lending apps"
+              eyebrow="01 · Benchmark" title={<>Started by studying<br />the whole market.</>}
+              body="Before a single screen, I benchmarked how leading banks and fintechs structure their credit flows. It became the shared reference point the team measured every later decision against." />
+            <SideShot isMobile={isMobile} side="left" glow="blue" src="/work/tw/user-journey.png" alt="End-to-end user journey board"
+              eyebrow="02 · User journey" title={<>Mapped the full<br />field-advisor journey.</>}
+              body="From client search to credit simulation, transfer and collections — the entire end-to-end journey laid out in one board so every gap and hand-off was visible to the team and the client." />
+            <SideShot isMobile={isMobile} side="right" glow="green" src="/work/tw/wireframes.png" alt="Low-fidelity wireframes board"
+              eyebrow="03 · Wireframes" title={<>Validated in low-fi,<br />before any pixel.</>}
+              body="Rapid low-fidelity wireframes let us test structure and flow with users early — so we committed to UI only once the underlying experience was proven to work." />
+            <SideShot isMobile={isMobile} side="left" glow="pink" src="/work/tw/evolution.png" alt="Screen evolution across iterations"
+              eyebrow="04 · Evolution" title={<>Every iteration,<br />documented.</>}
+              body="Screen evolution across iterations — each design rationale captured and traceable, so the reasoning behind every change stayed legible long after the decision was made." />
           </div>
         </div>
       </section>
