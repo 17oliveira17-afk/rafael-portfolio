@@ -262,6 +262,9 @@ export default function Home() {
           `,
         }} />
 
+        {/* Colorful aurora glow — breaks the black, Apple-style */}
+        <div className="aurora" style={{ opacity: 0.4, mixBlendMode: "screen" }} />
+
         {/* Grain */}
         <div style={{
           position: "absolute", inset: 0, opacity: 0.3, mixBlendMode: "overlay", pointerEvents: "none",
@@ -337,7 +340,7 @@ export default function Home() {
             opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
           }}>
             I design products<br />
-            <em style={{ color: "#0071e3", fontStyle: "italic" }}>that move the needle.</em>
+            <em className="text-gradient" style={{ fontStyle: "italic" }}>that move the needle.</em>
           </h1>
           <p style={{
             fontSize: "clamp(1rem,1.4vw,1.2rem)", fontWeight: 300, lineHeight: 1.7,
@@ -726,7 +729,7 @@ export default function Home() {
             lineHeight: 1.02, color: "#1d1d1f", marginBottom: "2rem", maxWidth: 800, margin: "0 auto 2rem",
           }}>
             Let&apos;s build something<br />
-            <em style={{ color: "#0071e3", fontStyle: "italic" }}>worth shipping.</em>
+            <em className="text-gradient" style={{ fontStyle: "italic" }}>worth shipping.</em>
           </h2>
           <p className="t-body" style={{ maxWidth: 480, margin: "0 auto 3rem" }}>
             Open to Product Design Lead roles in fintech and B2B. Pursuing opportunities in Canada.

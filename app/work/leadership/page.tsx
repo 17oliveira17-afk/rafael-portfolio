@@ -152,17 +152,23 @@ function IconBox({ icon, color = "rgba(0,113,227,.2)" }: { icon: ReactNode; colo
 }
 
 /* ── Apple-style floating device mockup (transparent PNG on dark bg) ── */
+const GLOWS: Record<string, string> = {
+  blue:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(0,113,227,.42), transparent 68%)",
+  violet: "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(126,72,255,.40), transparent 68%)",
+  green:  "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(0,200,160,.38), transparent 68%)",
+  pink:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(255,82,140,.38), transparent 68%)",
+};
 function Shot({
-  src, alt, eyebrow, caption, priority = false, glow = false,
-}: { src: string; alt: string; eyebrow?: string; caption?: string; priority?: boolean; glow?: boolean }) {
+  src, alt, eyebrow, caption, priority = false, glow,
+}: { src: string; alt: string; eyebrow?: string; caption?: string; priority?: boolean; glow?: keyof typeof GLOWS | boolean }) {
+  const glowBg = glow === true ? GLOWS.blue : glow ? GLOWS[glow] : null;
   return (
     <ScrollReveal type="scale">
       <figure style={{ margin: 0, position: "relative" }}>
-        {glow && (
+        {glowBg && (
           <div aria-hidden style={{
-            position: "absolute", inset: "-6% 2% 14% 2%", zIndex: 0,
-            background: "radial-gradient(ellipse 58% 55% at 50% 42%, rgba(0,113,227,.28), transparent 70%)",
-            filter: "blur(50px)", pointerEvents: "none",
+            position: "absolute", inset: "-10% 0 12% 0", zIndex: 0,
+            background: glowBg, filter: "blur(55px)", pointerEvents: "none",
           }} />
         )}
         <Image src={src} alt={alt} width={1430} height={866} unoptimized priority={priority}
@@ -172,7 +178,7 @@ function Shot({
             filter: "drop-shadow(0 34px 55px rgba(0,0,0,.5))",
           }} />
         {(eyebrow || caption) && (
-          <figcaption style={{ marginTop: ".6rem", textAlign: "center", maxWidth: 620, marginLeft: "auto", marginRight: "auto", position: "relative", zIndex: 1 }}>
+          <figcaption style={{ marginTop: ".7rem", textAlign: "center", maxWidth: 620, marginLeft: "auto", marginRight: "auto", position: "relative", zIndex: 1 }}>
             {eyebrow && <span style={{ display: "block", fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".4rem" }}>{eyebrow}</span>}
             {caption && <span style={{ display: "block", fontSize: ".82rem", color: "rgba(255,255,255,.4)", lineHeight: 1.6 }}>{caption}</span>}
           </figcaption>
@@ -182,12 +188,33 @@ function Shot({
   );
 }
 
-/* ── Hero-scale centered device on its own dark band ── */
-function FullBleedShot({ src, alt, eyebrow, caption }: { src: string; alt: string; eyebrow?: string; caption?: string }) {
+/* ── Apple-style colorful aurora stage with a floating hero device ── */
+function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; alt: string; eyebrow?: string; headline?: ReactNode; caption?: string }) {
   return (
-    <section style={{ position: "relative", overflow: "hidden", padding: "2rem 1.5rem 0", background: "radial-gradient(ellipse 70% 80% at 50% 30%, rgba(0,113,227,.10), transparent 65%)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <Shot src={src} alt={alt} eyebrow={eyebrow} caption={caption} glow />
+    <section className="aurora-wrap" style={{ padding: "clamp(4rem,9vw,8rem) 1.5rem clamp(3rem,6vw,5rem)", background: "#040406" }}>
+      <div className="aurora" />
+      <div className="aurora-content" style={{ maxWidth: 1280, margin: "0 auto", textAlign: "center" }}>
+        {eyebrow && (
+          <ScrollReveal type="up">
+            <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(255,255,255,.65)", marginBottom: "1rem" }}>{eyebrow}</p>
+          </ScrollReveal>
+        )}
+        {headline && (
+          <ScrollReveal type="up" delay={60}>
+            <h2 style={{ fontSize: "clamp(2rem,6vw,4.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1.02, color: "#fff", margin: "0 auto 2.5rem", maxWidth: 900 }}>{headline}</h2>
+          </ScrollReveal>
+        )}
+        <ScrollReveal type="scale" delay={120}>
+          <div className="floaty">
+            <Image src={src} alt={alt} width={1430} height={866} unoptimized
+              sizes="100vw" style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 50px 90px rgba(0,0,0,.6))" }} />
+          </div>
+        </ScrollReveal>
+        {caption && (
+          <ScrollReveal type="in" delay={120}>
+            <p style={{ marginTop: "1.25rem", fontSize: ".9rem", color: "rgba(255,255,255,.55)", maxWidth: 640, margin: "1.25rem auto 0", lineHeight: 1.6 }}>{caption}</p>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );
@@ -214,7 +241,8 @@ export default function LeadershipCasePage() {
       <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "6rem 1.5rem 3.5rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0 }}>
           <Image src="/cinematic/design-system.jpg" alt="Design leadership" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.7) 55%, rgba(0,0,0,.97) 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,.97) 100%)" }} />
+          <div className="aurora" style={{ opacity: .42, mixBlendMode: "screen" }} />
         </div>
         <div style={{ position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
@@ -225,7 +253,7 @@ export default function LeadershipCasePage() {
             </Tag>
           </div>
           <h1 style={{ fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 860, marginBottom: "1.25rem" }}>
-            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>8 weeks</em><br />to 3 weeks.
+            From <em className="text-gradient" style={{ fontStyle: "italic" }}>8 weeks</em><br />to 3 weeks.
           </h1>
           <p style={{ fontSize: isMobile ? ".93rem" : "1.2rem", color: "rgba(255,255,255,.58)", maxWidth: 520, lineHeight: 1.75, fontWeight: 300, marginBottom: ".75rem" }}>
             How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half.
@@ -453,30 +481,33 @@ export default function LeadershipCasePage() {
 
       {/* ═══ HERO DEVICE — chaos to clarity ═══ */}
       <FullBleedShot src="/work/tw/system-board.png" alt="System-level design board — the full credit flow mapped end to end"
-        eyebrow="System thinking" caption="The entire credit platform mapped end-to-end on a single board — every flow, state, and dependency in one place." />
+        eyebrow="System thinking"
+        headline={<>From chaos<br />to <span className="text-gradient">clarity.</span></>}
+        caption="The entire credit platform mapped end-to-end on a single board — every flow, state, and dependency in one place." />
 
       {/* ═══ WHAT I DELIVERED — process gallery ═══ */}
-      <section style={{ padding: pad }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section className="aurora-wrap" style={{ padding: pad, background: "#040406" }}>
+        <div className="aurora aurora-soft" />
+        <div className="aurora-content" style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>What I delivered</Label>
             <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
-              From chaos to clarity.
+              System thinking,<br /><span className="text-gradient">made visible.</span>
             </h2>
-            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "3rem", maxWidth: 640 }}>
-              Process artifacts and screen evolution — system thinking made visible across every stage of the credit platform.
+            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.5)", lineHeight: 1.75, marginBottom: "3.5rem", maxWidth: 640 }}>
+              Process artifacts and screen evolution across every stage of the credit platform — benchmark to handoff.
             </p>
           </ScrollReveal>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "3rem" : "4.5rem" }}>
-            <Shot src="/work/tw/benchmark.png" alt="Competitive benchmark of lending apps"
+          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "4rem" : "6rem" }}>
+            <Shot src="/work/tw/benchmark.png" alt="Competitive benchmark of lending apps" glow="violet"
               eyebrow="01 · Benchmark" caption="Benchmarking how leading banks and fintechs structure credit flows — the reference point for every decision." />
-            <Shot src="/work/tw/user-journey.png" alt="End-to-end user journey board"
+            <Shot src="/work/tw/user-journey.png" alt="End-to-end user journey board" glow="blue"
               eyebrow="02 · User journey" caption="The full field-advisor journey — from client search to credit simulation, transfer and collections." />
-            <Shot src="/work/tw/wireframes.png" alt="Low-fidelity wireframes board"
+            <Shot src="/work/tw/wireframes.png" alt="Low-fidelity wireframes board" glow="green"
               eyebrow="03 · Wireframes" caption="Rapid low-fidelity wireframes — validated before a single pixel of UI was committed." />
-            <Shot src="/work/tw/evolution.png" alt="Screen evolution across iterations"
-              eyebrow="04 · Evolution" caption="Screen evolution across iterations — every design rationale documented and traceable." glow />
+            <Shot src="/work/tw/evolution.png" alt="Screen evolution across iterations" glow="pink"
+              eyebrow="04 · Evolution" caption="Screen evolution across iterations — every design rationale documented and traceable." />
           </div>
         </div>
       </section>
@@ -607,7 +638,7 @@ export default function LeadershipCasePage() {
           <ScrollReveal>
             <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Next case study</p>
             <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.8rem)" : "clamp(2rem,5vw,4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "2.5rem" }}>
-              From two stars<br />to <em style={{ color: "#0071e3", fontStyle: "italic" }}>category-defining.</em>
+              From two stars<br />to <em className="text-gradient" style={{ fontStyle: "italic" }}>category-defining.</em>
             </h2>
             <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.5rem", fontSize: ".92rem" }}>CVC · Flights App →</Link>
           </ScrollReveal>
