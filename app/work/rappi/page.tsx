@@ -523,12 +523,13 @@ export default function RappiCasePage() {
       <Divider />
 
       {/* ═══ CTA ═══ */}
-      <section style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <section className="aurora-wrap" style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,102,0,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
-        <ScrollReveal>
+        <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
+        <ScrollReveal className="aurora-content">
           <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ff6600", marginBottom: "1.5rem" }}>Next case</p>
           <h2 style={{ fontSize: "clamp(2rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            See the CVC<br />Flight Booking Redesign.
+            See the CVC<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>Flight Booking Redesign.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/work/cvc" className="btn-blue">CVC Case Study →</Link>
