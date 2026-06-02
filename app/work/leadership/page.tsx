@@ -151,6 +151,51 @@ function IconBox({ icon, color = "rgba(0,113,227,.2)" }: { icon: ReactNode; colo
   );
 }
 
+/* ── Apple-style framed screenshot with scroll reveal ── */
+function Shot({
+  src, alt, eyebrow, caption, priority = false, glow = false, radius = 18,
+}: { src: string; alt: string; eyebrow?: string; caption?: string; priority?: boolean; glow?: boolean; radius?: number }) {
+  return (
+    <ScrollReveal type="scale">
+      <figure style={{ margin: 0 }}>
+        <div style={{
+          position: "relative", borderRadius: radius, overflow: "hidden",
+          background: "linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01))",
+          border: "1px solid rgba(255,255,255,.09)",
+          boxShadow: glow
+            ? "0 50px 120px rgba(0,113,227,.18), 0 30px 70px rgba(0,0,0,.6)"
+            : "0 40px 90px rgba(0,0,0,.55)",
+        }}>
+          <Image src={src} alt={alt} width={2400} height={1500} unoptimized priority={priority}
+            sizes="(max-width: 768px) 100vw, 1100px"
+            style={{ width: "100%", height: "auto", display: "block" }} />
+        </div>
+        {(eyebrow || caption) && (
+          <figcaption style={{ marginTop: "1.1rem", textAlign: "center", maxWidth: 620, marginLeft: "auto", marginRight: "auto" }}>
+            {eyebrow && <span style={{ display: "block", fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".4rem" }}>{eyebrow}</span>}
+            {caption && <span style={{ display: "block", fontSize: ".82rem", color: "rgba(255,255,255,.4)", lineHeight: 1.6 }}>{caption}</span>}
+          </figcaption>
+        )}
+      </figure>
+    </ScrollReveal>
+  );
+}
+
+/* ── Full-bleed cinematic image break ── */
+function FullBleedShot({ src, alt }: { src: string; alt: string }) {
+  return (
+    <section style={{ position: "relative", background: "#050505", overflow: "hidden", padding: 0 }}>
+      <ScrollReveal type="in">
+        <div style={{ position: "relative", width: "100%" }}>
+          <Image src={src} alt={alt} width={2400} height={1500} unoptimized
+            sizes="100vw" style={{ width: "100%", height: "auto", display: "block", opacity: 0.96 }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(5,5,5,.35) 0%, transparent 18%, transparent 82%, rgba(5,5,5,.55) 100%)", pointerEvents: "none" }} />
+        </div>
+      </ScrollReveal>
+    </section>
+  );
+}
+
 export default function LeadershipCasePage() {
   const isMobile = useIsMobile();
   const pad = isMobile ? "5rem 1.5rem" : "8rem 6rem";
@@ -280,10 +325,15 @@ export default function LeadershipCasePage() {
             <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
               Four systems that changed everything.
             </h2>
-            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "3rem" }}>
+            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
               I didn't just redesign screens. I redesigned how the team planned, communicated, and delivered.
             </p>
           </ScrollReveal>
+
+          <div style={{ marginBottom: "3.5rem" }}>
+            <Shot src="/work/tw/workflow.png" alt="Design workflow — components of our process"
+              eyebrow="The system" caption="The end-to-end design workflow I introduced — from discovery to handoff, anchored in user-centric design." glow />
+          </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
 
@@ -324,6 +374,14 @@ export default function LeadershipCasePage() {
                         <span key={i} style={{ fontSize: ".68rem", fontWeight: 600, padding: ".28rem .8rem", borderRadius: 8, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.48)" }}>{t}</span>
                       ))}
                     </div>
+                    <div style={{ marginTop: "1.75rem" }}>
+                      <Shot src="/work/tw/roadmap-sprint.png" alt="Sprint roadmap — design and dev tracks across 3 phases"
+                        caption="The shared sprint roadmap: design and dev tracks running in parallel across three phases, with a continuous discovery track." />
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
+                      <Shot src="/work/tw/delivery-plan.png" alt="Delivery plan Gantt 2026" />
+                      <Shot src="/work/tw/roadmap-gantt.png" alt="Design delivery schedule" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -355,6 +413,10 @@ export default function LeadershipCasePage() {
                         </div>
                       ))}
                     </div>
+                    <div style={{ marginTop: "1.75rem" }}>
+                      <Shot src="/work/tw/design-jira.png" alt="Design Jira board with AI-generated ticket templates"
+                        caption="The dedicated Design Jira board — every card spun up from an AI-generated template per design phase." />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -379,11 +441,44 @@ export default function LeadershipCasePage() {
                         </div>
                       ))}
                     </div>
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginTop: "1.75rem" }}>
+                      <Shot src="/work/tw/design-critique.png" alt="Design critique ceremony board" caption="Design critique" />
+                      <Shot src="/work/tw/handoff.png" alt="Engineering handoff board" caption="Ready-for-dev handoff" />
+                    </div>
                   </div>
                 </div>
               </div>
             </ScrollReveal>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ FULL-BLEED — chaos to clarity ═══ */}
+      <FullBleedShot src="/work/tw/system-board.png" alt="System-level design board — the full credit flow mapped end to end" />
+
+      {/* ═══ WHAT I DELIVERED — process gallery ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>What I delivered</Label>
+            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1rem", lineHeight: 1.1 }}>
+              From chaos to clarity.
+            </h2>
+            <p style={{ fontSize: isMobile ? ".9rem" : "1.05rem", color: "rgba(255,255,255,.48)", lineHeight: 1.75, marginBottom: "3rem", maxWidth: 640 }}>
+              Process artifacts and screen evolution — system thinking made visible across every stage of the credit platform.
+            </p>
+          </ScrollReveal>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "3rem" : "4.5rem" }}>
+            <Shot src="/work/tw/benchmark.png" alt="Competitive benchmark of lending apps"
+              eyebrow="01 · Benchmark" caption="Benchmarking how leading banks and fintechs structure credit flows — the reference point for every decision." />
+            <Shot src="/work/tw/user-journey.png" alt="End-to-end user journey board"
+              eyebrow="02 · User journey" caption="The full field-advisor journey — from client search to credit simulation, transfer and collections." />
+            <Shot src="/work/tw/wireframes.png" alt="Low-fidelity wireframes board"
+              eyebrow="03 · Wireframes" caption="Rapid low-fidelity wireframes — validated before a single pixel of UI was committed." />
+            <Shot src="/work/tw/evolution.png" alt="Screen evolution across iterations"
+              eyebrow="04 · Evolution" caption="Screen evolution across iterations — every design rationale documented and traceable." glow />
           </div>
         </div>
       </section>
