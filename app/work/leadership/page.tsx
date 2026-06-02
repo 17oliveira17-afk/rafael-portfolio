@@ -151,27 +151,28 @@ function IconBox({ icon, color = "rgba(0,113,227,.2)" }: { icon: ReactNode; colo
   );
 }
 
-/* ── Apple-style framed screenshot with scroll reveal ── */
+/* ── Apple-style floating device mockup (transparent PNG on dark bg) ── */
 function Shot({
-  src, alt, eyebrow, caption, priority = false, glow = false, radius = 18,
-}: { src: string; alt: string; eyebrow?: string; caption?: string; priority?: boolean; glow?: boolean; radius?: number }) {
+  src, alt, eyebrow, caption, priority = false, glow = false,
+}: { src: string; alt: string; eyebrow?: string; caption?: string; priority?: boolean; glow?: boolean }) {
   return (
     <ScrollReveal type="scale">
-      <figure style={{ margin: 0 }}>
-        <div style={{
-          position: "relative", borderRadius: radius, overflow: "hidden",
-          background: "linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01))",
-          border: "1px solid rgba(255,255,255,.09)",
-          boxShadow: glow
-            ? "0 50px 120px rgba(0,113,227,.18), 0 30px 70px rgba(0,0,0,.6)"
-            : "0 40px 90px rgba(0,0,0,.55)",
-        }}>
-          <Image src={src} alt={alt} width={2400} height={1500} unoptimized priority={priority}
-            sizes="(max-width: 768px) 100vw, 1100px"
-            style={{ width: "100%", height: "auto", display: "block" }} />
-        </div>
+      <figure style={{ margin: 0, position: "relative" }}>
+        {glow && (
+          <div aria-hidden style={{
+            position: "absolute", inset: "-6% 2% 14% 2%", zIndex: 0,
+            background: "radial-gradient(ellipse 58% 55% at 50% 42%, rgba(0,113,227,.28), transparent 70%)",
+            filter: "blur(50px)", pointerEvents: "none",
+          }} />
+        )}
+        <Image src={src} alt={alt} width={1430} height={866} unoptimized priority={priority}
+          sizes="(max-width: 768px) 100vw, 1100px"
+          style={{
+            width: "100%", height: "auto", display: "block", position: "relative", zIndex: 1,
+            filter: "drop-shadow(0 34px 55px rgba(0,0,0,.5))",
+          }} />
         {(eyebrow || caption) && (
-          <figcaption style={{ marginTop: "1.1rem", textAlign: "center", maxWidth: 620, marginLeft: "auto", marginRight: "auto" }}>
+          <figcaption style={{ marginTop: ".6rem", textAlign: "center", maxWidth: 620, marginLeft: "auto", marginRight: "auto", position: "relative", zIndex: 1 }}>
             {eyebrow && <span style={{ display: "block", fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".4rem" }}>{eyebrow}</span>}
             {caption && <span style={{ display: "block", fontSize: ".82rem", color: "rgba(255,255,255,.4)", lineHeight: 1.6 }}>{caption}</span>}
           </figcaption>
@@ -181,17 +182,13 @@ function Shot({
   );
 }
 
-/* ── Full-bleed cinematic image break ── */
-function FullBleedShot({ src, alt }: { src: string; alt: string }) {
+/* ── Hero-scale centered device on its own dark band ── */
+function FullBleedShot({ src, alt, eyebrow, caption }: { src: string; alt: string; eyebrow?: string; caption?: string }) {
   return (
-    <section style={{ position: "relative", background: "#050505", overflow: "hidden", padding: 0 }}>
-      <ScrollReveal type="in">
-        <div style={{ position: "relative", width: "100%" }}>
-          <Image src={src} alt={alt} width={2400} height={1500} unoptimized
-            sizes="100vw" style={{ width: "100%", height: "auto", display: "block", opacity: 0.96 }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(5,5,5,.35) 0%, transparent 18%, transparent 82%, rgba(5,5,5,.55) 100%)", pointerEvents: "none" }} />
-        </div>
-      </ScrollReveal>
+    <section style={{ position: "relative", overflow: "hidden", padding: "2rem 1.5rem 0", background: "radial-gradient(ellipse 70% 80% at 50% 30%, rgba(0,113,227,.10), transparent 65%)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <Shot src={src} alt={alt} eyebrow={eyebrow} caption={caption} glow />
+      </div>
     </section>
   );
 }
@@ -454,8 +451,9 @@ export default function LeadershipCasePage() {
         </div>
       </section>
 
-      {/* ═══ FULL-BLEED — chaos to clarity ═══ */}
-      <FullBleedShot src="/work/tw/system-board.png" alt="System-level design board — the full credit flow mapped end to end" />
+      {/* ═══ HERO DEVICE — chaos to clarity ═══ */}
+      <FullBleedShot src="/work/tw/system-board.png" alt="System-level design board — the full credit flow mapped end to end"
+        eyebrow="System thinking" caption="The entire credit platform mapped end-to-end on a single board — every flow, state, and dependency in one place." />
 
       {/* ═══ WHAT I DELIVERED — process gallery ═══ */}
       <section style={{ padding: pad }}>
