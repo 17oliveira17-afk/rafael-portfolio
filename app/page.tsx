@@ -557,6 +557,39 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
+          {/* ── Design System card ── */}
+          <ScrollReveal delay={200}>
+            <div style={{
+              background: "#000", borderRadius: 24, border: "1px solid rgba(255,255,255,.08)",
+              overflow: "hidden", position: "relative", marginTop: "1.5rem",
+              transition: "transform .3s ease, box-shadow .3s ease",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 24px 60px rgba(0,0,0,.4)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 80% at 20% 50%, rgba(126,72,255,.12) 0%, transparent 60%)", pointerEvents: "none" }} />
+              <div style={{ padding: "3rem", position: "relative", zIndex: 1 }}>
+                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+                  {["Design Systems", "Mobile + Web", "Rappi · CVC"].map((t, i) => (
+                    <span key={i} style={{
+                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
+                      padding: ".3rem .85rem", borderRadius: 100,
+                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
+                    }}>{t}</span>
+                  ))}
+                </div>
+                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.035em", lineHeight: 1.1, marginBottom: "1rem" }}>
+                  Design systems,<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>from zero to scale.</em>
+                </h3>
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
+                  Two starting points: bootstrapping a B2B system with no DS team at Rappi, and building the mobile-app layer that lifted the CVC app — leaving a legacy for the app team and best practices for web.
+                </p>
+                <Link href="/work/design-system" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
+                  See full case study →
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+
         </div>
       </section>
 
