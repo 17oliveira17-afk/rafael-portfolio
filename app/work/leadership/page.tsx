@@ -220,6 +220,28 @@ function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; 
   );
 }
 
+/* ── Elegant NDA placeholder — used where a real screenshot would be illegible ── */
+function Artifact({ icon, title, note }: { icon?: ReactNode; title: string; note: string }) {
+  return (
+    <ScrollReveal type="in">
+      <div style={{
+        position: "relative", height: "100%", borderRadius: 20, overflow: "hidden",
+        border: "1px solid rgba(255,255,255,.1)",
+        background: "linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.012))",
+        padding: "clamp(2.25rem,5vw,3.5rem) 1.75rem", minHeight: 200,
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        gap: ".85rem", textAlign: "center",
+      }}>
+        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px)", backgroundSize: "22px 22px", WebkitMaskImage: "radial-gradient(ellipse 75% 75% at 50% 50%, #000, transparent 75%)", maskImage: "radial-gradient(ellipse 75% 75% at 50% 50%, #000, transparent 75%)", pointerEvents: "none" }} />
+        <div style={{ position: "relative", width: 46, height: 46, borderRadius: 12, background: "rgba(0,113,227,.14)", border: "1px solid rgba(0,113,227,.28)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3" }}>{icon}</div>
+        <h4 style={{ position: "relative", fontSize: "1.08rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em" }}>{title}</h4>
+        <p style={{ position: "relative", fontSize: ".82rem", color: "rgba(255,255,255,.42)", lineHeight: 1.6, maxWidth: 420 }}>{note}</p>
+        <span style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: ".4rem", fontSize: ".6rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.3)", marginTop: ".25rem" }}><IconLock /> Protected under NDA</span>
+      </div>
+    </ScrollReveal>
+  );
+}
+
 export default function LeadershipCasePage() {
   const isMobile = useIsMobile();
   const pad = isMobile ? "5rem 1.5rem" : "8rem 6rem";
@@ -403,9 +425,9 @@ export default function LeadershipCasePage() {
                       <Shot src="/work/tw/roadmap-sprint.png" alt="Sprint roadmap — design and dev tracks across 3 phases"
                         caption="The shared sprint roadmap: design and dev tracks running in parallel across three phases, with a continuous discovery track." />
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
-                      <Shot src="/work/tw/delivery-plan.png" alt="Delivery plan Gantt 2026" />
-                      <Shot src="/work/tw/roadmap-gantt.png" alt="Design delivery schedule" />
+                    <div style={{ marginTop: "1rem" }}>
+                      <Artifact icon={<IconMap />} title="Plan de Entregas 2026"
+                        note="Underneath the roadmap sat a granular, quarter-by-quarter delivery Gantt — every design and dev dependency mapped for the year. The detailed plan stays condensed here to respect the client agreement." />
                     </div>
                   </div>
                 </div>
@@ -466,9 +488,10 @@ export default function LeadershipCasePage() {
                         </div>
                       ))}
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginTop: "1.75rem" }}>
-                      <Shot src="/work/tw/design-critique.png" alt="Design critique ceremony board" caption="Design critique" />
-                      <Shot src="/work/tw/handoff.png" alt="Engineering handoff board" caption="Ready-for-dev handoff" />
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem", marginTop: "1.75rem", alignItems: "stretch" }}>
+                      <Artifact icon={<IconUsers />} title="Design critique"
+                        note="A recurring ceremony where the team pressure-tested each other's work against user needs — before anything reached handoff." />
+                      <Shot src="/work/tw/handoff.png" alt="Engineering handoff board" caption="Ready-for-dev handoff — every screen approved, annotated, and linked to its Jira card." />
                     </div>
                   </div>
                 </div>
