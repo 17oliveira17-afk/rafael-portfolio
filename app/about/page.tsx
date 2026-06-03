@@ -72,11 +72,11 @@ const testimonials = [
 
 const metrics = [
   { n: "14+", label: "Years in design" },
-  { n: "7+", label: "Years in product" },
+  { n: "8+", label: "Years in product design" },
+  { n: "12+", label: "Countries served" },
+  { n: "7+", label: "Years in global teams" },
   { n: "+212%", label: "Checkout conversion at CVC" },
   { n: "+53%", label: "Onboarding conversion at Rappi" },
-  { n: "+135%", label: "Lead verification at Rappi" },
-  { n: "4.6★", label: "App Store rating (2.0 → 4.6)" },
 ];
 
 export default function AboutPage() {
