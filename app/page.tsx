@@ -7,6 +7,7 @@ import useIsMobile from "./components/useIsMobile";
 import IPhone from "./components/IPhone";
 import BigImageReveal from "./components/BigImageReveal";
 import ProjectGallery from "./components/ProjectGallery";
+import RevealText from "./components/RevealText";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -337,14 +338,14 @@ export default function Home() {
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.85)", marginBottom: "1.25rem" }}>
               Design at scale
             </p>
-            <h2 style={{
-              fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
-              letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
-              maxWidth: 900, margin: "0 auto",
-            }}>
-              Where strategy<br />
-              meets the craft.
-            </h2>
+            <RevealText
+              lines={["Where strategy", "meets the craft."]}
+              style={{
+                fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
+                letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
+                maxWidth: 900, margin: "0 auto",
+              }}
+            />
           </ScrollReveal>
         }
       />
@@ -356,13 +357,16 @@ export default function Home() {
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <ScrollReveal>
             <p className="t-eyebrow" style={{ marginBottom: "2rem" }}>The work</p>
-            <h2 style={{
-              fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.03em",
-              lineHeight: 1.05, color: "#1d1d1f", marginBottom: "2rem",
-            }}>
-              Complex systems.<br />
-              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Clear experiences.</em>
-            </h2>
+            <RevealText
+              lines={[
+                "Complex systems.",
+                <em key="ce" style={{ color: "#0071e3", fontStyle: "italic" }}>Clear experiences.</em>,
+              ]}
+              style={{
+                fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.03em",
+                lineHeight: 1.05, color: "#1d1d1f", marginBottom: "2rem",
+              }}
+            />
             <p className="t-body" style={{ maxWidth: 580, margin: "0 auto", fontSize: "1.15rem" }}>
               I lead design for fintech, travel, and growth products — turning architectural decisions into outcomes that ship and scale.
             </p>
