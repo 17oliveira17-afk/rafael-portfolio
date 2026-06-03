@@ -272,59 +272,6 @@ export default function Home() {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
         }} />
 
-        {/* Floating phones — background ambient (desktop only) */}
-        {!isMobile && (
-        <div ref={phonesRef} style={{
-          position: "absolute", inset: 0, pointerEvents: "none", willChange: "transform",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          {/* Far left phone — subtle bg */}
-          <div style={{
-            position: "absolute", left: "-5%", top: "20%",
-            opacity: 0.18, filter: "blur(3px)",
-            transform: "rotate(-18deg) scale(0.9)",
-          }}>
-            <Phone src="/screens-mobile/ip-search.png" alt="" w={300} />
-          </div>
-          {/* Far right phone — subtle bg */}
-          <div style={{
-            position: "absolute", right: "-5%", top: "10%",
-            opacity: 0.18, filter: "blur(3px)",
-            transform: "rotate(18deg) scale(0.95)",
-          }}>
-            <Phone src="/screens-mobile/ip-filters.png" alt="" w={300} />
-          </div>
-          {/* Bottom left */}
-          <div style={{
-            position: "absolute", left: "8%", bottom: "-10%",
-            opacity: 0.12, filter: "blur(4px)",
-            transform: "rotate(-8deg)",
-          }}>
-            <Phone src="/screens-mobile/ip-calendar.png" alt="" w={240} />
-          </div>
-          {/* Bottom right */}
-          <div style={{
-            position: "absolute", right: "8%", bottom: "-10%",
-            opacity: 0.12, filter: "blur(4px)",
-            transform: "rotate(8deg)",
-          }}>
-            <Phone src="/screens-mobile/ip-confirma.png" alt="" w={240} />
-          </div>
-        </div>
-        )}
-
-        {/* MOBILE: single floating phone with depth */}
-        {isMobile && (
-          <div style={{
-            position: "absolute", left: "50%", top: "60%",
-            transform: "translateX(-50%)",
-            opacity: 0.22, filter: "blur(2px)",
-            pointerEvents: "none",
-          }}>
-            <Phone src="/screens-mobile/ip-resultado.png" alt="" w={300} />
-          </div>
-        )}
-
         {/* Hero content */}
         <div ref={heroRef} style={{ position: "relative", zIndex: 1, maxWidth: 920, textAlign: "center", willChange: "transform" }}>
           <p style={{
