@@ -368,12 +368,12 @@ export default function CVCCasePage() {
           <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
             <ArtifactReveal
               isMobile={isMobile}
-              src="/screens-desktop/benchmark.png"
+              src="/screens-desktop/process-benchmark.png"
               eyebrow="01 · The evidence"
               title="It started with the whole market."
               body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
               metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
-              ratio="16 / 10"
+              ratio="1142 / 742"
             />
           </div>
 
@@ -382,12 +382,12 @@ export default function CVCCasePage() {
             <ArtifactReveal
               isMobile={isMobile}
               reverse
-              src="/screens-desktop/wireframes.png"
+              src="/screens-desktop/process-user-flow.png"
               eyebrow="02 · The architecture"
-              title="Then I redrew the structure."
-              body="A linear, guided architecture — one decision per screen, outbound then return. Validated as low-fi wireframes with a Maze A/B test before a single hi-fi pixel was committed."
-              metric={{ n: "Maze", l: "A/B validated pre-hi-fi" }}
-              ratio="16 / 10"
+              title="Then I remapped the flow."
+              body="The current webview sitemap, mapped against an ideal one — a linear, guided architecture with one decision per screen, outbound then return, and a confirmation before checkout instead of inside it."
+              metric={{ n: "Current → ideal", l: "navigation flow remapped" }}
+              ratio="1142 / 742"
             />
           </div>
 
@@ -400,9 +400,10 @@ export default function CVCCasePage() {
           <ScrollReveal delay={120}>
             <FeatureCarousel
               slides={[
-                { src: "/screens-desktop/mac-heuristica.png", title: "Heuristic evaluation", body: "Every friction point in the legacy webview flow, mapped before redrawing a pixel." },
-                { src: "/screens-desktop/mac-flow.png", title: "Redesigned flow", body: "One decision per screen — outbound, then return, then confirm." },
-                { src: "/screens-desktop/mac-dynamics.png", title: "Motion & dynamics", body: "Native transitions replacing the 40–55s of “dancing cards.”" },
+                { src: "/screens-desktop/process-ux-audit.png", title: "UX audit", body: "Every friction point in the legacy webview flow, annotated screen by screen.", ratio: "1142 / 742", position: "center" },
+                { src: "/screens-desktop/process-wireframes.png", title: "Wireframes", body: "Lo-fi structure for the whole flow before committing to a single hi-fi pixel.", ratio: "1142 / 742", position: "center" },
+                { src: "/screens-desktop/process-wireframe-validation.png", title: "Wireframe cross-validation", body: "Impediments, suggestions and effort scored per screen with the team.", ratio: "1142 / 742", position: "center" },
+                { src: "/screens-desktop/process-usability-test.png", title: "Usability test — Maze A/B", body: "The outbound/return split, validated. Variant A won 97–100 vs 40.", ratio: "1142 / 742", position: "center" },
               ]}
             />
           </ScrollReveal>
