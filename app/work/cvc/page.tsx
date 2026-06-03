@@ -303,10 +303,11 @@ export default function CVCCasePage() {
             <div style={{ marginBottom: "4rem" }}>
               <DeviceSwitcher
                 isMobile={isMobile}
+                frame
                 items={[
-                  { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
-                  { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
-                  { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
+                  { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
+                  { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
+                  { label: "Confirmation", src: "/screens-mobile/confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
                 ]}
               />
             </div>

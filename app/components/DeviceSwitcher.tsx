@@ -1,35 +1,42 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import DeviceFrame from "./DeviceFrame";
 
 /* Apple "lens slider" (48/35/28mm) + "Cores" variant chip, generalized.
    A segmented control swaps a centered device with a crossfade + subtle zoom.
    Use it for a step scrubber (Search → Results → Confirmation) or a
-   before/after toggle (Webview → Native). Lives on a dark stage. */
+   before/after toggle (Webview → Native). Lives on a dark stage.
+
+   Pass `frame` to draw a single CSS iPhone shell and feed it RAW screens
+   (no baked-in mockup) — only the screen crossfades inside the frame. */
 
 export type SwitchItem = {
   label: string;        // segment label
-  src: string;          // device PNG (frame included)
+  src: string;          // device PNG (framed) — or a RAW screen when `frame` is on
   caption?: string;     // line shown under the control
   badge?: string;       // small tag shown over the stage (e.g. "Before" / "After", "2x")
 };
 
 export default function DeviceSwitcher({
   items,
-  accent = "#0071e3",
   height = 560,
   heightMobile = 430,
   isMobile = false,
+  frame = false,
+  finish = "titanium",
 }: {
   items: SwitchItem[];
-  accent?: string;
   height?: number;
   heightMobile?: number;
   isMobile?: boolean;
+  frame?: boolean;
+  finish?: "titanium" | "black" | "blue" | "desert";
 }) {
   const [active, setActive] = useState(0);
   const n = items.length;
   const stageH = isMobile ? heightMobile : height;
+  const frameW = Math.round(stageH * 0.46);
 
   return (
     <div style={{ width: "100%" }}>
@@ -62,31 +69,53 @@ export default function DeviceSwitcher({
           </div>
         )}
 
-        {/* stacked, crossfading devices */}
-        {items.map((it, i) => (
-          <div
-            key={i}
-            aria-hidden={i !== active}
-            style={{
-              position: "absolute", inset: 0,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              padding: isMobile ? "1.75rem 0" : "2.25rem 0",
-              opacity: i === active ? 1 : 0,
-              transform: i === active ? "scale(1)" : "scale(1.06)",
-              transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
-              pointerEvents: "none",
-            }}
-          >
-            <Image
-              src={it.src}
-              alt={it.label}
-              fill
-              unoptimized
-              sizes="(max-width: 768px) 80vw, 420px"
-              style={{ objectFit: "contain" }}
-            />
+        {frame ? (
+          /* one persistent CSS frame — only the screen crossfades inside it */
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "1.5rem 0" : "2rem 0" }}>
+            <DeviceFrame width={frameW} finish={finish}>
+              {items.map((it, i) => (
+                <div
+                  key={i}
+                  aria-hidden={i !== active}
+                  style={{
+                    position: "absolute", inset: 0,
+                    opacity: i === active ? 1 : 0,
+                    transform: i === active ? "scale(1)" : "scale(1.04)",
+                    transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
+                  }}
+                >
+                  <Image src={it.src} alt={it.label} fill unoptimized sizes="320px" style={{ objectFit: "cover", objectPosition: "center top" }} />
+                </div>
+              ))}
+            </DeviceFrame>
           </div>
-        ))}
+        ) : (
+          /* stacked, crossfading pre-framed devices */
+          items.map((it, i) => (
+            <div
+              key={i}
+              aria-hidden={i !== active}
+              style={{
+                position: "absolute", inset: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                padding: isMobile ? "1.75rem 0" : "2.25rem 0",
+                opacity: i === active ? 1 : 0,
+                transform: i === active ? "scale(1)" : "scale(1.06)",
+                transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
+                pointerEvents: "none",
+              }}
+            >
+              <Image
+                src={it.src}
+                alt={it.label}
+                fill
+                unoptimized
+                sizes="(max-width: 768px) 80vw, 420px"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          ))
+        )}
       </div>
 
       {/* ── Caption ── */}

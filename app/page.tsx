@@ -442,10 +442,11 @@ export default function Home() {
           <ScrollReveal delay={120}>
             <DeviceSwitcher
               isMobile={isMobile}
+              frame
               items={[
-                { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates." },
-                { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
-                { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation before checkout — not buried inside it." },
+                { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates." },
+                { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
+                { label: "Confirmation", src: "/screens-mobile/confirma.png", caption: "A clear confirmation before checkout — not buried inside it." },
               ]}
             />
           </ScrollReveal>
