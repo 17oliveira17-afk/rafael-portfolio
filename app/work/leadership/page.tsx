@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect, ReactNode, CSSProperties } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
+import RevealText from "../../components/RevealText";
 
 /* ── Scroll progress: 0 as the element enters from the bottom, 1 once it reaches the upper third ── */
 function useScrollProgress<T extends HTMLElement>() {
@@ -145,7 +146,7 @@ function Label({ children }: { children: ReactNode }) {
   return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>{children}</p>;
 }
 function Divider() {
-  return <div style={{ height: 1, background: "rgba(255,255,255,.07)", margin: "0 2rem" }} />;
+  return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 function Tag({ children, bg = "rgba(0,113,227,.15)", border = "rgba(0,113,227,.3)", color = "#0071e3" }: { children: ReactNode; bg?: string; border?: string; color?: string }) {
   return <span style={{ fontSize: ".72rem", fontWeight: 600, letterSpacing: ".08em", textTransform: "uppercase", padding: ".35rem .85rem", borderRadius: 100, background: bg, border: `1px solid ${border}`, color }}>{children}</span>;
@@ -363,9 +364,12 @@ export default function LeadershipCasePage() {
               <span style={{ display: "inline-flex", alignItems: "center", gap: ".35rem" }}><IconLock />Bank · NDA</span>
             </Tag>
           </div>
-          <h1 style={{ fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 860, marginBottom: "1.25rem" }}>
-            From <em className="text-gradient" style={{ fontStyle: "italic" }}>8 weeks</em><br />to 3 weeks.
-          </h1>
+          <RevealText
+            as="h1"
+            lines={[<>From <em key="w" className="text-gradient" style={{ fontStyle: "italic" }}>8 weeks</em></>, "to 3 weeks."]}
+            stagger={90}
+            style={{ fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 860, marginBottom: "1.25rem" }}
+          />
           <p style={{ fontSize: isMobile ? ".93rem" : "1.2rem", color: "rgba(255,255,255,.58)", maxWidth: 520, lineHeight: 1.75, fontWeight: 300, marginBottom: ".75rem" }}>
             How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half.
           </p>
@@ -391,9 +395,10 @@ export default function LeadershipCasePage() {
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>The situation</Label>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1.5rem", lineHeight: 1.1 }}>
-              No process. No roadmap.<br />No ceremonies. Just fire.
-            </h2>
+            <RevealText
+              lines={["No process. No roadmap.", "No ceremonies. Just fire."]}
+              style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", marginBottom: "1.5rem", lineHeight: 1.1 }}
+            />
             <p style={{ fontSize: isMobile ? ".93rem" : "1.05rem", color: "rgba(255,255,255,.62)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
               When I joined the project at a major Latin American bank, the design team was operating in pure survival mode. Deliveries took 8 weeks on average. Scope changed constantly mid-sprint. The client was frustrated and trust had eroded completely. There was no planning structure, no roadmap visible to anyone, and no design ceremonies connecting the team.
             </p>
