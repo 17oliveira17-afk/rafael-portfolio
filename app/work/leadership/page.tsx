@@ -651,7 +651,7 @@ export default function LeadershipCasePage() {
                 { track: "Delivery Track", role: "UI design, handoff to Engineering, client alignment", icon: <IconArrow />, color: "rgba(0,113,227,.07)", border: "rgba(0,113,227,.22)" },
               ].map((t, i) => (
                 <div key={i} style={{ padding: isMobile ? "1.5rem" : "2rem", borderRadius: 20, background: t.color, border: `1px solid ${t.border}`, display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-                  <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 10, background: "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>{t.icon}</div>
+                  <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 10, background: "rgba(255,255,255,.08)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>{t.icon}</div>
                   <div>
                     <h4 style={{ fontSize: ".97rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".3rem" }}>{t.track}</h4>
                     <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.48)", lineHeight: 1.6 }}>{t.role}</p>
