@@ -1,15 +1,15 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
-import IPhone from "../../components/IPhone";
 import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
+import ArtifactReveal from "../../components/ArtifactReveal";
+import PhoneSpotlight from "../../components/PhoneSpotlight";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -353,23 +353,55 @@ export default function CVCCasePage() {
 
       <Divider />
 
-      {/* ═══ 06.5 · PROCESS — CLOSER LOOK ═══ */}
+      {/* ═══ 06.5 · PROCESS — THE THINKING (desktop artifacts) ═══ */}
       <section style={{ padding: pad, background: "#050505" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>Behind the screens — the process</Label>
             <RevealText
-              lines={["From benchmark to hi-fi.", <em key="p" className="text-gradient" style={{ fontStyle: "italic" }}>Swipe through the work.</em>]}
-              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "3rem", maxWidth: 700 }}
+              lines={["Rigor before pixels.", <em key="p" className="text-gradient" style={{ fontStyle: "italic" }}>The work behind the work.</em>]}
+              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: isMobile ? "3rem" : "6rem", maxWidth: 700 }}
             />
           </ScrollReveal>
-          <ScrollReveal delay={100}>
+
+          {/* Highlighted artifact 1 — the evidence */}
+          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
+            <ArtifactReveal
+              isMobile={isMobile}
+              src="/screens-desktop/benchmark.png"
+              eyebrow="01 · The evidence"
+              title="It started with the whole market."
+              body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
+              metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
+              ratio="16 / 10"
+            />
+          </div>
+
+          {/* Highlighted artifact 2 — the architecture */}
+          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
+            <ArtifactReveal
+              isMobile={isMobile}
+              reverse
+              src="/screens-desktop/wireframes.png"
+              eyebrow="02 · The architecture"
+              title="Then I redrew the structure."
+              body="A linear, guided architecture — one decision per screen, outbound then return. Validated as low-fi wireframes with a Maze A/B test before a single hi-fi pixel was committed."
+              metric={{ n: "Maze", l: "A/B validated pre-hi-fi" }}
+              ratio="16 / 10"
+            />
+          </div>
+
+          {/* Supporting craft — peers you skim, in a carousel */}
+          <ScrollReveal delay={80}>
+            <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.35)", marginBottom: "1.5rem" }}>
+              03 · More from the process
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
             <FeatureCarousel
               slides={[
-                { src: "/screens-desktop/mac-benchmark.png", title: "Competitive benchmark", body: "Hopper, Skyscanner, Kayak, Decolar — three shared principles CVC was breaking on all of them." },
-                { src: "/screens-desktop/mac-heuristica.png", title: "Heuristic evaluation", body: "Mapped every friction point in the legacy webview flow before redrawing a single pixel." },
-                { src: "/screens-desktop/mac-flow.png", title: "Redesigned flow", body: "A linear, guided architecture — one decision per screen, outbound then return." },
-                { src: "/screens-desktop/mac-wireframes.png", title: "Wireframes", body: "Low-fi structure validated with a Maze A/B test before committing to hi-fi." },
+                { src: "/screens-desktop/mac-heuristica.png", title: "Heuristic evaluation", body: "Every friction point in the legacy webview flow, mapped before redrawing a pixel." },
+                { src: "/screens-desktop/mac-flow.png", title: "Redesigned flow", body: "One decision per screen — outbound, then return, then confirm." },
                 { src: "/screens-desktop/mac-dynamics.png", title: "Motion & dynamics", body: "Native transitions replacing the 40–55s of “dancing cards.”" },
               ]}
             />
@@ -379,40 +411,32 @@ export default function CVCCasePage() {
 
       <Divider />
 
-      {/* ═══ 07 · MORE SCREENS ═══ */}
-      <section style={{ padding: pad, background: "#050505" }}>
+      {/* ═══ 07 · MORE OF THE PRODUCT — one pinned phone ═══ */}
+      <section style={{ padding: isMobile ? "5rem 1.5rem" : "8rem 6rem 4rem", background: "#050505" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>06 — More of the product</Label>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "3rem", marginBottom: "3rem" }}>
-              {[
-                { src: "/screens-mobile/ip-filters.png", title: "Filters", body: "Price range, duration, stops — clean sheet without modal interruption." },
-                { src: "/screens-mobile/ip-detail.png", title: "Flight detail", body: "Expanded inline — no page navigation. Return suggestions shown before commitment." },
-              ].map((item, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto 1fr", gap: isMobile ? "1.5rem" : "2rem", alignItems: "center" }}>
-                  <IPhone src={item.src} alt={item.title} width={180} />
-                  <div>
-                    <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem" }}>{item.title}</h3>
-                    <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{item.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <RevealText
+              lines={["Five more screens.", <em key="o" className="text-gradient" style={{ fontStyle: "italic" }}>One focused device.</em>]}
+              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
+            />
+            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 620 }}>
+              {isMobile ? "Scroll through the supporting screens." : "Scroll — the device stays, the screen changes."}
+            </p>
           </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "2rem" }}>
-              {[
-                { src: "/screens-mobile/ip-upgrade.png", label: "Baggage upselling" },
-                { src: "/screens-mobile/ip-volta.png", label: "Return flight selection" },
-                { src: "/screens-mobile/ip-passengers.png", label: "Passengers" },
-              ].map((p, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
-                  <IPhone src={p.src} alt={p.label} width={220} />
-                  <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.35)", letterSpacing: ".08em", textAlign: "center", textTransform: "uppercase" }}>{p.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
+        </div>
+        <div style={{ maxWidth: 1100, margin: isMobile ? "3rem auto 0" : "0 auto" }}>
+          <PhoneSpotlight
+            isMobile={isMobile}
+            finish="blue"
+            items={[
+              { src: "/screens-mobile/filters.png", title: "Filters", body: "Price range, duration and stops on a clean sheet — no modal interruption." },
+              { src: "/screens-mobile/detail.png", title: "Flight detail", body: "Expanded inline. No page navigation — return suggestions surface before commitment." },
+              { src: "/screens-mobile/upgrade.png", title: "Baggage upselling", body: "Tiered upgrades framed as a clear choice, shown at the right moment in the flow.", metric: "+23% cross-sell" },
+              { src: "/screens-mobile/volta.png", title: "Return flight", body: "Outbound locked, return chosen separately — the decision that tested 101% faster." },
+              { src: "/screens-mobile/passengers.png", title: "Passengers & class", body: "Adults, children, infants and cabin class in one native step — no webview reload." },
+            ]}
+          />
         </div>
       </section>
 
