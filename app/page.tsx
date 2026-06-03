@@ -6,6 +6,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import useIsMobile from "./components/useIsMobile";
 import IPhone from "./components/IPhone";
 import BigImageReveal from "./components/BigImageReveal";
+import ProjectGallery from "./components/ProjectGallery";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -481,117 +482,14 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           MORE WORK — Rappi + Leadership
       ══════════════════════════════════════════════════ */}
-      <section className="section-off-white" style={{ padding: "8rem 2rem" }}>
-        <div style={{ maxWidth: 1024, margin: "0 auto" }}>
+      <section className="section-off-white" style={{ padding: "8rem 2rem", overflow: "hidden" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <ScrollReveal>
-            <div style={{ marginBottom: "3rem" }}>
-              <p className="t-eyebrow" style={{ marginBottom: "1rem" }}>More case studies</p>
-              <h2 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.02em" }}>
-                More work.
-              </h2>
-            </div>
+            <ProjectGallery />
           </ScrollReveal>
-
-          {/* ── Rappi card ── */}
-          <ScrollReveal delay={80}>
-            <div style={{
-              background: "#fff", borderRadius: 24, border: "1px solid #d2d2d7",
-              overflow: "hidden", marginBottom: "1.5rem",
-              transition: "transform .3s ease, box-shadow .3s ease",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(0,0,0,.1)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-              <div style={{ padding: "3rem" }}>
-                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-                  {["Growth · Fintech", "LATAM", "Rappi"].map((t, i) => (
-                    <span key={i} style={{
-                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
-                      padding: ".3rem .85rem", borderRadius: 100,
-                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
-                    }}>{t}</span>
-                  ))}
-                </div>
-                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1rem" }}>
-                  Rappi · <em style={{ color: "#0071e3", fontStyle: "italic" }}>Growth & Fintech</em>
-                </h3>
-                <p style={{ fontSize: "1rem", color: "#86868b", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
-                  Onboarding redesign and fintech product design for one of Latin America&apos;s largest super-apps — 25M+ users across 9 countries.
-                </p>
-                <Link href="/work/rappi" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
-                  See full case study →
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* ── Leadership card ── */}
-          <ScrollReveal delay={140}>
-            <div style={{
-              background: "#000", borderRadius: 24, border: "1px solid rgba(255,255,255,.08)",
-              overflow: "hidden", position: "relative",
-              transition: "transform .3s ease, box-shadow .3s ease",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 24px 60px rgba(0,0,0,.4)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
-              <div style={{ padding: "3rem", position: "relative", zIndex: 1 }}>
-                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-                  {["Design Leadership", "B2B · Fintech", "Bank · NDA"].map((t, i) => (
-                    <span key={i} style={{
-                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
-                      padding: ".3rem .85rem", borderRadius: 100,
-                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
-                    }}>{t}</span>
-                  ))}
-                </div>
-                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.035em", lineHeight: 1.1, marginBottom: "1rem" }}>
-                  From chaos to<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>high-performing team.</em>
-                </h3>
-                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
-                  How I stepped into a fractured design practice at a Latin American bank — no process, no ceremonies, 3–4× rework — and rebuilt it from scratch, leading a team of 3 designers to formal recognition in under 2 months.
-                </p>
-                <Link href="/work/leadership" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
-                  See full case study →
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* ── Design System card ── */}
-          <ScrollReveal delay={200}>
-            <div style={{
-              background: "#000", borderRadius: 24, border: "1px solid rgba(255,255,255,.08)",
-              overflow: "hidden", position: "relative", marginTop: "1.5rem",
-              transition: "transform .3s ease, box-shadow .3s ease",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 24px 60px rgba(0,0,0,.4)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 80% at 20% 50%, rgba(126,72,255,.12) 0%, transparent 60%)", pointerEvents: "none" }} />
-              <div style={{ padding: "3rem", position: "relative", zIndex: 1 }}>
-                <div style={{ display: "flex", gap: ".75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-                  {["Design Systems", "Mobile + Web", "Rappi · CVC"].map((t, i) => (
-                    <span key={i} style={{
-                      fontSize: ".68rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase",
-                      padding: ".3rem .85rem", borderRadius: 100,
-                      background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3",
-                    }}>{t}</span>
-                  ))}
-                </div>
-                <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.035em", lineHeight: 1.1, marginBottom: "1rem" }}>
-                  Design systems,<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>from zero to scale.</em>
-                </h3>
-                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.75, maxWidth: 580, marginBottom: "2rem" }}>
-                  Two starting points: bootstrapping a B2B system with no DS team at Rappi, and building the mobile-app layer that lifted the CVC app — leaving a legacy for the app team and best practices for web.
-                </p>
-                <Link href="/work/design-system" className="btn-blue" style={{ display: "inline-block", padding: ".85rem 2.5rem", fontSize: ".95rem" }}>
-                  See full case study →
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-
         </div>
       </section>
+
 
       {/* ══════════════════════════════════════════════════
           THE PROCESS — full-bleed working photo
