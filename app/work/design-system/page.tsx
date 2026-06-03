@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
+import RevealText from "../../components/RevealText";
 
 /* ── Animated counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -56,7 +57,7 @@ function Label({ children, color = "#0071e3" }: { children: ReactNode; color?: s
   return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color, marginBottom: "1.5rem" }}>{children}</p>;
 }
 function Divider() {
-  return <div style={{ height: 1, background: "rgba(255,255,255,.07)", margin: "0 2rem" }} />;
+  return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 function Tag({ children, color = "#0071e3" }: { children: ReactNode; color?: string }) {
   return <span style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".06em", padding: ".3rem .9rem", borderRadius: 100, background: `${color}22`, border: `1px solid ${color}55`, color }}>{children}</span>;
@@ -110,9 +111,12 @@ export default function DesignSystemCasePage() {
               <Tag color="#0071e3">Mobile</Tag>
               <Tag color="#7e48ff">B2B & B2C</Tag>
             </div>
-            <h1 style={{ fontSize: isMobile ? "2.7rem" : "clamp(3rem,7vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}>
-              Design systems,<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>from zero to scale.</em>
-            </h1>
+            <RevealText
+              as="h1"
+              lines={["Design systems,", <em key="z" className="text-gradient" style={{ fontStyle: "italic" }}>from zero to scale.</em>]}
+              stagger={90}
+              style={{ fontSize: isMobile ? "2.7rem" : "clamp(3rem,7vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}
+            />
             <p style={{ fontSize: isMobile ? "1rem" : "1.15rem", color: "rgba(255,255,255,.58)", maxWidth: 620, lineHeight: 1.75, marginBottom: "3rem" }}>
               Two companies, two starting points. At <strong style={{ color: "#fff", fontWeight: 600 }}>Rappi</strong> I helped a team bootstrap a system from nothing — no budget, no dedicated DS team. At <strong style={{ color: "#fff", fontWeight: 600 }}>CVC</strong> I built the mobile layer of a system that had none, shipping only the components that genuinely make an app feel native.
             </p>
@@ -139,9 +143,10 @@ export default function DesignSystemCasePage() {
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>How I approach design systems</Label>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-              A system is only worth it<br />if it <em className="text-gradient" style={{ fontStyle: "italic" }}>earns its keep.</em>
-            </h2>
+            <RevealText
+              lines={["A system is only worth it", <>if it <em key="e" className="text-gradient" style={{ fontStyle: "italic" }}>earns its keep.</em></>]}
+              style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1.5rem" }}
+            />
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
               I&apos;ve worked on design systems from both directions — <strong style={{ color: "#fff" }}>contributing to a maturing one</strong> and <strong style={{ color: "#fff" }}>starting one from zero</strong> with no investment behind it. In both, my rule was the same: don&apos;t build a component library for its own sake. Build only what removes real friction, ships faster, and stays consistent at scale.
             </p>
