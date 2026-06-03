@@ -403,19 +403,13 @@ export default function Home() {
           <ScrollReveal>
             <p style={{
               fontSize: ".75rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase",
-              color: "#0071e3", marginBottom: "2rem",
-            }}>Selected work · 01</p>
-            <h2 style={{
-              fontSize: "clamp(2.5rem,6vw,5.5rem)", fontWeight: 700, letterSpacing: "-.035em",
-              lineHeight: 1.02, color: "#fff", marginBottom: "2rem",
-            }}>
-              CVC Corp · <em style={{ color: "#0071e3", fontStyle: "italic" }}>Flight Booking</em>
-            </h2>
+              color: "#0071e3", marginBottom: "1.5rem",
+            }}>Selected work · 01 — CVC Corp · Flight Booking</p>
             <p style={{
-              fontSize: "1.1rem", color: "rgba(255,255,255,.6)", maxWidth: 620, margin: "0 auto",
-              lineHeight: 1.7, fontWeight: 300,
+              fontSize: "clamp(1.3rem,2.6vw,2rem)", color: "rgba(255,255,255,.85)", maxWidth: 680, margin: "0 auto",
+              lineHeight: 1.45, fontWeight: 400, letterSpacing: "-.015em",
             }}>
-              Brazil&apos;s largest travel company. 30M customers. A flight booking app stuck at 2 stars. Rebuilt from architecture up.
+              Brazil&apos;s largest travel company. 30M customers. A flight booking app stuck at 2 stars — <span style={{ color: "#fff", fontWeight: 500 }}>rebuilt from the architecture up.</span>
             </p>
           </ScrollReveal>
         </div>
