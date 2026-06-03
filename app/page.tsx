@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import useIsMobile from "./components/useIsMobile";
-import IPhone from "./components/IPhone";
+import DeviceFrame from "./components/DeviceFrame";
 import BigImageReveal from "./components/BigImageReveal";
 import ProjectGallery from "./components/ProjectGallery";
 import RevealText from "./components/RevealText";
@@ -36,9 +36,13 @@ function Counter({ n, suffix = "+" }: { n: number; suffix?: string }) {
   return <div ref={ref}>{v}{suffix}</div>;
 }
 
-/* Phone wraps the SVG IPhone mockup */
-function Phone({ src, alt, w = 280, style = {} }: { src: string; alt: string; w?: number; style?: React.CSSProperties }) {
-  return <IPhone src={src} alt={alt} width={w} style={style} />;
+/* Code-drawn iPhone fed a RAW screen — sharp, themeable, consistent with CVC */
+function Phone({ src, alt, w = 280, finish = "blue" }: { src: string; alt: string; w?: number; finish?: "titanium" | "black" | "blue" | "desert" }) {
+  return (
+    <DeviceFrame width={w} finish={finish}>
+      <Image src={src} alt={alt} fill unoptimized sizes="340px" style={{ objectFit: "cover", objectPosition: "center top" }} />
+    </DeviceFrame>
+  );
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -98,7 +102,7 @@ function CVCShowcase() {
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem", filter: "drop-shadow(0 30px 60px rgba(0,113,227,.25)) drop-shadow(0 20px 40px rgba(0,0,0,.5))" }}>
-              <Phone src="/screens-mobile/ip-resultado.png" alt="" w={240} />
+              <Phone src="/screens-mobile/resultado.png" alt="CVC flight results" w={230} />
             </div>
           </ScrollReveal>
           <ScrollReveal delay={250}>
@@ -175,7 +179,7 @@ function CVCShowcase() {
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.08 + ph1 * 0.2})) drop-shadow(0 30px 60px rgba(0,0,0,.7))`,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC flight booking" w={320} />
+          <Phone src="/screens-mobile/resultado.png" alt="CVC flight booking" w={320} />
         </div>
 
         {/* Stats — centered bottom, staggered fade up */}
@@ -224,7 +228,6 @@ export default function Home() {
   const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
-  const phonesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isMobile) return; // skip parallax on mobile (perf + visual)
@@ -236,9 +239,6 @@ export default function Home() {
       }
       if (heroBgRef.current) {
         heroBgRef.current.style.transform = `translateY(${y * .4}px)`;
-      }
-      if (phonesRef.current) {
-        phonesRef.current.style.transform = `translateY(${y * .15}px)`;
       }
     };
     window.addEventListener("scroll", fn, { passive: true });
@@ -443,6 +443,7 @@ export default function Home() {
             <DeviceSwitcher
               isMobile={isMobile}
               frame
+              finish="blue"
               items={[
                 { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates." },
                 { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
