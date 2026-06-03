@@ -273,10 +273,10 @@ export default function AboutPage() {
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "3rem" }}>Design principles</p>
           </ScrollReveal>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+          <div className="pgrid" style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
             {principles.map((p, i) => (
               <ScrollReveal key={i} delay={i * 60}>
-                <div style={{ background: "#0a0a0a", padding: isMobile ? "2rem 1.5rem" : "3rem 3.5rem", display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
+                <div className="pcard" style={{ background: "#0a0a0a", padding: isMobile ? "2rem 1.5rem" : "3rem 3.5rem", display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
                   <p style={{ fontSize: ".7rem", color: "#0071e3", fontWeight: 700, letterSpacing: ".1em", flexShrink: 0, marginTop: ".35rem" }}>{p.n}</p>
                   <div>
                     <h3 style={{ fontSize: isMobile ? "1.1rem" : "1.4rem", fontWeight: 700, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.02em" }}>{p.title}</h3>
@@ -337,7 +337,7 @@ export default function AboutPage() {
               What leaders say.
             </h2>
           </ScrollReveal>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))", gap: "1rem" }}>
+          <div className="tgrid" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))", gap: "1rem" }}>
             {testimonials.map((t, i) => (
               <ScrollReveal key={i} delay={(i % 3) * 80}>
                 <div className="tcard" style={{
@@ -388,8 +388,11 @@ export default function AboutPage() {
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        .tcard { transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease; }
-        .tcard:hover { transform: translateY(-6px); border-color: rgba(0,113,227,.45); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+        .tcard, .pcard { opacity: .6; transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
+        .tgrid:hover .tcard, .pgrid:hover .pcard { opacity: .32; }
+        .tcard:hover { opacity: 1; transform: translateY(-6px); border-color: rgba(0,113,227,.45); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+        .pcard:hover { opacity: 1; background: #101014 !important; }
+        @media (hover: none) { .tcard, .pcard { opacity: 1; } }
       `}</style>
     </main>
   );
