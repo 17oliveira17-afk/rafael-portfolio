@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "../components/ScrollReveal";
 import useIsMobile from "../components/useIsMobile";
+import RevealText from "../components/RevealText";
 
 const exp = [
   {
@@ -220,9 +221,10 @@ export default function AboutPage() {
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>What I do</p>
-            <h2 style={{ fontSize: isMobile ? "clamp(2rem,8vw,2.8rem)" : "clamp(2.5rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "2rem" }}>
-              I specialize in making<br />the complex feel <em style={{ color: "#0071e3", fontStyle: "italic" }}>obvious.</em>
-            </h2>
+            <RevealText
+              lines={["I specialize in making", <>the complex feel <em key="o" style={{ color: "#0071e3", fontStyle: "italic" }}>obvious.</em></>]}
+              style={{ fontSize: isMobile ? "clamp(2rem,8vw,2.8rem)" : "clamp(2.5rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "2rem" }}
+            />
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               <p style={{ fontSize: isMobile ? ".97rem" : "1.1rem", color: "rgba(255,255,255,.65)", lineHeight: 1.8 }}>
                 Fintech, B2B credit platforms, mobile commerce — these are domains where users face real stakes and real friction. My job is to remove that friction without losing the nuance that makes the product work.
@@ -244,9 +246,10 @@ export default function AboutPage() {
               <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3" }}>AI-First Practice</p>
               <span style={{ padding: ".15rem .6rem", background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".62rem", color: "#0071e3", fontWeight: 600 }}>NEW</span>
             </div>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.5rem)" : "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.25rem" }}>
-              Prototyping at<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>production quality.</em>
-            </h2>
+            <RevealText
+              lines={["Prototyping at", <em key="p" style={{ color: "#0071e3", fontStyle: "italic" }}>production quality.</em>]}
+              style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.5rem)" : "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.25rem" }}
+            />
             <p style={{ fontSize: isMobile ? ".93rem" : "1.05rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 680, marginBottom: "3rem" }}>
               I prototype with AI tools that generate near-production-quality interfaces — collapsing validation cycles from weeks to days. Less time in Figma limbo, more time testing with real users on something that looks and behaves like the product.
             </p>
@@ -333,9 +336,10 @@ export default function AboutPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>Recognized by</p>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.5rem)" : "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "3rem" }}>
-              What leaders say.
-            </h2>
+            <RevealText
+              text="What leaders say."
+              style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.5rem)" : "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "3rem" }}
+            />
           </ScrollReveal>
           <div className="tgrid" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))", gap: "1rem" }}>
             {testimonials.map((t, i) => (
@@ -361,9 +365,10 @@ export default function AboutPage() {
         <div style={{ position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Open to opportunities</p>
-            <h2 style={{ fontSize: isMobile ? "clamp(2rem,8vw,3rem)" : "clamp(2.5rem,6vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.25rem" }}>
-              Based in São Paulo.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>Open to Canada</em><br />or remote.
-            </h2>
+            <RevealText
+              lines={["Based in São Paulo.", <em key="c" style={{ color: "#0071e3", fontStyle: "italic" }}>Open to Canada</em>, "or remote."]}
+              style={{ fontSize: isMobile ? "clamp(2rem,8vw,3rem)" : "clamp(2.5rem,6vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.25rem" }}
+            />
             <p style={{ fontSize: isMobile ? ".93rem" : "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 440, margin: "0 auto 2.5rem", lineHeight: 1.7 }}>
               Design Lead looking for high-impact product teams. Fintech, B2B, and complex domains preferred.
             </p>
