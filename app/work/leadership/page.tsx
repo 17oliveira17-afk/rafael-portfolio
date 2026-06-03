@@ -1,9 +1,41 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useState, useEffect, ReactNode, CSSProperties } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
+
+/* ── Scroll progress: 0 as the element enters from the bottom, 1 once it reaches the upper third ── */
+function useScrollProgress<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const calc = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const start = vh;          // element top at bottom of viewport
+      const end = vh * 0.32;     // element top near the upper third
+      const raw = (start - r.top) / (start - end);
+      setP(Math.max(0, Math.min(1, raw)));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(calc); };
+    calc();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+  return [ref, p] as const;
+}
+
+const easeOut = (p: number) => 1 - Math.pow(1 - p, 2);
 
 /* ── SVG Icons ── */
 const IconCalendar = () => (
@@ -190,6 +222,8 @@ function Shot({
 
 /* ── Apple-style colorful aurora stage with a floating hero device ── */
 function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; alt: string; eyebrow?: string; headline?: ReactNode; caption?: string }) {
+  const [zoomRef, zp] = useScrollProgress<HTMLDivElement>();
+  const scale = 0.82 + 0.18 * easeOut(zp);
   return (
     <section className="aurora-wrap" style={{ padding: "clamp(4rem,9vw,8rem) 1.5rem clamp(3rem,6vw,5rem)", background: "#040406" }}>
       <div className="aurora" />
@@ -204,12 +238,12 @@ function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; 
             <h2 style={{ fontSize: "clamp(2rem,6vw,4.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1.02, color: "#fff", margin: "0 auto 2.5rem", maxWidth: 900 }}>{headline}</h2>
           </ScrollReveal>
         )}
-        <ScrollReveal type="scale" delay={120}>
+        <div ref={zoomRef} style={{ transform: `scale(${scale})`, transformOrigin: "center top", willChange: "transform" }}>
           <div className="floaty">
             <Image src={src} alt={alt} width={1430} height={866} unoptimized
               sizes="100vw" style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 50px 90px rgba(0,0,0,.6))" }} />
           </div>
-        </ScrollReveal>
+        </div>
         {caption && (
           <ScrollReveal type="in" delay={120}>
             <p style={{ marginTop: "1.25rem", fontSize: ".9rem", color: "rgba(255,255,255,.55)", maxWidth: 640, margin: "1.25rem auto 0", lineHeight: 1.6 }}>{caption}</p>
@@ -224,8 +258,14 @@ function FullBleedShot({ src, alt, eyebrow, headline, caption }: { src: string; 
 function SideShot({ src, alt, side, eyebrow, title, body, glow, isMobile }:
   { src: string; alt: string; side: "left" | "right"; eyebrow: string; title: ReactNode; body: string; glow?: keyof typeof GLOWS; isMobile: boolean }) {
   const glowBg = glow ? GLOWS[glow] : null;
+  const [slideRef, sp] = useScrollProgress<HTMLDivElement>();
+  const e = easeOut(sp);
+  const dir = side === "left" ? -1 : 1;
+  const slideStyle: CSSProperties = isMobile
+    ? {}
+    : { transform: `translateX(${(1 - e) * dir * 28}%)`, opacity: 0.25 + 0.75 * e, willChange: "transform, opacity" };
   const img = (
-    <div style={{ position: "relative", zIndex: 0 }}>
+    <div ref={slideRef} style={{ position: "relative", zIndex: 0, ...slideStyle }}>
       {glowBg && <div aria-hidden style={{ position: "absolute", inset: "-14%", background: glowBg, filter: "blur(65px)", pointerEvents: "none" }} />}
       <Image src={src} alt={alt} width={1430} height={866} unoptimized sizes="70vw"
         style={{ width: "100%", height: "auto", display: "block", position: "relative", filter: "drop-shadow(0 40px 70px rgba(0,0,0,.55))" }} />
