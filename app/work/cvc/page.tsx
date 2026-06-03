@@ -8,7 +8,8 @@ import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
-import ScrollGallery from "../../components/ScrollGallery";
+import DeviceSwitcher from "../../components/DeviceSwitcher";
+import FeatureCarousel from "../../components/FeatureCarousel";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -264,13 +265,16 @@ export default function CVCCasePage() {
                   101% faster. Evidence &gt; opinion. We moved to hi-fi with confidence.
                 </p>
               </div>
-              {/* Before/After phone mockups */}
+              {/* Before/After — interactive toggle */}
               <ScrollReveal delay={100}>
-                <MediaPlaceholder
-                  label="Before / After — Combined vs Separated flights"
-                  filename="cvc/cvc-ab-test-screens.png"
-                  hint="Screenshot mostrando os dois celulares lado a lado — Combined Flights (esquerda) vs Separated Flights (direita). Slide 14 do PDF CVC."
-                  aspect="4/5"
+                <DeviceSwitcher
+                  isMobile={isMobile}
+                  height={620}
+                  heightMobile={460}
+                  items={[
+                    { label: "B — Combined", src: "/screens-mobile/ip-resultado-old.png", badge: "Before", caption: "Outbound + return on one card. 18.9s to choose. “Too much info.”" },
+                    { label: "A — Separated", src: "/screens-mobile/ip-resultado.png", badge: "After", caption: "One flight at a time. 9.4s to choose — 101% faster. “Practical, no back and forth.”" },
+                  ]}
                 />
               </ScrollReveal>
             </div>
@@ -294,15 +298,15 @@ export default function CVCCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* Phone rail — take a closer look */}
+          {/* Lens-slider step scrubber — the guided flow */}
           <ScrollReveal delay={100}>
             <div style={{ marginBottom: "4rem" }}>
-              <ScrollGallery
-                cardWidth={280}
+              <DeviceSwitcher
+                isMobile={isMobile}
                 items={[
-                  { src: "/screens-mobile/ip-search.png", alt: "Guided search", caption: "Guided search" },
-                  { src: "/screens-mobile/ip-resultado.png", alt: "Flight results — separated", caption: "Flight results — separated" },
-                  { src: "/screens-mobile/ip-confirma.png", alt: "Confirmation before checkout", caption: "Confirmation before checkout" },
+                  { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
+                  { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
+                  { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
                 ]}
               />
             </div>
@@ -342,6 +346,32 @@ export default function CVCCasePage() {
                 />
               </div>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 06.5 · PROCESS — CLOSER LOOK ═══ */}
+      <section style={{ padding: pad, background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>Behind the screens — the process</Label>
+            <RevealText
+              lines={["From benchmark to hi-fi.", <em key="p" className="text-gradient" style={{ fontStyle: "italic" }}>Swipe through the work.</em>]}
+              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "3rem", maxWidth: 700 }}
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <FeatureCarousel
+              slides={[
+                { src: "/screens-desktop/mac-benchmark.png", title: "Competitive benchmark", body: "Hopper, Skyscanner, Kayak, Decolar — three shared principles CVC was breaking on all of them." },
+                { src: "/screens-desktop/mac-heuristica.png", title: "Heuristic evaluation", body: "Mapped every friction point in the legacy webview flow before redrawing a single pixel." },
+                { src: "/screens-desktop/mac-flow.png", title: "Redesigned flow", body: "A linear, guided architecture — one decision per screen, outbound then return." },
+                { src: "/screens-desktop/mac-wireframes.png", title: "Wireframes", body: "Low-fi structure validated with a Maze A/B test before committing to hi-fi." },
+                { src: "/screens-desktop/mac-dynamics.png", title: "Motion & dynamics", body: "Native transitions replacing the 40–55s of “dancing cards.”" },
+              ]}
+            />
           </ScrollReveal>
         </div>
       </section>
