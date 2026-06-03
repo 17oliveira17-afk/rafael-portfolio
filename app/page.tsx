@@ -448,14 +448,14 @@ export default function Home() {
             <p style={{ fontSize: ".72rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>
               The process
             </p>
-            <h2 style={{
-              fontSize: "clamp(2rem, 6vw, 5.5rem)", fontWeight: 700,
-              letterSpacing: "-.035em", lineHeight: 1.02, color: "#fff",
-              maxWidth: 1000, margin: "0 auto",
-            }}>
-              Strategy. Research.<br />
-              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Pixels that ship.</em>
-            </h2>
+            <RevealText
+              lines={["Strategy. Research.", <em key="p" style={{ color: "#0071e3", fontStyle: "italic" }}>Pixels that ship.</em>]}
+              style={{
+                fontSize: "clamp(2rem, 6vw, 5.5rem)", fontWeight: 700,
+                letterSpacing: "-.035em", lineHeight: 1.02, color: "#fff",
+                maxWidth: 1000, margin: "0 auto",
+              }}
+            />
             <p style={{
               fontSize: "clamp(1rem,1.3vw,1.15rem)", color: "rgba(255,255,255,.75)",
               maxWidth: 580, margin: "2rem auto 0", lineHeight: 1.7, fontWeight: 300,
@@ -560,13 +560,13 @@ export default function Home() {
           {/* Bio content */}
           <ScrollReveal delay={150}>
             <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1.5rem" }}>About</p>
-            <h2 style={{
-              fontSize: "clamp(2.2rem,4.5vw,4rem)", fontWeight: 700, color: "#fff",
-              letterSpacing: "-.035em", lineHeight: 1.02, marginBottom: "2rem",
-            }}>
-              Brazilian designer.<br />
-              <em style={{ color: "#0071e3", fontStyle: "italic" }}>Working globally.</em>
-            </h2>
+            <RevealText
+              lines={["Brazilian designer.", <em key="g" style={{ color: "#0071e3", fontStyle: "italic" }}>Working globally.</em>]}
+              style={{
+                fontSize: "clamp(2.2rem,4.5vw,4rem)", fontWeight: 700, color: "#fff",
+                letterSpacing: "-.035em", lineHeight: 1.02, marginBottom: "2rem",
+              }}
+            />
             <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.75)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
               Currently Product Design Lead at <span style={{ color: "#fff", fontWeight: 500 }}>Thoughtworks Brasil</span>, designing URPI PRO — a B2B credit origination platform for MiBanco.
             </p>
@@ -600,13 +600,13 @@ export default function Home() {
       <section className="section-white" style={{ padding: "12rem 2rem", textAlign: "center" }}>
         <ScrollReveal>
           <p className="t-eyebrow" style={{ marginBottom: "2rem" }}>Open to opportunities</p>
-          <h2 style={{
-            fontSize: "clamp(2.5rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.035em",
-            lineHeight: 1.02, color: "#1d1d1f", marginBottom: "2rem", maxWidth: 800, margin: "0 auto 2rem",
-          }}>
-            Let&apos;s build something<br />
-            <em className="text-gradient" style={{ fontStyle: "italic" }}>worth shipping.</em>
-          </h2>
+          <RevealText
+            lines={["Let's build something", <em key="s" className="text-gradient" style={{ fontStyle: "italic" }}>worth shipping.</em>]}
+            style={{
+              fontSize: "clamp(2.5rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.035em",
+              lineHeight: 1.02, color: "#1d1d1f", marginBottom: "2rem", maxWidth: 800, margin: "0 auto 2rem",
+            }}
+          />
           <p className="t-body" style={{ maxWidth: 480, margin: "0 auto 3rem" }}>
             Open to Product Design Lead roles in fintech and B2B. Pursuing opportunities in Canada.
           </p>

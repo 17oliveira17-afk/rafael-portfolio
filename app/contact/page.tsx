@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import ScrollReveal from "../components/ScrollReveal";
+import RevealText from "../components/RevealText";
 
 const links = [
   {
@@ -44,9 +45,12 @@ export default function ContactPage() {
         <div style={{ maxWidth: 1100, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "2rem" }}>Contact</p>
-            <h1 style={{ fontSize: "clamp(3rem,7vw,7rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "2rem" }}>
-              Got a project<br />in mind?
-            </h1>
+            <RevealText
+              as="h1"
+              lines={["Got a project", "in mind?"]}
+              stagger={90}
+              style={{ fontSize: "clamp(3rem,7vw,7rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "2rem" }}
+            />
             <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 480, lineHeight: 1.7, marginBottom: "3rem" }}>
               Open to Product Design Lead roles in fintech and B2B. Currently pursuing opportunities in Canada.
             </p>
