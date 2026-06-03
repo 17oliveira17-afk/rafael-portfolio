@@ -4,6 +4,8 @@ import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
+import RevealText from "../../components/RevealText";
+import LoopVideo from "../../components/LoopVideo";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -88,7 +90,7 @@ function Label({ children }: { children: ReactNode }) {
 
 /* ── Divider ── */
 function Divider() {
-  return <div style={{ height: 1, background: "rgba(255,255,255,.07)", margin: "0 2rem" }} />;
+  return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -117,13 +119,15 @@ export default function RappiCasePage() {
                 <span key={t} style={{ padding: ".3rem .85rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
               ))}
             </div>
-            <h1 style={{
-              fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,7vw,6.5rem)",
-              fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "1.25rem",
-            }}>
-              Rappi Merchant<br />
-              <em className="text-gradient" style={{ fontStyle: "italic" }}>Onboarding.</em>
-            </h1>
+            <RevealText
+              as="h1"
+              lines={["Rappi Merchant", <em key="o" className="text-gradient" style={{ fontStyle: "italic" }}>Onboarding.</em>]}
+              stagger={90}
+              style={{
+                fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,7vw,6.5rem)",
+                fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "1.25rem",
+              }}
+            />
             <p style={{ fontSize: isMobile ? ".97rem" : "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
               The onboarding was losing 30% of merchants at the menu step alone. 2 weeks to open a store. I changed the roadmap, shipped 3 releases, and cut that to 2 days.
             </p>
@@ -200,9 +204,10 @@ export default function RappiCasePage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>02 — The diagnosis</Label>
-            <h2 style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              144 problems. But the<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>roadmap was the real problem.</em>
-            </h2>
+            <RevealText
+              lines={["144 problems. But the", <em key="r" style={{ color: "#0071e3", fontStyle: "italic" }}>roadmap was the real problem.</em>]}
+              style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
+            />
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               I mapped every friction point in production and ranked them by severity. 144 problems total — categorized by impact across 30%/33%/37% severity tiers. The original plan was a full 6-month redesign delivering zero value until month 3. I proposed the opposite: fix the highest-impact bugs first and ship value from week 1.
             </p>
@@ -282,11 +287,11 @@ export default function RappiCasePage() {
               <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
                 <Icon name="video" size={15} /> Usability test — prototype walkthrough
               </p>
-              <MediaPlaceholder
-                label="GIF/Video — High-fi prototype usability test (Slide 9 do PDF Rappi)"
-                filename="rappi/rappi-prototype-test.gif"
-                hint="GIF ou MP4 do protótipo em alta sendo testado com usuário. Slide 9 da apresentação Rappi."
-                aspect="16/9"
+              <LoopVideo
+                src="/videos/rappi/rappi-prototype-test.mp4"
+                label="Usability test — prototype walkthrough"
+                aspect="16 / 9"
+                radius={16}
               />
             </div>
           </ScrollReveal>
@@ -411,11 +416,11 @@ export default function RappiCasePage() {
                 <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
                   <Icon name="film" size={15} /> Login flow animation
                 </p>
-                <MediaPlaceholder
-                  label="GIF/Video — Login animation (Slide 36 do PDF Rappi)"
-                  filename="rappi/rappi-login-animation.gif"
-                  hint="GIF ou MP4 da animação de login: 4 telas → 1 transição fluida. Slide 36 da apresentação Rappi."
-                  aspect="9/16"
+                <LoopVideo
+                  src="/videos/rappi/rappi-login-animation.mp4"
+                  label="Login flow animation"
+                  aspect="9 / 16"
+                  radius={20}
                 />
               </div>
             </div>
@@ -457,9 +462,10 @@ export default function RappiCasePage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>09 — Outcomes</Label>
-            <h2 style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}>
-              3 releases. 3 markets.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>Numbers that moved the business.</em>
-            </h2>
+            <RevealText
+              lines={["3 releases. 3 markets.", <em key="n" style={{ color: "#0071e3", fontStyle: "italic" }}>Numbers that moved the business.</em>]}
+              style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}
+            />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "4rem", letterSpacing: ".06em" }}>Tracked via Amplitude conversion funnels</p>
           </ScrollReveal>
 
