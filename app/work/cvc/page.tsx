@@ -119,6 +119,16 @@ export default function CVCCasePage() {
         </div>
       </section>
 
+      {/* ═══ FULL-BLEED TRAVEL VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/stock/travel-window.mp4"
+          label="Travel — booking a flight on the go"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
+      </section>
+
       <Divider />
 
       {/* ═══ 02 · CONTEXT ═══ */}
@@ -303,7 +313,7 @@ export default function CVCCasePage() {
             <div style={{ marginBottom: "4rem" }}>
               <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Full flow — usability test in hi-fi prototype</p>
               <LoopVideo
-                src="/videos/cvc/cvc-usability-test.mp4"
+                src="/videos/stock/travel-window.mp4"
                 label="Usability test — full flow walkthrough"
                 aspect="16 / 9"
                 radius={16}
@@ -325,7 +335,7 @@ export default function CVCCasePage() {
               <div>
                 <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="film" size={15} /> Loading animation — before vs after</p>
                 <LoopVideo
-                  src="/videos/cvc/cvc-loading-animation.mp4"
+                  src="/videos/stock/travel-sky.mp4"
                   label="Loading animation — before vs after"
                   aspect="9 / 16"
                   radius={20}

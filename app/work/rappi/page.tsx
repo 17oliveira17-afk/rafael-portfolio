@@ -288,7 +288,7 @@ export default function RappiCasePage() {
                 <Icon name="video" size={15} /> Usability test — prototype walkthrough
               </p>
               <LoopVideo
-                src="/videos/rappi/rappi-prototype-test.mp4"
+                src="/videos/stock/restaurant-kitchen.mp4"
                 label="Usability test — prototype walkthrough"
                 aspect="16 / 9"
                 radius={16}
@@ -417,7 +417,7 @@ export default function RappiCasePage() {
                   <Icon name="film" size={15} /> Login flow animation
                 </p>
                 <LoopVideo
-                  src="/videos/rappi/rappi-login-animation.mp4"
+                  src="/videos/stock/restaurant-grill.mp4"
                   label="Login flow animation"
                   aspect="9 / 16"
                   radius={20}

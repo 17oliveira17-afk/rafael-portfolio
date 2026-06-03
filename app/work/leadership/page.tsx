@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, ReactNode, CSSProperties } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
+import LoopVideo from "../../components/LoopVideo";
 
 /* ── Scroll progress: 0 as the element enters from the bottom, 1 once it reaches the upper third ── */
 function useScrollProgress<T extends HTMLElement>() {
@@ -388,6 +389,16 @@ export default function LeadershipCasePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ═══ FULL-BLEED TEAM VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/stock/team-working.mp4"
+          label="Design team working together"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
       </section>
 
       {/* ═══ 02 · CONTEXT ═══ */}

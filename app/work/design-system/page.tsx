@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, ReactNode } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
+import LoopVideo from "../../components/LoopVideo";
 
 /* ── Animated counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -134,6 +135,16 @@ export default function DesignSystemCasePage() {
             </div>
           </ScrollReveal>
         </div>
+      </section>
+
+      {/* ═══ FULL-BLEED DESIGNERS VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/stock/designers-working.mp4"
+          label="Designers working at their computers"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
       </section>
 
       <Divider />
