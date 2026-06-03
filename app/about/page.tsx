@@ -45,12 +45,16 @@ const aiSkills = [
     desc: "I use AI tools to build high-fidelity, near-production prototypes — collapsing weeks of validation cycles into days.",
   },
   {
-    title: "AI-first product thinking",
-    desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful.",
+    title: "Automate the operational layer",
+    desc: "AI takes the busywork off the team — generating Jira cards and ticket templates, drafting documentation, and trimming the operational process so designers spend their time on design, not overhead.",
   },
   {
-    title: "Reduce bias, increase signal",
-    desc: "AI-assisted synthesis cuts pattern recognition time and surfaces insights that manual affinity mapping misses. Less groupthink, more signal.",
+    title: "Faster, sharper research",
+    desc: "AI-assisted synthesis cuts research and pattern-recognition time dramatically — surfacing insights manual affinity mapping misses. Less groupthink, more signal, in a fraction of the time.",
+  },
+  {
+    title: "AI-first product thinking",
+    desc: "Designing for AI features — copilots, smart forms, recommendation surfaces — where the UX has to make the model feel trustworthy and useful.",
   },
 ];
 
@@ -333,11 +337,15 @@ export default function AboutPage() {
               What leaders say.
             </h2>
           </ScrollReveal>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))", gap: "1rem" }}>
             {testimonials.map((t, i) => (
-              <ScrollReveal key={i} delay={i * 60}>
-                <div style={{ background: "#0a0a0a", padding: isMobile ? "1.75rem 1.5rem" : "2.5rem" }}>
-                  <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.7)", lineHeight: 1.75, marginBottom: "1.5rem", fontStyle: "italic" }}>&ldquo;{t.quote}&rdquo;</p>
+              <ScrollReveal key={i} delay={(i % 3) * 80}>
+                <div className="tcard" style={{
+                  background: "#0a0a0a", padding: isMobile ? "1.75rem 1.5rem" : "2.25rem",
+                  borderRadius: 18, border: "1px solid rgba(255,255,255,.08)", height: "100%",
+                  display: "flex", flexDirection: "column",
+                }}>
+                  <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.72)", lineHeight: 1.75, marginBottom: "1.5rem", fontStyle: "italic", flex: 1 }}>&ldquo;{t.quote}&rdquo;</p>
                   <p style={{ fontSize: ".85rem", color: "#fff", fontWeight: 600 }}>{t.name}</p>
                   <p style={{ fontSize: ".75rem", color: "rgba(255,255,255,.4)", marginTop: ".3rem" }}>{t.role}</p>
                 </div>
@@ -380,6 +388,8 @@ export default function AboutPage() {
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .tcard { transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease; }
+        .tcard:hover { transform: translateY(-6px); border-color: rgba(0,113,227,.45); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
       `}</style>
     </main>
   );
