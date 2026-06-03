@@ -6,6 +6,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 type Project = {
   href: string;
   eyebrow: string;
+  company: string;
   title: string;
   blurb: string;
   metric: string;
@@ -19,29 +20,32 @@ const PROJECTS: Project[] = [
   {
     href: "/work/cvc",
     eyebrow: "B2C · Travel",
-    title: "CVC Flights",
+    company: "CVC",
+    title: "Redesign Flights App",
     blurb: "A 1-month A/B bet that beat a 6-month rebuild — native flight booking for Brazil's largest travel app.",
     metric: "2.0★ → 4.6★",
     metricLabel: "App Store rating",
     tags: ["Mobile App", "A/B tested", "Solo designer"],
-    grad: "linear-gradient(135deg, #0a2a6b 0%, #0071e3 55%, #2a9bff 100%)",
-    glow: "#0071e3",
+    grad: "linear-gradient(135deg, #6e4a00 0%, #e3a008 55%, #ffce1f 100%)",
+    glow: "#d99400",
   },
   {
     href: "/work/rappi",
     eyebrow: "Growth · Fintech",
-    title: "Rappi Onboarding",
+    company: "Rappi",
+    title: "Restaurants Onboarding",
     blurb: "Merchant onboarding and fintech product design for one of LATAM's largest super-apps.",
     metric: "25M+",
     metricLabel: "Users · 9 countries",
     tags: ["Onboarding", "Fintech", "LATAM"],
-    grad: "linear-gradient(135deg, #2b1a6b 0%, #5b3fe0 55%, #7e48ff 100%)",
-    glow: "#7e48ff",
+    grad: "linear-gradient(135deg, #7a1f00 0%, #e2400d 55%, #ff6a2b 100%)",
+    glow: "#ff5a1f",
   },
   {
     href: "/work/design-system",
     eyebrow: "Design Systems",
-    title: "Systems, 0 → scale",
+    company: "Rappi · CVC",
+    title: "Creating Design Systems",
     blurb: "Bootstrapping a system from nothing at Rappi, and building CVC's native mobile layer.",
     metric: "0 → 1",
     metricLabel: "Systems bootstrapped",
@@ -52,13 +56,14 @@ const PROJECTS: Project[] = [
   {
     href: "/work/leadership",
     eyebrow: "Design Leadership",
-    title: "Chaos → clarity",
+    company: "Bank · NDA",
+    title: "Implementing Process",
     blurb: "Rebuilt a fractured design practice at a LATAM bank — process, roadmap, ceremonies, AI.",
     metric: "8w → 3w",
     metricLabel: "Delivery cycle",
     tags: ["Leadership", "Process", "Bank · NDA"],
-    grad: "linear-gradient(135deg, #1a1f4b 0%, #3d4bd8 50%, #6f7bff 100%)",
-    glow: "#6f7bff",
+    grad: "linear-gradient(135deg, #5e1430 0%, #c0395b 55%, #ec6b86 100%)",
+    glow: "#e1607c",
   },
 ];
 
@@ -166,7 +171,10 @@ export default function ProjectGallery() {
               padding: "1.5rem", overflow: "hidden",
             }}>
               <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(120% 90% at 80% 0%, rgba(255,255,255,.28), transparent 55%)", pointerEvents: "none" }} />
-              <span style={{ position: "relative", fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{p.eyebrow}</span>
+              <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: ".75rem" }}>
+                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{p.eyebrow}</span>
+                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".06em", color: "#fff", padding: ".28rem .6rem", borderRadius: 100, background: "rgba(255,255,255,.16)", border: "1px solid rgba(255,255,255,.28)", backdropFilter: "blur(6px)", whiteSpace: "nowrap" }}>{p.company}</span>
+              </div>
               <div style={{ position: "relative" }}>
                 <div style={{ fontSize: "clamp(2rem,5vw,2.8rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{p.metric}</div>
                 <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.72)", marginTop: ".35rem", letterSpacing: ".04em" }}>{p.metricLabel}</div>
