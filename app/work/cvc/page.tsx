@@ -6,6 +6,9 @@ import ScrollReveal from "../../components/ScrollReveal";
 import IPhone from "../../components/IPhone";
 import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
+import RevealText from "../../components/RevealText";
+import LoopVideo from "../../components/LoopVideo";
+import ScrollGallery from "../../components/ScrollGallery";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -59,7 +62,7 @@ function Label({ children }: { children: ReactNode }) {
 }
 
 function Divider() {
-  return <div style={{ height: 1, background: "rgba(255,255,255,.07)", margin: "0 2rem" }} />;
+  return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -87,10 +90,12 @@ export default function CVCCasePage() {
                 <span key={t} style={{ padding: ".3rem .9rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".7rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
               ))}
             </div>
-            <h1 style={{ fontSize: isMobile ? "2.8rem" : "clamp(3rem,7vw,6.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}>
-              CVC Flight<br />
-              <em className="text-gradient" style={{ fontStyle: "italic" }}>Booking Redesign.</em>
-            </h1>
+            <RevealText
+              as="h1"
+              lines={["CVC Flight", <em key="br" className="text-gradient" style={{ fontStyle: "italic" }}>Booking Redesign.</em>]}
+              stagger={90}
+              style={{ fontSize: isMobile ? "2.8rem" : "clamp(3rem,7vw,6.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}
+            />
             <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "3rem" }}>
               Brazil's largest travel app had a 2.0★ rating, 40-second loads, and 6% checkout conversion. I proposed a 1-month A/B bet instead of a 6-month redesign — and delivered results in the first month.
             </p>
@@ -270,27 +275,26 @@ export default function CVCCasePage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>05 — The product</Label>
-            <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              Guided search. One flight at a time.<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>Confirmation before checkout.</em>
-            </h2>
+            <RevealText
+              lines={["Guided search. One flight at a time.", <em key="c" className="text-gradient" style={{ fontStyle: "italic" }}>Confirmation before checkout.</em>]}
+              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
+            />
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               The new flow replaced a fragmented multi-step search with a linear 3-step guided experience — destination, details, dates. Results show one flight at a time, outbound then return. Flight details expand inline without leaving the list. Confirmation appears before checkout, not inside it.
             </p>
           </ScrollReveal>
 
-          {/* Phone trio */}
+          {/* Phone rail — take a closer look */}
           <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "2rem", marginBottom: "4rem" }}>
-              {[
-                { src: "/screens-mobile/ip-search.png", label: "Guided search" },
-                { src: "/screens-mobile/ip-resultado.png", label: "Flight results — separated" },
-                { src: "/screens-mobile/ip-confirma.png", label: "Confirmation before checkout" },
-              ].map((p, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.25rem" }}>
-                  <IPhone src={p.src} alt={p.label} width={260} />
-                  <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", letterSpacing: ".08em", textAlign: "center", textTransform: "uppercase" }}>{p.label}</p>
-                </div>
-              ))}
+            <div style={{ marginBottom: "4rem" }}>
+              <ScrollGallery
+                cardWidth={280}
+                items={[
+                  { src: "/screens-mobile/ip-search.png", alt: "Guided search", caption: "Guided search" },
+                  { src: "/screens-mobile/ip-resultado.png", alt: "Flight results — separated", caption: "Flight results — separated" },
+                  { src: "/screens-mobile/ip-confirma.png", alt: "Confirmation before checkout", caption: "Confirmation before checkout" },
+                ]}
+              />
             </div>
           </ScrollReveal>
 
@@ -298,11 +302,11 @@ export default function CVCCasePage() {
           <ScrollReveal delay={150}>
             <div style={{ marginBottom: "4rem" }}>
               <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Full flow — usability test in hi-fi prototype</p>
-              <MediaPlaceholder
-                label="GIF/Video — Usability test: full flow walkthrough (Slide 17 do PDF CVC)"
-                filename="cvc/cvc-usability-test.gif"
-                hint="GIF ou MP4 do vídeo de usability test mostrando o fluxo completo do app em alta fidelidade. Slide 17 do PDF CVC."
-                aspect="16/9"
+              <LoopVideo
+                src="/videos/cvc/cvc-usability-test.mp4"
+                label="Usability test — full flow walkthrough"
+                aspect="16 / 9"
+                radius={16}
               />
             </div>
           </ScrollReveal>
@@ -320,11 +324,11 @@ export default function CVCCasePage() {
               </div>
               <div>
                 <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="film" size={15} /> Loading animation — before vs after</p>
-                <MediaPlaceholder
-                  label="GIF/Video — Loading animation before vs after (Slide 20 do PDF CVC)"
-                  filename="cvc/cvc-loading-animation.gif"
-                  hint="GIF ou MP4 comparando o loading antigo ('dancing cards') com o novo loading state. Slide 20 do PDF CVC."
-                  aspect="9/16"
+                <LoopVideo
+                  src="/videos/cvc/cvc-loading-animation.mp4"
+                  label="Loading animation — before vs after"
+                  aspect="9 / 16"
+                  radius={20}
                 />
               </div>
             </div>
@@ -378,9 +382,10 @@ export default function CVCCasePage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>07 — Outcomes</Label>
-            <h2 style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}>
-              Results after 1 month live.<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>A/B tested 50/50 in production.</em>
-            </h2>
+            <RevealText
+              lines={["Results after 1 month live.", <em key="ab" className="text-gradient" style={{ fontStyle: "italic" }}>A/B tested 50/50 in production.</em>]}
+              style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}
+            />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "4rem", letterSpacing: ".06em" }}>Tracked via Mixpanel</p>
           </ScrollReveal>
 
