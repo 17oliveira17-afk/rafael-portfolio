@@ -130,10 +130,12 @@ function CVCShowcase() {
   const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
   const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  // Phone: starts below+small, rises and grows in ph1, then settles back a
-  // little in ph2 so the 3-up triptych + stats + CTA all fit with margins.
-  const phoneScale = 0.28 + easeOut(ph0) * 0.40 + easeOut(ph1) * 0.34 - ph2 * 0.24;
-  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 150;
+  // Phone: starts BIG (200% of the settled size) showing only its top ~45%,
+  // then shrinks down to the final size as you scroll, before fanning out.
+  const F = 0.78;                          // settled size when scroll stops
+  const q = easeOut(Math.min(1, p / 0.62)); // 0 at start → 1 once settled (before fan)
+  const phoneScale = 2 * F - (2 * F - F) * q; // 1.56 → 0.78
+  const phoneY     = 540 - (540 - -118) * q;  // big & low (top peeking) → settled, lifted
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
@@ -184,7 +186,7 @@ function CVCShowcase() {
           position: "absolute",
           top: "50%", left: "50%",
           transform: `translate(-50%, calc(-50% + ${phoneY}px)) scale(${phoneScale})`,
-          transformOrigin: "center bottom",
+          transformOrigin: "center center",
           zIndex: 3,
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.08 + ph1 * 0.2})) drop-shadow(0 30px 60px rgba(0,0,0,.7))`,
           willChange: "transform",
