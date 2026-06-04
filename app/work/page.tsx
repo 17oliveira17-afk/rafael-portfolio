@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { CSSProperties } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import RevealText from "../components/RevealText";
 import useIsMobile from "../components/useIsMobile";
@@ -12,23 +12,19 @@ const ArrowR = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-/* glowing hover wrapper — lifts + rings in the project's accent colour */
-function Hoverable({ glow, children, style }: { glow: string; children: React.ReactNode; style?: React.CSSProperties }) {
-  const [on, setOn] = useState(false);
+const hexA = (hex: string, a: number) => {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${a})`;
+};
+
+/* glowing hover wrapper — lifts + rings in the project's accent colour.
+   Uses CSS :hover (not JS state) so it always resets cleanly between cards. */
+function Hoverable({ glow, children, style }: { glow: string; children: React.ReactNode; style?: CSSProperties }) {
   return (
     <div
-      onMouseEnter={() => setOn(true)}
-      onMouseLeave={() => setOn(false)}
-      style={{
-        transition: "transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease, border-color .45s ease",
-        transform: on ? "translateY(-8px)" : "translateY(0)",
-        boxShadow: on ? `0 36px 80px ${glow}30, 0 12px 30px rgba(0,0,0,.5)` : "0 1px 2px rgba(0,0,0,.4)",
-        border: `1px solid ${on ? glow + "66" : "rgba(255,255,255,.08)"}`,
-        borderRadius: 28,
-        overflow: "hidden",
-        background: "#1c1c1f",
-        ...style,
-      }}
+      className="work-card"
+      style={{ ["--glow-shadow" as string]: hexA(glow, 0.19), ["--glow-border" as string]: hexA(glow, 0.42), ...style }}
     >
       {children}
     </div>
@@ -147,6 +143,25 @@ export default function WorkPage() {
           </ScrollReveal>
         </div>
       </section>
+
+      <style jsx>{`
+        .work-card {
+          position: relative;
+          border-radius: 28px;
+          overflow: hidden;
+          background: #1c1c1f;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.45s ease, border-color 0.45s ease;
+          will-change: transform;
+        }
+        .work-card:hover {
+          transform: translateY(-8px);
+          border-color: var(--glow-border);
+          box-shadow: 0 36px 80px var(--glow-shadow), 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+      `}</style>
     </main>
   );
 }
