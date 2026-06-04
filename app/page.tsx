@@ -135,7 +135,7 @@ function CVCShowcase() {
   const F = 0.78;                          // settled size when scroll stops
   const q = easeOut(Math.min(1, p / 0.62)); // 0 at start → 1 once settled (before fan)
   const phoneScale = 2 * F - (2 * F - F) * q; // 1.56 → 0.78
-  const phoneY     = 540 - (540 - -78) * q;   // big (top peeking, below title) → settled (a bit lower)
+  const phoneY     = 435 - (435 - -78) * q;   // start ~10% higher (more of the phone visible) → settled
   const titleOut   = Math.min(1, q * 2.4);    // headline fades out as the phone rises in
 
   // Stats stagger bottom
@@ -148,8 +148,8 @@ function CVCShowcase() {
   // the result stats appear (ph2), two phones fan out from behind it — guided
   // to the left, confirmation to the right — same size and angle.
   const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-  const fanL = easeOut(clamp01((p - 0.44) / 0.24));  // left fans out first
-  const fanR = easeOut(clamp01((p - 0.56) / 0.24));  // right follows a beat later (not synced)
+  const fanL = easeOut(clamp01((p - 0.20) / 0.28));  // left starts emerging while the centre is still rising/shrinking
+  const fanR = easeOut(clamp01((p - 0.32) / 0.28));  // right follows a beat later (not synced)
   const triptych = [
     { src: "/screens-mobile/ip-results-1.png", op: 1, x: 0, z: 3, scale: 1, shadow: false },
     { src: "/screens-mobile/ip-guided-1.png", op: fanL, x: -fanL * 112, z: 1, scale: 0.92 + fanL * 0.08, shadow: true },
