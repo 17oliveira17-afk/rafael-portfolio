@@ -26,7 +26,7 @@ function Hoverable({ glow, children, style }: { glow: string; children: React.Re
         border: `1px solid ${on ? glow + "66" : "rgba(255,255,255,.08)"}`,
         borderRadius: 28,
         overflow: "hidden",
-        background: "#0b0b0e",
+        background: "#1c1c1f",
         ...style,
       }}
     >
