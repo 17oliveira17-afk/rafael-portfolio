@@ -303,11 +303,10 @@ export default function CVCCasePage() {
             <div style={{ marginBottom: "4rem" }}>
               <DeviceSwitcher
                 isMobile={isMobile}
-                frame
                 items={[
-                  { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
-                  { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
-                  { label: "Confirmation", src: "/screens-mobile/confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
+                  { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
+                  { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
+                  { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
                 ]}
               />
             </div>
@@ -368,12 +367,12 @@ export default function CVCCasePage() {
           <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
             <ArtifactReveal
               isMobile={isMobile}
-              src="/screens-desktop/process-benchmark.png"
+              src="/screens-desktop/mac-benchmark.png"
               eyebrow="01 · The evidence"
               title="It started with the whole market."
               body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
               metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
-              ratio="1142 / 742"
+              ratio="2145 / 1300"
             />
           </div>
 
@@ -382,12 +381,12 @@ export default function CVCCasePage() {
             <ArtifactReveal
               isMobile={isMobile}
               reverse
-              src="/screens-desktop/process-user-flow.png"
+              src="/screens-desktop/mac-user-flow.png"
               eyebrow="02 · The architecture"
               title="Then I remapped the flow."
               body="The current webview sitemap, mapped against an ideal one — a linear, guided architecture with one decision per screen, outbound then return, and a confirmation before checkout instead of inside it."
               metric={{ n: "Current → ideal", l: "navigation flow remapped" }}
-              ratio="1142 / 742"
+              ratio="2145 / 1300"
             />
           </div>
 
@@ -430,12 +429,13 @@ export default function CVCCasePage() {
           <PhoneSpotlight
             isMobile={isMobile}
             finish="blue"
+            baked
             items={[
-              { src: "/screens-mobile/filters.png", title: "Filters", body: "Price range, duration and stops on a clean sheet — no modal interruption." },
-              { src: "/screens-mobile/detail.png", title: "Flight detail", body: "Expanded inline. No page navigation — return suggestions surface before commitment." },
-              { src: "/screens-mobile/upgrade.png", title: "Baggage upselling", body: "Tiered upgrades framed as a clear choice, shown at the right moment in the flow.", metric: "+23% cross-sell" },
-              { src: "/screens-mobile/volta.png", title: "Return flight", body: "Outbound locked, return chosen separately — the decision that tested 101% faster." },
-              { src: "/screens-mobile/passengers.png", title: "Passengers & class", body: "Adults, children, infants and cabin class in one native step — no webview reload." },
+              { src: "/screens-mobile/ip-filters.png", title: "Filters", body: "Price range, duration and stops on a clean sheet — no modal interruption." },
+              { src: "/screens-mobile/ip-detail.png", title: "Flight detail", body: "Expanded inline. No page navigation — return suggestions surface before commitment." },
+              { src: "/screens-mobile/ip-upgrade.png", title: "Baggage upselling", body: "Tiered upgrades framed as a clear choice, shown at the right moment in the flow.", metric: "+23% cross-sell" },
+              { src: "/screens-mobile/ip-volta.png", title: "Return flight", body: "Outbound locked, return chosen separately — the decision that tested 101% faster." },
+              { src: "/screens-mobile/ip-passengers.png", title: "Passengers & class", body: "Adults, children, infants and cabin class in one native step — no webview reload." },
             ]}
           />
         </div>

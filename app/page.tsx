@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import useIsMobile from "./components/useIsMobile";
-import DeviceFrame from "./components/DeviceFrame";
 import BigImageReveal from "./components/BigImageReveal";
 import ProjectGallery from "./components/ProjectGallery";
 import RevealText from "./components/RevealText";
@@ -36,12 +35,12 @@ function Counter({ n, suffix = "+" }: { n: number; suffix?: string }) {
   return <div ref={ref}>{v}{suffix}</div>;
 }
 
-/* Code-drawn iPhone fed a RAW screen — sharp, themeable, consistent with CVC */
-function Phone({ src, alt, w = 280, finish = "blue" }: { src: string; alt: string; w?: number; finish?: "titanium" | "black" | "blue" | "desert" }) {
+/* Pre-framed iPhone screenshot — the phone mockup is already baked into the PNG */
+function Phone({ src, alt, w = 280 }: { src: string; alt: string; w?: number }) {
   return (
-    <DeviceFrame width={w} finish={finish}>
-      <Image src={src} alt={alt} fill unoptimized sizes="340px" style={{ objectFit: "cover", objectPosition: "center top" }} />
-    </DeviceFrame>
+    <div style={{ width: w }}>
+      <Image src={src} alt={alt} width={908} height={1880} unoptimized sizes={`${w}px`} style={{ width: "100%", height: "auto", display: "block" }} />
+    </div>
   );
 }
 
@@ -102,7 +101,7 @@ function CVCShowcase() {
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem", filter: "drop-shadow(0 30px 60px rgba(0,113,227,.25)) drop-shadow(0 20px 40px rgba(0,0,0,.5))" }}>
-              <Phone src="/screens-mobile/resultado.png" alt="CVC flight results" w={230} />
+              <Phone src="/screens-mobile/ip-resultado.png" alt="CVC flight results" w={230} />
             </div>
           </ScrollReveal>
           <ScrollReveal delay={250}>
@@ -179,7 +178,7 @@ function CVCShowcase() {
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.08 + ph1 * 0.2})) drop-shadow(0 30px 60px rgba(0,0,0,.7))`,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/resultado.png" alt="CVC flight booking" w={320} />
+          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC flight booking" w={320} />
         </div>
 
         {/* Stats — centered bottom, staggered fade up */}
@@ -442,12 +441,11 @@ export default function Home() {
           <ScrollReveal delay={120}>
             <DeviceSwitcher
               isMobile={isMobile}
-              frame
               finish="blue"
               items={[
-                { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates." },
-                { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
-                { label: "Confirmation", src: "/screens-mobile/confirma.png", caption: "A clear confirmation before checkout — not buried inside it." },
+                { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates." },
+                { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
+                { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation before checkout — not buried inside it." },
               ]}
             />
           </ScrollReveal>

@@ -22,11 +22,13 @@ export default function PhoneSpotlight({
   isMobile = false,
   finish = "titanium",
   vhPerItem = 78,
+  baked = false,
 }: {
   items: SpotItem[];
   isMobile?: boolean;
   finish?: "titanium" | "black" | "blue" | "desert";
   vhPerItem?: number;
+  baked?: boolean; // src PNGs already include the phone mockup — skip the code frame
 }) {
   const n = items.length;
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -69,9 +71,15 @@ export default function PhoneSpotlight({
       <div style={{ display: "flex", flexDirection: "column", gap: "4.5rem" }}>
         {items.map((it, i) => (
           <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
-            <DeviceFrame width={230} finish={finish}>
-              <Image src={it.src} alt={it.title} fill unoptimized sizes="240px" style={{ objectFit: "cover", objectPosition: "center top" }} />
-            </DeviceFrame>
+            {baked ? (
+              <div style={{ width: 250 }}>
+                <Image src={it.src} alt={it.title} width={908} height={1880} unoptimized sizes="250px" style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            ) : (
+              <DeviceFrame width={230} finish={finish}>
+                <Image src={it.src} alt={it.title} fill unoptimized sizes="240px" style={{ objectFit: "cover", objectPosition: "center top" }} />
+              </DeviceFrame>
+            )}
             <div style={{ textAlign: "center", maxWidth: 360 }}>
               {it.metric && (
                 <span style={{ display: "inline-block", marginBottom: ".75rem", padding: ".3rem .8rem", borderRadius: 100, fontSize: ".68rem", fontWeight: 700, letterSpacing: ".04em", color: "#0071e3", border: "1px solid rgba(0,113,227,.35)", background: "rgba(0,113,227,.06)" }}>{it.metric}</span>
@@ -138,8 +146,8 @@ export default function PhoneSpotlight({
 
         {/* pinned device */}
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <DeviceFrame width={310} finish={finish}>
-            {items.map((it, i) => (
+          {(() => {
+            const layers = items.map((it, i) => (
               <div
                 key={i}
                 aria-hidden={i !== active}
@@ -151,10 +159,15 @@ export default function PhoneSpotlight({
                   transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
                 }}
               >
-                <Image src={it.src} alt={it.title} fill unoptimized sizes="320px" style={{ objectFit: "cover", objectPosition: "center top" }} />
+                <Image src={it.src} alt={it.title} fill unoptimized sizes="360px" style={{ objectFit: baked ? "contain" : "cover", objectPosition: "center top" }} />
               </div>
-            ))}
-          </DeviceFrame>
+            ));
+            return baked ? (
+              <div style={{ position: "relative", width: 340, aspectRatio: "908 / 1880" }}>{layers}</div>
+            ) : (
+              <DeviceFrame width={310} finish={finish}>{layers}</DeviceFrame>
+            );
+          })()}
         </div>
       </div>
     </div>
