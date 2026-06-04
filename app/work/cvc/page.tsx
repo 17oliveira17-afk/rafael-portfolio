@@ -307,7 +307,7 @@ export default function CVCCasePage() {
                 isMobile={isMobile}
                 groups={[
                   {
-                    label: "Guided search",
+                    label: "Search",
                     items: [
                       { src: "/screens-mobile/ip-guided-1.png", alt: "Destination search", caption: "Destination — type a city, pick an airport. No fragmented multi-step form." },
                       { src: "/screens-mobile/ip-guided-2.png", alt: "Trip details", caption: "Details — passengers, cabin class and stops in one native step." },
@@ -315,11 +315,19 @@ export default function CVCCasePage() {
                     ],
                   },
                   {
-                    label: "Flight results",
+                    label: "Results",
                     items: [
                       { src: "/screens-mobile/ip-results-1.png", alt: "Choose outbound", caption: "Outbound first — smart badges (cheapest, non-stop, more baggage) surface the trade-offs." },
                       { src: "/screens-mobile/ip-results-2.png", alt: "Expanded flight detail", caption: "Tap to expand inline — return options, full itinerary and fare class, without leaving the list." },
                       { src: "/screens-mobile/ip-results-3.png", alt: "Choose return", caption: "Then the return — outbound locked at the top, return chosen separately. 101% faster." },
+                    ],
+                  },
+                  {
+                    label: "Confirmation",
+                    items: [
+                      { src: "/screens-mobile/ip-confirm-1.png", alt: "Trip summary", caption: "Outbound and return summarised — dates, airline and baggage — before you commit." },
+                      { src: "/screens-mobile/ip-confirm-2.png", alt: "Full itinerary", caption: "The full itinerary — every leg and layover, with operating carrier and fare class." },
+                      { src: "/screens-mobile/ip-confirm-3.png", alt: "Important notices", caption: "Important notices — COVID rules, delay and cancellation stats — surfaced before checkout." },
                     ],
                   },
                 ]}
