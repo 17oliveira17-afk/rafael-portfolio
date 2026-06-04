@@ -140,13 +140,26 @@ function CVCShowcase() {
   const s2 = Math.max(0, Math.min(1, (ph2 - 0.4) / 0.4));
   const ct = Math.max(0, Math.min(1, (ph2 - 0.65) / 0.35));
 
-  // Flow crossfade: guided search → flight results → confirmation
+  // The flow: the centre phone cycles guided → results → confirmation as it
+  // rises; then (ph2) two phones fan out from behind it — guided to the left,
+  // confirmation to the right — ending on a 3-screen triptych, same size/angle.
   const ramp = (x0: number, x1: number) => Math.max(0, Math.min(1, (p - x0) / (x1 - x0)));
-  const flowImgs = [
-    { src: "/screens-mobile/ip-guided-1.png", op: 1 - ramp(0.30, 0.42) },
-    { src: "/screens-mobile/ip-results-1.png", op: Math.min(ramp(0.30, 0.42), 1 - ramp(0.60, 0.72)) },
-    { src: "/screens-mobile/ip-confirm-1.png", op: ramp(0.60, 0.72) },
+  const fan = easeOut(ph2); // 0 while cycling → 1 when fanned out
+  const cyc = [
+    1 - ramp(0.30, 0.46),                                  // guided (centre, early)
+    Math.min(ramp(0.30, 0.46), 1 - ramp(0.56, 0.70)),      // results (centre, mid)
+    ramp(0.56, 0.70),                                      // confirmation (centre, late)
   ];
+  const triptych = [
+    { src: "/screens-mobile/ip-guided-1.png", off: -1 },   // → slides left
+    { src: "/screens-mobile/ip-results-1.png", off: 0 },   // → stays centre
+    { src: "/screens-mobile/ip-confirm-1.png", off: 1 },   // → slides right
+  ].map((t, i) => ({
+    src: t.src,
+    off: t.off,
+    x: t.off * fan * 112,                 // % of phone width
+    op: Math.max(cyc[i], fan),            // current screen while cycling; all three once fanned
+  }));
 
   return (
     <div ref={ref} style={{ height: "380vh", position: "relative" }}>
@@ -186,16 +199,29 @@ function CVCShowcase() {
           willChange: "transform",
         }}>
           <div style={{ position: "relative", width: 320, aspectRatio: "800 / 1650" }}>
-            {flowImgs.map((f, i) => (
-              <Image
+            {triptych.map((t, i) => (
+              <div
                 key={i}
-                src={f.src}
-                alt="CVC flight booking flow"
-                fill
-                unoptimized
-                sizes="320px"
-                style={{ objectFit: "contain", opacity: f.op, transition: "opacity .2s linear" }}
-              />
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  opacity: t.op,
+                  transform: `translateX(${t.x}%)`,
+                  zIndex: t.off === 0 ? 2 : 1,
+                  filter: t.off === 0 ? "none" : "drop-shadow(0 30px 60px rgba(0,0,0,.5))",
+                  transition: "opacity .18s linear, transform .18s linear",
+                  willChange: "opacity, transform",
+                }}
+              >
+                <Image
+                  src={t.src}
+                  alt="CVC flight booking flow"
+                  fill
+                  unoptimized
+                  sizes="320px"
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
             ))}
           </div>
         </div>
