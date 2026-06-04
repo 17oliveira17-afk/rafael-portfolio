@@ -132,8 +132,8 @@ function CVCShowcase() {
 
   // Phone: starts below+small, rises and grows in ph1, then settles back a
   // little in ph2 so the 3-up triptych + stats + CTA all fit with margins.
-  const phoneScale = 0.28 + easeOut(ph0) * 0.38 + easeOut(ph1) * 0.30 - ph2 * 0.24;
-  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 158;
+  const phoneScale = 0.28 + easeOut(ph0) * 0.40 + easeOut(ph1) * 0.34 - ph2 * 0.24;
+  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 150;
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
@@ -219,7 +219,7 @@ function CVCShowcase() {
 
         {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute", bottom: "21%", left: 0, right: 0,
+          position: "absolute", bottom: "18%", left: 0, right: 0,
           display: "flex", justifyContent: "center",
           gap: "clamp(3rem, 8vw, 8rem)",
           zIndex: 5, padding: "0 2rem",
@@ -235,15 +235,15 @@ function CVCShowcase() {
               opacity: s.op,
               transform: `translateY(${(1 - s.op) * 24}px)`,
             }}>
-              <div style={{ fontSize: "clamp(1.7rem, 3.6vw, 3.2rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".66rem", color: "rgba(255,255,255,.45)", marginTop: ".65rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
+              <div style={{ fontSize: "clamp(1.5rem, 3vw, 2.7rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".62rem", color: "rgba(255,255,255,.45)", marginTop: ".6rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
         <div style={{
-          position: "absolute", bottom: "9%", left: "50%", transform: "translateX(-50%)",
+          position: "absolute", bottom: "7%", left: "50%", transform: "translateX(-50%)",
           opacity: ct, zIndex: 6,
           pointerEvents: ct > 0.5 ? "auto" : "none",
         }}>
