@@ -130,9 +130,10 @@ function CVCShowcase() {
   const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
   const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  // Phone: starts below+small, rises and grows in ph1, lifts in ph2
-  const phoneScale = 0.3 + easeOut(ph0) * 0.4 + easeOut(ph1) * 0.35 - ph2 * 0.15;
-  const phoneY     = 120 - easeOut(ph0) * 60 - easeOut(ph1) * 80 - ph2 * 100;
+  // Phone: starts below+small, rises and grows in ph1, then settles back a
+  // little in ph2 so the 3-up triptych + stats + CTA all fit with margins.
+  const phoneScale = 0.28 + easeOut(ph0) * 0.38 + easeOut(ph1) * 0.30 - ph2 * 0.24;
+  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 52;
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
@@ -218,7 +219,7 @@ function CVCShowcase() {
 
         {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute", bottom: "12%", left: 0, right: 0,
+          position: "absolute", bottom: "16%", left: 0, right: 0,
           display: "flex", justifyContent: "center",
           gap: "clamp(3rem, 8vw, 8rem)",
           zIndex: 5, padding: "0 2rem",
@@ -242,7 +243,7 @@ function CVCShowcase() {
 
         {/* CTA */}
         <div style={{
-          position: "absolute", bottom: "6%", left: "50%", transform: "translateX(-50%)",
+          position: "absolute", bottom: "9%", left: "50%", transform: "translateX(-50%)",
           opacity: ct, zIndex: 6,
           pointerEvents: ct > 0.5 ? "auto" : "none",
         }}>
