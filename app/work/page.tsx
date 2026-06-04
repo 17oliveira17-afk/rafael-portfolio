@@ -15,14 +15,13 @@ const ArrowR = ({ size = 16 }: { size?: number }) => (
 /* glowing hover wrapper — lifts + rings in the project's accent colour.
    `active` is driven by a single shared key in the parent, so entering a
    new card un-lifts the previous one even if its mouse-leave was missed. */
-function Hoverable({ glow, active, onEnter, onLeave, children, style }: {
-  glow: string; active: boolean; onEnter: () => void; onLeave: () => void;
+function Hoverable({ glow, active, onEnter, children, style }: {
+  glow: string; active: boolean; onEnter: () => void;
   children: React.ReactNode; style?: CSSProperties;
 }) {
   return (
     <div
       onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
       style={{
         transition: "transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease, border-color .45s ease",
         transform: active ? "translateY(-8px)" : "translateY(0)",
@@ -106,34 +105,38 @@ export default function WorkPage() {
             </div>
           </ScrollReveal>
 
-          {/* ── Featured flagship ── */}
-          <ScrollReveal delay={80}>
-            <Link href={featured.href} style={{ textDecoration: "none", display: "block", marginBottom: isMobile ? "1.5rem" : "2rem" }}>
-              <Hoverable glow={featured.glow} active={hovered === featured.href} onEnter={() => setHovered(featured.href)} onLeave={() => setHovered(null)}>
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 1fr" }}>
-                  <div style={{ minHeight: isMobile ? 260 : 380 }}>
-                    <Plate p={featured} index={0} big />
-                  </div>
-                  <Body p={featured} big />
-                </div>
-              </Hoverable>
-            </Link>
-          </ScrollReveal>
-
-          {/* ── The other three ── */}
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? "1.5rem" : "2rem" }}>
-            {rest.map((p, i) => (
-              <ScrollReveal key={p.href} delay={120 + i * 80}>
-                <Link href={p.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                  <Hoverable glow={p.glow} active={hovered === p.href} onEnter={() => setHovered(p.href)} onLeave={() => setHovered(null)} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                    <div style={{ aspectRatio: "16 / 11" }}>
-                      <Plate p={p} index={i + 1} />
+          {/* All cards share one hovered key; leaving the whole area clears it,
+              so a card can never get stuck lifted on a fast pointer move. */}
+          <div onMouseLeave={() => setHovered(null)}>
+            {/* ── Featured flagship ── */}
+            <ScrollReveal delay={80}>
+              <Link href={featured.href} style={{ textDecoration: "none", display: "block", marginBottom: isMobile ? "1.5rem" : "2rem" }}>
+                <Hoverable glow={featured.glow} active={hovered === featured.href} onEnter={() => setHovered(featured.href)}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 1fr" }}>
+                    <div style={{ minHeight: isMobile ? 260 : 380 }}>
+                      <Plate p={featured} index={0} big />
                     </div>
-                    <Body p={p} />
-                  </Hoverable>
-                </Link>
-              </ScrollReveal>
-            ))}
+                    <Body p={featured} big />
+                  </div>
+                </Hoverable>
+              </Link>
+            </ScrollReveal>
+
+            {/* ── The other three ── */}
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? "1.5rem" : "2rem" }}>
+              {rest.map((p, i) => (
+                <ScrollReveal key={p.href} delay={120 + i * 80}>
+                  <Link href={p.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                    <Hoverable glow={p.glow} active={hovered === p.href} onEnter={() => setHovered(p.href)} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                      <div style={{ aspectRatio: "16 / 11" }}>
+                        <Plate p={p} index={i + 1} />
+                      </div>
+                      <Body p={p} />
+                    </Hoverable>
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
 
           {/* ── Footer CTA ── */}
