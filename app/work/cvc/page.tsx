@@ -8,7 +8,7 @@ import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
-import ArtifactReveal from "../../components/ArtifactReveal";
+import SideShot from "../../components/SideShot";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
 import PhoneTabs from "../../components/PhoneTabs";
 
@@ -376,44 +376,46 @@ export default function CVCCasePage() {
       <Divider />
 
       {/* ═══ 06.5 · PROCESS — THE THINKING (desktop artifacts) ═══ */}
-      <section style={{ padding: pad, background: "#050505" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
+        {/* heading */}
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: isMobile ? "0 1.5rem" : "0 6rem" }}>
           <ScrollReveal>
             <Label>Behind the screens — the process</Label>
             <RevealText
               lines={["Rigor before pixels.", <em key="p" className="text-gradient" style={{ fontStyle: "italic" }}>The work behind the work.</em>]}
-              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: isMobile ? "3rem" : "6rem", maxWidth: 700 }}
+              style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: isMobile ? "3rem" : "5rem", maxWidth: 700 }}
             />
           </ScrollReveal>
+        </div>
 
-          {/* Highlighted artifact 1 — the evidence */}
-          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
-            <ArtifactReveal
-              isMobile={isMobile}
-              src="/screens-desktop/mac-benchmark.png"
-              eyebrow="01 · The evidence"
-              title="It started with the whole market."
-              body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
-              metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
-              ratio="2145 / 1300"
-            />
-          </div>
+        {/* huge side-bleed laptops — enter from the page edge on scroll */}
+        <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "5rem" : "clamp(6rem,11vw,10rem)", padding: isMobile ? "0 1.5rem" : 0, marginTop: isMobile ? "2rem" : "3rem" }}>
+          <SideShot
+            isMobile={isMobile}
+            side="right"
+            glow="blue"
+            src="/screens-desktop/mac-benchmark.png"
+            alt="Competitive benchmark of leading flight apps"
+            eyebrow="01 · The evidence"
+            title="It started with the whole market."
+            body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
+            metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
+          />
+          <SideShot
+            isMobile={isMobile}
+            side="left"
+            glow="violet"
+            src="/screens-desktop/mac-user-flow.png"
+            alt="Navigation flow remapped — current vs ideal"
+            eyebrow="02 · The architecture"
+            title="Then I remapped the flow."
+            body="The current webview sitemap, mapped against an ideal one — a linear, guided architecture with one decision per screen, outbound then return, and a confirmation before checkout instead of inside it."
+            metric={{ n: "Current → ideal", l: "navigation flow remapped" }}
+          />
+        </div>
 
-          {/* Highlighted artifact 2 — the architecture */}
-          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
-            <ArtifactReveal
-              isMobile={isMobile}
-              reverse
-              src="/screens-desktop/mac-user-flow.png"
-              eyebrow="02 · The architecture"
-              title="Then I remapped the flow."
-              body="The current webview sitemap, mapped against an ideal one — a linear, guided architecture with one decision per screen, outbound then return, and a confirmation before checkout instead of inside it."
-              metric={{ n: "Current → ideal", l: "navigation flow remapped" }}
-              ratio="2145 / 1300"
-            />
-          </div>
-
-          {/* Supporting craft — peers you skim, in a carousel */}
+        {/* Supporting craft — peers you skim, in a carousel */}
+        <div style={{ maxWidth: 1100, margin: isMobile ? "4rem auto 0" : "6rem auto 0", padding: isMobile ? "0 1.5rem" : "0 6rem" }}>
           <ScrollReveal delay={80}>
             <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.35)", marginBottom: "1.5rem" }}>
               03 · More from the process

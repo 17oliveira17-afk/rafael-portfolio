@@ -7,7 +7,6 @@ import useIsMobile from "./components/useIsMobile";
 import BigImageReveal from "./components/BigImageReveal";
 import ProjectGallery from "./components/ProjectGallery";
 import RevealText from "./components/RevealText";
-import DeviceSwitcher from "./components/DeviceSwitcher";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -423,34 +422,6 @@ export default function Home() {
           CINEMATIC CVC SHOWCASE
       ══════════════════════════════════════════════════ */}
       <CVCShowcase />
-
-      {/* ══════════════════════════════════════════════════
-          INTERACTIVE — try the guided flow
-      ══════════════════════════════════════════════════ */}
-      <section style={{ background: "#000", padding: isMobile ? "4rem 1.5rem 6rem" : "6rem 2rem 10rem", position: "relative", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,.06)" }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
-          <ScrollReveal>
-            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>
-              Take a closer look
-            </p>
-            <RevealText
-              lines={["Tap through", <em key="f" style={{ color: "#0071e3", fontStyle: "italic" }}>the redesigned flow.</em>]}
-              style={{ fontSize: "clamp(1.9rem,4.5vw,3.4rem)", fontWeight: 700, letterSpacing: "-.035em", lineHeight: 1.04, color: "#fff", marginBottom: "2.75rem" }}
-            />
-          </ScrollReveal>
-          <ScrollReveal delay={120}>
-            <DeviceSwitcher
-              isMobile={isMobile}
-              finish="blue"
-              items={[
-                { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates." },
-                { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. 101% faster to choose." },
-                { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation before checkout — not buried inside it." },
-              ]}
-            />
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════
           MORE WORK — Rappi + Leadership
