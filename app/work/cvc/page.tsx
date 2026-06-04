@@ -10,7 +10,6 @@ import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
 import MacBookReveal from "../../components/MacBookReveal";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
-import ComboReveal from "../../components/ComboReveal";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -299,17 +298,20 @@ export default function CVCCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* Combo triptychs — the guided flow, three screens per step */}
-          <div style={{ marginBottom: "4rem" }}>
-            <ComboReveal
-              isMobile={isMobile}
-              items={[
-                { src: "/screens-mobile/combo-search.png", alt: "Guided search — destination, details, dates" },
-                { src: "/screens-mobile/combo-results.png", alt: "Flight results — outbound, details, return" },
-                { src: "/screens-mobile/combo-other.png", alt: "Other screens — filters, confirmation, upsell" },
-              ]}
-            />
-          </div>
+          {/* Lens-slider step scrubber — the guided flow */}
+          <ScrollReveal delay={100}>
+            <div style={{ marginBottom: "4rem" }}>
+              <DeviceSwitcher
+                isMobile={isMobile}
+                frame
+                items={[
+                  { label: "Search", src: "/screens-mobile/search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
+                  { label: "Results", src: "/screens-mobile/resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
+                  { label: "Confirmation", src: "/screens-mobile/confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
+                ]}
+              />
+            </div>
+          </ScrollReveal>
 
           {/* GIF: Usability test */}
           <ScrollReveal delay={150}>
