@@ -24,6 +24,7 @@ export default function DeviceSwitcher({
   heightMobile = 430,
   isMobile = false,
   frame = false,
+  bare = false,
   finish = "titanium",
 }: {
   items: SwitchItem[];
@@ -31,12 +32,14 @@ export default function DeviceSwitcher({
   heightMobile?: number;
   isMobile?: boolean;
   frame?: boolean;
+  bare?: boolean; // no card box/border — phone floats on a blue glow, shown bigger
   finish?: "titanium" | "black" | "blue" | "desert";
 }) {
   const [active, setActive] = useState(0);
   const n = items.length;
   const stageH = isMobile ? heightMobile : height;
   const frameW = Math.round(stageH * 0.46);
+  const pad = bare ? "0" : isMobile ? "1.75rem 0" : "2.25rem 0";
 
   return (
     <div style={{ width: "100%" }}>
@@ -45,10 +48,12 @@ export default function DeviceSwitcher({
         style={{
           position: "relative",
           height: stageH,
-          borderRadius: 28,
-          overflow: "hidden",
-          background: "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(0,113,227,.14) 0%, transparent 62%), #08080a",
-          border: "1px solid rgba(255,255,255,.07)",
+          borderRadius: bare ? 0 : 28,
+          overflow: bare ? "visible" : "hidden",
+          background: bare
+            ? "radial-gradient(ellipse 62% 58% at 50% 50%, rgba(0,113,227,.22) 0%, transparent 66%)"
+            : "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(0,113,227,.14) 0%, transparent 62%), #08080a",
+          border: bare ? "none" : "1px solid rgba(255,255,255,.07)",
         }}
       >
         {/* badge */}
@@ -98,7 +103,7 @@ export default function DeviceSwitcher({
               style={{
                 position: "absolute", inset: 0,
                 display: "flex", alignItems: "center", justifyContent: "center",
-                padding: isMobile ? "1.75rem 0" : "2.25rem 0",
+                padding: pad,
                 opacity: i === active ? 1 : 0,
                 transform: i === active ? "scale(1)" : "scale(1.06)",
                 transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
@@ -111,7 +116,7 @@ export default function DeviceSwitcher({
                 fill
                 unoptimized
                 sizes="(max-width: 768px) 80vw, 420px"
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", filter: bare ? "drop-shadow(0 30px 60px rgba(0,0,0,.55))" : undefined }}
               />
             </div>
           ))

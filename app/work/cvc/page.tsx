@@ -10,6 +10,7 @@ import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
 import ArtifactReveal from "../../components/ArtifactReveal";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
+import PhoneRow from "../../components/PhoneRow";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -269,8 +270,9 @@ export default function CVCCasePage() {
               <ScrollReveal delay={100}>
                 <DeviceSwitcher
                   isMobile={isMobile}
-                  height={620}
-                  heightMobile={460}
+                  bare
+                  height={640}
+                  heightMobile={480}
                   items={[
                     { label: "B — Combined", src: "/screens-mobile/ip-resultado-old.png", badge: "Before", caption: "Outbound + return on one card. 18.9s to choose. “Too much info.”" },
                     { label: "A — Separated", src: "/screens-mobile/ip-resultado.png", badge: "After", caption: "One flight at a time. 9.4s to choose — 101% faster. “Practical, no back and forth.”" },
@@ -298,15 +300,15 @@ export default function CVCCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* Lens-slider step scrubber — the guided flow */}
+          {/* Guided search — three steps, shown together (mobile: swipe) */}
           <ScrollReveal delay={100}>
             <div style={{ marginBottom: "4rem" }}>
-              <DeviceSwitcher
+              <PhoneRow
                 isMobile={isMobile}
                 items={[
-                  { label: "Search", src: "/screens-mobile/ip-search.png", caption: "Guided 3-step search — destination, details, dates. No fragmented multi-step form." },
-                  { label: "Results", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time, outbound then return. Details expand inline without leaving the list." },
-                  { label: "Confirmation", src: "/screens-mobile/ip-confirma.png", caption: "A clear confirmation appears before checkout — not buried inside it." },
+                  { src: "/screens-mobile/ip-guided-1.png", alt: "Destination search", caption: "Destination — type a city, pick an airport. No fragmented multi-step form." },
+                  { src: "/screens-mobile/ip-guided-2.png", alt: "Trip details", caption: "Details — passengers, cabin class and stops in one native step." },
+                  { src: "/screens-mobile/ip-guided-3.png", alt: "Date selection", caption: "Dates — outbound and return on a single, clear calendar." },
                 ]}
               />
             </div>
