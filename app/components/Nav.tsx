@@ -9,18 +9,36 @@ export default function Nav() {
   const path = usePathname();
 
   useEffect(() => {
+    // true when an rgb(...) string is dark (luminance < ~0.55); white pages stay light
+    const isDarkColor = (c: string) => {
+      const m = c.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)/);
+      if (!m) return false;
+      const [r, g, b] = [Number(m[1]), Number(m[2]), Number(m[3])];
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.55;
+    };
     const fn = () => {
       setScrolled(window.scrollY > 10);
-      // detect if current section has dark bg
-      const el = document.elementFromPoint(window.innerWidth / 2, 50);
-      const section = el?.closest("section, main");
-      const bg = section ? window.getComputedStyle(section).backgroundColor : "";
-      setDarkBg(bg.includes("0, 0, 0") || bg.includes("29, 29, 31"));
+      // sample just below the nav, then walk up to the first opaque background
+      let node = document.elementFromPoint(window.innerWidth / 2, 64) as HTMLElement | null;
+      let dark = true; // pages default to dark backgrounds
+      while (node) {
+        const c = window.getComputedStyle(node).backgroundColor;
+        if (c && c !== "transparent" && !c.startsWith("rgba(0, 0, 0, 0)")) {
+          dark = isDarkColor(c);
+          break;
+        }
+        node = node.parentElement;
+      }
+      setDarkBg(dark);
     };
     window.addEventListener("scroll", fn, { passive: true });
+    window.addEventListener("resize", fn);
     fn();
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", fn);
+      window.removeEventListener("resize", fn);
+    };
+  }, [path]);
 
   const isDark = darkBg;
 
