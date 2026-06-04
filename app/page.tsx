@@ -133,7 +133,7 @@ function CVCShowcase() {
   // Phone: starts below+small, rises and grows in ph1, then settles back a
   // little in ph2 so the 3-up triptych + stats + CTA all fit with margins.
   const phoneScale = 0.28 + easeOut(ph0) * 0.38 + easeOut(ph1) * 0.30 - ph2 * 0.24;
-  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 52;
+  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 130;
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
