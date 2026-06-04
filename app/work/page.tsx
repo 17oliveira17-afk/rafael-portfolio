@@ -38,22 +38,31 @@ function Hoverable({ glow, active, onEnter, children, style }: {
   );
 }
 
-/* the small gradient "index + metric" plate shared by all cards */
+/* Creative, modern project header — no photos: a mesh-gradient base with
+   soft light/shadow orbs, a masked dot-grid for texture, a diagonal sheen
+   and a big ghost-outline index number. Shared by all project cards. */
 function Plate({ p, index, big = false }: { p: Project; index: number; big?: boolean }) {
   return (
-    <div style={{ position: "relative", height: "100%", background: p.grad, padding: big ? "2.25rem" : "1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between", overflow: "hidden" }}>
-      <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(120% 90% at 80% 0%, rgba(255,255,255,.3), transparent 55%)", pointerEvents: "none" }} />
-      {/* giant index watermark */}
-      <div aria-hidden style={{ position: "absolute", right: big ? "1.5rem" : "0.6rem", bottom: big ? "-1.5rem" : "-1rem", fontSize: big ? "13rem" : "8rem", fontWeight: 800, lineHeight: 1, color: "rgba(255,255,255,.14)", letterSpacing: "-.05em", pointerEvents: "none" }}>
+    <div style={{ position: "relative", height: "100%", background: p.grad, padding: big ? "2.25rem" : "1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between", overflow: "hidden", isolation: "isolate" }}>
+      {/* mesh-gradient orbs: a bright highlight + a deep shadow for depth */}
+      <div aria-hidden style={{ position: "absolute", width: "75%", aspectRatio: "1", borderRadius: "50%", top: "-28%", right: "-16%", background: "radial-gradient(circle at center, rgba(255,255,255,.55), transparent 62%)", filter: "blur(8px)", mixBlendMode: "soft-light", pointerEvents: "none" }} />
+      <div aria-hidden style={{ position: "absolute", width: "80%", aspectRatio: "1", borderRadius: "50%", bottom: "-34%", left: "-22%", background: "radial-gradient(circle at center, rgba(0,0,0,.4), transparent 62%)", filter: "blur(14px)", pointerEvents: "none" }} />
+      {/* fine dot-grid texture, masked to fade out */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.55) 1px, transparent 1.4px)", backgroundSize: big ? "20px 20px" : "16px 16px", opacity: 0.13, WebkitMaskImage: "radial-gradient(ellipse 85% 80% at 72% 28%, #000, transparent 78%)", maskImage: "radial-gradient(ellipse 85% 80% at 72% 28%, #000, transparent 78%)", pointerEvents: "none" }} />
+      {/* diagonal sheen sweep */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg, transparent 35%, rgba(255,255,255,.14) 48%, transparent 60%)", pointerEvents: "none" }} />
+      {/* big ghost-outline index number */}
+      <div aria-hidden style={{ position: "absolute", right: big ? "1.5rem" : "0.55rem", bottom: big ? "-2.4rem" : "-1.7rem", fontSize: big ? "14rem" : "9rem", fontWeight: 800, lineHeight: 1, color: "transparent", WebkitTextStroke: `${big ? 2 : 1.5}px rgba(255,255,255,.32)`, letterSpacing: "-.06em", pointerEvents: "none" }}>
         0{index + 1}
       </div>
-      <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: ".75rem" }}>
-        <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.85)" }}>{p.eyebrow}</span>
-        <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".06em", color: "#fff", padding: ".28rem .6rem", borderRadius: 100, background: "rgba(255,255,255,.16)", border: "1px solid rgba(255,255,255,.28)", backdropFilter: "blur(6px)", whiteSpace: "nowrap" }}>{p.company}</span>
+
+      <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", gap: ".75rem" }}>
+        <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.88)" }}>{p.eyebrow}</span>
+        <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".06em", color: "#fff", padding: ".28rem .6rem", borderRadius: 100, background: "rgba(255,255,255,.18)", border: "1px solid rgba(255,255,255,.3)", backdropFilter: "blur(6px)", whiteSpace: "nowrap" }}>{p.company}</span>
       </div>
-      <div style={{ position: "relative" }}>
-        <div style={{ fontSize: big ? "clamp(2.6rem,5vw,4rem)" : "clamp(2rem,5vw,2.7rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{p.metric}</div>
-        <div style={{ fontSize: ".74rem", color: "rgba(255,255,255,.78)", marginTop: ".4rem", letterSpacing: ".04em" }}>{p.metricLabel}</div>
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div style={{ fontSize: big ? "clamp(2.6rem,5vw,4rem)" : "clamp(2rem,5vw,2.7rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1, textShadow: "0 2px 20px rgba(0,0,0,.18)" }}>{p.metric}</div>
+        <div style={{ fontSize: ".74rem", color: "rgba(255,255,255,.8)", marginTop: ".4rem", letterSpacing: ".04em" }}>{p.metricLabel}</div>
       </div>
     </div>
   );
