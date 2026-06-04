@@ -77,9 +77,28 @@ export default function PhoneTabs({
     <div>
       {control("0 auto 2.75rem")}
 
-      <div key={active} className="pt-pane">
-        <PhoneRow items={groups[active].items} isMobile={isMobile} />
-      </div>
+      {isMobile ? (
+        <div key={active} className="pt-pane">
+          <PhoneRow items={groups[active].items} isMobile />
+        </div>
+      ) : (
+        <div style={{ overflow: "hidden" }}>
+          <div
+            style={{
+              display: "flex",
+              width: `${n * 100}%`,
+              transform: `translateX(-${active * (100 / n)}%)`,
+              transition: "transform .7s cubic-bezier(.16,1,.3,1)",
+            }}
+          >
+            {groups.map((g, i) => (
+              <div key={i} style={{ width: `${100 / n}%`, flexShrink: 0 }} aria-hidden={i !== active}>
+                <PhoneRow items={g.items} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {control(isMobile ? "2.5rem auto 0" : "3rem auto 0")}
 

@@ -147,23 +147,37 @@ export default function PhoneSpotlight({
         {/* pinned device */}
         <div style={{ display: "flex", justifyContent: "center" }}>
           {(() => {
-            const layers = items.map((it, i) => (
-              <div
-                key={i}
-                aria-hidden={i !== active}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  opacity: i === active ? 1 : 0,
-                  transform: i === active ? "scale(1)" : "scale(1.04)",
-                  transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1)",
-                }}
-              >
-                <Image src={it.src} alt={it.title} fill unoptimized sizes="360px" style={{ objectFit: baked ? "contain" : "cover", objectPosition: "center top" }} />
-              </div>
-            ));
+            const layers = items.map((it, i) => {
+              const rel = i - active;
+              const dir = rel === 0 ? 0 : rel < 0 ? -1 : 1; // earlier steps exit left, later enter from right
+              const slide = baked
+                ? {
+                    opacity: i === active ? 1 : 0,
+                    transform: `translateX(${dir * 60}%) scale(${i === active ? 1 : 0.8}) rotateY(${dir * -16}deg)`,
+                  }
+                : {
+                    opacity: i === active ? 1 : 0,
+                    transform: i === active ? "scale(1)" : "scale(1.04)",
+                  };
+              return (
+                <div
+                  key={i}
+                  aria-hidden={i !== active}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    ...slide,
+                    transformOrigin: "center center",
+                    transition: "opacity .6s cubic-bezier(.4,0,.2,1), transform .85s cubic-bezier(.16,1,.3,1)",
+                    willChange: "transform, opacity",
+                  }}
+                >
+                  <Image src={it.src} alt={it.title} fill unoptimized sizes="360px" style={{ objectFit: baked ? "contain" : "cover", objectPosition: "center top" }} />
+                </div>
+              );
+            });
             return baked ? (
-              <div style={{ position: "relative", width: 340, aspectRatio: "908 / 1880" }}>{layers}</div>
+              <div style={{ position: "relative", width: 340, aspectRatio: "908 / 1880", perspective: 1400 }}>{layers}</div>
             ) : (
               <DeviceFrame width={310} finish={finish}>{layers}</DeviceFrame>
             );
