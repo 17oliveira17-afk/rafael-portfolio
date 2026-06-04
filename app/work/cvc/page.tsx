@@ -10,7 +10,7 @@ import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
 import ArtifactReveal from "../../components/ArtifactReveal";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
-import PhoneRow from "../../components/PhoneRow";
+import PhoneTabs from "../../components/PhoneTabs";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -300,15 +300,28 @@ export default function CVCCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* Guided search — three steps, shown together (mobile: swipe) */}
+          {/* Guided search · Flight results · Confirmation — three phones each */}
           <ScrollReveal delay={100}>
             <div style={{ marginBottom: "4rem" }}>
-              <PhoneRow
+              <PhoneTabs
                 isMobile={isMobile}
-                items={[
-                  { src: "/screens-mobile/ip-guided-1.png", alt: "Destination search", caption: "Destination — type a city, pick an airport. No fragmented multi-step form." },
-                  { src: "/screens-mobile/ip-guided-2.png", alt: "Trip details", caption: "Details — passengers, cabin class and stops in one native step." },
-                  { src: "/screens-mobile/ip-guided-3.png", alt: "Date selection", caption: "Dates — outbound and return on a single, clear calendar." },
+                groups={[
+                  {
+                    label: "Guided search",
+                    items: [
+                      { src: "/screens-mobile/ip-guided-1.png", alt: "Destination search", caption: "Destination — type a city, pick an airport. No fragmented multi-step form." },
+                      { src: "/screens-mobile/ip-guided-2.png", alt: "Trip details", caption: "Details — passengers, cabin class and stops in one native step." },
+                      { src: "/screens-mobile/ip-guided-3.png", alt: "Date selection", caption: "Dates — outbound and return on a single, clear calendar." },
+                    ],
+                  },
+                  {
+                    label: "Flight results",
+                    items: [
+                      { src: "/screens-mobile/ip-results-1.png", alt: "Choose outbound", caption: "Outbound first — smart badges (cheapest, non-stop, more baggage) surface the trade-offs." },
+                      { src: "/screens-mobile/ip-results-2.png", alt: "Expanded flight detail", caption: "Tap to expand inline — return options, full itinerary and fare class, without leaving the list." },
+                      { src: "/screens-mobile/ip-results-3.png", alt: "Choose return", caption: "Then the return — outbound locked at the top, return chosen separately. 101% faster." },
+                    ],
+                  },
                 ]}
               />
             </div>
