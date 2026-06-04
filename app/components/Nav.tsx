@@ -53,7 +53,7 @@ export default function Nav() {
         {/* Links */}
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           {[
-            { label: "Work", href: "/#work" },
+            { label: "Work", href: "/work" },
             { label: "About", href: "/about" },
             { label: "Contact", href: "/contact" },
           ].map(l => (

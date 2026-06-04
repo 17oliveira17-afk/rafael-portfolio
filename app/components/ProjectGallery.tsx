@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef, useState, useEffect, useCallback } from "react";
 
 /* ── Project data ── */
-type Project = {
+export type Project = {
   href: string;
   eyebrow: string;
   company: string;
@@ -16,7 +16,7 @@ type Project = {
   glow: string;        // accent for the metric / hover ring
 };
 
-const PROJECTS: Project[] = [
+export const PROJECTS: Project[] = [
   {
     href: "/work/cvc",
     eyebrow: "B2C · Travel",
