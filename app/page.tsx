@@ -140,6 +140,14 @@ function CVCShowcase() {
   const s2 = Math.max(0, Math.min(1, (ph2 - 0.4) / 0.4));
   const ct = Math.max(0, Math.min(1, (ph2 - 0.65) / 0.35));
 
+  // Flow crossfade: guided search → flight results → confirmation
+  const ramp = (x0: number, x1: number) => Math.max(0, Math.min(1, (p - x0) / (x1 - x0)));
+  const flowImgs = [
+    { src: "/screens-mobile/ip-guided-1.png", op: 1 - ramp(0.30, 0.42) },
+    { src: "/screens-mobile/ip-results-1.png", op: Math.min(ramp(0.30, 0.42), 1 - ramp(0.60, 0.72)) },
+    { src: "/screens-mobile/ip-confirm-1.png", op: ramp(0.60, 0.72) },
+  ];
+
   return (
     <div ref={ref} style={{ height: "380vh", position: "relative" }}>
       <div style={{
@@ -177,7 +185,19 @@ function CVCShowcase() {
           filter: `drop-shadow(0 60px 100px rgba(0,113,227,${0.08 + ph1 * 0.2})) drop-shadow(0 30px 60px rgba(0,0,0,.7))`,
           willChange: "transform",
         }}>
-          <Phone src="/screens-mobile/ip-resultado.png" alt="CVC flight booking" w={320} />
+          <div style={{ position: "relative", width: 320, aspectRatio: "800 / 1650" }}>
+            {flowImgs.map((f, i) => (
+              <Image
+                key={i}
+                src={f.src}
+                alt="CVC flight booking flow"
+                fill
+                unoptimized
+                sizes="320px"
+                style={{ objectFit: "contain", opacity: f.op, transition: "opacity .2s linear" }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Stats — centered bottom, staggered fade up */}

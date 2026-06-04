@@ -113,16 +113,16 @@ export default function SideShot({
 
   return (
     <ScrollReveal>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "clamp(2rem,5vw,5rem)", maxWidth: 1400, margin: "0 auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: side === "left" ? "1.32fr 0.68fr" : "0.68fr 1.32fr", alignItems: "center", gap: "clamp(1.5rem,4vw,4rem)", maxWidth: 1560, margin: "0 auto" }}>
         {side === "left" ? (
           <>
-            <div style={{ marginLeft: "-15%", marginRight: "-3%" }}>{img}</div>
-            <div style={{ paddingRight: "clamp(1rem,4vw,4rem)" }}>{txt}</div>
+            <div style={{ marginLeft: "-24%", marginRight: "-5%" }}>{img}</div>
+            <div style={{ paddingRight: "clamp(1rem,3vw,3rem)" }}>{txt}</div>
           </>
         ) : (
           <>
-            <div style={{ paddingLeft: "clamp(1rem,4vw,4rem)", display: "flex", justifyContent: "flex-end" }}>{txt}</div>
-            <div style={{ marginRight: "-15%", marginLeft: "-3%" }}>{img}</div>
+            <div style={{ paddingLeft: "clamp(1rem,3vw,3rem)", display: "flex", justifyContent: "flex-end" }}>{txt}</div>
+            <div style={{ marginRight: "-24%", marginLeft: "-5%" }}>{img}</div>
           </>
         )}
       </div>

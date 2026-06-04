@@ -460,7 +460,6 @@ export default function CVCCasePage() {
               { src: "/screens-mobile/ip-resultado-filtros.png", title: "Quick filters", body: "One-tap chips — cheapest, economy, non-stop — let users jump straight to what they want without opening the full filter sheet." },
               { src: "/screens-mobile/ip-search-edit.png", title: "Fast search edit", body: "Origin, dates and passengers editable inline from the results header — no trip back to the start of the flow." },
               { src: "/screens-mobile/ip-filters-sheet.png", title: "Filters", body: "Price range, duration and stops on a clean sheet, with a live price histogram — no modal interruption." },
-              { src: "/screens-mobile/ip-confirmation.png", title: "Flight confirmation", body: "The full itinerary — every leg, layover and baggage detail — laid out clearly before checkout, not inside it." },
               { src: "/screens-mobile/ip-upgrade.png", title: "Baggage & fare upselling", body: "Tiered upgrades framed as a clear choice at the right moment in the flow.", metric: "+23% cross-sell" },
             ]}
           />
