@@ -98,7 +98,7 @@ export default function PhoneTabs({
         </div>
       )}
 
-      {control(isMobile ? "2.5rem auto 0" : "3rem auto 0")}
+      {control(isMobile ? "2rem auto 0" : "1.75rem auto 0")}
 
       <style jsx>{`
         .pt-pane {

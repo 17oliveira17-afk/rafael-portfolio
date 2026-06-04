@@ -16,7 +16,7 @@ export type RowItem = { src: string; alt?: string; caption?: string };
 export default function PhoneRow({
   items,
   isMobile = false,
-  width = 300,
+  width = 262,
 }: {
   items: RowItem[];
   isMobile?: boolean;
@@ -87,7 +87,7 @@ export default function PhoneRow({
           alignItems: "flex-start",
           overflowX: isMobile ? "auto" : "visible",
           scrollSnapType: isMobile ? "x mandatory" : undefined,
-          padding: isMobile ? "1rem 1.5rem 1.5rem" : "1.5rem 0",
+          padding: isMobile ? "1rem 1.5rem 1.5rem" : ".5rem 0",
           margin: isMobile ? "0 -1.5rem" : 0,
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none",
@@ -135,11 +135,11 @@ export default function PhoneRow({
                 {it.caption && (
                   <p
                     style={{
-                      marginTop: "1.25rem",
+                      marginTop: ".85rem",
                       textAlign: "center",
-                      fontSize: ".9rem",
+                      fontSize: ".8rem",
                       color: "rgba(255,255,255,.55)",
-                      lineHeight: 1.6,
+                      lineHeight: 1.45,
                     }}
                   >
                     {it.caption}
