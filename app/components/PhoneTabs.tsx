@@ -75,8 +75,6 @@ export default function PhoneTabs({
 
   return (
     <div>
-      {control("0 auto 2.75rem")}
-
       {isMobile ? (
         <div key={active} className="pt-pane">
           <PhoneRow items={groups[active].items} isMobile />
