@@ -133,7 +133,7 @@ function CVCShowcase() {
   // Phone: starts below+small, rises and grows in ph1, then settles back a
   // little in ph2 so the 3-up triptych + stats + CTA all fit with margins.
   const phoneScale = 0.28 + easeOut(ph0) * 0.38 + easeOut(ph1) * 0.30 - ph2 * 0.24;
-  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 130;
+  const phoneY     = 110 - easeOut(ph0) * 55 - easeOut(ph1) * 70 - ph2 * 158;
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
@@ -219,7 +219,7 @@ function CVCShowcase() {
 
         {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute", bottom: "16%", left: 0, right: 0,
+          position: "absolute", bottom: "21%", left: 0, right: 0,
           display: "flex", justifyContent: "center",
           gap: "clamp(3rem, 8vw, 8rem)",
           zIndex: 5, padding: "0 2rem",
