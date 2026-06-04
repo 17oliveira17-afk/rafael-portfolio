@@ -8,7 +8,7 @@ import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import DeviceSwitcher from "../../components/DeviceSwitcher";
 import FeatureCarousel from "../../components/FeatureCarousel";
-import ArtifactReveal from "../../components/ArtifactReveal";
+import MacBookReveal from "../../components/MacBookReveal";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
 
 /* ── Counter ── */
@@ -364,30 +364,27 @@ export default function CVCCasePage() {
             />
           </ScrollReveal>
 
-          {/* Highlighted artifact 1 — the evidence */}
-          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
-            <ArtifactReveal
+          {/* Highlighted artifact 1 — the evidence (huge MacBook, scroll-zoom) */}
+          <div style={{ marginBottom: isMobile ? "5rem" : "6rem" }}>
+            <MacBookReveal
               isMobile={isMobile}
-              src="/screens-desktop/process-benchmark.png"
+              src="/screens-desktop/mac-benchmark.png"
               eyebrow="01 · The evidence"
               title="It started with the whole market."
               body="Hopper, Skyscanner, Kayak, AvisaSales, Decolar — every leading flight app, mapped screen by screen. Three principles kept repeating: guided flow, one flight at a time, fully native. CVC was breaking all three."
               metric={{ n: "5 apps", l: "benchmarked end-to-end" }}
-              ratio="1142 / 742"
             />
           </div>
 
-          {/* Highlighted artifact 2 — the architecture */}
-          <div style={{ marginBottom: isMobile ? "5rem" : "8rem" }}>
-            <ArtifactReveal
+          {/* Highlighted artifact 2 — the architecture (huge MacBook, scroll-zoom) */}
+          <div style={{ marginBottom: isMobile ? "5rem" : "6rem" }}>
+            <MacBookReveal
               isMobile={isMobile}
-              reverse
-              src="/screens-desktop/process-user-flow.png"
+              src="/screens-desktop/mac-user-flow.png"
               eyebrow="02 · The architecture"
               title="Then I remapped the flow."
               body="The current webview sitemap, mapped against an ideal one — a linear, guided architecture with one decision per screen, outbound then return, and a confirmation before checkout instead of inside it."
               metric={{ n: "Current → ideal", l: "navigation flow remapped" }}
-              ratio="1142 / 742"
             />
           </div>
 
@@ -400,10 +397,10 @@ export default function CVCCasePage() {
           <ScrollReveal delay={120}>
             <FeatureCarousel
               slides={[
-                { src: "/screens-desktop/process-ux-audit.png", title: "UX audit", body: "Every friction point in the legacy webview flow, annotated screen by screen.", ratio: "1142 / 742", position: "center" },
-                { src: "/screens-desktop/process-wireframes.png", title: "Wireframes", body: "Lo-fi structure for the whole flow before committing to a single hi-fi pixel.", ratio: "1142 / 742", position: "center" },
-                { src: "/screens-desktop/process-wireframe-validation.png", title: "Wireframe cross-validation", body: "Impediments, suggestions and effort scored per screen with the team.", ratio: "1142 / 742", position: "center" },
-                { src: "/screens-desktop/process-usability-test.png", title: "Usability test — Maze A/B", body: "The outbound/return split, validated. Variant A won 97–100 vs 40.", ratio: "1142 / 742", position: "center" },
+                { src: "/screens-desktop/mac-screens.png", title: "Screen inventory", body: "Every hi-fi screen in the flow, laid out end-to-end before validation.", ratio: "2145 / 1300", position: "center" },
+                { src: "/screens-desktop/mac-wireframes.png", title: "Wireframes", body: "Lo-fi structure for the whole flow before committing to a single hi-fi pixel.", ratio: "2145 / 1300", position: "center" },
+                { src: "/screens-desktop/mac-validation.png", title: "Wireframe cross-validation", body: "Impediments, suggestions and effort scored per screen with the team.", ratio: "2145 / 1300", position: "center" },
+                { src: "/screens-desktop/mac-maze.png", title: "Usability test — Maze A/B", body: "The outbound/return split, validated. Variant A won 97–100 vs 40.", ratio: "2145 / 1300", position: "center" },
               ]}
             />
           </ScrollReveal>
