@@ -147,12 +147,13 @@ function CVCShowcase() {
   // The flow: only the RESULTS screen rises with the device. Then, exactly as
   // the result stats appear (ph2), two phones fan out from behind it — guided
   // to the left, confirmation to the right — same size and angle.
-  const fan = easeOut(ph2);                  // 0 while rising → 1 when fanned out
-  const sideScale = 0.92 + fan * 0.08;       // emerge a touch smaller, settle same size
+  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+  const fanL = easeOut(clamp01((p - 0.44) / 0.24));  // left fans out first
+  const fanR = easeOut(clamp01((p - 0.56) / 0.24));  // right follows a beat later (not synced)
   const triptych = [
     { src: "/screens-mobile/ip-results-1.png", op: 1, x: 0, z: 3, scale: 1, shadow: false },
-    { src: "/screens-mobile/ip-guided-1.png", op: fan, x: -fan * 112, z: 1, scale: sideScale, shadow: true },
-    { src: "/screens-mobile/ip-confirm-1.png", op: fan, x: fan * 112, z: 1, scale: sideScale, shadow: true },
+    { src: "/screens-mobile/ip-guided-1.png", op: fanL, x: -fanL * 112, z: 1, scale: 0.92 + fanL * 0.08, shadow: true },
+    { src: "/screens-mobile/ip-confirm-1.png", op: fanR, x: fanR * 112, z: 1, scale: 0.92 + fanR * 0.08, shadow: true },
   ];
 
   return (
