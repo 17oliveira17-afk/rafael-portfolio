@@ -340,7 +340,7 @@ export default function CVCCasePage() {
             <div style={{ marginBottom: "4rem" }}>
               <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Full flow — usability test in hi-fi prototype</p>
               <LoopVideo
-                src="/videos/stock/travel-window.mp4"
+                src="/videos/stock/designers-working.mp4"
                 label="Usability test — full flow walkthrough"
                 aspect="16 / 9"
                 radius={16}
