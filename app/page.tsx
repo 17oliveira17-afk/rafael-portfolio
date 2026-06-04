@@ -140,26 +140,16 @@ function CVCShowcase() {
   const s2 = Math.max(0, Math.min(1, (ph2 - 0.4) / 0.4));
   const ct = Math.max(0, Math.min(1, (ph2 - 0.65) / 0.35));
 
-  // The flow: the centre phone cycles guided → results → confirmation as it
-  // rises; then (ph2) two phones fan out from behind it — guided to the left,
-  // confirmation to the right — ending on a 3-screen triptych, same size/angle.
-  const ramp = (x0: number, x1: number) => Math.max(0, Math.min(1, (p - x0) / (x1 - x0)));
-  const fan = easeOut(ph2); // 0 while cycling → 1 when fanned out
-  const cyc = [
-    1 - ramp(0.30, 0.46),                                  // guided (centre, early)
-    Math.min(ramp(0.30, 0.46), 1 - ramp(0.56, 0.70)),      // results (centre, mid)
-    ramp(0.56, 0.70),                                      // confirmation (centre, late)
-  ];
+  // The flow: only the RESULTS screen rises with the device. Then, exactly as
+  // the result stats appear (ph2), two phones fan out from behind it — guided
+  // to the left, confirmation to the right — same size and angle.
+  const fan = easeOut(ph2);                  // 0 while rising → 1 when fanned out
+  const sideScale = 0.92 + fan * 0.08;       // emerge a touch smaller, settle same size
   const triptych = [
-    { src: "/screens-mobile/ip-guided-1.png", off: -1 },   // → slides left
-    { src: "/screens-mobile/ip-results-1.png", off: 0 },   // → stays centre
-    { src: "/screens-mobile/ip-confirm-1.png", off: 1 },   // → slides right
-  ].map((t, i) => ({
-    src: t.src,
-    off: t.off,
-    x: t.off * fan * 112,                 // % of phone width
-    op: Math.max(cyc[i], fan),            // current screen while cycling; all three once fanned
-  }));
+    { src: "/screens-mobile/ip-results-1.png", op: 1, x: 0, z: 3, scale: 1, shadow: false },
+    { src: "/screens-mobile/ip-guided-1.png", op: fan, x: -fan * 112, z: 1, scale: sideScale, shadow: true },
+    { src: "/screens-mobile/ip-confirm-1.png", op: fan, x: fan * 112, z: 1, scale: sideScale, shadow: true },
+  ];
 
   return (
     <div ref={ref} style={{ height: "380vh", position: "relative" }}>
@@ -206,9 +196,9 @@ function CVCShowcase() {
                   position: "absolute",
                   inset: 0,
                   opacity: t.op,
-                  transform: `translateX(${t.x}%)`,
-                  zIndex: t.off === 0 ? 2 : 1,
-                  filter: t.off === 0 ? "none" : "drop-shadow(0 30px 60px rgba(0,0,0,.5))",
+                  transform: `translateX(${t.x}%) scale(${t.scale})`,
+                  zIndex: t.z,
+                  filter: t.shadow ? "drop-shadow(0 30px 60px rgba(0,0,0,.5))" : "none",
                   transition: "opacity .18s linear, transform .18s linear",
                   willChange: "opacity, transform",
                 }}
@@ -244,15 +234,15 @@ function CVCShowcase() {
               opacity: s.op,
               transform: `translateY(${(1 - s.op) * 24}px)`,
             }}>
-              <div style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".7rem", color: "rgba(255,255,255,.45)", marginTop: ".75rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
+              <div style={{ fontSize: "clamp(1.7rem, 3.6vw, 3.2rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".66rem", color: "rgba(255,255,255,.45)", marginTop: ".65rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
         <div style={{
-          position: "absolute", bottom: "2%", left: "50%", transform: "translateX(-50%)",
+          position: "absolute", bottom: "6%", left: "50%", transform: "translateX(-50%)",
           opacity: ct, zIndex: 6,
           pointerEvents: ct > 0.5 ? "auto" : "none",
         }}>
