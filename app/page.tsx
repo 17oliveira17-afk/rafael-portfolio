@@ -135,7 +135,7 @@ function CVCShowcase() {
   const F = 0.78;                          // settled size when scroll stops
   const q = easeOut(Math.min(1, p / 0.62)); // 0 at start → 1 once settled (before fan)
   const phoneScale = 2 * F - (2 * F - F) * q; // 1.56 → 0.78
-  const phoneY     = 600 - (600 - -118) * q;  // big & low (top peeking) → settled, lifted
+  const phoneY     = 540 - (540 - -118) * q;  // big (top peeking, below title) → settled, lifted
   const titleOut   = Math.min(1, q * 2.4);    // headline fades out as the phone rises in
 
   // Stats stagger bottom
