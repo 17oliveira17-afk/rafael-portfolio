@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { CSSProperties } from "react";
+import { useState, CSSProperties } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import RevealText from "../components/RevealText";
 import useIsMobile from "../components/useIsMobile";
@@ -12,19 +12,27 @@ const ArrowR = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-const hexA = (hex: string, a: number) => {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
-  return `rgba(${r},${g},${b},${a})`;
-};
-
 /* glowing hover wrapper — lifts + rings in the project's accent colour.
-   Uses CSS :hover (not JS state) so it always resets cleanly between cards. */
-function Hoverable({ glow, children, style }: { glow: string; children: React.ReactNode; style?: CSSProperties }) {
+   `active` is driven by a single shared key in the parent, so entering a
+   new card un-lifts the previous one even if its mouse-leave was missed. */
+function Hoverable({ glow, active, onEnter, onLeave, children, style }: {
+  glow: string; active: boolean; onEnter: () => void; onLeave: () => void;
+  children: React.ReactNode; style?: CSSProperties;
+}) {
   return (
     <div
-      className="work-card"
-      style={{ ["--glow-shadow" as string]: hexA(glow, 0.19), ["--glow-border" as string]: hexA(glow, 0.42), ...style }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      style={{
+        transition: "transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease, border-color .45s ease",
+        transform: active ? "translateY(-8px)" : "translateY(0)",
+        boxShadow: active ? `0 36px 80px ${glow}30, 0 12px 30px rgba(0,0,0,.5)` : "0 1px 2px rgba(0,0,0,.4)",
+        border: `1px solid ${active ? glow + "66" : "rgba(255,255,255,.08)"}`,
+        borderRadius: 28,
+        overflow: "hidden",
+        background: "#1c1c1f",
+        ...style,
+      }}
     >
       {children}
     </div>
@@ -72,6 +80,7 @@ function Body({ p, big = false }: { p: Project; big?: boolean }) {
 export default function WorkPage() {
   const isMobile = useIsMobile();
   const [featured, ...rest] = PROJECTS;
+  const [hovered, setHovered] = useState<string | null>(null);
   const pad = isMobile ? "7rem 1.5rem 5rem" : "10rem 6rem 7rem";
 
   return (
@@ -100,7 +109,7 @@ export default function WorkPage() {
           {/* ── Featured flagship ── */}
           <ScrollReveal delay={80}>
             <Link href={featured.href} style={{ textDecoration: "none", display: "block", marginBottom: isMobile ? "1.5rem" : "2rem" }}>
-              <Hoverable glow={featured.glow}>
+              <Hoverable glow={featured.glow} active={hovered === featured.href} onEnter={() => setHovered(featured.href)} onLeave={() => setHovered(null)}>
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 1fr" }}>
                   <div style={{ minHeight: isMobile ? 260 : 380 }}>
                     <Plate p={featured} index={0} big />
@@ -116,7 +125,7 @@ export default function WorkPage() {
             {rest.map((p, i) => (
               <ScrollReveal key={p.href} delay={120 + i * 80}>
                 <Link href={p.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                  <Hoverable glow={p.glow} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                  <Hoverable glow={p.glow} active={hovered === p.href} onEnter={() => setHovered(p.href)} onLeave={() => setHovered(null)} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
                     <div style={{ aspectRatio: "16 / 11" }}>
                       <Plate p={p} index={i + 1} />
                     </div>
@@ -143,25 +152,6 @@ export default function WorkPage() {
           </ScrollReveal>
         </div>
       </section>
-
-      <style jsx>{`
-        .work-card {
-          position: relative;
-          border-radius: 28px;
-          overflow: hidden;
-          background: #1c1c1f;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-            box-shadow 0.45s ease, border-color 0.45s ease;
-          will-change: transform;
-        }
-        .work-card:hover {
-          transform: translateY(-8px);
-          border-color: var(--glow-border);
-          box-shadow: 0 36px 80px var(--glow-shadow), 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-      `}</style>
     </main>
   );
 }
