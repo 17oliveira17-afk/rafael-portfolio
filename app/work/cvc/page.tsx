@@ -433,11 +433,12 @@ export default function CVCCasePage() {
             finish="blue"
             baked
             items={[
-              { src: "/screens-mobile/ip-filters.png", title: "Filters", body: "Price range, duration and stops on a clean sheet — no modal interruption." },
-              { src: "/screens-mobile/ip-detail.png", title: "Flight detail", body: "Expanded inline. No page navigation — return suggestions surface before commitment." },
-              { src: "/screens-mobile/ip-upgrade.png", title: "Baggage upselling", body: "Tiered upgrades framed as a clear choice, shown at the right moment in the flow.", metric: "+23% cross-sell" },
-              { src: "/screens-mobile/ip-volta.png", title: "Return flight", body: "Outbound locked, return chosen separately — the decision that tested 101% faster." },
-              { src: "/screens-mobile/ip-passengers.png", title: "Passengers & class", body: "Adults, children, infants and cabin class in one native step — no webview reload." },
+              { src: "/screens-mobile/ip-bag-details.png", title: "Baggage details on search", body: "Personal item, carry-on and checked-bag rules surfaced right in the search filters — answered before the results, not after booking." },
+              { src: "/screens-mobile/ip-resultado-filtros.png", title: "Quick filters", body: "One-tap chips — cheapest, economy, non-stop — let users jump straight to what they want without opening the full filter sheet." },
+              { src: "/screens-mobile/ip-search-edit.png", title: "Fast search edit", body: "Origin, dates and passengers editable inline from the results header — no trip back to the start of the flow." },
+              { src: "/screens-mobile/ip-filters-sheet.png", title: "Filters", body: "Price range, duration and stops on a clean sheet, with a live price histogram — no modal interruption." },
+              { src: "/screens-mobile/ip-confirmation.png", title: "Flight confirmation", body: "The full itinerary — every leg, layover and baggage detail — laid out clearly before checkout, not inside it." },
+              { src: "/screens-mobile/ip-upgrade.png", title: "Baggage & fare upselling", body: "Tiered upgrades framed as a clear choice at the right moment in the flow.", metric: "+23% cross-sell" },
             ]}
           />
         </div>
