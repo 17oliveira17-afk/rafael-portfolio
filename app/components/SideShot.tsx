@@ -76,7 +76,13 @@ export default function SideShot({
   const dir = side === "left" ? -1 : 1;
   const slideStyle: CSSProperties = isMobile
     ? {}
-    : { transform: `translateX(${(1 - e) * dir * 30}%)`, opacity: 0.2 + 0.8 * e, willChange: "transform, opacity" };
+    : {
+        // slide in from the page edge AND grow from smaller to full size
+        transform: `translateX(${(1 - e) * dir * 30}%) scale(${0.88 + e * 0.12})`,
+        transformOrigin: side === "left" ? "left center" : "right center",
+        opacity: 0.2 + 0.8 * e,
+        willChange: "transform, opacity",
+      };
 
   const img = (
     <div ref={slideRef} style={{ position: "relative", zIndex: 0, ...slideStyle }}>
@@ -113,16 +119,16 @@ export default function SideShot({
 
   return (
     <ScrollReveal>
-      <div style={{ display: "grid", gridTemplateColumns: side === "left" ? "1.32fr 0.68fr" : "0.68fr 1.32fr", alignItems: "center", gap: "clamp(1.5rem,4vw,4rem)", maxWidth: 1560, margin: "0 auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: side === "left" ? "1.26fr 0.74fr" : "0.74fr 1.26fr", alignItems: "center", gap: "clamp(1.5rem,4vw,4rem)", maxWidth: 1500, margin: "0 auto" }}>
         {side === "left" ? (
           <>
-            <div style={{ marginLeft: "-24%", marginRight: "-5%" }}>{img}</div>
+            <div style={{ marginLeft: "-20%", marginRight: "-4%" }}>{img}</div>
             <div style={{ paddingRight: "clamp(1rem,3vw,3rem)" }}>{txt}</div>
           </>
         ) : (
           <>
             <div style={{ paddingLeft: "clamp(1rem,3vw,3rem)", display: "flex", justifyContent: "flex-end" }}>{txt}</div>
-            <div style={{ marginRight: "-24%", marginLeft: "-5%" }}>{img}</div>
+            <div style={{ marginRight: "-20%", marginLeft: "-4%" }}>{img}</div>
           </>
         )}
       </div>
