@@ -135,7 +135,8 @@ function CVCShowcase() {
   const F = 0.78;                          // settled size when scroll stops
   const q = easeOut(Math.min(1, p / 0.62)); // 0 at start → 1 once settled (before fan)
   const phoneScale = 2 * F - (2 * F - F) * q; // 1.56 → 0.78
-  const phoneY     = 540 - (540 - -118) * q;  // big & low (top peeking) → settled, lifted
+  const phoneY     = 600 - (600 - -118) * q;  // big & low (top peeking) → settled, lifted
+  const titleOut   = Math.min(1, q * 2.4);    // headline fades out as the phone rises in
 
   // Stats stagger bottom
   const s0 = Math.max(0, Math.min(1, (ph2 - 0.0) / 0.4));
@@ -170,8 +171,8 @@ function CVCShowcase() {
         <div style={{
           position: "absolute", top: "10%", left: 0, right: 0,
           textAlign: "center", zIndex: 5, pointerEvents: "none",
-          opacity: Math.max(0, 1 - easeOut(ph1) * 2.5),
-          transform: `translateY(${-easeOut(ph1) * 28}px)`,
+          opacity: Math.max(0, 1 - titleOut),
+          transform: `translateY(${-titleOut * 30}px)`,
         }}>
           <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>
             Featured Case Study
