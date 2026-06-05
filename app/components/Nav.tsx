@@ -51,7 +51,7 @@ export default function Nav() {
         </Link>
 
         {/* Links */}
-        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+        <div className="apple-nav-links" style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           {[
             { label: "Work", href: "/work" },
             { label: "About", href: "/about" },

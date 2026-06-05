@@ -311,9 +311,24 @@ body {
 
 /* Mobile (≤768px) */
 @media (max-width: 768px) {
+  /* Guard against accidental horizontal scroll from oversized/bleeding
+     elements (clip, not hidden, so it never affects sticky/desktop). */
+  html { overflow-x: clip; }
+
   /* Layout */
   .apple-grid-2, .apple-grid-3 { grid-template-columns: 1fr; gap: 1rem; }
   .apple-nav-inner { padding: 0 1.25rem; }
+  /* keep the whole nav on one line on phones */
+  .apple-nav-links { gap: 1.1rem !important; }
+  .apple-nav-links a { font-size: .78rem !important; }
+}
+
+/* Very small phones — tighten nav further so it never overflows */
+@media (max-width: 400px) {
+  .apple-nav-inner { padding: 0 1rem; }
+  .apple-nav-links { gap: .8rem !important; }
+  .apple-nav-links a { font-size: .72rem !important; }
+  .apple-nav-links .btn-blue { padding: .42rem .8rem !important; font-size: .72rem !important; min-height: 0 !important; }
 
   /* Cursor: disable on touch */
   body { cursor: auto; }
