@@ -488,7 +488,7 @@ export default function Home() {
       <section className="section-off-white" style={{ padding: "8rem 2rem", overflow: "hidden" }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <ScrollReveal>
-            <ProjectGallery />
+            <ProjectGallery exclude={["/work/cvc"]} />
           </ScrollReveal>
         </div>
       </section>

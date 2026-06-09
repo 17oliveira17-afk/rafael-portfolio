@@ -93,7 +93,8 @@ function Arrow({ dir, onClick, disabled }: { dir: "left" | "right"; onClick: () 
   );
 }
 
-export default function ProjectGallery() {
+export default function ProjectGallery({ exclude = [] }: { exclude?: string[] }) {
+  const projects = PROJECTS.filter(p => !exclude.includes(p.href));
   const trackRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -150,7 +151,7 @@ export default function ProjectGallery() {
           scrollbarWidth: "none", padding: "1rem 1.5rem 1.5rem", margin: "0 -1.5rem",
         }}
       >
-        {PROJECTS.map((p, i) => (
+        {projects.map((p, i) => (
           <Link
             key={p.href}
             href={p.href}
@@ -203,7 +204,7 @@ export default function ProjectGallery() {
 
       {/* Progress dots */}
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: ".5rem" }}>
-        {PROJECTS.map((_, i) => (
+        {projects.map((_, i) => (
           <button
             key={i}
             onClick={() => trackRef.current?.scrollTo({ left: i * STEP, behavior: "smooth" })}
