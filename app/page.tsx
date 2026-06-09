@@ -156,6 +156,9 @@ function CVCShowcase() {
     { src: "/screens-mobile/ip-confirm-1.png", op: fanR, x: fanR * 112, z: 1, scale: 0.92 + fanR * 0.08, shadow: true },
   ];
 
+  // small project title for the final view (fades in as the triptych settles)
+  const projShown = Math.max(0, Math.min(1, (ph2 - 0.05) / 0.4));
+
   return (
     <div ref={ref} style={{ height: "380vh", position: "relative" }}>
       <div style={{
@@ -183,6 +186,21 @@ function CVCShowcase() {
           </h2>
         </div>
 
+        {/* End-state project title — compact, fades in with the triptych */}
+        <div style={{
+          position: "absolute", top: "5%", left: 0, right: 0,
+          textAlign: "center", zIndex: 5, pointerEvents: "none",
+          opacity: projShown,
+          transform: `translateY(${(1 - projShown) * -12}px)`,
+        }}>
+          <p style={{ fontSize: ".64rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".5rem" }}>
+            Featured Case Study
+          </p>
+          <h2 style={{ fontSize: "clamp(1.3rem,2.6vw,2rem)", fontWeight: 700, letterSpacing: "-.03em", color: "#fff", lineHeight: 1.05 }}>
+            CVC — Flights Redesign
+          </h2>
+        </div>
+
         {/* Phone — rises and grows from below */}
         <div style={{
           position: "absolute",
@@ -204,7 +222,7 @@ function CVCShowcase() {
                   transform: `translateX(${t.x}%) scale(${t.scale})`,
                   zIndex: t.z,
                   filter: t.shadow ? "drop-shadow(0 30px 60px rgba(0,0,0,.5))" : "none",
-                  transition: "opacity .18s linear, transform .18s linear",
+                  transition: "opacity .18s linear",
                   willChange: "opacity, transform",
                 }}
               >
@@ -239,8 +257,8 @@ function CVCShowcase() {
               opacity: s.op,
               transform: `translateY(${(1 - s.op) * 24}px)`,
             }}>
-              <div style={{ fontSize: "clamp(1.5rem, 3vw, 2.7rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: ".62rem", color: "rgba(255,255,255,.45)", marginTop: ".6rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
+              <div style={{ fontSize: "clamp(1.25rem, 2.4vw, 2rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: ".58rem", color: "rgba(255,255,255,.45)", marginTop: ".5rem", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
         </div>
