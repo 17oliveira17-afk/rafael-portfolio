@@ -132,10 +132,10 @@ function CVCShowcase() {
 
   // Phone: starts BIG (200% of the settled size) showing only its top ~45%,
   // then shrinks down to the final size as you scroll, before fanning out.
-  const F = 0.78;                          // settled size when scroll stops
+  const F = 0.75;                          // settled size when scroll stops
   const q = easeOut(Math.min(1, p / 0.62)); // 0 at start → 1 once settled (before fan)
-  const phoneScale = 2 * F - (2 * F - F) * q; // 1.56 → 0.78
-  const phoneY     = 435 - (435 - -78) * q;   // start ~10% higher (more of the phone visible) → settled
+  const phoneScale = 2 * F - (2 * F - F) * q; // 1.50 → 0.75
+  const phoneY     = 435 - (435 - -40) * q;   // start high (top peeking) → settled lower, below the title
   const titleOut   = Math.min(1, q * 2.4);    // headline fades out as the phone rises in
 
   // Stats stagger bottom
@@ -189,7 +189,7 @@ function CVCShowcase() {
         {/* End-state project title — compact, fades in with the triptych.
            Sits below the fixed nav so it never tucks under the header. */}
         <div style={{
-          position: "absolute", top: "11%", left: 0, right: 0,
+          position: "absolute", top: "8%", left: 0, right: 0,
           textAlign: "center", zIndex: 5, pointerEvents: "none",
           opacity: projShown,
           transform: `translateY(${(1 - projShown) * -12}px)`,
@@ -242,7 +242,7 @@ function CVCShowcase() {
 
         {/* Stats — centered bottom, staggered fade up */}
         <div style={{
-          position: "absolute", bottom: "18%", left: 0, right: 0,
+          position: "absolute", bottom: "16%", left: 0, right: 0,
           display: "flex", justifyContent: "center",
           gap: "clamp(3rem, 8vw, 8rem)",
           zIndex: 5, padding: "0 2rem",
