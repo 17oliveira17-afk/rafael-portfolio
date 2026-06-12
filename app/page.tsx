@@ -186,9 +186,10 @@ function CVCShowcase() {
           </h2>
         </div>
 
-        {/* End-state project title — compact, fades in with the triptych */}
+        {/* End-state project title — compact, fades in with the triptych.
+           Sits below the fixed nav so it never tucks under the header. */}
         <div style={{
-          position: "absolute", top: "5%", left: 0, right: 0,
+          position: "absolute", top: "11%", left: 0, right: 0,
           textAlign: "center", zIndex: 5, pointerEvents: "none",
           opacity: projShown,
           transform: `translateY(${(1 - projShown) * -12}px)`,
