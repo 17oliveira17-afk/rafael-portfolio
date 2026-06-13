@@ -94,8 +94,8 @@ function CVCShowcase() {
               fontSize: "clamp(2rem,11vw,3rem)", fontWeight: 700, letterSpacing: "-.035em",
               color: "#f5f5f7", lineHeight: 1.03, marginBottom: "2.5rem",
             }}>
-              From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />
-              to category-defining.
+              From 2 stars<br />
+              to <em style={{ color: "#0071e3", fontStyle: "italic" }}>4.6</em>.
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={150}>
@@ -182,7 +182,7 @@ function CVCShowcase() {
             Featured Case Study
           </p>
           <h2 style={{ fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1.04 }}>
-            From <em style={{ color: "#0071e3", fontStyle: "italic" }}>two stars</em><br />to category-defining.
+            From 2 stars<br />to <em style={{ color: "#0071e3", fontStyle: "italic" }}>4.6</em>.
           </h2>
         </div>
 
