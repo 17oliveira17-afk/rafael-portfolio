@@ -274,8 +274,8 @@ export default function CVCCasePage() {
                   height={640}
                   heightMobile={480}
                   items={[
-                    { label: "B — Combined", src: "/screens-mobile/ip-resultado-old.png", badge: "Before", caption: "Outbound + return on one card. 18.9s to choose. “Too much info.”" },
-                    { label: "A — Separated", src: "/screens-mobile/ip-resultado.png", badge: "After", caption: "One flight at a time. 9.4s to choose — 101% faster. “Practical, no back and forth.”" },
+                    { label: "B — Combined", src: "/screens-mobile/ip-resultado-old.png", caption: "Outbound + return on one card. 18.9s to choose. “Too much info.”" },
+                    { label: "A — Separated", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time. 9.4s to choose — 101% faster. “Practical, no back and forth.”" },
                   ]}
                 />
               </ScrollReveal>
