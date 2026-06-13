@@ -389,8 +389,8 @@ export default function Home() {
           CINEMATIC IMAGE — design at scale
       ══════════════════════════════════════════════════ */}
       <BigImageReveal
-        src="/cinematic/design-system.jpg"
-        alt="Design at scale"
+        src="/cinematic/leadership-team.jpg"
+        alt="Design at scale — leading a discovery session with the team"
         minHeight="70vh"
         overlay={
           <ScrollReveal>
