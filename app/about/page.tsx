@@ -178,7 +178,7 @@ export default function AboutPage() {
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 60, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ display: "flex", overflow: "hidden" }}>
             {[0, 1].map(copy => (
-              <div key={copy} aria-hidden={copy === 1} style={{ display: "flex", gap: "3rem", alignItems: "center", animation: "logoScroll 28s linear infinite", flexShrink: 0 }}>
+              <div key={copy} aria-hidden={copy === 1} style={{ display: "flex", gap: "3rem", alignItems: "center", animation: "logoScroll 22s linear infinite", flexShrink: 0 }}>
                 {[
                   { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
                   { src: "/logos/logo-rappi.png", alt: "Rappi" },
