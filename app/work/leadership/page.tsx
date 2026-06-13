@@ -353,7 +353,7 @@ export default function LeadershipCasePage() {
       {/* ═══ 01 · HERO ═══ */}
       <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "6rem 1.5rem 3.5rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0 }}>
-          <Image src="/cinematic/design-system.jpg" alt="Design leadership" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
+          <Image src="/cinematic/leadership-team.jpg" alt="Design leadership — leading a discovery session with the team" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,.97) 100%)" }} />
           <div className="aurora" style={{ opacity: .42, mixBlendMode: "screen" }} />
         </div>
