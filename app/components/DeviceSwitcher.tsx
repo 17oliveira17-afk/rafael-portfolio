@@ -124,7 +124,7 @@ export default function DeviceSwitcher({
       </div>
 
       {/* ── Caption ── */}
-      <div style={{ minHeight: "2.6rem", textAlign: "center", marginTop: "1.5rem" }}>
+      <div style={{ minHeight: "2.6rem", textAlign: "center", marginTop: ".75rem" }}>
         <p
           key={`cap-${active}`}
           style={{
@@ -139,7 +139,7 @@ export default function DeviceSwitcher({
       {/* ── Segmented control ── */}
       <div
         style={{
-          position: "relative", display: "flex", gap: 0, margin: "1.5rem auto 0",
+          position: "relative", display: "flex", gap: 0, margin: ".9rem auto 0",
           maxWidth: n > 2 ? 460 : 360, padding: 5, borderRadius: 100,
           background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.09)",
         }}

@@ -271,8 +271,8 @@ export default function CVCCasePage() {
                 <DeviceSwitcher
                   isMobile={isMobile}
                   bare
-                  height={640}
-                  heightMobile={480}
+                  height={520}
+                  heightMobile={420}
                   items={[
                     { label: "B — Combined", src: "/screens-mobile/ip-resultado-old.png", caption: "Outbound + return on one card. 18.9s to choose. “Too much info.”" },
                     { label: "A — Separated", src: "/screens-mobile/ip-resultado.png", caption: "One flight at a time. 9.4s to choose — 101% faster. “Practical, no back and forth.”" },
