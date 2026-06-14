@@ -277,15 +277,17 @@ export default function AboutPage() {
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "3rem" }}>Design principles</p>
           </ScrollReveal>
           <div className="ptable">
+            <div className="prow phead">
+              <span>№</span>
+              <span>Principle</span>
+              <span>What it means</span>
+            </div>
             {principles.map((p, i) => (
               <ScrollReveal key={i} delay={i * 60}>
                 <div className="prow">
                   <span className="pnum">{p.n}</span>
-                  <div className="ptext">
-                    <h3 style={{ fontSize: isMobile ? "1.1rem" : "1.45rem", fontWeight: 700, color: "#fff", marginBottom: ".55rem", letterSpacing: "-.02em" }}>{p.title}</h3>
-                    <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, maxWidth: 640 }}>{p.desc}</p>
-                  </div>
-                  <span className="parrow" aria-hidden>→</span>
+                  <h3 className="ptitle">{p.title}</h3>
+                  <p className="pdesc">{p.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -317,9 +319,11 @@ export default function AboutPage() {
             {exp.map((e, i) => (
               <ScrollReveal key={i} delay={i * 70}>
                 <div className="tl-item">
-                  <div className="tl-rail"><span className="tl-dot" /></div>
+                  <div className="tl-rail"><span className={i === 0 ? "tl-dot tl-dot-now" : "tl-dot"} /></div>
                   <div className="tl-body">
-                    <span style={{ display: "inline-block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: e.c === "#6e6e73" ? "rgba(255,255,255,.4)" : "#0071e3", marginBottom: ".7rem" }}>{e.year}</span>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: ".5rem", fontSize: ".8rem", fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", color: e.c === "#6e6e73" ? "rgba(255,255,255,.4)" : "#0071e3", marginBottom: ".7rem" }}>
+                      {e.year}{i === 0 && <span style={{ fontSize: ".58rem", padding: ".12rem .5rem", borderRadius: 100, background: "rgba(0,113,227,.14)", border: "1px solid rgba(0,113,227,.3)", letterSpacing: ".08em" }}>NOW</span>}
+                    </span>
                     <h3 style={{ fontWeight: 700, fontSize: isMobile ? "1.1rem" : "1.35rem", color: "#fff", letterSpacing: "-.02em", marginBottom: ".2rem" }}>{e.role}</h3>
                     <p style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500, marginBottom: "1rem" }}>{e.company}</p>
                     <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.25rem", maxWidth: 680 }}>{e.story}</p>
@@ -404,9 +408,9 @@ export default function AboutPage() {
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        .tcard { opacity: .6; transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
-        .tgrid:hover .tcard { opacity: .32; }
-        .tcard:hover { opacity: 1; transform: translateY(-6px); border-color: rgba(0,113,227,.45); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+        .tcard { opacity: .82; transition: opacity .4s ease, transform .4s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
+        .tgrid:hover .tcard { opacity: .1; }
+        .tcard:hover { opacity: 1 !important; transform: translateY(-6px) scale(1.015); border-color: rgba(0,113,227,.5); box-shadow: 0 28px 60px rgba(0,0,0,.5); }
         @media (hover: none) { .tcard { opacity: 1; } }
 
         /* Testimonial details */
@@ -414,26 +418,38 @@ export default function AboutPage() {
         .tcard:hover .t-quote-mark { color: rgba(0,113,227,.5); }
         .t-avatar { width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; color: #fff; background: linear-gradient(135deg, #0071e3, #4aa3ff); flex-shrink: 0; }
 
-        /* Principles — interactive sweep table */
-        .ptable { border-top: 1px solid rgba(255,255,255,.08); }
-        .prow { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; padding: 2rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,.08); overflow: hidden; transition: padding-left .45s cubic-bezier(.16,1,.3,1); }
-        .prow::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,113,227,.14), transparent 70%); transform: translateX(-101%); transition: transform .55s cubic-bezier(.16,1,.3,1); pointer-events: none; }
-        .prow:hover::before { transform: translateX(0); }
-        .prow:hover { padding-left: 2rem; }
-        .pnum { position: relative; font-size: 1.5rem; font-weight: 800; color: rgba(255,255,255,.18); letter-spacing: -.03em; transition: color .4s ease; align-self: flex-start; margin-top: .15rem; }
-        .prow:hover .pnum { color: #0071e3; }
-        .ptext { position: relative; }
-        .parrow { position: relative; color: #0071e3; font-size: 1.25rem; opacity: 0; transform: translateX(-10px); transition: opacity .4s ease, transform .4s cubic-bezier(.16,1,.3,1); }
-        .prow:hover .parrow { opacity: 1; transform: translateX(0); }
+        /* Principles — a real table (header row + aligned columns) */
+        .ptable { border-top: 1px solid rgba(255,255,255,.12); }
+        .prow { position: relative; display: grid; grid-template-columns: 64px minmax(170px, 1fr) 1.5fr; gap: 1.5rem 2rem; align-items: baseline; padding: 1.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,.08); overflow: hidden; transition: padding-left .45s cubic-bezier(.16,1,.3,1); }
+        .phead { padding-top: 0; padding-bottom: .9rem; border-bottom: 1px solid rgba(255,255,255,.14); }
+        .phead span { font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.32); font-weight: 600; }
+        .prow:not(.phead)::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,113,227,.13), transparent 72%); transform: translateX(-101%); transition: transform .55s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+        .prow:not(.phead):hover::before { transform: translateX(0); }
+        .prow:not(.phead):hover { padding-left: 1.75rem; }
+        .pnum { position: relative; font-size: 1.35rem; font-weight: 800; color: rgba(255,255,255,.22); letter-spacing: -.03em; transition: color .4s ease; }
+        .prow:not(.phead):hover .pnum { color: #0071e3; }
+        .ptitle { position: relative; font-size: 1.15rem; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+        .pdesc { position: relative; font-size: .92rem; color: rgba(255,255,255,.55); line-height: 1.65; }
+        @media (max-width: 768px) {
+          .phead { display: none; }
+          .prow { grid-template-columns: 38px 1fr; gap: .4rem 1rem; padding: 1.5rem .5rem; }
+          .pdesc { grid-column: 1 / -1; margin-top: .5rem; }
+          .ptitle { font-size: 1.05rem; }
+          .prow:not(.phead):hover { padding-left: 1.25rem; }
+        }
 
         /* Experience — vertical timeline */
-        .tl-item { position: relative; display: grid; grid-template-columns: 26px 1fr; gap: 1.5rem; padding-bottom: 3.25rem; }
+        .tl-item { position: relative; display: grid; grid-template-columns: 26px 1fr; gap: 1.6rem; padding-bottom: 3.25rem; }
         .tl-item:last-child { padding-bottom: 0; }
         .tl-rail { position: relative; }
-        .tl-rail::before { content: ""; position: absolute; left: 50%; top: 16px; bottom: -3.25rem; width: 1px; background: rgba(255,255,255,.12); transform: translateX(-50%); }
+        .tl-rail::before { content: ""; position: absolute; left: 50%; top: 16px; bottom: -3.25rem; width: 1px; background: linear-gradient(180deg, rgba(0,113,227,.5), rgba(255,255,255,.06)); transform: translateX(-50%); }
         .tl-item:last-child .tl-rail::before { display: none; }
-        .tl-dot { position: absolute; left: 50%; top: 7px; width: 12px; height: 12px; border-radius: 50%; transform: translateX(-50%); background: #000; border: 2px solid rgba(255,255,255,.25); transition: border-color .35s ease, background .35s ease, box-shadow .35s ease; }
-        .tl-item:hover .tl-dot { border-color: #0071e3; background: #0071e3; box-shadow: 0 0 0 5px rgba(0,113,227,.14); }
+        .tl-dot { position: absolute; left: 50%; top: 6px; width: 13px; height: 13px; border-radius: 50%; transform: translateX(-50%); background: #000; border: 2px solid rgba(255,255,255,.28); transition: border-color .35s ease, background .35s ease, box-shadow .35s ease, transform .35s ease; }
+        .tl-item:hover .tl-dot { border-color: #0071e3; background: #0071e3; box-shadow: 0 0 0 6px rgba(0,113,227,.14); transform: translateX(-50%) scale(1.15); }
+        .tl-dot-now { background: #0071e3; border-color: #0071e3; box-shadow: 0 0 0 5px rgba(0,113,227,.16); animation: tlPulse 2.4s ease-in-out infinite; }
+        @keyframes tlPulse { 0%,100% { box-shadow: 0 0 0 5px rgba(0,113,227,.16); } 50% { box-shadow: 0 0 0 9px rgba(0,113,227,.04); } }
+        .tl-body { padding: .25rem .75rem 1.25rem .25rem; border-radius: 14px; transition: background .35s ease; }
+        .tl-item:hover .tl-body { background: rgba(255,255,255,.025); }
       `}</style>
     </main>
   );
