@@ -165,20 +165,24 @@ export default function ProjectGallery({ exclude = [] }: { exclude?: string[] })
               display: "flex", flexDirection: "column",
             }}
           >
-            {/* Visual header */}
+            {/* Visual header — mesh-gradient treatment, consistent with /work */}
             <div style={{
               position: "relative", aspectRatio: "16/11", background: p.grad,
               display: "flex", flexDirection: "column", justifyContent: "space-between",
-              padding: "1.5rem", overflow: "hidden",
+              padding: "1.5rem", overflow: "hidden", isolation: "isolate",
             }}>
-              <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(120% 90% at 80% 0%, rgba(255,255,255,.28), transparent 55%)", pointerEvents: "none" }} />
-              <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: ".75rem" }}>
-                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{p.eyebrow}</span>
-                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".06em", color: "#fff", padding: ".28rem .6rem", borderRadius: 100, background: "rgba(255,255,255,.16)", border: "1px solid rgba(255,255,255,.28)", backdropFilter: "blur(6px)", whiteSpace: "nowrap" }}>{p.company}</span>
+              <div aria-hidden style={{ position: "absolute", width: "70%", aspectRatio: "1", borderRadius: "50%", top: "-30%", right: "-14%", background: "radial-gradient(circle at center, rgba(255,255,255,.55), transparent 62%)", filter: "blur(8px)", mixBlendMode: "soft-light", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", width: "78%", aspectRatio: "1", borderRadius: "50%", bottom: "-34%", left: "-22%", background: "radial-gradient(circle at center, rgba(0,0,0,.38), transparent 62%)", filter: "blur(14px)", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.5) 1px, transparent 1.3px)", backgroundSize: "15px 15px", opacity: .12, WebkitMaskImage: "radial-gradient(ellipse 85% 80% at 72% 26%, #000, transparent 78%)", maskImage: "radial-gradient(ellipse 85% 80% at 72% 26%, #000, transparent 78%)", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg, transparent 36%, rgba(255,255,255,.13) 48%, transparent 60%)", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", right: ".5rem", bottom: "-1.4rem", fontSize: "7.5rem", fontWeight: 800, lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.3)", letterSpacing: "-.06em", pointerEvents: "none" }}>0{PROJECTS.findIndex(x => x.href === p.href) + 1}</div>
+              <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", gap: ".75rem" }}>
+                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.88)" }}>{p.eyebrow}</span>
+                <span style={{ fontSize: ".66rem", fontWeight: 700, letterSpacing: ".06em", color: "#fff", padding: ".28rem .6rem", borderRadius: 100, background: "rgba(255,255,255,.18)", border: "1px solid rgba(255,255,255,.3)", backdropFilter: "blur(6px)", whiteSpace: "nowrap" }}>{p.company}</span>
               </div>
-              <div style={{ position: "relative" }}>
-                <div style={{ fontSize: "clamp(2rem,5vw,2.8rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{p.metric}</div>
-                <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.72)", marginTop: ".35rem", letterSpacing: ".04em" }}>{p.metricLabel}</div>
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ fontSize: "clamp(2rem,5vw,2.8rem)", fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1, textShadow: "0 2px 18px rgba(0,0,0,.18)" }}>{p.metric}</div>
+                <div style={{ fontSize: ".72rem", color: "rgba(255,255,255,.78)", marginTop: ".35rem", letterSpacing: ".04em" }}>{p.metricLabel}</div>
               </div>
             </div>
 
