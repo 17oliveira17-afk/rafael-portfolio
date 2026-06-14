@@ -4,9 +4,30 @@ import { CSSProperties } from "react";
  * Minimal inline SVG icon set (stroke-based, currentColor).
  * Replaces emoji throughout the site for a cleaner, consistent look.
  */
-type IconName = "folder" | "close" | "trophy" | "video" | "film" | "star";
+type IconName = "folder" | "close" | "trophy" | "video" | "film" | "star" | "target" | "flask" | "zap" | "layers";
 
 const PATHS: Record<IconName, React.ReactNode> = {
+  target: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
+    </>
+  ),
+  flask: (
+    <>
+      <path d="M9 3h6M10 3v5.5L5.2 17a2 2 0 0 0 1.8 3h10a2 2 0 0 0 1.8-3L14 8.5V3" />
+      <path d="M7.5 14h9" />
+    </>
+  ),
+  zap: <path d="M13 2 4.5 13.5H11l-1 8.5L18.5 10.5H12l1-8.5Z" />,
+  layers: (
+    <>
+      <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+      <path d="m3 12 9 5 9-5" />
+      <path d="m3 17 9 5 9-5" />
+    </>
+  ),
   folder: <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />,
   close: (
     <>

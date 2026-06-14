@@ -489,14 +489,19 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>08 — What I learned</Label>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "2rem" }}>
-              {[
-                { n: "01", title: "Define metrics before pixels.", body: "Setting success metrics upfront aligned PM, Engineering, and gave me clear go/no-go criteria. It's what made the A/B test decisive instead of debatable." },
-                { n: "02", title: "Test the riskiest decision first.", body: "Testing the outbound/return split before investing in hi-fi gave me the evidence to challenge stakeholder assumptions confidently." },
-                { n: "03", title: "Sell a bet, not a vision.", body: "1-month A/B test instead of 6-month full rebuild. Smaller scope, contained risk, metrics upfront. That's what got the yes." },
-                { n: "04", title: "Native DS compounds.", body: "Investing in mobile-specific components improved usability in ways that web-ported components never would have. The experience felt like a different product." },
-              ].map((l, i) => (
+              {([
+                { n: "01", icon: "target", title: "Define metrics before pixels.", body: "Setting success metrics upfront aligned PM, Engineering, and gave me clear go/no-go criteria. It's what made the A/B test decisive instead of debatable." },
+                { n: "02", icon: "flask", title: "Test the riskiest decision first.", body: "Testing the outbound/return split before investing in hi-fi gave me the evidence to challenge stakeholder assumptions confidently." },
+                { n: "03", icon: "zap", title: "Sell a bet, not a vision.", body: "1-month A/B test instead of 6-month full rebuild. Smaller scope, contained risk, metrics upfront. That's what got the yes." },
+                { n: "04", icon: "layers", title: "Native DS compounds.", body: "Investing in mobile-specific components improved usability in ways that web-ported components never would have. The experience felt like a different product." },
+              ] as const).map((l, i) => (
                 <div key={i} style={{ padding: "2rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 16 }}>
-                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1rem" }}>{l.n}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: ".85rem", marginBottom: "1.25rem" }}>
+                    <div style={{ width: 42, height: 42, borderRadius: 11, background: "rgba(0,113,227,.1)", border: "1px solid rgba(0,113,227,.25)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3", flexShrink: 0 }}>
+                      <Icon name={l.icon} size={20} />
+                    </div>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase" }}>{l.n}</p>
+                  </div>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{l.title}</h3>
                   <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{l.body}</p>
                 </div>
