@@ -335,16 +335,18 @@ export default function CVCCasePage() {
             </div>
           </ScrollReveal>
 
-          {/* GIF: Usability test */}
+          {/* Real hi-fi prototype — full booking flow, end to end */}
           <ScrollReveal delay={150}>
-            <div style={{ marginBottom: "4rem" }}>
-              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Full flow — usability test in hi-fi prototype</p>
-              <LoopVideo
-                src="/videos/stock/designers-working.mp4"
-                label="Usability test — full flow walkthrough"
-                aspect="16 / 9"
-                radius={16}
-              />
+            <div style={{ marginBottom: "4rem", textAlign: "center" }}>
+              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1.5rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> The hi-fi prototype — full flow, end to end</p>
+              <div style={{ maxWidth: isMobile ? 280 : 340, margin: "0 auto", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.55))" }}>
+                <LoopVideo
+                  src="/videos/cvc-prototype.mp4"
+                  label="CVC flight booking — full prototype walkthrough"
+                  aspect="720 / 1488"
+                  radius={28}
+                />
+              </div>
             </div>
           </ScrollReveal>
 
