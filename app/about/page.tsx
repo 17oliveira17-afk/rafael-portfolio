@@ -276,15 +276,16 @@ export default function AboutPage() {
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "3rem" }}>Design principles</p>
           </ScrollReveal>
-          <div className="pgrid" style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+          <div className="ptable">
             {principles.map((p, i) => (
               <ScrollReveal key={i} delay={i * 60}>
-                <div className="pcard" style={{ background: "#0a0a0a", padding: isMobile ? "2rem 1.5rem" : "3rem 3.5rem", display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
-                  <p style={{ fontSize: ".7rem", color: "#0071e3", fontWeight: 700, letterSpacing: ".1em", flexShrink: 0, marginTop: ".35rem" }}>{p.n}</p>
-                  <div>
-                    <h3 style={{ fontSize: isMobile ? "1.1rem" : "1.4rem", fontWeight: 700, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.02em" }}>{p.title}</h3>
-                    <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>{p.desc}</p>
+                <div className="prow">
+                  <span className="pnum">{p.n}</span>
+                  <div className="ptext">
+                    <h3 style={{ fontSize: isMobile ? "1.1rem" : "1.45rem", fontWeight: 700, color: "#fff", marginBottom: ".55rem", letterSpacing: "-.02em" }}>{p.title}</h3>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, maxWidth: 640 }}>{p.desc}</p>
                   </div>
+                  <span className="parrow" aria-hidden>→</span>
                 </div>
               </ScrollReveal>
             ))}
@@ -312,22 +313,26 @@ export default function AboutPage() {
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "3rem" }}>Experience</p>
           </ScrollReveal>
-          {exp.map((e, i) => (
-            <ScrollReveal key={i} delay={i * 60}>
-              <div style={{ padding: isMobile ? "2rem 0" : "3rem 0", borderBottom: i < exp.length - 1 ? "1px solid rgba(255,255,255,.08)" : "none" }}>
-                {/* Year on top on mobile */}
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", marginBottom: ".6rem" }}>{e.year}</p>
-                <h3 style={{ fontWeight: 600, fontSize: isMobile ? "1.05rem" : "1.2rem", color: "#fff", marginBottom: ".35rem", letterSpacing: "-.01em" }}>{e.role}</h3>
-                <p style={{ color: e.c, fontSize: ".9rem", fontWeight: 500, marginBottom: "1rem" }}>{e.company}</p>
-                <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.25rem" }}>{e.story}</p>
-                <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
-                  {e.tags.map(t => (
-                    <span key={t} style={{ padding: ".2rem .7rem", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
-                  ))}
+          <div className="timeline">
+            {exp.map((e, i) => (
+              <ScrollReveal key={i} delay={i * 70}>
+                <div className="tl-item">
+                  <div className="tl-rail"><span className="tl-dot" /></div>
+                  <div className="tl-body">
+                    <span style={{ display: "inline-block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: e.c === "#6e6e73" ? "rgba(255,255,255,.4)" : "#0071e3", marginBottom: ".7rem" }}>{e.year}</span>
+                    <h3 style={{ fontWeight: 700, fontSize: isMobile ? "1.1rem" : "1.35rem", color: "#fff", letterSpacing: "-.02em", marginBottom: ".2rem" }}>{e.role}</h3>
+                    <p style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500, marginBottom: "1rem" }}>{e.company}</p>
+                    <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.25rem", maxWidth: 680 }}>{e.story}</p>
+                    <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
+                      {e.tags.map(t => (
+                        <span key={t} style={{ padding: ".2rem .7rem", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -345,13 +350,19 @@ export default function AboutPage() {
             {testimonials.map((t, i) => (
               <ScrollReveal key={i} delay={(i % 3) * 80}>
                 <div className="tcard" style={{
-                  background: "#0a0a0a", padding: isMobile ? "1.75rem 1.5rem" : "2.25rem",
+                  position: "relative", background: "#0a0a0a", padding: isMobile ? "1.75rem 1.5rem" : "2.25rem",
                   borderRadius: 18, border: "1px solid rgba(255,255,255,.08)", height: "100%",
                   display: "flex", flexDirection: "column",
                 }}>
-                  <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.72)", lineHeight: 1.75, marginBottom: "1.5rem", fontStyle: "italic", flex: 1 }}>&ldquo;{t.quote}&rdquo;</p>
-                  <p style={{ fontSize: ".85rem", color: "#fff", fontWeight: 600 }}>{t.name}</p>
-                  <p style={{ fontSize: ".75rem", color: "rgba(255,255,255,.4)", marginTop: ".3rem" }}>{t.role}</p>
+                  <span className="t-quote-mark" aria-hidden>&rdquo;</span>
+                  <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.72)", lineHeight: 1.75, marginBottom: "1.75rem", flex: 1, position: "relative" }}>&ldquo;{t.quote}&rdquo;</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: ".75rem" }}>
+                    <span className="t-avatar" aria-hidden>{t.name.split(" ").map(w => w[0]).slice(0, 2).join("")}</span>
+                    <div>
+                      <p style={{ fontSize: ".85rem", color: "#fff", fontWeight: 600 }}>{t.name}</p>
+                      <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".15rem" }}>{t.role}</p>
+                    </div>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -393,11 +404,36 @@ export default function AboutPage() {
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        .tcard, .pcard { opacity: .6; transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
-        .tgrid:hover .tcard, .pgrid:hover .pcard { opacity: .32; }
+        .tcard { opacity: .6; transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
+        .tgrid:hover .tcard { opacity: .32; }
         .tcard:hover { opacity: 1; transform: translateY(-6px); border-color: rgba(0,113,227,.45); box-shadow: 0 24px 50px rgba(0,0,0,.45); }
-        .pcard:hover { opacity: 1; background: #101014 !important; }
-        @media (hover: none) { .tcard, .pcard { opacity: 1; } }
+        @media (hover: none) { .tcard { opacity: 1; } }
+
+        /* Testimonial details */
+        .t-quote-mark { position: absolute; top: .9rem; right: 1.4rem; font-size: 3.6rem; line-height: 1; color: rgba(0,113,227,.16); font-family: Georgia, "Times New Roman", serif; transition: color .35s ease; pointer-events: none; }
+        .tcard:hover .t-quote-mark { color: rgba(0,113,227,.5); }
+        .t-avatar { width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; color: #fff; background: linear-gradient(135deg, #0071e3, #4aa3ff); flex-shrink: 0; }
+
+        /* Principles — interactive sweep table */
+        .ptable { border-top: 1px solid rgba(255,255,255,.08); }
+        .prow { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; padding: 2rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,.08); overflow: hidden; transition: padding-left .45s cubic-bezier(.16,1,.3,1); }
+        .prow::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,113,227,.14), transparent 70%); transform: translateX(-101%); transition: transform .55s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+        .prow:hover::before { transform: translateX(0); }
+        .prow:hover { padding-left: 2rem; }
+        .pnum { position: relative; font-size: 1.5rem; font-weight: 800; color: rgba(255,255,255,.18); letter-spacing: -.03em; transition: color .4s ease; align-self: flex-start; margin-top: .15rem; }
+        .prow:hover .pnum { color: #0071e3; }
+        .ptext { position: relative; }
+        .parrow { position: relative; color: #0071e3; font-size: 1.25rem; opacity: 0; transform: translateX(-10px); transition: opacity .4s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+        .prow:hover .parrow { opacity: 1; transform: translateX(0); }
+
+        /* Experience — vertical timeline */
+        .tl-item { position: relative; display: grid; grid-template-columns: 26px 1fr; gap: 1.5rem; padding-bottom: 3.25rem; }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-rail { position: relative; }
+        .tl-rail::before { content: ""; position: absolute; left: 50%; top: 16px; bottom: -3.25rem; width: 1px; background: rgba(255,255,255,.12); transform: translateX(-50%); }
+        .tl-item:last-child .tl-rail::before { display: none; }
+        .tl-dot { position: absolute; left: 50%; top: 7px; width: 12px; height: 12px; border-radius: 50%; transform: translateX(-50%); background: #000; border: 2px solid rgba(255,255,255,.25); transition: border-color .35s ease, background .35s ease, box-shadow .35s ease; }
+        .tl-item:hover .tl-dot { border-color: #0071e3; background: #0071e3; box-shadow: 0 0 0 5px rgba(0,113,227,.14); }
       `}</style>
     </main>
   );
