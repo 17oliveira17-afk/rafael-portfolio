@@ -87,7 +87,6 @@ function Body({ p, big = false }: { p: Project; big?: boolean }) {
 
 export default function WorkPage() {
   const isMobile = useIsMobile();
-  const [featured, ...rest] = PROJECTS;
   const [hovered, setHovered] = useState<string | null>(null);
   const pad = isMobile ? "7rem 1.5rem 5rem" : "10rem 6rem 7rem";
 
@@ -114,38 +113,36 @@ export default function WorkPage() {
             </div>
           </ScrollReveal>
 
-          {/* All cards share one hovered key; leaving the whole area clears it,
-              so a card can never get stuck lifted on a fast pointer move. */}
-          <div onMouseLeave={() => setHovered(null)}>
-            {/* ── Featured flagship ── */}
-            <ScrollReveal delay={80}>
-              <Link href={featured.href} style={{ textDecoration: "none", display: "block", marginBottom: isMobile ? "1.5rem" : "2rem" }}>
-                <Hoverable glow={featured.glow} active={hovered === featured.href} onEnter={() => setHovered(featured.href)}>
-                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 1fr" }}>
-                    <div style={{ minHeight: isMobile ? 260 : 380 }}>
-                      <Plate p={featured} index={0} big />
-                    </div>
-                    <Body p={featured} big />
-                  </div>
-                </Hoverable>
-              </Link>
-            </ScrollReveal>
+          {/* ── Capabilities strip ── */}
+          <ScrollReveal delay={40}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? ".75rem 1.5rem" : "2.5rem", paddingBottom: isMobile ? "2.5rem" : "3.25rem", marginBottom: isMobile ? "2.5rem" : "3.5rem", borderBottom: "1px solid rgba(255,255,255,.08)" }}>
+              {["Product Design", "Design Systems", "Design Leadership", "Research & Testing"].map((c) => (
+                <div key={c} style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#0071e3" }} />
+                  <span style={{ fontSize: ".82rem", color: "rgba(255,255,255,.6)", letterSpacing: ".01em" }}>{c}</span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
 
-            {/* ── The other three ── */}
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? "1.5rem" : "2rem" }}>
-              {rest.map((p, i) => (
-                <ScrollReveal key={p.href} delay={120 + i * 80}>
-                  <Link href={p.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                    <Hoverable glow={p.glow} active={hovered === p.href} onEnter={() => setHovered(p.href)} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                      <div style={{ aspectRatio: "16 / 11" }}>
-                        <Plate p={p} index={i + 1} />
+          {/* ── Projects as large alternating editorial rows ── */}
+          <div onMouseLeave={() => setHovered(null)} style={{ display: "flex", flexDirection: "column", gap: isMobile ? "1.75rem" : "2.75rem" }}>
+            {PROJECTS.map((p, i) => {
+              const plateLeft = i % 2 === 0;
+              const plate = <div style={{ minHeight: isMobile ? 240 : 380 }}><Plate p={p} index={i} big /></div>;
+              const body = <Body p={p} big />;
+              return (
+                <ScrollReveal key={p.href} delay={60 + i * 70}>
+                  <Link href={p.href} style={{ textDecoration: "none", display: "block" }}>
+                    <Hoverable glow={p.glow} active={hovered === p.href} onEnter={() => setHovered(p.href)}>
+                      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : plateLeft ? "1.05fr 1fr" : "1fr 1.05fr" }}>
+                        {isMobile || plateLeft ? (<>{plate}{body}</>) : (<>{body}{plate}</>)}
                       </div>
-                      <Body p={p} />
                     </Hoverable>
                   </Link>
                 </ScrollReveal>
-              ))}
-            </div>
+              );
+            })}
           </div>
 
           {/* ── Footer CTA ── */}
