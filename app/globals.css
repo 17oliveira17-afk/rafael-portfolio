@@ -22,6 +22,9 @@ html { scroll-behavior: smooth; }
 /* Accessible keyboard focus (only on keyboard nav, not mouse clicks) */
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
 :focus:not(:focus-visible) { outline: none; }
+
+.footer-link { transition: color .2s ease; }
+.footer-link:hover { color: #fff; }
 body {
   background: #fff;
   color: var(--black);

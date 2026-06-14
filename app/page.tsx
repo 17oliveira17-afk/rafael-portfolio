@@ -676,13 +676,30 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* Footer */}
-      <footer style={{ background: "#f5f5f7", borderTop: "1px solid #d2d2d7", padding: "1.5rem 2rem" }}>
-        <div style={{ maxWidth: 1024, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-          <p style={{ fontSize: ".72rem", color: "#86868b" }}>Copyright © 2025 Rafael Guimarães. All rights reserved.</p>
-          <div style={{ display: "flex", gap: "2rem" }}>
-            <a href="https://linkedin.com/in/rafaelgdesign" target="_blank" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>LinkedIn</a>
-            <a href="mailto:rafael@rafaelgdesign.com" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>Email</a>
+      {/* Footer — closing moment */}
+      <footer style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,.08)", padding: "clamp(3.5rem,6vw,5.5rem) clamp(1.5rem,5vw,6rem) 2.5rem", color: "#fff", position: "relative", overflow: "hidden" }}>
+        <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 60% at 80% 0%, rgba(0,113,227,.10) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "relative", maxWidth: 1024, margin: "0 auto" }}>
+          {/* CTA row */}
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem", flexWrap: "wrap", paddingBottom: "2.75rem", borderBottom: "1px solid rgba(255,255,255,.08)" }}>
+            <h2 style={{ fontSize: "clamp(1.7rem,4vw,3rem)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff" }}>
+              Let&apos;s build something<br /><span className="text-gradient">worth shipping.</span>
+            </h2>
+            <Link href="/contact" className="btn-blue" style={{ padding: ".9rem 2.25rem", fontSize: ".95rem", whiteSpace: "nowrap" }}>Get in touch →</Link>
+          </div>
+          {/* bottom row */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1.25rem", marginTop: "2.25rem" }}>
+            <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)" }}>© {new Date().getFullYear()} Rafael Guimarães · Designed &amp; built in São Paulo</p>
+            <div style={{ display: "flex", gap: "1.6rem", alignItems: "center", flexWrap: "wrap" }}>
+              {[
+                { label: "Work", href: "/work" },
+                { label: "About", href: "/about" },
+                { label: "Contact", href: "/contact" },
+              ].map(l => (
+                <Link key={l.href} href={l.href} className="footer-link" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.6)", textDecoration: "none" }}>{l.label}</Link>
+              ))}
+              <a href="https://linkedin.com/in/rafaelgdesign" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.6)", textDecoration: "none" }}>LinkedIn ↗</a>
+            </div>
           </div>
         </div>
       </footer>
