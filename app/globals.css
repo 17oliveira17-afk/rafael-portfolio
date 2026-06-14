@@ -14,6 +14,14 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* Branded text selection */
+::selection { background: rgba(0, 113, 227, 0.30); }
+::-moz-selection { background: rgba(0, 113, 227, 0.30); }
+
+/* Accessible keyboard focus (only on keyboard nav, not mouse clicks) */
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+:focus:not(:focus-visible) { outline: none; }
 body {
   background: #fff;
   color: var(--black);
