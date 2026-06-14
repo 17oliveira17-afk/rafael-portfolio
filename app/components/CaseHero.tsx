@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import RevealText from "./RevealText";
 import useIsMobile from "./useIsMobile";
@@ -37,6 +37,17 @@ export default function CaseHero({
   const isMobile = useIsMobile();
   const a = (o: number) => hexA(accent, o);
 
+  // roll the result numbers up when the stats come into view
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsIn, setStatsIn] = useState(false);
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => e.isIntersecting && (setStatsIn(true), obs.unobserve(el)), { threshold: 0.4 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section style={{
       minHeight: "100svh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
@@ -70,18 +81,26 @@ export default function CaseHero({
             ))}
           </div>
         </ScrollReveal>
-        <ScrollReveal delay={200}>
-          <div style={{ display: "flex", gap: isMobile ? "1.5rem 1.25rem" : "0", flexWrap: "wrap", justifyContent: "center" }}>
-            {stats.map((s, i) => (
-              <div key={i} style={{ padding: isMobile ? "0" : "0 1.75rem", borderRight: !isMobile && i < stats.length - 1 ? "1px solid rgba(255,255,255,.12)" : "none", minWidth: isMobile ? 92 : "auto" }}>
-                <p style={{ fontSize: "clamp(1.4rem,3vw,2.2rem)", fontWeight: 700, color: accent, letterSpacing: "-.03em", lineHeight: 1 }}>{s.n}</p>
-                <p style={{ fontSize: ".68rem", color: "rgba(255,255,255,.42)", marginTop: ".5rem", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.4 }}>
-                  {s.l}{s.sub && <><br /><span style={{ color: "rgba(255,255,255,.25)" }}>{s.sub}</span></>}
-                </p>
+        <div ref={statsRef} style={{ display: "flex", gap: isMobile ? "1.5rem 1.25rem" : "0", flexWrap: "wrap", justifyContent: "center" }}>
+          {stats.map((s, i) => (
+            <div key={i} style={{ padding: isMobile ? "0" : "0 1.75rem", borderRight: !isMobile && i < stats.length - 1 ? "1px solid rgba(255,255,255,.12)" : "none", minWidth: isMobile ? 92 : "auto" }}>
+              <div style={{ overflow: "hidden", paddingBottom: ".12em" }}>
+                <p style={{
+                  fontSize: "clamp(1.4rem,3vw,2.2rem)", fontWeight: 700, color: accent, letterSpacing: "-.03em", lineHeight: 1,
+                  transform: statsIn ? "translateY(0)" : "translateY(115%)",
+                  opacity: statsIn ? 1 : 0,
+                  transition: `transform .85s cubic-bezier(.16,1,.3,1) ${150 + i * 130}ms, opacity .6s ease ${150 + i * 130}ms`,
+                }}>{s.n}</p>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+              <p style={{
+                fontSize: ".68rem", color: "rgba(255,255,255,.42)", marginTop: ".5rem", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.4,
+                opacity: statsIn ? 1 : 0, transition: `opacity .6s ease ${300 + i * 130}ms`,
+              }}>
+                {s.l}{s.sub && <><br /><span style={{ color: "rgba(255,255,255,.25)" }}>{s.sub}</span></>}
+              </p>
+            </div>
+          ))}
+        </div>
         {note && (
           <ScrollReveal delay={240}>
             <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.25)", marginTop: "1.75rem" }}>{note}</p>
