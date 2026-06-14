@@ -83,13 +83,13 @@ export default function CVCCasePage() {
         justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(227,160,8,.13) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div className="aurora" style={{ opacity: 0.38, mixBlendMode: "screen" }} />
         <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
               {["B2C", "Mobile App", "Travel", "Solo designer"].map(t => (
-                <span key={t} style={{ padding: ".3rem .9rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".7rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
+                <span key={t} style={{ padding: ".3rem .9rem", border: "1px solid rgba(227,160,8,.35)", borderRadius: 100, fontSize: ".7rem", color: "rgba(255,255,255,.55)", letterSpacing: ".06em" }}>{t}</span>
               ))}
             </div>
             <RevealText

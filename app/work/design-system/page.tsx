@@ -103,12 +103,12 @@ export default function DesignSystemCasePage() {
 
       {/* ═══ 01 · HERO ═══ */}
       <section className="aurora-wrap" style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 25% 70%, rgba(0,113,227,.12) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 25% 70%, rgba(0,200,160,.14) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div className="aurora" style={{ opacity: 0.4, mixBlendMode: "screen" }} />
         <div className="aurora-content" style={{ maxWidth: 940, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".7rem", flexWrap: "wrap", marginBottom: "2rem" }}>
-              <Tag>Design Systems</Tag>
+              <Tag color="#00c8a0">Design Systems</Tag>
               <Tag color="#0071e3">Mobile</Tag>
               <Tag color="#7e48ff">B2B & B2C</Tag>
             </div>

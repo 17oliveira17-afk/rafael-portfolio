@@ -110,13 +110,13 @@ export default function RappiCasePage() {
         justifyContent: "flex-end", padding: isMobile ? "7rem 1.5rem 3.5rem" : "10rem 6rem 6rem",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(0,113,227,.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(255,90,31,.12) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div className="aurora" style={{ opacity: 0.36, mixBlendMode: "screen" }} />
         <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
               {["B2B", "Onboarding", "9 markets", "Solo designer"].map(t => (
-                <span key={t} style={{ padding: ".3rem .85rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.5)", letterSpacing: ".06em" }}>{t}</span>
+                <span key={t} style={{ padding: ".3rem .85rem", border: "1px solid rgba(255,90,31,.35)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.55)", letterSpacing: ".06em" }}>{t}</span>
               ))}
             </div>
             <RevealText

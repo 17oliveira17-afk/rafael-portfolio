@@ -359,8 +359,8 @@ export default function LeadershipCasePage() {
         </div>
         <div style={{ position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
-            <Tag>Design Leadership</Tag>
-            <Tag>Process & Ops</Tag>
+            <Tag bg="rgba(225,96,124,.16)" border="rgba(225,96,124,.36)" color="#e98aa1">Design Leadership</Tag>
+            <Tag bg="rgba(225,96,124,.16)" border="rgba(225,96,124,.36)" color="#e98aa1">Process &amp; Ops</Tag>
             <Tag bg="rgba(255,255,255,.07)" border="rgba(255,255,255,.12)" color="rgba(255,255,255,.45)">
               <span style={{ display: "inline-flex", alignItems: "center", gap: ".35rem" }}><IconLock />Bank · NDA</span>
             </Tag>
@@ -382,7 +382,7 @@ export default function LeadershipCasePage() {
               { v: "0 → 7", l: "Ceremonies" },
               { v: "< 2 months", l: "To Lead role" },
             ].map((s, i) => (
-              <div key={i} style={{ borderLeft: "2px solid rgba(0,113,227,.4)", paddingLeft: ".85rem" }}>
+              <div key={i} style={{ borderLeft: "2px solid rgba(225,96,124,.5)", paddingLeft: ".85rem" }}>
                 <div style={{ fontSize: isMobile ? "1rem" : "1.3rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1 }}>{s.v}</div>
                 <div style={{ fontSize: ".63rem", color: "rgba(255,255,255,.35)", marginTop: ".3rem", letterSpacing: ".05em", textTransform: "uppercase" }}>{s.l}</div>
               </div>
