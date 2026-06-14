@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import RevealText from "../components/RevealText";
 
@@ -38,6 +38,14 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<{ [k: string]: string }>({});
   const [sent, setSent] = useState(false);
+  const [now, setNow] = useState("");
+
+  useEffect(() => {
+    const tick = () => setNow(new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()));
+    tick();
+    const id = setInterval(tick, 30000);
+    return () => clearInterval(id);
+  }, []);
 
   const set = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -86,12 +94,20 @@ export default function ContactPage() {
               stagger={90}
               style={{ fontSize: "clamp(3rem,7vw,7rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "2rem" }}
             />
-            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 480, lineHeight: 1.7, marginBottom: "3rem" }}>
+            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 480, lineHeight: 1.7, marginBottom: "2rem" }}>
               Open to Product Design Lead roles in fintech and B2B. Currently pursuing opportunities in Canada.
             </p>
-            <a href="#message" className="btn-blue" style={{ fontSize: "1rem", padding: ".9rem 2.5rem" }}>
-              Send a message →
-            </a>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: ".7rem", padding: ".55rem 1.1rem", borderRadius: 100, background: "rgba(52,199,89,.08)", border: "1px solid rgba(52,199,89,.25)", marginBottom: "2.75rem" }}>
+              <span className="pulse" style={{ width: 8, height: 8, borderRadius: "50%", background: "#34c759", flexShrink: 0 }} />
+              <span style={{ fontSize: ".82rem", color: "rgba(255,255,255,.7)" }}>
+                Available for new work{now && <span style={{ color: "rgba(255,255,255,.4)" }}> · {now} in São Paulo</span>}
+              </span>
+            </div>
+            <div>
+              <a href="#message" className="btn-blue" style={{ fontSize: "1rem", padding: ".9rem 2.5rem" }}>
+                Send a message →
+              </a>
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -156,20 +172,16 @@ export default function ContactPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 6rem" }}>
           {links.map((lk, i) => (
             <ScrollReveal key={i}>
-              <a href={lk.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "block" }}>
+              <a href={lk.href} target="_blank" rel="noopener noreferrer" className="contact-link" style={{ textDecoration: "none", display: "block" }}>
                 <div style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
-                  padding: "3rem 0", borderBottom: "1px solid rgba(255,255,255,.08)",
-                  transition: "opacity .2s",
-                }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.7"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
-                >
+                  padding: "2.75rem 0", borderBottom: "1px solid rgba(255,255,255,.08)",
+                }}>
                   <div>
                     <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".75rem" }}>{lk.label}</p>
-                    <h2 style={{ fontSize: "clamp(1rem,2vw,1.75rem)", fontWeight: 600, color: "#fff", letterSpacing: "-.02em" }}>{lk.value}</h2>
+                    <h2 className="contact-link-value" style={{ fontSize: "clamp(1rem,2vw,1.75rem)", fontWeight: 600, color: "#fff", letterSpacing: "-.02em" }}>{lk.value}</h2>
                   </div>
-                  <span style={{ color: "#0071e3", fontSize: "2rem", fontWeight: 300, flexShrink: 0 }}>↗</span>
+                  <span className="contact-link-arrow" style={{ color: "#0071e3", fontSize: "2rem", fontWeight: 300, flexShrink: 0 }}>↗</span>
                 </div>
               </a>
             </ScrollReveal>
