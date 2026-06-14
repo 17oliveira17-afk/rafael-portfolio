@@ -11,6 +11,7 @@ import FeatureCarousel from "../../components/FeatureCarousel";
 import SideShot from "../../components/SideShot";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
 import PhoneTabs from "../../components/PhoneTabs";
+import CaseHero from "../../components/CaseHero";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -78,48 +79,19 @@ export default function CVCCasePage() {
     <main className="page-in dark-cursor" style={{ background: "#000" }}>
 
       {/* ═══ 01 · HERO ═══ */}
-      <section style={{
-        minHeight: "100vh", display: "flex", flexDirection: "column",
-        justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem",
-        position: "relative", overflow: "hidden",
-      }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 70%, rgba(227,160,8,.13) 0%, transparent 60%)", pointerEvents: "none" }} />
-        <div className="aurora" style={{ opacity: 0.38, mixBlendMode: "screen" }} />
-        <div style={{ maxWidth: 900, position: "relative", zIndex: 1 }}>
-          <ScrollReveal>
-            <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
-              {["B2C", "Mobile App", "Travel", "Solo designer"].map(t => (
-                <span key={t} style={{ padding: ".3rem .9rem", border: "1px solid rgba(227,160,8,.35)", borderRadius: 100, fontSize: ".7rem", color: "rgba(255,255,255,.55)", letterSpacing: ".06em" }}>{t}</span>
-              ))}
-            </div>
-            <RevealText
-              as="h1"
-              lines={["CVC Flight", <em key="br" className="text-gradient" style={{ fontStyle: "italic" }}>Booking Redesign.</em>]}
-              stagger={90}
-              style={{ fontSize: isMobile ? "2.8rem" : "clamp(3rem,7vw,6.5rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}
-            />
-            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 560, lineHeight: 1.75, marginBottom: "3rem" }}>
-              Brazil's largest travel app had a 2.0★ rating, 40-second loads, and 6% checkout conversion. I proposed a 1-month A/B bet instead of a 6-month redesign — and delivered results in the first month.
-            </p>
-            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-              {[
-                { n: "2.0 → 4.6★", l: "App Store rating" },
-                { n: "+212%", l: "Checkout conversion" },
-                { n: "+23%", l: "Cross-sell revenue" },
-              ].map((s, i) => (
-                <div key={i} style={{ paddingRight: i < 2 ? "1.5rem" : 0, borderRight: i < 2 ? "1px solid rgba(255,255,255,.1)" : "none" }}>
-                  <p style={{ fontSize: "clamp(1.4rem,3vw,2.2rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1 }}>{s.n}</p>
-                  <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{s.l}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-        <div style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: ".5rem", opacity: .4 }}>
-          <p style={{ fontSize: ".65rem", letterSpacing: ".12em", textTransform: "uppercase", color: "#fff" }}>Scroll</p>
-          <div style={{ width: 1, height: 40, background: "rgba(255,255,255,.4)" }} />
-        </div>
-      </section>
+      <CaseHero
+        accent="#eab308"
+        index="01"
+        company="CVC · Travel"
+        titleLines={["CVC Flight", <em key="br" style={{ color: "#eab308", fontStyle: "italic" }}>Booking Redesign.</em>]}
+        subtitle="Brazil's largest travel app had a 2.0★ rating, 40-second loads, and 6% checkout conversion. I proposed a 1-month A/B bet instead of a 6-month redesign — and delivered results in the first month."
+        tags={["B2C", "Mobile App", "Travel", "Solo designer"]}
+        stats={[
+          { n: "2.0 → 4.6★", l: "App Store rating" },
+          { n: "+212%", l: "Checkout conversion" },
+          { n: "+23%", l: "Cross-sell revenue" },
+        ]}
+      />
 
       {/* ═══ FULL-BLEED TRAVEL VIDEO ═══ */}
       <section style={{ width: "100%", position: "relative" }}>

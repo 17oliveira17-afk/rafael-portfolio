@@ -6,6 +6,7 @@ import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
+import CaseHero from "../../components/CaseHero";
 
 /* ── Scroll progress: 0 as the element enters from the bottom, 1 once it reaches the upper third ── */
 function useScrollProgress<T extends HTMLElement>() {
@@ -351,45 +352,21 @@ export default function LeadershipCasePage() {
       </div>
 
       {/* ═══ 01 · HERO ═══ */}
-      <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "6rem 1.5rem 3.5rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0 }}>
-          <Image src="/cinematic/design-system.jpg" alt="Design leadership" fill style={{ objectFit: "cover", objectPosition: "center" }} priority sizes="100vw" />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,.97) 100%)" }} />
-          <div className="aurora" style={{ opacity: .42, mixBlendMode: "screen" }} />
-        </div>
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
-            <Tag bg="rgba(225,96,124,.16)" border="rgba(225,96,124,.36)" color="#e98aa1">Design Leadership</Tag>
-            <Tag bg="rgba(225,96,124,.16)" border="rgba(225,96,124,.36)" color="#e98aa1">Process &amp; Ops</Tag>
-            <Tag bg="rgba(255,255,255,.07)" border="rgba(255,255,255,.12)" color="rgba(255,255,255,.45)">
-              <span style={{ display: "inline-flex", alignItems: "center", gap: ".35rem" }}><IconLock />Bank · NDA</span>
-            </Tag>
-          </div>
-          <RevealText
-            as="h1"
-            lines={[<>From <em key="w" className="text-gradient" style={{ fontStyle: "italic" }}>8 weeks</em></>, "to 3 weeks."]}
-            stagger={90}
-            style={{ fontSize: isMobile ? "clamp(2.2rem,9vw,3rem)" : "clamp(3rem,6vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#f5f5f7", maxWidth: 860, marginBottom: "1.25rem" }}
-          />
-          <p style={{ fontSize: isMobile ? ".93rem" : "1.2rem", color: "rgba(255,255,255,.58)", maxWidth: 520, lineHeight: 1.75, fontWeight: 300, marginBottom: ".75rem" }}>
-            How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half.
-          </p>
-          <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.22)", marginBottom: "2.5rem" }}>Client name under NDA.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: ".85rem", maxWidth: isMobile ? "100%" : 560 }}>
-            {[
-              { v: "8w → 3w", l: "Delivery cycle" },
-              { v: "3 designers", l: "Team led" },
-              { v: "0 → 7", l: "Ceremonies" },
-              { v: "< 2 months", l: "To Lead role" },
-            ].map((s, i) => (
-              <div key={i} style={{ borderLeft: "2px solid rgba(225,96,124,.5)", paddingLeft: ".85rem" }}>
-                <div style={{ fontSize: isMobile ? "1rem" : "1.3rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1 }}>{s.v}</div>
-                <div style={{ fontSize: ".63rem", color: "rgba(255,255,255,.35)", marginTop: ".3rem", letterSpacing: ".05em", textTransform: "uppercase" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CaseHero
+        accent="#ec6b86"
+        index="04"
+        company="Thoughtworks · Design Leadership"
+        titleLines={[<>From <em key="w" style={{ color: "#ec6b86", fontStyle: "italic" }}>8 weeks</em></>, "to 3 weeks."]}
+        subtitle="How I restructured a fractured design team at a Latin American bank — introducing planning, roadmaps, AI automation, and governance — cutting delivery by more than half."
+        tags={["Design Leadership", "Process & Ops", "Bank · NDA"]}
+        stats={[
+          { n: "8w → 3w", l: "Delivery cycle" },
+          { n: "3 designers", l: "Team led" },
+          { n: "0 → 7", l: "Ceremonies" },
+          { n: "< 2 months", l: "To Lead role" },
+        ]}
+        note="Client name under NDA."
+      />
 
       {/* ═══ FULL-BLEED TEAM VIDEO ═══ */}
       <section style={{ width: "100%", position: "relative" }}>

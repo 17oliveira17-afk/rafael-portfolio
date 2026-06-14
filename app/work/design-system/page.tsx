@@ -6,6 +6,7 @@ import ScrollReveal from "../../components/ScrollReveal";
 import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
+import CaseHero from "../../components/CaseHero";
 
 /* ── Animated counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -102,40 +103,19 @@ export default function DesignSystemCasePage() {
       </div>
 
       {/* ═══ 01 · HERO ═══ */}
-      <section className="aurora-wrap" style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: isMobile ? "8rem 1.5rem 4rem" : "10rem 6rem 6rem", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 25% 70%, rgba(0,200,160,.14) 0%, transparent 60%)", pointerEvents: "none" }} />
-        <div className="aurora" style={{ opacity: 0.4, mixBlendMode: "screen" }} />
-        <div className="aurora-content" style={{ maxWidth: 940, position: "relative", zIndex: 1 }}>
-          <ScrollReveal>
-            <div style={{ display: "flex", gap: ".7rem", flexWrap: "wrap", marginBottom: "2rem" }}>
-              <Tag color="#00c8a0">Design Systems</Tag>
-              <Tag color="#0071e3">Mobile</Tag>
-              <Tag color="#7e48ff">B2B & B2C</Tag>
-            </div>
-            <RevealText
-              as="h1"
-              lines={["Design systems,", <em key="z" className="text-gradient" style={{ fontStyle: "italic" }}>from zero to scale.</em>]}
-              stagger={90}
-              style={{ fontSize: isMobile ? "2.7rem" : "clamp(3rem,7vw,6rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: .98, color: "#fff", marginBottom: "2rem" }}
-            />
-            <p style={{ fontSize: isMobile ? "1rem" : "1.15rem", color: "rgba(255,255,255,.58)", maxWidth: 620, lineHeight: 1.75, marginBottom: "3rem" }}>
-              Two companies, two starting points. At <strong style={{ color: "#fff", fontWeight: 600 }}>Rappi</strong> I helped a team bootstrap a system from nothing — no budget, no dedicated DS team. At <strong style={{ color: "#fff", fontWeight: 600 }}>CVC</strong> I built the mobile layer of a system that had none, shipping only the components that genuinely make an app feel native.
-            </p>
-            <div style={{ display: "flex", gap: "1.75rem", flexWrap: "wrap" }}>
-              {[
-                { n: "0 → 1", l: "Systems bootstrapped" },
-                { n: "2", l: "Companies, 2 contexts" },
-                { n: "Web + App", l: "Best practices shared" },
-              ].map((s, i) => (
-                <div key={i} style={{ paddingRight: i < 2 ? "1.75rem" : 0, borderRight: i < 2 ? "1px solid rgba(255,255,255,.1)" : "none" }}>
-                  <p style={{ fontSize: "clamp(1.3rem,3vw,2rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.03em", lineHeight: 1 }}>{s.n}</p>
-                  <p style={{ fontSize: ".7rem", color: "rgba(255,255,255,.4)", marginTop: ".5rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{s.l}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <CaseHero
+        accent="#00c8a0"
+        index="03"
+        company="Rappi & CVC · Design Systems"
+        titleLines={["Design systems,", <em key="z" style={{ color: "#00c8a0", fontStyle: "italic" }}>from zero to scale.</em>]}
+        subtitle={<>Two companies, two starting points. At <strong style={{ color: "#fff", fontWeight: 600 }}>Rappi</strong> I helped a team bootstrap a system from nothing — no budget, no dedicated DS team. At <strong style={{ color: "#fff", fontWeight: 600 }}>CVC</strong> I built the mobile layer of a system that had none, shipping only the components that genuinely make an app feel native.</>}
+        tags={["Design Systems", "Mobile", "B2B & B2C"]}
+        stats={[
+          { n: "0 → 1", l: "Systems bootstrapped" },
+          { n: "2", l: "Companies · 2 contexts" },
+          { n: "Web + App", l: "Best practices shared" },
+        ]}
+      />
 
       {/* ═══ FULL-BLEED DESIGNERS VIDEO ═══ */}
       <section style={{ width: "100%", position: "relative" }}>
