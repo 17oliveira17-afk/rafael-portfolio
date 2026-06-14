@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, CSSProperties } from "react";
+import { useState, useRef, CSSProperties } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import RevealText from "../components/RevealText";
 import useIsMobile from "../components/useIsMobile";
@@ -85,6 +85,25 @@ function Body({ p, big = false }: { p: Project; big?: boolean }) {
   );
 }
 
+/* Cursor-following spotlight over a project plate — a soft light that tracks
+   the pointer for a tactile, premium feel. */
+function Spotlight({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const onMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+  return (
+    <div ref={ref} onMouseMove={onMove} className="wk-spot" style={{ position: "relative", height: "100%" }}>
+      {children}
+      <div aria-hidden className="wk-spot-glow" />
+    </div>
+  );
+}
+
 export default function WorkPage() {
   const isMobile = useIsMobile();
   const [hovered, setHovered] = useState<string | null>(null);
@@ -129,7 +148,7 @@ export default function WorkPage() {
           <div onMouseLeave={() => setHovered(null)} style={{ display: "flex", flexDirection: "column", gap: isMobile ? "1.75rem" : "2.75rem" }}>
             {PROJECTS.map((p, i) => {
               const plateLeft = i % 2 === 0;
-              const plate = <div style={{ minHeight: isMobile ? 240 : 380 }}><Plate p={p} index={i} big /></div>;
+              const plate = <div style={{ minHeight: isMobile ? 240 : 380 }}><Spotlight><Plate p={p} index={i} big /></Spotlight></div>;
               const body = <Body p={p} big />;
               return (
                 <ScrollReveal key={p.href} delay={60 + i * 70}>
