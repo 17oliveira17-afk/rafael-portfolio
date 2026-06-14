@@ -335,40 +335,30 @@ export default function CVCCasePage() {
             </div>
           </ScrollReveal>
 
-          {/* Real hi-fi prototype — full booking flow, end to end */}
+          {/* Hi-fi prototype — the whole app, usability-tested end to end */}
           <ScrollReveal delay={150}>
-            <div style={{ marginBottom: "4rem", textAlign: "center" }}>
-              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1.5rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> The hi-fi prototype — full flow, end to end</p>
-              <div style={{ maxWidth: isMobile ? 280 : 340, margin: "0 auto", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.55))" }}>
-                <LoopVideo
-                  src="/videos/cvc-prototype.mp4"
-                  label="CVC flight booking — full prototype walkthrough"
-                  aspect="720 / 1488"
-                  radius={28}
-                />
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* GIF: Loading animation */}
-          <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2.5rem" : "5rem", alignItems: "center" }}>
               <div>
-                <h3 style={{ fontSize: "1.4rem", fontWeight: 600, color: "#fff", letterSpacing: "-.02em", marginBottom: "1rem" }}>
-                  40–55s of "dancing cards"<br />→ clear loading state + cross-sell.
+                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1.25rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="video" size={15} /> Hi-fi prototype</p>
+                <h3 style={{ fontSize: "clamp(1.6rem,2.6vw,2.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.02em", lineHeight: 1.1, marginBottom: "1.25rem" }}>
+                  The whole app, prototyped<br />and tested end to end.
                 </h3>
-                <p style={{ fontSize: ".95rem", color: "rgba(255,255,255,.5)", lineHeight: 1.75 }}>
-                  The old search refresh caused 40–55 seconds of cards jumping around — users mis-tapped constantly. I replaced it with a clear loading state and used the wait time to show contextual cross-sell for hotels and cars. Resolved the wrong-click problem and contributed +23% cross-sell revenue.
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.1rem" }}>
+                  I built the entire experience as a clickable hi-fi prototype — guided search, results, flight details, baggage, passengers and confirmation — not just isolated screens.
+                </p>
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>
+                  That let me run real usability tests on the full journey before a single line of code — validating the one-flight-at-a-time decision and handing engineering a flow already proven to work.
                 </p>
               </div>
-              <div>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}><Icon name="film" size={15} /> Loading animation — before vs after</p>
-                <LoopVideo
-                  src="/videos/stock/travel-sky.mp4"
-                  label="Loading animation — before vs after"
-                  aspect="9 / 16"
-                  radius={20}
-                />
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ width: isMobile ? 260 : 320, filter: "drop-shadow(0 40px 80px rgba(0,0,0,.55))" }}>
+                  <LoopVideo
+                    src="/videos/cvc-prototype.mp4"
+                    label="CVC flight booking — full prototype walkthrough"
+                    aspect="720 / 1488"
+                    radius={28}
+                  />
+                </div>
               </div>
             </div>
           </ScrollReveal>
