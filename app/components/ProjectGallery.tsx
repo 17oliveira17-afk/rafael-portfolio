@@ -65,6 +65,18 @@ export const PROJECTS: Project[] = [
     grad: "linear-gradient(135deg, #5e1430 0%, #c0395b 55%, #ec6b86 100%)",
     glow: "#e1607c",
   },
+  {
+    href: "/work/maple-track",
+    eyebrow: "0 → 1 · Product",
+    company: "MapleTrack",
+    title: "Your GPS to Canada",
+    blurb: "A self-initiated 0→1 product — designed and built solo — guiding a couple through every step of Canadian immigration.",
+    metric: "0 → 1",
+    metricLabel: "Greenfield · web + app",
+    tags: ["0→1 Product", "Web + Mobile", "Founder"],
+    grad: "linear-gradient(135deg, #5e0a28 0%, #c81e4e 55%, #ff385c 100%)",
+    glow: "#e31c5f",
+  },
 ];
 
 /* ── Arrow button ── */

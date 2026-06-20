@@ -4,9 +4,34 @@ import { CSSProperties } from "react";
  * Minimal inline SVG icon set (stroke-based, currentColor).
  * Replaces emoji throughout the site for a cleaner, consistent look.
  */
-type IconName = "folder" | "close" | "trophy" | "video" | "film" | "star" | "target" | "flask" | "zap" | "layers";
+type IconName = "folder" | "close" | "trophy" | "video" | "film" | "star" | "target" | "flask" | "zap" | "layers" | "compass" | "map" | "check" | "globe" | "flag";
 
 const PATHS: Record<IconName, React.ReactNode> = {
+  compass: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m16 8-2.4 5.6L8 16l2.4-5.6L16 8Z" />
+    </>
+  ),
+  map: (
+    <>
+      <path d="m9 4 6 2 5.3-1.8a1 1 0 0 1 1.7 1V18a1 1 0 0 1-.7 1L15 21l-6-2-5.3 1.8A1 1 0 0 1 2 19.8V6a1 1 0 0 1 .7-1L9 4Z" />
+      <path d="M9 4v15M15 6v15" />
+    </>
+  ),
+  check: <path d="M20 6 9 17l-5-5" />,
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3.5 9h17M3.5 15h17M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+    </>
+  ),
+  flag: (
+    <>
+      <path d="M5 21V4" />
+      <path d="M5 4h11l-1.6 3.4L16 11H5" />
+    </>
+  ),
   target: (
     <>
       <circle cx="12" cy="12" r="9" />
