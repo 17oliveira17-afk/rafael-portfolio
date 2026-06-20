@@ -67,12 +67,13 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
 
 /* ── Auto-cycling DS component viewer ── */
 const DS_SLIDES = [
-  { src: "/work/ds-cvc/ds-cycle-01.png", label: "Checkbox" },
-  { src: "/work/ds-cvc/ds-cycle-02.png", label: "Progress Stepper" },
-  { src: "/work/ds-cvc/ds-cycle-03.png", label: "Native Elements" },
-  { src: "/work/ds-cvc/ds-cycle-04.png", label: "Alert" },
-  { src: "/work/ds-cvc/ds-cycle-05.png", label: "Switch" },
-  { src: "/work/ds-cvc/ds-cycle-06.png", label: "Tooltip" },
+  { src: "/work/ds-cvc/ds-button.png", label: "Button" },
+  { src: "/work/ds-cvc/ds-native.png", label: "Native Elements" },
+  { src: "/work/ds-cvc/ds-bottomsheet.png", label: "Bottom Sheet" },
+  { src: "/work/ds-cvc/ds-stepper.png", label: "Progress Stepper" },
+  { src: "/work/ds-cvc/ds-alert.png", label: "Alert" },
+  { src: "/work/ds-cvc/ds-switch.png", label: "Switch" },
+  { src: "/work/ds-cvc/ds-dialog.png", label: "Dialog" },
 ];
 
 function DSCycler({ isMobile }: { isMobile: boolean }) {
@@ -287,13 +288,7 @@ export default function DesignSystemCasePage() {
           </ScrollReveal>
 
           {/* The lean component set */}
-          {/* Hero — token overview */}
           <ScrollReveal delay={80}>
-            <Image src="/work/ds-cvc/ds-hero.png" alt="CVC mobile design system — full token and color overview" width={1600} height={970} style={{ width: "100%", height: "auto", display: "block", marginBottom: "2.5rem" }} />
-          </ScrollReveal>
-
-          {/* Component pages — auto-cycling with click */}
-          <ScrollReveal delay={120}>
             <DSCycler isMobile={isMobile} />
           </ScrollReveal>
 
