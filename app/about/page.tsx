@@ -15,7 +15,14 @@ const exp = [
     tags: ["B2B", "Fintech", "Regulated", "Leadership", "LatAm"],
     c: "#ec6b86",
     logo: "/logos/logo-thoughtworks.png",
-    companyInfo: { tagline: "Global technology consultancy", stats: [{ n: "10,000+", l: "Employees" }, { n: "48", l: "Offices" }, { n: "18", l: "Countries" }] },
+    companyInfo: {
+      tagline: "Global technology consultancy",
+      about: "One of the world's most influential tech consultancies — pioneered Agile, Continuous Delivery and Evolutionary Architecture. Partners with Fortune 500 enterprises to solve their hardest engineering and design challenges at scale.",
+      industry: "Tech Consulting",
+      hq: "Chicago, USA",
+      founded: "1993",
+      stats: [{ n: "10,000+", l: "Employees" }, { n: "48", l: "Offices worldwide" }, { n: "18", l: "Countries" }],
+    },
   },
   {
     year: "2022 — 25",
@@ -25,7 +32,14 @@ const exp = [
     tags: ["Fintech", "Growth", "Design System", "LatAm"],
     c: "#ff6a2b",
     logo: "/logos/logo-rappi.png",
-    companyInfo: { tagline: "Latin America's super-app", stats: [{ n: "25M+", l: "Users" }, { n: "9", l: "Countries" }, { n: "$5.25B", l: "Valuation" }] },
+    companyInfo: {
+      tagline: "Latin America's leading super-app",
+      about: "The dominant on-demand platform across Latin America — delivery, fintech, travel and commerce unified in one app. Backed by SoftBank, serving over 25 million monthly users from Colombia to Brazil.",
+      industry: "Super-app · Fintech",
+      hq: "Bogotá, Colombia",
+      founded: "2015",
+      stats: [{ n: "25M+", l: "Monthly active users" }, { n: "9", l: "Countries" }, { n: "$5.25B", l: "Peak valuation" }, { n: "4,000+", l: "Employees" }],
+    },
   },
   {
     year: "2018 — 22",
@@ -35,7 +49,14 @@ const exp = [
     tags: ["Travel", "Mobile", "Design System", "Conversion"],
     c: "#eab308",
     logo: "/logos/logo-cvc.png",
-    companyInfo: { tagline: "Brazil's largest travel company", stats: [{ n: "30M+", l: "Customers" }, { n: "1,600+", l: "Stores" }, { n: "R$17B", l: "Bookings/yr" }] },
+    companyInfo: {
+      tagline: "Brazil's largest travel company",
+      about: "The largest travel corporation in Latin America — publicly traded (B3: CVCB3), operating across flights, hotels, cruises and packages. Over 1,600 retail stores nationwide and R$17 billion in annual bookings.",
+      industry: "Travel · E-commerce",
+      hq: "São Paulo, Brazil",
+      founded: "1972",
+      stats: [{ n: "30M+", l: "Customers" }, { n: "1,600+", l: "Retail stores" }, { n: "R$17B", l: "Annual bookings" }, { n: "B3", l: "Publicly traded" }],
+    },
   },
   {
     year: "Until 2018",
@@ -93,58 +114,78 @@ const metrics = [
 
 function CompanyInline({ name, logo, accent, info, isMobile }: {
   name: string; logo: string; accent: string;
-  info: { tagline: string; stats: { n: string; l: string }[] };
+  info: { tagline: string; about: string; industry: string; hq: string; founded: string; stats: { n: string; l: string }[] };
   isMobile: boolean;
 }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ marginBottom: "1rem" }}>
+    <div style={{ marginBottom: "1.25rem" }}>
+      {/* Company name row — always visible */}
       <button
         onClick={() => setOpen(!open)}
         style={{
-          display: "flex", alignItems: "center", gap: ".75rem",
-          background: "none", border: "none", cursor: "pointer", padding: 0,
-          marginBottom: open ? ".75rem" : 0,
+          display: "flex", alignItems: "center", gap: ".75rem", width: "100%",
+          background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logo} alt={name} style={{ height: 28, width: "auto", filter: open ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(1.8)", opacity: open ? 1 : 0.6, transition: "all .3s ease" }} />
-        <span style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500 }}>{name}</span>
-        <span style={{
-          fontSize: ".58rem", fontWeight: 600, letterSpacing: ".06em",
-          padding: ".18rem .55rem", borderRadius: 100,
-          background: open ? accent + "1f" : "rgba(255,255,255,.06)",
-          border: `1px solid ${open ? accent + "55" : "rgba(255,255,255,.1)"}`,
-          color: open ? accent : "rgba(255,255,255,.35)",
-          transition: "all .3s ease",
-          whiteSpace: "nowrap",
-        }}>
-          {open ? "Hide" : "Company size ↓"}
+        <img src={logo} alt={name} style={{ height: 30, width: "auto", filter: open ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(1.8)", opacity: open ? 1 : 0.6, transition: "all .3s ease" }} />
+        <span style={{ color: open ? "#fff" : "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 600, transition: "color .3s ease" }}>{name}</span>
+        <span style={{ fontSize: ".72rem", color: open ? accent : "rgba(255,255,255,.3)", transition: "color .3s ease", marginLeft: "auto" }}>
+          {open ? "−" : "+"}
         </span>
       </button>
 
+      {/* Expandable company card */}
       <div style={{
-        maxHeight: open ? 120 : 0,
+        maxHeight: open ? 500 : 0,
         opacity: open ? 1 : 0,
         overflow: "hidden",
-        transition: "max-height .45s cubic-bezier(.16,1,.3,1), opacity .35s ease",
+        transition: "max-height .55s cubic-bezier(.16,1,.3,1), opacity .4s ease",
       }}>
         <div style={{
-          display: "flex", gap: isMobile ? "1rem" : "1.5rem",
-          padding: ".9rem 1.25rem",
-          borderRadius: 14,
-          background: accent + "0a",
-          border: `1px solid ${accent}30`,
-          alignItems: "center",
-          flexWrap: "wrap",
+          marginTop: ".9rem",
+          borderRadius: 18,
+          border: `1px solid ${accent}35`,
+          background: `linear-gradient(135deg, ${accent}08 0%, transparent 60%)`,
+          overflow: "hidden",
+          position: "relative",
         }}>
-          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)", marginRight: "auto", minWidth: isMobile ? "100%" : undefined }}>{info.tagline}</p>
-          {info.stats.map((s) => (
-            <div key={s.l} style={{ textAlign: "center", minWidth: 60 }}>
-              <p style={{ fontSize: "1.1rem", fontWeight: 700, color: accent, letterSpacing: "-.02em", lineHeight: 1 }}>{s.n}</p>
-              <p style={{ fontSize: ".6rem", color: "rgba(255,255,255,.4)", marginTop: ".25rem", letterSpacing: ".04em", textTransform: "uppercase" }}>{s.l}</p>
+          {/* Accent glow */}
+          <div aria-hidden style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "50%", background: `radial-gradient(ellipse at 100% 0%, ${accent}15, transparent 70%)`, pointerEvents: "none" }} />
+
+          {/* Top row: tagline + meta */}
+          <div style={{ padding: isMobile ? "1.25rem 1.25rem .75rem" : "1.5rem 1.75rem 1rem", position: "relative" }}>
+            <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.7)", fontWeight: 500, marginBottom: ".75rem" }}>{info.tagline}</p>
+            <p style={{ fontSize: ".84rem", color: "rgba(255,255,255,.45)", lineHeight: 1.7, maxWidth: 560 }}>{info.about}</p>
+            <div style={{ display: "flex", gap: isMobile ? "1rem" : "1.75rem", marginTop: "1rem", flexWrap: "wrap" }}>
+              {[
+                { icon: "◆", label: "Industry", value: info.industry },
+                { icon: "◉", label: "HQ", value: info.hq },
+                { icon: "✦", label: "Founded", value: info.founded },
+              ].map(m => (
+                <div key={m.label} style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+                  <span style={{ fontSize: ".5rem", color: accent }}>{m.icon}</span>
+                  <span style={{ fontSize: ".72rem", color: "rgba(255,255,255,.35)" }}>{m.label}:</span>
+                  <span style={{ fontSize: ".72rem", color: "rgba(255,255,255,.7)", fontWeight: 600 }}>{m.value}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Stats row */}
+          <div style={{
+            display: "grid", gridTemplateColumns: `repeat(${info.stats.length}, 1fr)`,
+            gap: "1px", background: `${accent}18`,
+            borderTop: `1px solid ${accent}20`,
+          }}>
+            {info.stats.map((s) => (
+              <div key={s.l} style={{ padding: isMobile ? "1rem" : "1.25rem 1.5rem", background: "#0a0a0c", textAlign: "center" }}>
+                <p style={{ fontSize: isMobile ? "clamp(1.1rem,4vw,1.4rem)" : "1.5rem", fontWeight: 700, color: accent, letterSpacing: "-.03em", lineHeight: 1 }}>{s.n}</p>
+                <p style={{ fontSize: ".62rem", color: "rgba(255,255,255,.4)", marginTop: ".4rem", letterSpacing: ".06em", textTransform: "uppercase" }}>{s.l}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
