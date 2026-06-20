@@ -265,9 +265,9 @@ export default function DesignSystemCasePage() {
           <ScrollReveal delay={150}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: "1rem" }}>
               {[
-                { n: "Faster", l: "Delivery time", sub: "Reusable components cut build time" },
-                { n: "Higher", l: "User engagement", sub: "A more intuitive, consistent system" },
-                { n: "Unified", l: "Brand consistency", sub: "Strengthened across B2B products" },
+                { n: "Unified", l: "Brand consistency", sub: "One component standard adopted across all B2B teams in 9 countries" },
+                { n: "Faster", l: "Component creation", sub: "Reduced time to ship new components with reusable foundations" },
+                { n: "Process", l: "Alignment before building", sub: "Established discovery → definition → solution workflow for every new component" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
                   <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#00c8a0", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
@@ -335,9 +335,9 @@ export default function DesignSystemCasePage() {
           <ScrollReveal delay={140}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
               {[
-                { n: "[ +__% ]", l: "Usability / conversion", sub: "Tie to the CVC app uplift the system enabled" },
-                { n: "[ __ ]", l: "Components shipped", sub: "Size of the mobile component set" },
-                { n: "[ __ teams ]", l: "Adopting the system", sub: "App + web teams using it" },
+                { n: "+212%", l: "Checkout conversion", sub: "Mobile DS enabled the native experience that drove the CVC app uplift" },
+                { n: "20+", l: "Mobile components", sub: "Native inputs, gestures, navigation, loading & feedback states" },
+                { n: "2 teams", l: "Adopting the system", sub: "App team built on it; web team adopted mobile-first patterns upstream" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2.25rem 1.75rem", background: "#0a0a0a" }}>
                   <p style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#00c8a0", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".6rem" }}>{m.n}</p>
