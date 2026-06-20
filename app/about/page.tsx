@@ -131,8 +131,19 @@ function CompanyInline({ name, logo, accent, info, isMobile }: {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logo} alt={name} style={{ height: 30, width: "auto", filter: open ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(1.8)", opacity: open ? 1 : 0.6, transition: "all .3s ease" }} />
         <span style={{ color: open ? "#fff" : "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 600, transition: "color .3s ease" }}>{name}</span>
-        <span style={{ fontSize: ".72rem", color: open ? accent : "rgba(255,255,255,.3)", transition: "color .3s ease", marginLeft: "auto" }}>
-          {open ? "−" : "+"}
+        <span className="co-pill" style={{
+          marginLeft: "auto",
+          display: "inline-flex", alignItems: "center", gap: ".35rem",
+          fontSize: ".66rem", fontWeight: 600, letterSpacing: ".04em",
+          padding: ".3rem .75rem", borderRadius: 100,
+          background: open ? `${accent}1a` : "rgba(255,255,255,.05)",
+          border: `1px solid ${open ? accent + "50" : "rgba(255,255,255,.12)"}`,
+          color: open ? accent : "rgba(255,255,255,.45)",
+          transition: "all .35s ease",
+          whiteSpace: "nowrap",
+        }}>
+          {open ? "Hide details" : "About the company"}
+          <span style={{ fontSize: ".7rem", transition: "transform .3s ease", display: "inline-block", transform: open ? "rotate(180deg)" : "rotate(0)" }}>▾</span>
         </span>
       </button>
 
