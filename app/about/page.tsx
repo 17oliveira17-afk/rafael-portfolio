@@ -13,7 +13,9 @@ const exp = [
     company: "Thoughtworks",
     story: "Joined into one of the most turbulent design fronts I've seen — a team delivering 1–2 months late, no defined process, bad design decisions, and endless uncontrolled changes. In under two months, I replaced that chaos with a structured 3-week sprint cadence covering all 5 design phases with quality gates — a 62% reduction in cycle time. I also introduced an AI-first prototyping workflow that cut operational overhead and accelerated validation. The same client who walked out of meetings later described the new plan as 'solid and leading to excellent results.' Formally designated Leader of the UX Front, added to the Client Leadership Team, rated Consistently Exceeded Expectations — performing at Lead grade. All navigated in Spanish.",
     tags: ["B2B", "Fintech", "Regulated", "Leadership", "LatAm"],
-    c: "#0071e3",
+    c: "#ec6b86",
+    logo: "/logos/logo-thoughtworks.png",
+    companyInfo: { tagline: "Global technology consultancy", stats: [{ n: "10,000+", l: "Employees" }, { n: "48", l: "Offices" }, { n: "18", l: "Countries" }] },
   },
   {
     year: "2022 — 25",
@@ -21,7 +23,9 @@ const exp = [
     company: "Rappi",
     story: "Three years designing fintech and growth products at one of Latin America's most demanding tech companies. I led the full redesign of restaurant onboarding — a product used by hundreds of thousands of merchants — driving +53% conversion and +135% lead verification. Alongside that, I shaped the activation and retention experience for Rappi's financial products, built and evolved Design System components adopted across multiple squads, and collaborated with PMs and engineering on concurrent workstreams under real pressure.",
     tags: ["Fintech", "Growth", "Design System", "LatAm"],
-    c: "#0071e3",
+    c: "#ff6a2b",
+    logo: "/logos/logo-rappi.png",
+    companyInfo: { tagline: "Latin America's super-app", stats: [{ n: "25M+", l: "Users" }, { n: "9", l: "Countries" }, { n: "$5.25B", l: "Valuation" }] },
   },
   {
     year: "2018 — 22",
@@ -29,7 +33,9 @@ const exp = [
     company: "CVC Corp",
     story: "I inherited a mobile app with a 2.0★ App Store rating, a 40-second load time, and a checkout that converted at 6%. What followed was a full native redesign of the flight booking experience — from research and architecture to UI and launch. Within one month of the flights redesign going live, the rating jumped to 3.2★. After rolling out across all products, it reached 4.6★. Checkout conversion went from 6% to 20% (+212%), load time dropped from 40s to 6s.",
     tags: ["Travel", "Mobile", "Design System", "Conversion"],
-    c: "#0071e3",
+    c: "#eab308",
+    logo: "/logos/logo-cvc.png",
+    companyInfo: { tagline: "Brazil's largest travel company", stats: [{ n: "30M+", l: "Customers" }, { n: "1,600+", l: "Stores" }, { n: "R$17B", l: "Bookings/yr" }] },
   },
   {
     year: "Until 2018",
@@ -84,6 +90,66 @@ const metrics = [
   { n: "+212%", label: "Checkout conversion at CVC" },
   { n: "+53%", label: "Onboarding conversion at Rappi" },
 ];
+
+function CompanyInline({ name, logo, accent, info, isMobile }: {
+  name: string; logo: string; accent: string;
+  info: { tagline: string; stats: { n: string; l: string }[] };
+  isMobile: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ marginBottom: "1rem" }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          display: "flex", alignItems: "center", gap: ".75rem",
+          background: "none", border: "none", cursor: "pointer", padding: 0,
+          marginBottom: open ? ".75rem" : 0,
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo} alt={name} style={{ height: 28, width: "auto", filter: open ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(1.8)", opacity: open ? 1 : 0.6, transition: "all .3s ease" }} />
+        <span style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500 }}>{name}</span>
+        <span style={{
+          fontSize: ".58rem", fontWeight: 600, letterSpacing: ".06em",
+          padding: ".18rem .55rem", borderRadius: 100,
+          background: open ? accent + "1f" : "rgba(255,255,255,.06)",
+          border: `1px solid ${open ? accent + "55" : "rgba(255,255,255,.1)"}`,
+          color: open ? accent : "rgba(255,255,255,.35)",
+          transition: "all .3s ease",
+          whiteSpace: "nowrap",
+        }}>
+          {open ? "Hide" : "Company size ↓"}
+        </span>
+      </button>
+
+      <div style={{
+        maxHeight: open ? 120 : 0,
+        opacity: open ? 1 : 0,
+        overflow: "hidden",
+        transition: "max-height .45s cubic-bezier(.16,1,.3,1), opacity .35s ease",
+      }}>
+        <div style={{
+          display: "flex", gap: isMobile ? "1rem" : "1.5rem",
+          padding: ".9rem 1.25rem",
+          borderRadius: 14,
+          background: accent + "0a",
+          border: `1px solid ${accent}30`,
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
+          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)", marginRight: "auto", minWidth: isMobile ? "100%" : undefined }}>{info.tagline}</p>
+          {info.stats.map((s) => (
+            <div key={s.l} style={{ textAlign: "center", minWidth: 60 }}>
+              <p style={{ fontSize: "1.1rem", fontWeight: 700, color: accent, letterSpacing: "-.02em", lineHeight: 1 }}>{s.n}</p>
+              <p style={{ fontSize: ".6rem", color: "rgba(255,255,255,.4)", marginTop: ".25rem", letterSpacing: ".04em", textTransform: "uppercase" }}>{s.l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const FEATURED_COMPANIES = [
   {
@@ -289,21 +355,18 @@ export default function AboutPage() {
       )}
 
       {/* ═══ LOGOS ═══ */}
-      <section style={{ background: "#000", padding: isMobile ? "3.5rem 1.5rem" : "3.5rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
+      <section style={{ background: "#000", padding: "3.5rem 0", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
         <p style={{ fontSize: ".62rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2rem" }}>Companies</p>
-
-        {/* — Featured companies with stats on hover/click — */}
-        <CompanyShowcase isMobile={isMobile} />
-
-        {/* — Other companies — scrolling strip — */}
-        <div style={{ marginTop: "2.5rem", position: "relative" }}>
+        <div style={{ position: "relative" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 60, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 60, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <p style={{ fontSize: ".58rem", fontWeight: 600, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.18)", textAlign: "center", marginBottom: "1rem" }}>Also worked with</p>
           <div style={{ display: "flex", overflow: "hidden" }}>
             {[0, 1].map(copy => (
               <div key={copy} aria-hidden={copy === 1} style={{ display: "flex", gap: "3rem", alignItems: "center", animation: "logoScroll 22s linear infinite", flexShrink: 0 }}>
                 {[
+                  { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
+                  { src: "/logos/logo-rappi.png", alt: "Rappi" },
+                  { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
                   { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
                   { src: "/logos/logo-almundo.png", alt: "Almundo" },
                   { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
@@ -314,7 +377,7 @@ export default function AboutPage() {
                 ].map((logo, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img key={i} src={logo.src} alt={logo.alt}
-                    style={{ height: isMobile ? 50 : 60, width: "auto", opacity: 0.3, filter: "grayscale(1) brightness(2)", flexShrink: 0 }}
+                    style={{ height: isMobile ? 60 : 80, width: "auto", opacity: 0.4, filter: "grayscale(1) brightness(2)", flexShrink: 0 }}
                   />
                 ))}
               </div>
@@ -440,17 +503,24 @@ export default function AboutPage() {
             {exp.map((e, i) => (
               <ScrollReveal key={i} delay={i * 70}>
                 <div className="tl-item">
-                  <div className="tl-rail"><span className={i === 0 ? "tl-dot tl-dot-now" : "tl-dot"} /></div>
+                  <div className="tl-rail"><span className={i === 0 ? "tl-dot tl-dot-now" : "tl-dot"} style={e.c !== "#6e6e73" ? { background: e.c, borderColor: e.c } : undefined} /></div>
                   <div className="tl-body">
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: ".5rem", fontSize: ".8rem", fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", color: e.c === "#6e6e73" ? "rgba(255,255,255,.4)" : "#0071e3", marginBottom: ".7rem" }}>
-                      {e.year}{i === 0 && <span style={{ fontSize: ".58rem", padding: ".12rem .5rem", borderRadius: 100, background: "rgba(0,113,227,.14)", border: "1px solid rgba(0,113,227,.3)", letterSpacing: ".08em" }}>NOW</span>}
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: ".5rem", fontSize: ".8rem", fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", color: e.c, marginBottom: ".7rem" }}>
+                      {e.year}{i === 0 && <span style={{ fontSize: ".58rem", padding: ".12rem .5rem", borderRadius: 100, background: `${e.c}24`, border: `1px solid ${e.c}4d`, letterSpacing: ".08em" }}>NOW</span>}
                     </span>
                     <h3 style={{ fontWeight: 700, fontSize: isMobile ? "1.1rem" : "1.35rem", color: "#fff", letterSpacing: "-.02em", marginBottom: ".2rem" }}>{e.role}</h3>
-                    <p style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500, marginBottom: "1rem" }}>{e.company}</p>
+
+                    {/* Company name + expandable info for big companies */}
+                    {e.companyInfo ? (
+                      <CompanyInline name={e.company} logo={e.logo!} accent={e.c} info={e.companyInfo} isMobile={isMobile} />
+                    ) : (
+                      <p style={{ color: "rgba(255,255,255,.55)", fontSize: ".95rem", fontWeight: 500, marginBottom: "1rem" }}>{e.company}</p>
+                    )}
+
                     <p style={{ fontSize: isMobile ? ".88rem" : ".95rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.25rem", maxWidth: 680 }}>{e.story}</p>
                     <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
                       {e.tags.map(t => (
-                        <span key={t} style={{ padding: ".2rem .7rem", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
+                        <span key={t} style={{ padding: ".2rem .7rem", border: `1px solid ${e.c !== "#6e6e73" ? e.c + "30" : "rgba(255,255,255,.12)"}`, borderRadius: 100, fontSize: ".68rem", color: "rgba(255,255,255,.4)" }}>{t}</span>
                       ))}
                     </div>
                   </div>
