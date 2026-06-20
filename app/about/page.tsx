@@ -289,7 +289,7 @@ export default function AboutPage() {
       )}
 
       {/* ═══ LOGOS ═══ */}
-      <section style={{ background: "#000", padding: "3.5rem 0", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
+      <section style={{ background: "#000", padding: isMobile ? "3.5rem 1.5rem" : "3.5rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
         <p style={{ fontSize: ".62rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2rem" }}>Companies</p>
 
         {/* — Featured companies with stats on hover/click — */}
