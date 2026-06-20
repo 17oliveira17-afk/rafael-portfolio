@@ -69,13 +69,19 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
 type DSSlide = { src: string; label: string; video?: boolean };
 
 const DS_CVC_SLIDES: DSSlide[] = [
+  { src: "/work/ds-cvc/ds-overview.png", label: "Overview" },
   { src: "/work/ds-cvc/ds-button.png", label: "Button" },
   { src: "/work/ds-cvc/ds-native.png", label: "Native Elements" },
-  { src: "/work/ds-cvc/ds-bottomsheet.png", label: "Bottom Sheet" },
-  { src: "/work/ds-cvc/ds-stepper.png", label: "Progress Stepper" },
-  { src: "/work/ds-cvc/ds-alert.png", label: "Alert" },
+  { src: "/work/ds-cvc/ds-checkbox.png", label: "Checkbox" },
   { src: "/work/ds-cvc/ds-switch.png", label: "Switch" },
+  { src: "/work/ds-cvc/ds-stepper.png", label: "Stepper" },
   { src: "/work/ds-cvc/ds-dialog.png", label: "Dialog" },
+  { src: "/work/ds-cvc/ds-carousel.png", label: "Carousel" },
+  { src: "/work/ds-cvc/ds-avatar.png", label: "Avatar" },
+  { src: "/work/ds-cvc/ds-bottomsheet.png", label: "Bottom Sheet" },
+  { src: "/work/ds-cvc/ds-sheet-rules.png", label: "Do / Don't" },
+  { src: "/work/ds-cvc/ds-alert.png", label: "Alert + Docs" },
+  { src: "/work/ds-cvc/ds-tooltip.png", label: "Tooltip + Docs" },
 ];
 
 const DS_RAPPI_SLIDES: DSSlide[] = [
