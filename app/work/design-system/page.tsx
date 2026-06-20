@@ -65,8 +65,10 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
   return <span style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".06em", padding: ".3rem .9rem", borderRadius: 100, background: `${color}22`, border: `1px solid ${color}55`, color }}>{children}</span>;
 }
 
-/* ── Auto-cycling DS component viewer ── */
-const DS_SLIDES = [
+/* ── Auto-cycling DS viewer (shared by Rappi + CVC) ── */
+type DSSlide = { src: string; label: string; video?: boolean };
+
+const DS_CVC_SLIDES: DSSlide[] = [
   { src: "/work/ds-cvc/ds-button.png", label: "Button" },
   { src: "/work/ds-cvc/ds-native.png", label: "Native Elements" },
   { src: "/work/ds-cvc/ds-bottomsheet.png", label: "Bottom Sheet" },
@@ -76,31 +78,54 @@ const DS_SLIDES = [
   { src: "/work/ds-cvc/ds-dialog.png", label: "Dialog" },
 ];
 
-function DSCycler({ isMobile }: { isMobile: boolean }) {
+const DS_RAPPI_SLIDES: DSSlide[] = [
+  { src: "/work/ds-rappi/solution-component.mp4", label: "Component", video: true },
+  { src: "/work/ds-rappi/solution-variations.mp4", label: "Variations", video: true },
+  { src: "/work/ds-rappi/solution-docs.mp4", label: "Documentation", video: true },
+  { src: "/work/ds-rappi/solution-usage.mp4", label: "Usage rules", video: true },
+  { src: "/work/ds-rappi/discovery-competitors.png", label: "Benchmarks" },
+  { src: "/work/ds-rappi/discovery-rappi-teams.png", label: "Team audit" },
+  { src: "/work/ds-rappi/definition-anatomy.png", label: "Anatomy" },
+  { src: "/work/ds-rappi/definition-states.png", label: "States" },
+];
+
+function DSCycler({ isMobile, slides, accent = "#00c8a0" }: { isMobile: boolean; slides: DSSlide[]; accent?: string }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     if (paused) return;
-    timer.current = setInterval(() => setActive((p) => (p + 1) % DS_SLIDES.length), 3200);
+    timer.current = setInterval(() => setActive((p) => (p + 1) % slides.length), 4000);
     return () => { if (timer.current) clearInterval(timer.current); };
-  }, [paused]);
+  }, [paused, slides.length]);
 
-  const go = (i: number) => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 8000); };
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => { if (v) { if (i === active) { v.currentTime = 0; v.play().catch(() => {}); } else { v.pause(); } } });
+  }, [active]);
+
+  const go = (i: number) => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 10000); };
 
   return (
     <div style={{ marginBottom: "1.5rem" }}>
-      <div style={{ position: "relative", aspectRatio: "1600 / 970" }}>
-        {DS_SLIDES.map((s, i) => (
-          <Image key={i} src={s.src} alt={`CVC DS — ${s.label}`} width={1600} height={970}
-            style={{ position: i === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", opacity: i === active ? 1 : 0, transition: "opacity .6s ease", display: "block" }} />
+      <div style={{ position: "relative", aspectRatio: "1600 / 970", overflow: "hidden" }}>
+        {slides.map((s, i) => (
+          <div key={i} style={{ position: i === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: "100%", opacity: i === active ? 1 : 0, transition: "opacity .6s ease" }}>
+            {s.video ? (
+              <video ref={el => { videoRefs.current[i] = el; }} src={s.src} muted loop playsInline
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+            ) : (
+              <Image src={s.src} alt={s.label} width={1600} height={970}
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+            )}
+          </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginTop: "1.25rem", flexWrap: "wrap" }}>
-        {DS_SLIDES.map((s, i) => (
+        {slides.map((s, i) => (
           <button key={i} onClick={() => go(i)}
-            style={{ padding: ".35rem .85rem", borderRadius: 100, border: `1px solid ${i === active ? "rgba(0,200,160,.5)" : "rgba(255,255,255,.1)"}`, background: i === active ? "rgba(0,200,160,.12)" : "transparent", color: i === active ? "#00c8a0" : "rgba(255,255,255,.45)", fontSize: ".72rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease" }}>
+            style={{ padding: ".35rem .85rem", borderRadius: 100, border: `1px solid ${i === active ? accent + "80" : "rgba(255,255,255,.1)"}`, background: i === active ? accent + "1f" : "transparent", color: i === active ? accent : "rgba(255,255,255,.45)", fontSize: ".72rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease" }}>
             {s.label}
           </button>
         ))}
@@ -215,11 +240,7 @@ export default function DesignSystemCasePage() {
           {/* Text field as the seed */}
           <ScrollReveal delay={80}>
             <div style={{ marginBottom: "2.5rem" }}>
-              <MediaPlaceholder accent="#00c8a0"
-                label="Text field — single main component, every variation inside"
-                filename="ds/rappi-text-field-variants.png"
-                hint="Board do text field: anatomia + todos os estados (default, hover, focus, focus w/ placeholder, filling, filled, disabled, disabled filled, error) e tipos (ícone esquerda/direita/ambos, text area, code validation, chips). Exporte do Figma."
-                aspect="16/9" />
+              <DSCycler isMobile={isMobile} slides={DS_RAPPI_SLIDES} accent="#00c8a0" />
             </div>
           </ScrollReveal>
 
@@ -289,7 +310,7 @@ export default function DesignSystemCasePage() {
 
           {/* The lean component set */}
           <ScrollReveal delay={80}>
-            <DSCycler isMobile={isMobile} />
+            <DSCycler isMobile={isMobile} slides={DS_CVC_SLIDES} accent="#00c8a0" />
           </ScrollReveal>
 
           {/* Why mobile-only components */}
