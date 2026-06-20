@@ -72,6 +72,176 @@ function DeviceDuo({ desktop, mobile, alt, url, isMobile }: { desktop: string; m
   );
 }
 
+/* ── full-bleed, gently tilted browser showcase ── */
+function Showcase({ desktop, url, alt, isMobile, rail }: { desktop: string; url: string; alt: string; isMobile: boolean; rail?: ReactNode }) {
+  const frame = <BrowserFrame src={desktop} alt={alt} url={url} />;
+  return (
+    <div>
+      {rail && <div style={{ marginBottom: isMobile ? "2rem" : "3rem" }}>{rail}</div>}
+      {isMobile ? frame : (
+        <div style={{ width: "min(1300px, 94vw)", marginLeft: "50%", transform: "translateX(-50%)" }}>
+          <div style={{ transform: "perspective(2600px) rotateX(4deg)", transformOrigin: "center top" }}>{frame}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── desktop browser with numbered annotation pills (+ optional phone inset) ── */
+function Annotated({ desktop, url, alt, notes, phone, isMobile }: { desktop: string; url: string; alt: string; notes: { x: number; y: number; t: string }[]; phone?: string; isMobile: boolean }) {
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem", alignItems: "center" }}>
+        <BrowserFrame src={desktop} alt={alt} url={url} />
+        <div style={{ display: "flex", flexDirection: "column", gap: ".7rem", width: "100%" }}>
+          {notes.map((n, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: ".7rem", fontSize: ".88rem", color: "rgba(255,255,255,.72)" }}>
+              <span style={{ width: 22, height: 22, borderRadius: "50%", background: a(0.15), border: `1px solid ${a(0.5)}`, color: ACC, display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".7rem", fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+              {n.t}
+            </div>
+          ))}
+        </div>
+        {phone && <PhoneFrame src={phone} alt={alt + " — mobile"} width={180} />}
+      </div>
+    );
+  }
+  return (
+    <div style={{ position: "relative", paddingBottom: phone ? "2rem" : 0 }}>
+      <BrowserFrame src={desktop} alt={alt} url={url} />
+      {notes.map((n, i) => (
+        <div key={i} style={{ position: "absolute", left: `${n.x}%`, top: `${n.y}%`, transform: "translate(-50%,-50%)", zIndex: 4, display: "flex", alignItems: "center", gap: ".45rem", padding: ".4rem .75rem", borderRadius: 100, background: "rgba(10,10,12,.82)", border: `1px solid ${a(0.55)}`, backdropFilter: "blur(6px)", whiteSpace: "nowrap", boxShadow: "0 8px 24px rgba(0,0,0,.45)" }}>
+          <span style={{ width: 16, height: 16, borderRadius: "50%", background: ACC, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".62rem", fontWeight: 700 }}>{i + 1}</span>
+          <span style={{ fontSize: ".74rem", color: "#fff", fontWeight: 500 }}>{n.t}</span>
+        </div>
+      ))}
+      {phone && (
+        <div style={{ position: "absolute", left: "-1.25rem", bottom: "-1.5rem", width: "16%", zIndex: 5 }}>
+          <PhoneFrame src={phone} alt={alt + " — mobile"} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── three phones fanned out ── */
+function PhoneFan({ items, isMobile }: { items: { src: string; alt: string }[]; isMobile: boolean }) {
+  const W = isMobile ? 116 : 200;
+  const ov = isMobile ? -32 : -60;
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start" }}>
+      <div style={{ width: W, transform: "rotate(-8deg)", marginRight: ov, marginTop: isMobile ? 18 : 34, zIndex: 1 }}><PhoneFrame src={items[0].src} alt={items[0].alt} /></div>
+      <div style={{ width: W, zIndex: 3 }}><PhoneFrame src={items[1].src} alt={items[1].alt} /></div>
+      <div style={{ width: W, transform: "rotate(8deg)", marginLeft: ov, marginTop: isMobile ? 18 : 34, zIndex: 1 }}><PhoneFrame src={items[2].src} alt={items[2].alt} /></div>
+    </div>
+  );
+}
+
+/* ── the 10-step onboarding stepper, rebuilt ── */
+function OnboardingSteps() {
+  const steps = ["Boas-vindas", "Perfil", "Educação", "Experiência", "Idiomas", "Cônjuge", "Finanças", "Filhos", "Preferências", "Resultado"];
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: ".5rem", justifyContent: "center", marginTop: "2.75rem" }}>
+      {steps.map((s, i) => (
+        <div key={s} style={{ display: "flex", alignItems: "center", gap: ".5rem", padding: ".38rem .8rem", borderRadius: 100, border: `1px solid ${i < 1 ? a(0.5) : "rgba(255,255,255,.1)"}`, background: i < 1 ? a(0.08) : "transparent" }}>
+          <span style={{ width: 18, height: 18, borderRadius: "50%", background: i < 1 ? ACC : "rgba(255,255,255,.1)", color: i < 1 ? "#fff" : "rgba(255,255,255,.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".62rem", fontWeight: 700 }}>{i + 1}</span>
+          <span style={{ fontSize: ".72rem", color: i < 1 ? "#fff" : "rgba(255,255,255,.5)" }}>{s}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ── two desktop browsers side by side, optional phone on the seam ── */
+function TwoUp({ left, right, phone, alt, isMobile }: { left: { src: string; url: string }; right: { src: string; url: string }; phone?: string; alt: string; isMobile: boolean }) {
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", alignItems: "center" }}>
+        <BrowserFrame src={left.src} alt={alt} url={left.url} />
+        <BrowserFrame src={right.src} alt={alt + " — compare"} url={right.url} />
+        {phone && <PhoneFrame src={phone} alt={alt + " — mobile"} width={180} />}
+      </div>
+    );
+  }
+  return (
+    <div style={{ position: "relative", paddingBottom: phone ? "1.5rem" : 0 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", alignItems: "start" }}>
+        <BrowserFrame src={left.src} alt={alt} url={left.url} />
+        <BrowserFrame src={right.src} alt={alt + " — compare"} url={right.url} />
+      </div>
+      {phone && (
+        <div style={{ position: "absolute", left: "50%", bottom: "-1.5rem", transform: "translateX(-50%)", width: "14%", zIndex: 5 }}>
+          <PhoneFrame src={phone} alt={alt + " — mobile"} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Plan A/B/C, rebuilt from the data ── */
+function PlanColumns({ isMobile }: { isMobile: boolean }) {
+  const plans = [
+    { tag: "Plan A", kind: "Primary path", title: "Atlantic Immigration Program", rows: [["Processing", "~12 mo"], ["Min. CLB", "4"]], hi: true },
+    { tag: "Plan B", kind: "Complements A", title: "Express Entry — FSWP", rows: [["Processing", "~6 mo"], ["Min. CLB", "7"], ["Min. CRS", "470"], ["Funds", "CAD 13,757"]], hi: false },
+    { tag: "Plan C", kind: "Fallback", title: "Study Permit → PGWP → PR", rows: [["Processing", "~36 mo"], ["Min. CLB", "6"], ["Funds", "CAD 20,000"]], hi: false },
+  ];
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1rem" }}>
+      {plans.map((p) => (
+        <div key={p.tag} style={{ padding: "1.5rem", borderRadius: 16, border: `1px solid ${p.hi ? a(0.4) : "rgba(255,255,255,.1)"}`, background: p.hi ? a(0.06) : "#0a0a0a" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: ".6rem", marginBottom: "1rem" }}>
+            <span style={{ fontSize: ".64rem", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "#fff", background: p.hi ? ACC : "rgba(255,255,255,.14)", padding: ".25rem .6rem", borderRadius: 100 }}>{p.tag}</span>
+            <span style={{ fontSize: ".7rem", color: "rgba(255,255,255,.4)" }}>{p.kind}</span>
+          </div>
+          <h3 style={{ fontSize: "1.02rem", fontWeight: 600, color: "#fff", marginBottom: "1.25rem", letterSpacing: "-.01em", lineHeight: 1.25, minHeight: isMobile ? undefined : "2.5em" }}>{p.title}</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: ".55rem" }}>
+            {p.rows.map(([k, v]) => (
+              <div key={k} style={{ display: "flex", justifyContent: "space-between", fontSize: ".8rem", borderTop: "1px solid rgba(255,255,255,.06)", paddingTop: ".55rem" }}>
+                <span style={{ color: "rgba(255,255,255,.4)" }}>{k}</span>
+                <span style={{ color: "rgba(255,255,255,.85)", fontWeight: 500 }}>{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ── progress rail (Início → Cidadania) ── */
+function ProgressRail({ isMobile }: { isMobile: boolean }) {
+  return (
+    <div style={{ border: "1px solid rgba(255,255,255,.1)", borderRadius: 16, padding: isMobile ? "1.25rem" : "1.5rem 2rem", background: "#0a0a0a" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: ".9rem" }}>
+        <span style={{ fontSize: ".8rem", color: "#fff", fontWeight: 600 }}>Plano A — 3 of 27 steps</span>
+        <span style={{ fontSize: ".85rem", color: ACC, fontWeight: 700 }}>11%</span>
+      </div>
+      <div style={{ display: "flex", gap: 4 }}>
+        {Array.from({ length: 9 }).map((_, i) => (
+          <div key={i} style={{ flex: 1, height: 6, borderRadius: 3, background: i === 0 ? ACC : i === 1 ? a(0.4) : "rgba(255,255,255,.1)" }} />
+        ))}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: ".7rem", fontSize: ".7rem", color: "rgba(255,255,255,.4)" }}>
+        <span>Início</span>
+        <span style={{ color: "rgba(255,255,255,.7)" }}>Fase 2 · Testes de Idioma</span>
+        <span>Cidadania</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── phone + magnified loupe of the real UI ── */
+function DetailZoom({ phone, zoomSrc, zoomPos, caption, alt, isMobile }: { phone: string; zoomSrc: string; zoomPos: string; caption: string; alt: string; isMobile: boolean }) {
+  return (
+    <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? "2.5rem" : "4rem", alignItems: "center", justifyContent: "center" }}>
+      <PhoneFrame src={phone} alt={alt} width={isMobile ? 200 : 235} />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+        <div style={{ width: isMobile ? 210 : 300, height: isMobile ? 210 : 300, borderRadius: 24, border: `2px solid ${a(0.6)}`, boxShadow: "0 30px 70px rgba(0,0,0,.5)", backgroundImage: `url(${zoomSrc})`, backgroundSize: "300%", backgroundPosition: zoomPos, backgroundRepeat: "no-repeat", backgroundColor: "#0a0a0a" }} />
+        <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)", letterSpacing: ".03em", maxWidth: 300, textAlign: "center", lineHeight: 1.5 }}>{caption}</p>
+      </div>
+    </div>
+  );
+}
+
 function Title({ lines, mb }: { lines: ReactNode[]; mb?: string }) {
   return (
     <RevealText
@@ -121,7 +291,7 @@ export default function MapleTrackCasePage() {
       <section style={{ padding: isMobile ? "1rem 1.5rem 4rem" : "0 6rem 6rem" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <ScrollReveal type="scale">
-            <DeviceDuo isMobile={isMobile} desktop={`${SHOT}/dashboard-desktop.png`} mobile={`${SHOT}/dashboard-mobile.png`} alt="MapleTrack dashboard" url="app.mapletrack.io/dashboard" />
+            <Showcase isMobile={isMobile} desktop={`${SHOT}/dashboard-desktop.png`} url="app.mapletrack.io/dashboard" alt="MapleTrack dashboard" />
           </ScrollReveal>
           <ScrollReveal delay={120}>
             <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.35)", marginTop: isMobile ? "1.5rem" : "3rem", letterSpacing: ".04em" }}>
@@ -219,9 +389,19 @@ export default function MapleTrackCasePage() {
           titleLines={["Ten questions", em("that set the whole strategy.")]}
           body="Everything downstream — the score, the ranked programs, the plans — rests on one thing: a profile that truly reflects the applicant. A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
           chips={["10 guided steps", "Per applicant", "Powers every recommendation", "Minutes, not forms"]}
-          desktop={`${SHOT}/onboarding-desktop.png`}
-          mobile={`${SHOT}/onboarding-mobile.png`}
-          url="app.mapletrack.io/onboarding"
+          visual={
+            <>
+              <PhoneFan
+                isMobile={isMobile}
+                items={[
+                  { src: `${SHOT}/onb-welcome-mobile.png`, alt: "Onboarding — welcome" },
+                  { src: `${SHOT}/onb-personal-mobile.png`, alt: "Onboarding — personal profile" },
+                  { src: `${SHOT}/onb-education-mobile.png`, alt: "Onboarding — education" },
+                ]}
+              />
+              <OnboardingSteps />
+            </>
+          }
         />,
         "#050505"
       )}
@@ -236,9 +416,20 @@ export default function MapleTrackCasePage() {
           titleLines={["A CRS simulator", em("for two.")]}
           body="The Comprehensive Ranking System decides who gets invited. MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant. Change one input and the whole breakdown recalculates live."
           chips={["1,200-point model", "Both applicants", "Spouse factors", "Live recalculation"]}
-          desktop={`${SHOT}/simulator-desktop.png`}
-          mobile={`${SHOT}/simulator-mobile.png`}
-          url="app.mapletrack.io/simulator"
+          visual={
+            <Annotated
+              isMobile={isMobile}
+              desktop={`${SHOT}/simulator-desktop.png`}
+              url="app.mapletrack.io/simulator"
+              alt="CRS simulator"
+              phone={`${SHOT}/simulator-mobile.png`}
+              notes={[
+                { x: 75, y: 27, t: "Live CRS score" },
+                { x: 78, y: 56, t: "Factor breakdown" },
+                { x: 41, y: 64, t: "Add the spouse" },
+              ]}
+            />
+          }
         />,
         "#050505"
       )}
@@ -253,9 +444,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Nine phases, twenty-seven steps,", em("one clear next move.")]}
           body="The entire route — research and eligibility, language tests, documents, application, landing — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances. The progress bar runs the whole way from Início to Cidadania."
           chips={["9 phases", "27 tracked steps", "Per-person tasks", "Início → Cidadania"]}
-          desktop={`${SHOT}/journey-desktop.png`}
-          mobile={`${SHOT}/journey-mobile.png`}
-          url="app.mapletrack.io/journey"
+          visual={<Showcase isMobile={isMobile} desktop={`${SHOT}/journey-desktop.png`} url="app.mapletrack.io/journey" alt="Immigration journey" rail={<ProgressRail isMobile={isMobile} />} />}
         />
       )}
 
@@ -269,9 +458,15 @@ export default function MapleTrackCasePage() {
           titleLines={["Thirteen pathways,", em("ranked by fit.")]}
           body="Express Entry (FSWP, CEC, FST), category-based draws, every major Provincial Nominee Program, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums. Compare them side by side, then open any one for the full breakdown."
           chips={["13 programs", "Ranked by fit", "Side-by-side compare", "Full detail view"]}
-          desktop={`${SHOT}/programs-desktop.png`}
-          mobile={`${SHOT}/program-detail-mobile.png`}
-          url="app.mapletrack.io/programs"
+          visual={
+            <TwoUp
+              isMobile={isMobile}
+              left={{ src: `${SHOT}/programs-desktop.png`, url: "app.mapletrack.io/programs" }}
+              right={{ src: `${SHOT}/programs-compare-desktop.png`, url: "app.mapletrack.io/programs/compare" }}
+              phone={`${SHOT}/program-detail-mobile.png`}
+              alt="Immigration programs"
+            />
+          }
         />,
         "#050505"
       )}
@@ -286,9 +481,12 @@ export default function MapleTrackCasePage() {
           titleLines={["Plan A, B and C —", em("running in parallel.")]}
           body="Immigration law changes without warning, so the strategy never rests on one path. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit → PGWP → PR route. Each carries its own timeline, costs and language targets — and the couple can promote any plan to primary at any time."
           chips={["3 parallel plans", "Switch anytime", "Costs & timelines", "Risk-hedged"]}
-          desktop={`${SHOT}/plans-desktop.png`}
-          mobile={`${SHOT}/plans-mobile.png`}
-          url="app.mapletrack.io/plans"
+          visual={
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "2rem" : "2.5rem" }}>
+              <PlanColumns isMobile={isMobile} />
+              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans" url="app.mapletrack.io/plans" />
+            </div>
+          }
         />
       )}
 
@@ -302,9 +500,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Language scores,", em("tracked to the point.")]}
           body="Language is the biggest CRS lever, so it gets its own cockpit. Each applicant’s CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — “Plano A: atingido”, “Plano B: faltam 1 pt” — with test dates counting down to the booking."
           chips={["CELPIP · IELTS · TEF", "Skill-by-skill", "Target per plan", "Test countdowns"]}
-          desktop={`${SHOT}/languages-desktop.png`}
-          mobile={`${SHOT}/languages-mobile.png`}
-          url="app.mapletrack.io/languages"
+          visual={<DetailZoom isMobile={isMobile} phone={`${SHOT}/languages-mobile.png`} zoomSrc={`${SHOT}/languages-desktop.png`} zoomPos="26% 56%" caption="CELPIP — every skill scored against each plan’s exact target" alt="Language preparation" />}
         />,
         "#050505"
       )}
@@ -319,9 +515,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Every document,", em("every deadline.")]}
           body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what’s expired, and keeps the couple’s paperwork audit-ready for whichever plan goes live first."
           chips={["By category", "Status tracking", "Translation flags", "Expiry alerts"]}
-          desktop={`${SHOT}/documents-desktop.png`}
-          mobile={`${SHOT}/documents-mobile.png`}
-          url="app.mapletrack.io/documents"
+          visual={<Showcase isMobile={isMobile} desktop={`${SHOT}/documents-desktop.png`} url="app.mapletrack.io/documents" alt="Document hub" />}
         />
       )}
 
@@ -490,11 +684,11 @@ export default function MapleTrackCasePage() {
   );
 }
 
-/* ── one feature: heading + lead + chips, then a big device duo ── */
+/* ── one feature: heading + lead + chips, then a pluggable visual ── */
 function Feature({
-  isMobile, label, titleLines, body, chips, desktop, mobile, url,
+  isMobile, label, titleLines, body, chips, visual,
 }: {
-  isMobile: boolean; label: string; titleLines: ReactNode[]; body: string; chips: string[]; desktop: string; mobile: string; url: string;
+  isMobile: boolean; label: string; titleLines: ReactNode[]; body: string; chips: string[]; visual: ReactNode;
 }) {
   return (
     <>
@@ -511,9 +705,7 @@ function Feature({
         </div>
       </ScrollReveal>
       <ScrollReveal delay={120} type="scale">
-        <div style={{ marginTop: isMobile ? "3rem" : "4.5rem" }}>
-          <DeviceDuo isMobile={isMobile} desktop={desktop} mobile={mobile} alt={label} url={url} />
-        </div>
+        <div style={{ marginTop: isMobile ? "3rem" : "4.5rem" }}>{visual}</div>
       </ScrollReveal>
     </>
   );
