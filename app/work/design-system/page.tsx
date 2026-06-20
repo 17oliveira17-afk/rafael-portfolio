@@ -65,6 +65,49 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
   return <span style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".06em", padding: ".3rem .9rem", borderRadius: 100, background: `${color}22`, border: `1px solid ${color}55`, color }}>{children}</span>;
 }
 
+/* ── Auto-cycling DS component viewer ── */
+const DS_SLIDES = [
+  { src: "/work/ds-cvc/ds-cycle-01.png", label: "Checkbox" },
+  { src: "/work/ds-cvc/ds-cycle-02.png", label: "Progress Stepper" },
+  { src: "/work/ds-cvc/ds-cycle-03.png", label: "Native Elements" },
+  { src: "/work/ds-cvc/ds-cycle-04.png", label: "Alert" },
+  { src: "/work/ds-cvc/ds-cycle-05.png", label: "Switch" },
+  { src: "/work/ds-cvc/ds-cycle-06.png", label: "Tooltip" },
+];
+
+function DSCycler({ isMobile }: { isMobile: boolean }) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (paused) return;
+    timer.current = setInterval(() => setActive((p) => (p + 1) % DS_SLIDES.length), 3200);
+    return () => { if (timer.current) clearInterval(timer.current); };
+  }, [paused]);
+
+  const go = (i: number) => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 8000); };
+
+  return (
+    <div style={{ marginBottom: "1.5rem" }}>
+      <div style={{ position: "relative", aspectRatio: "1600 / 970" }}>
+        {DS_SLIDES.map((s, i) => (
+          <Image key={i} src={s.src} alt={`CVC DS — ${s.label}`} width={1600} height={970}
+            style={{ position: i === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", opacity: i === active ? 1 : 0, transition: "opacity .6s ease", display: "block" }} />
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginTop: "1.25rem", flexWrap: "wrap" }}>
+        {DS_SLIDES.map((s, i) => (
+          <button key={i} onClick={() => go(i)}
+            style={{ padding: ".35rem .85rem", borderRadius: 100, border: `1px solid ${i === active ? "rgba(0,200,160,.5)" : "rgba(255,255,255,.1)"}`, background: i === active ? "rgba(0,200,160,.12)" : "transparent", color: i === active ? "#00c8a0" : "rgba(255,255,255,.45)", fontSize: ".72rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease" }}>
+            {s.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ── Media placeholder (drop a real screenshot here later) ── */
 function MediaPlaceholder({ label, filename, hint, aspect = "16/9", accent = "#00c8a0" }:
   { label: string; filename: string; hint?: string; aspect?: string; accent?: string }) {
@@ -244,17 +287,14 @@ export default function DesignSystemCasePage() {
           </ScrollReveal>
 
           {/* The lean component set */}
+          {/* Hero — token overview */}
           <ScrollReveal delay={80}>
-            <div style={{ display: "flex", gap: "1rem", overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", padding: "1rem 0 1.5rem", marginBottom: "1.5rem", scrollbarWidth: "none" }}>
-              {[1, 2, 3, 4, 5].map((n) => (
-                <div key={n} style={{ flexShrink: 0, width: isMobile ? "82vw" : 560, scrollSnapAlign: "center", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,.08)", background: "#111" }}>
-                  <Image src={`/work/ds-cvc/ds-cvc-0${n}.png`} alt={`CVC mobile design system — screen ${n}`} width={1600} height={970} style={{ width: "100%", height: "auto", display: "block" }} />
-                </div>
-              ))}
-            </div>
-            <p style={{ fontSize: ".74rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em", textAlign: "center" }}>
-              Scroll → CVC mobile design system — native inputs, gestures, navigation, loading and feedback states
-            </p>
+            <Image src="/work/ds-cvc/ds-hero.png" alt="CVC mobile design system — full token and color overview" width={1600} height={970} style={{ width: "100%", height: "auto", display: "block", marginBottom: "2.5rem" }} />
+          </ScrollReveal>
+
+          {/* Component pages — auto-cycling with click */}
+          <ScrollReveal delay={120}>
+            <DSCycler isMobile={isMobile} />
           </ScrollReveal>
 
           {/* Why mobile-only components */}
