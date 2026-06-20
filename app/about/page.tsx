@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import useIsMobile from "../components/useIsMobile";
 import RevealText from "../components/RevealText";
@@ -83,6 +84,123 @@ const metrics = [
   { n: "+212%", label: "Checkout conversion at CVC" },
   { n: "+53%", label: "Onboarding conversion at Rappi" },
 ];
+
+const FEATURED_COMPANIES = [
+  {
+    name: "Thoughtworks",
+    logo: "/logos/logo-thoughtworks.png",
+    accent: "#ec6b86",
+    tagline: "Global technology consultancy",
+    stats: [
+      { n: "10,000+", l: "Employees" },
+      { n: "48", l: "Offices worldwide" },
+      { n: "18", l: "Countries" },
+    ],
+    blurb: "One of the world's most influential technology consultancies — pioneering Agile, Continuous Delivery and Evolutionary Architecture. Thoughtworks partners with enterprises to solve their hardest engineering and design challenges at scale.",
+  },
+  {
+    name: "Rappi",
+    logo: "/logos/logo-rappi.png",
+    accent: "#ff6a2b",
+    tagline: "Latin America's super-app",
+    stats: [
+      { n: "25M+", l: "Monthly users" },
+      { n: "9", l: "Countries" },
+      { n: "$5.25B", l: "Valuation" },
+    ],
+    blurb: "The leading on-demand super-app in Latin America — delivery, fintech, travel and commerce in one platform. Rappi serves over 25 million users across 9 countries, from Colombia to Brazil.",
+  },
+  {
+    name: "CVC Corp",
+    logo: "/logos/logo-cvc.png",
+    accent: "#eab308",
+    tagline: "Brazil's largest travel company",
+    stats: [
+      { n: "30M+", l: "Customers" },
+      { n: "1,600+", l: "Retail stores" },
+      { n: "R$17B", l: "Annual bookings" },
+    ],
+    blurb: "The largest travel company in Latin America — 1,600+ stores, 30 million customers, and R$17 billion in annual bookings. CVC is publicly traded (B3: CVCB3) and operates across flights, hotels, cruises and packages.",
+  },
+];
+
+function CompanyShowcase({ isMobile }: { isMobile: boolean }) {
+  const [active, setActive] = useState<string | null>(null);
+
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "1rem", maxWidth: 1100, margin: "0 auto" }}>
+      {FEATURED_COMPANIES.map((c) => {
+        const isOpen = active === c.name;
+        return (
+          <div
+            key={c.name}
+            onClick={() => setActive(isOpen ? null : c.name)}
+            onMouseEnter={() => { if (!isMobile) setActive(c.name); }}
+            onMouseLeave={() => { if (!isMobile) setActive(null); }}
+            style={{
+              position: "relative",
+              borderRadius: 20,
+              border: `1px solid ${isOpen ? c.accent + "55" : "rgba(255,255,255,.08)"}`,
+              background: isOpen ? c.accent + "0d" : "#0a0a0a",
+              padding: isMobile ? "1.5rem" : "1.75rem",
+              cursor: "pointer",
+              transition: "all .4s cubic-bezier(.16,1,.3,1)",
+              overflow: "hidden",
+              transform: isOpen ? "translateY(-4px)" : "translateY(0)",
+              boxShadow: isOpen ? `0 20px 60px ${c.accent}20` : "none",
+            }}
+          >
+            {/* Logo + tagline */}
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: isOpen ? "1.25rem" : ".75rem", transition: "margin .3s ease" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={c.logo} alt={c.name}
+                style={{
+                  height: 42, width: "auto",
+                  filter: isOpen ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(2)",
+                  opacity: isOpen ? 1 : 0.5,
+                  transition: "filter .4s ease, opacity .4s ease",
+                }}
+              />
+              <div>
+                <p style={{ fontSize: ".92rem", fontWeight: 700, color: isOpen ? "#fff" : "rgba(255,255,255,.7)", transition: "color .3s ease" }}>{c.name}</p>
+                <p style={{ fontSize: ".72rem", color: isOpen ? c.accent : "rgba(255,255,255,.35)", transition: "color .3s ease" }}>{c.tagline}</p>
+              </div>
+            </div>
+
+            {/* Expandable content */}
+            <div style={{
+              maxHeight: isOpen ? 300 : 0,
+              opacity: isOpen ? 1 : 0,
+              overflow: "hidden",
+              transition: "max-height .5s cubic-bezier(.16,1,.3,1), opacity .4s ease",
+            }}>
+              {/* Stats row */}
+              <div style={{ display: "flex", gap: "1rem", marginBottom: "1.25rem" }}>
+                {c.stats.map((s) => (
+                  <div key={s.l} style={{ flex: 1 }}>
+                    <p style={{ fontSize: "clamp(1.1rem,2.5vw,1.5rem)", fontWeight: 700, color: c.accent, letterSpacing: "-.03em", lineHeight: 1 }}>{s.n}</p>
+                    <p style={{ fontSize: ".64rem", color: "rgba(255,255,255,.4)", marginTop: ".35rem", letterSpacing: ".04em", textTransform: "uppercase" }}>{s.l}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Blurb */}
+              <p style={{ fontSize: ".84rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{c.blurb}</p>
+            </div>
+
+            {/* Hint when closed */}
+            {!isOpen && (
+              <p style={{ fontSize: ".68rem", color: "rgba(255,255,255,.2)", marginTop: ".25rem", transition: "opacity .3s ease" }}>
+                {isMobile ? "Tap" : "Hover"} to see company size →
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   const isMobile = useIsMobile();
@@ -173,16 +291,19 @@ export default function AboutPage() {
       {/* ═══ LOGOS ═══ */}
       <section style={{ background: "#000", padding: "3.5rem 0", borderTop: "1px solid rgba(255,255,255,.06)", overflow: "hidden" }}>
         <p style={{ fontSize: ".62rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textAlign: "center", marginBottom: "2rem" }}>Companies</p>
-        <div style={{ position: "relative" }}>
+
+        {/* — Featured companies with stats on hover/click — */}
+        <CompanyShowcase isMobile={isMobile} />
+
+        {/* — Other companies — scrolling strip — */}
+        <div style={{ marginTop: "2.5rem", position: "relative" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 60, background: "linear-gradient(to right, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 60, background: "linear-gradient(to left, #000, transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <p style={{ fontSize: ".58rem", fontWeight: 600, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.18)", textAlign: "center", marginBottom: "1rem" }}>Also worked with</p>
           <div style={{ display: "flex", overflow: "hidden" }}>
             {[0, 1].map(copy => (
               <div key={copy} aria-hidden={copy === 1} style={{ display: "flex", gap: "3rem", alignItems: "center", animation: "logoScroll 22s linear infinite", flexShrink: 0 }}>
                 {[
-                  { src: "/logos/logo-thoughtworks.png", alt: "Thoughtworks" },
-                  { src: "/logos/logo-rappi.png", alt: "Rappi" },
-                  { src: "/logos/logo-cvc.png", alt: "CVC Corp" },
                   { src: "/logos/logo-submarino.png", alt: "Submarino Viagens" },
                   { src: "/logos/logo-almundo.png", alt: "Almundo" },
                   { src: "/logos/logo-avantrip.png", alt: "Avantrip" },
@@ -193,7 +314,7 @@ export default function AboutPage() {
                 ].map((logo, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img key={i} src={logo.src} alt={logo.alt}
-                    style={{ height: isMobile ? 60 : 80, width: "auto", opacity: 0.4, filter: "grayscale(1) brightness(2)", flexShrink: 0 }}
+                    style={{ height: isMobile ? 50 : 60, width: "auto", opacity: 0.3, filter: "grayscale(1) brightness(2)", flexShrink: 0 }}
                   />
                 ))}
               </div>
