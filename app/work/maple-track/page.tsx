@@ -211,11 +211,28 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 03 · SIMULATOR ═══ */}
+      {/* ═══ 03 · ONBOARDING — DEFINE THE PROFILE ═══ */}
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="03 — Score the profile"
+          label="03 — Define the profile"
+          titleLines={["Ten questions", em("that set the whole strategy.")]}
+          body="Everything downstream — the score, the ranked programs, the plans — rests on one thing: a profile that truly reflects the applicant. A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
+          chips={["10 guided steps", "Per applicant", "Powers every recommendation", "Minutes, not forms"]}
+          desktop={`${SHOT}/onboarding-desktop.png`}
+          mobile={`${SHOT}/onboarding-mobile.png`}
+          url="app.mapletrack.io/onboarding"
+        />,
+        "#050505"
+      )}
+
+      <Divider />
+
+      {/* ═══ 04 · SIMULATOR ═══ */}
+      {wrap(
+        <Feature
+          isMobile={isMobile}
+          label="04 — Score the profile"
           titleLines={["A CRS simulator", em("for two.")]}
           body="The Comprehensive Ranking System decides who gets invited. MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant. Change one input and the whole breakdown recalculates live."
           chips={["1,200-point model", "Both applicants", "Spouse factors", "Live recalculation"]}
@@ -232,7 +249,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="04 — Map the path"
+          label="05 — Map the path"
           titleLines={["Nine phases, twenty-seven steps,", em("one clear next move.")]}
           body="The entire route — research and eligibility, language tests, documents, application, landing — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances. The progress bar runs the whole way from Início to Cidadania."
           chips={["9 phases", "27 tracked steps", "Per-person tasks", "Início → Cidadania"]}
@@ -248,7 +265,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="05 — Choose the route"
+          label="06 — Choose the route"
           titleLines={["Thirteen pathways,", em("ranked by fit.")]}
           body="Express Entry (FSWP, CEC, FST), category-based draws, every major Provincial Nominee Program, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums. Compare them side by side, then open any one for the full breakdown."
           chips={["13 programs", "Ranked by fit", "Side-by-side compare", "Full detail view"]}
@@ -265,7 +282,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="06 — Hedge the bet"
+          label="07 — Hedge the bet"
           titleLines={["Plan A, B and C —", em("running in parallel.")]}
           body="Immigration law changes without warning, so the strategy never rests on one path. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit → PGWP → PR route. Each carries its own timeline, costs and language targets — and the couple can promote any plan to primary at any time."
           chips={["3 parallel plans", "Switch anytime", "Costs & timelines", "Risk-hedged"]}
@@ -281,7 +298,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="07 — Hit the targets"
+          label="08 — Hit the targets"
           titleLines={["Language scores,", em("tracked to the point.")]}
           body="Language is the biggest CRS lever, so it gets its own cockpit. Each applicant’s CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — “Plano A: atingido”, “Plano B: faltam 1 pt” — with test dates counting down to the booking."
           chips={["CELPIP · IELTS · TEF", "Skill-by-skill", "Target per plan", "Test countdowns"]}
@@ -298,7 +315,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <Feature
           isMobile={isMobile}
-          label="08 — Stay ready"
+          label="09 — Stay ready"
           titleLines={["Every document,", em("every deadline.")]}
           body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what’s expired, and keeps the couple’s paperwork audit-ready for whichever plan goes live first."
           chips={["By category", "Status tracking", "Translation flags", "Expiry alerts"]}
@@ -314,7 +331,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <>
           <ScrollReveal>
-            <Label>09 — Keep the momentum</Label>
+            <Label>10 — Keep the momentum</Label>
             <Title lines={["A process this long", em("needs motivation.")]} />
             <Lead>
               Immigration takes years, so MapleTrack is built to keep a couple moving — XP and achievements for each milestone, gentle nudges and notifications, and a household where Rafael and Luana share one journey under separate logins.
@@ -344,7 +361,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <>
           <ScrollReveal>
-            <Label>10 — The craft</Label>
+            <Label>11 — The craft</Label>
             <Title lines={["One design system.", em("Every breakpoint.")]} />
             <Lead>
               The whole product runs on a single token set — the MapleTrack rose, Airbnb-grade spacing and type — with shadcn/ui primitives, keyboard and contrast accessibility, and layouts that hold from a 390px phone to a widescreen desktop. The same product, everywhere.
@@ -395,7 +412,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <>
           <ScrollReveal>
-            <Label>11 — Where it stands</Label>
+            <Label>12 — Where it stands</Label>
             <Title lines={["A working product —", em("the first of its kind.")]} mb="1rem" />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "3.5rem", letterSpacing: ".06em" }}>Live MVP · in daily use by the household</p>
           </ScrollReveal>
@@ -423,7 +440,7 @@ export default function MapleTrackCasePage() {
       {/* ═══ 12 · WHAT I LEARNED ═══ */}
       {wrap(
         <ScrollReveal>
-          <Label>12 — What I learned</Label>
+          <Label>13 — What I learned</Label>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "2rem" }}>
             {([
               { icon: "compass", title: "Designing for yourself is the ultimate brief.", body: "Being user zero meant every gap in the experience was a gap in my own life. The feedback loop was instant and ruthless — the best research I’ve ever had." },
