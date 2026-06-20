@@ -217,40 +217,39 @@ export default function DesignSystemCasePage() {
         </div>
       </section>
 
-      {/* ═══ 03 · CONTEXT A — RAPPI (zero to one) ═══ */}
+      {/* ═══ 03 · RAPPI — ZERO TO ONE ═══ */}
       <section style={{ padding: pad, background: "#050505", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,200,160,.08) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+          {/* — THE PROBLEM — */}
           <ScrollReveal>
-            <Label color="#00c8a0">Context A · Rappi — zero to one</Label>
+            <Label color="#00c8a0">Rappi · The problem</Label>
             <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
               <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,200,160,.16)", border: "1px solid rgba(0,200,160,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00c8a0" }}><IconSeed /></div>
               <h2 style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2.2rem)" : "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1 }}>
-                A fragmented system, no DS team.<br />So we built it collaboratively.
+                Nine countries, one brand —<br /><em style={{ color: "#00c8a0", fontStyle: "italic" }}>nine different text fields.</em>
               </h2>
             </div>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "1.25rem" }}>
-              On Rappi&apos;s <strong style={{ color: "#fff" }}>B2B Design team</strong> — spanning 9 countries — the design system was fragmented and inconsistent. Essential components were missing, and teams worked independently, slowly diluting one brand into many. There was no dedicated design-system team and no investment to spin one up.
+              Rappi&apos;s <strong style={{ color: "#fff" }}>B2B Design team</strong> spanned 9 countries, and the design system was fragmenting fast. Essential components were missing. Teams built their own versions independently. One brand was slowly becoming many — and there was no dedicated DS team and no investment to spin one up.
             </p>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "2.5rem" }}>
-              So we adopted a <strong style={{ color: "#fff" }}>collaborative model</strong>: one product designer led the effort while individual designers contributed components. As Sr. Product Designer I led the <strong style={{ color: "#fff" }}>text field</strong> — the most-used, most-inconsistent atom in the product. Done thoroughly, one foundational component becomes the template for how every component after it gets made.
+              So we adopted a <strong style={{ color: "#fff" }}>collaborative model</strong>: one product designer led the system effort, and individual designers contributed components. I took the <strong style={{ color: "#fff" }}>text field</strong> — the most-used, most-inconsistent atom in the entire product. The bet was simple: do one foundational component so thoroughly that it becomes the template for how every component after it gets made.
             </p>
           </ScrollReveal>
 
-          {/* Text field as the seed */}
+          {/* — THE PROCESS — */}
           <ScrollReveal delay={80}>
-            <div style={{ marginBottom: "2.5rem" }}>
-              <DSCycler isMobile={isMobile} slides={DS_RAPPI_SLIDES} accent="#00c8a0" />
-            </div>
-          </ScrollReveal>
-
-          {/* Discovery → Definition → Solution */}
-          <ScrollReveal delay={120}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1rem" }}>
+            <Label color="#00c8a0">Rappi · The process</Label>
+            <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.6rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1.15, marginBottom: "1.75rem" }}>
+              Discovery → Definition → Solution.
+            </h3>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1rem", marginBottom: "2.5rem" }}>
               {[
-                { k: "Discovery", t: "Benchmarked the best, audited our own.", d: "Studied Google Material, Airbnb, Uber Eats and Apple's web & iOS, then asked every Rappi team to hand over their own text fields — mapping each team's identity and needs before drawing a line." },
-                { k: "Definition", t: "One anatomy, many variations.", d: "A Material-based anatomy with an outline that makes every state legible — extended with support messages, states, icons, large text, code validation and chips, tuned for desktop and responsive web." },
-                { k: "Solution", t: "Everything in one component + docs.", d: "Consolidated all states and types into a single main component, then wrote full documentation — intro, anatomy, specs, usage rules and max-width guidance — so the whole team applied it consistently." },
+                { k: "01 · Discovery", t: "Benchmarked the best, audited our own.", d: "I studied Google Material, Airbnb, Uber Eats and Apple — then asked every Rappi team to hand over their own text fields. Mapping each team's identity and needs before drawing a single line." },
+                { k: "02 · Definition", t: "One anatomy, many variations.", d: "A Material-based anatomy with an outline that makes every state legible — extended with support messages, states, icons, large text, code validation and chips, tuned for desktop and responsive web." },
+                { k: "03 · Solution", t: "One component + full docs.", d: "All states and types consolidated into a single main component. Then I wrote full documentation — intro, anatomy, specs, usage rules and max-width guidance — so any designer could apply it consistently without asking." },
               ].map((c, i) => (
                 <div key={i} style={{ padding: "1.75rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
                   <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#00c8a0", marginBottom: ".9rem" }}>{c.k}</p>
@@ -261,13 +260,27 @@ export default function DesignSystemCasePage() {
             </div>
           </ScrollReveal>
 
-          {/* Rappi impact */}
-          <ScrollReveal delay={150}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: "1rem" }}>
+          {/* — THE WORK — */}
+          <ScrollReveal delay={100}>
+            <Label color="#00c8a0">Rappi · The work</Label>
+            <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.6rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1.15, marginBottom: "1.75rem" }}>
+              From a fragmented atom to a <em style={{ color: "#00c8a0", fontStyle: "italic" }}>living standard.</em>
+            </h3>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <div style={{ marginBottom: "2.5rem" }}>
+              <DSCycler isMobile={isMobile} slides={DS_RAPPI_SLIDES} accent="#00c8a0" />
+            </div>
+          </ScrollReveal>
+
+          {/* — THE IMPACT — */}
+          <ScrollReveal delay={140}>
+            <Label color="#00c8a0">Rappi · The impact</Label>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: ".5rem" }}>
               {[
                 { n: "Unified", l: "Brand consistency", sub: "One component standard adopted across all B2B teams in 9 countries" },
-                { n: "Faster", l: "Component creation", sub: "Reduced time to ship new components with reusable foundations" },
-                { n: "Process", l: "Alignment before building", sub: "Established discovery → definition → solution workflow for every new component" },
+                { n: "Faster", l: "Component creation", sub: "Reusable foundations cut the time to ship every new component" },
+                { n: "Process", l: "Alignment before building", sub: "Discovery → definition → solution became the workflow for every new component" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
                   <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#00c8a0", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
@@ -278,9 +291,9 @@ export default function DesignSystemCasePage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={170}>
+          <ScrollReveal delay={160}>
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.42)", marginTop: "1.5rem", fontStyle: "italic", maxWidth: 680, lineHeight: 1.7 }}>
-              Built for desktop and responsive web — deliberately excluding mobile apps. That boundary is exactly where the next chapter, CVC, begins.
+              Built for desktop and responsive web — deliberately excluding mobile apps. That boundary is exactly where the next chapter begins.
             </p>
           </ScrollReveal>
         </div>
@@ -288,33 +301,34 @@ export default function DesignSystemCasePage() {
 
       <Divider />
 
-      {/* ═══ 04 · CONTEXT B — CVC (mobile app DS) ═══ */}
+      {/* ═══ 04 · CVC — THE MOBILE LAYER ═══ */}
       <section style={{ padding: pad, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 20% 25%, rgba(0,200,160,.09) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+          {/* — THE PROBLEM — */}
           <ScrollReveal>
-            <Label>Context B · CVC — the mobile layer</Label>
+            <Label>CVC · The problem</Label>
             <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
               <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,200,160,.16)", border: "1px solid rgba(0,200,160,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00c8a0" }}><IconMobile /></div>
               <h2 style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2.2rem)" : "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1 }}>
-                CVC had a design system.<br />It just wasn&apos;t built for the app.
+                CVC had a design system.<br /><em style={{ color: "#00c8a0", fontStyle: "italic" }}>It just wasn&apos;t built for the app.</em>
               </h2>
             </div>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "1.25rem" }}>
-              CVC had a fresh design system — but it was web-first. The mobile app was running on web-ported components that never felt native. To deliver a genuinely <strong style={{ color: "#fff" }}>unique app experience</strong> and fix usability at the root, I built a <strong style={{ color: "#fff" }}>mobile app design system</strong> — and I was deliberate about scope: I only created the components that <em style={{ color: "#00c8a0" }}>actually make a difference on mobile.</em>
+              CVC&apos;s design system was fresh — but it was web-first. The mobile app was running on web-ported components that never felt native: no gesture patterns, no mobile navigation, no loading states designed for a phone. The 2.0-star app rating was a symptom, and the root cause was deeper than any single feature fix could reach.
             </p>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "2.5rem" }}>
-              Native inputs, gesture-driven patterns, mobile navigation, loading and feedback states — the pieces a responsive web component simply can&apos;t replicate well. Everything else stayed shared with the web system, so the app felt native without fragmenting the brand.
+              To deliver a genuinely <strong style={{ color: "#fff" }}>unique app experience</strong>, I needed to build a <strong style={{ color: "#fff" }}>mobile app design system</strong> — and I was deliberate about scope: only the components that <em style={{ color: "#00c8a0" }}>actually make a difference on mobile</em>. Everything else stayed shared with the web system, so the app felt native without fragmenting the brand.
             </p>
           </ScrollReveal>
 
-          {/* The lean component set */}
+          {/* — THE APPROACH — */}
           <ScrollReveal delay={80}>
-            <DSCycler isMobile={isMobile} slides={DS_CVC_SLIDES} accent="#00c8a0" />
-          </ScrollReveal>
-
-          {/* Why mobile-only components */}
-          <ScrollReveal delay={120}>
+            <Label>CVC · The approach</Label>
+            <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.6rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1.15, marginBottom: "1.75rem" }}>
+              Build only what web can&apos;t replicate.
+            </h3>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "1rem", marginBottom: "2.5rem" }}>
               {[
                 { t: "Native-only by design", d: "I built mobile-specific components only where a web-ported one fell short — native inputs, gestures, mobile nav, loading & feedback states." },
@@ -331,12 +345,26 @@ export default function DesignSystemCasePage() {
             </div>
           </ScrollReveal>
 
-          {/* Impact metrics — placeholders */}
+          {/* — THE WORK — */}
+          <ScrollReveal delay={100}>
+            <Label>CVC · The components</Label>
+            <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.6rem", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.02em", lineHeight: 1.15, marginBottom: "1.75rem" }}>
+              20+ components, each <em style={{ color: "#00c8a0", fontStyle: "italic" }}>documented and governed.</em>
+            </h3>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <div style={{ marginBottom: "2.5rem" }}>
+              <DSCycler isMobile={isMobile} slides={DS_CVC_SLIDES} accent="#00c8a0" />
+            </div>
+          </ScrollReveal>
+
+          {/* — THE IMPACT — */}
           <ScrollReveal delay={140}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)" }}>
+            <Label>CVC · The impact</Label>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: ".5rem" }}>
               {[
-                { n: "+212%", l: "Checkout conversion", sub: "Mobile DS enabled the native experience that drove the CVC app uplift" },
-                { n: "20+", l: "Mobile components", sub: "Native inputs, gestures, navigation, loading & feedback states" },
+                { n: "+212%", l: "Checkout conversion", sub: "The mobile DS enabled the native experience that drove the CVC app's numbers" },
+                { n: "20+", l: "Mobile components", sub: "Native inputs, gestures, navigation, loading & feedback — each with full docs" },
                 { n: "2 teams", l: "Adopting the system", sub: "App team built on it; web team adopted mobile-first patterns upstream" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2.25rem 1.75rem", background: "#0a0a0a" }}>
@@ -350,7 +378,7 @@ export default function DesignSystemCasePage() {
 
           <ScrollReveal delay={160}>
             <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginTop: "2rem", padding: "1.5rem 1.75rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
-              The result compounded: the mobile design system was a direct lever in lifting the CVC app&apos;s numbers, it left a <strong style={{ color: "#fff" }}>lasting foundation for the mobile app team</strong>, and the mobile-first patterns became <strong style={{ color: "#fff" }}>best practices the web teams adopted</strong> in their responsive builds. <Link href="/work/cvc" style={{ color: "#00c8a0", textDecoration: "none" }}>See it in production — CVC Flights →</Link>
+              The mobile design system was a direct lever in lifting the CVC app&apos;s numbers. It left a <strong style={{ color: "#fff" }}>lasting foundation for the mobile team</strong>, and the patterns fed back upstream as <strong style={{ color: "#fff" }}>best practices the web teams adopted</strong>. <Link href="/work/cvc" style={{ color: "#00c8a0", textDecoration: "none" }}>See the product it powered — CVC Flights →</Link>
             </p>
           </ScrollReveal>
         </div>
