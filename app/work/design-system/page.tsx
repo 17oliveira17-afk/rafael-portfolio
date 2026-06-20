@@ -245,13 +245,16 @@ export default function DesignSystemCasePage() {
 
           {/* The lean component set */}
           <ScrollReveal delay={80}>
-            <div style={{ marginBottom: "2.5rem" }}>
-              <MediaPlaceholder
-                label="Mobile component library — the pieces that matter on mobile"
-                filename="ds/cvc-mobile-ds-overview.png"
-                hint="Imagem/board do design system mobile do CVC: componentes nativos (inputs, navegação, estados de loading, feedback, etc.). Exporte do Figma."
-                aspect="16/9" />
+            <div style={{ display: "flex", gap: "1rem", overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", padding: "1rem 0 1.5rem", marginBottom: "1.5rem", scrollbarWidth: "none" }}>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <div key={n} style={{ flexShrink: 0, width: isMobile ? "82vw" : 560, scrollSnapAlign: "center", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,.08)", background: "#111" }}>
+                  <Image src={`/work/ds-cvc/ds-cvc-0${n}.png`} alt={`CVC mobile design system — screen ${n}`} width={1600} height={970} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              ))}
             </div>
+            <p style={{ fontSize: ".74rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em", textAlign: "center" }}>
+              Scroll → CVC mobile design system — native inputs, gestures, navigation, loading and feedback states
+            </p>
           </ScrollReveal>
 
           {/* Why mobile-only components */}
