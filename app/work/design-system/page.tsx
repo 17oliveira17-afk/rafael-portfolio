@@ -168,12 +168,12 @@ export default function DesignSystemCasePage() {
     <main className="page-in dark-cursor" style={{ background: "#000", "--blue": "#00c8a0", "--blue-hover": "#00a885" } as React.CSSProperties}>
 
       {/* ═══ NAV ═══ */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, padding: isMobile ? "1.25rem 1.5rem" : "1.75rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 50, background: "rgba(0,0,0,.75)", backdropFilter: "blur(20px)" }}>
-        <Link href="/" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.5)", textDecoration: "none" }}>← Back</Link>
+      <div style={{ position: "fixed", top: 48, left: 0, right: 0, padding: isMobile ? ".6rem 1.5rem" : ".6rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 100, background: "rgba(0,0,0,.7)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
+        <Link href="/work" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.5)", textDecoration: "none" }}>← All work</Link>
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          <Link href="/work/cvc" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>CVC</Link>
-          <Link href="/work/rappi" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>Rappi</Link>
-          <Link href="/work/leadership" style={{ fontSize: ".82rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>Leadership</Link>
+          <Link href="/work/cvc" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>CVC</Link>
+          <Link href="/work/rappi" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>Rappi</Link>
+          <Link href="/work/leadership" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>Leadership</Link>
         </div>
       </div>
 
