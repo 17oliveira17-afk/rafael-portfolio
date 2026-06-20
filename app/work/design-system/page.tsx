@@ -55,18 +55,18 @@ const IconBox = () => (
 );
 
 /* ── Shared bits ── */
-function Label({ children, color = "#0071e3" }: { children: ReactNode; color?: string }) {
+function Label({ children, color = "#00c8a0" }: { children: ReactNode; color?: string }) {
   return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color, marginBottom: "1.5rem" }}>{children}</p>;
 }
 function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
-function Tag({ children, color = "#0071e3" }: { children: ReactNode; color?: string }) {
+function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: string }) {
   return <span style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".06em", padding: ".3rem .9rem", borderRadius: 100, background: `${color}22`, border: `1px solid ${color}55`, color }}>{children}</span>;
 }
 
 /* ── Media placeholder (drop a real screenshot here later) ── */
-function MediaPlaceholder({ label, filename, hint, aspect = "16/9", accent = "#0071e3" }:
+function MediaPlaceholder({ label, filename, hint, aspect = "16/9", accent = "#00c8a0" }:
   { label: string; filename: string; hint?: string; aspect?: string; accent?: string }) {
   return (
     <div style={{
@@ -90,7 +90,7 @@ export default function DesignSystemCasePage() {
   const pad = isMobile ? "5rem 1.5rem" : "8rem 6rem";
 
   return (
-    <main className="page-in dark-cursor" style={{ background: "#000" }}>
+    <main className="page-in dark-cursor" style={{ background: "#000", "--blue": "#00c8a0", "--blue-hover": "#00a885" } as React.CSSProperties}>
 
       {/* ═══ NAV ═══ */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, padding: isMobile ? "1.25rem 1.5rem" : "1.75rem 6rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 50, background: "rgba(0,0,0,.75)", backdropFilter: "blur(20px)" }}>
@@ -135,7 +135,7 @@ export default function DesignSystemCasePage() {
           <ScrollReveal>
             <Label>How I approach design systems</Label>
             <RevealText
-              lines={["A system is only worth it", <>if it <em key="e" className="text-gradient" style={{ fontStyle: "italic" }}>earns its keep.</em></>]}
+              lines={["A system is only worth it", <>if it <em key="e" style={{ color: "#00c8a0", fontStyle: "italic" }}>earns its keep.</em></>]}
               style={{ fontSize: isMobile ? "clamp(1.6rem,6vw,2.4rem)" : "clamp(1.8rem,4vw,3rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "1.5rem" }}
             />
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
@@ -150,12 +150,12 @@ export default function DesignSystemCasePage() {
 
       {/* ═══ 03 · CONTEXT A — RAPPI (zero to one) ═══ */}
       <section style={{ padding: pad, background: "#050505", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,113,227,.08) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,200,160,.08) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <ScrollReveal>
-            <Label color="#0071e3">Context A · Rappi — zero to one</Label>
+            <Label color="#00c8a0">Context A · Rappi — zero to one</Label>
             <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
-              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,113,227,.16)", border: "1px solid rgba(0,113,227,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3" }}><IconSeed /></div>
+              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,200,160,.16)", border: "1px solid rgba(0,200,160,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00c8a0" }}><IconSeed /></div>
               <h2 style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2.2rem)" : "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1 }}>
                 A fragmented system, no DS team.<br />So we built it collaboratively.
               </h2>
@@ -171,7 +171,7 @@ export default function DesignSystemCasePage() {
           {/* Text field as the seed */}
           <ScrollReveal delay={80}>
             <div style={{ marginBottom: "2.5rem" }}>
-              <MediaPlaceholder accent="#0071e3"
+              <MediaPlaceholder accent="#00c8a0"
                 label="Text field — single main component, every variation inside"
                 filename="ds/rappi-text-field-variants.png"
                 hint="Board do text field: anatomia + todos os estados (default, hover, focus, focus w/ placeholder, filling, filled, disabled, disabled filled, error) e tipos (ícone esquerda/direita/ambos, text area, code validation, chips). Exporte do Figma."
@@ -188,7 +188,7 @@ export default function DesignSystemCasePage() {
                 { k: "Solution", t: "Everything in one component + docs.", d: "Consolidated all states and types into a single main component, then wrote full documentation — intro, anatomy, specs, usage rules and max-width guidance — so the whole team applied it consistently." },
               ].map((c, i) => (
                 <div key={i} style={{ padding: "1.75rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
-                  <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".9rem" }}>{c.k}</p>
+                  <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#00c8a0", marginBottom: ".9rem" }}>{c.k}</p>
                   <h4 style={{ fontSize: ".98rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".5rem", lineHeight: 1.25 }}>{c.t}</h4>
                   <p style={{ fontSize: ".86rem", color: "rgba(255,255,255,.5)", lineHeight: 1.65 }}>{c.d}</p>
                 </div>
@@ -205,7 +205,7 @@ export default function DesignSystemCasePage() {
                 { n: "Unified", l: "Brand consistency", sub: "Strengthened across B2B products" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
+                  <p style={{ fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 700, color: "#00c8a0", letterSpacing: "-.03em", lineHeight: 1, marginBottom: ".5rem" }}>{m.n}</p>
                   <p style={{ fontSize: ".86rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem" }}>{m.l}</p>
                   <p style={{ fontSize: ".76rem", color: "rgba(255,255,255,.4)", lineHeight: 1.5 }}>{m.sub}</p>
                 </div>
@@ -225,18 +225,18 @@ export default function DesignSystemCasePage() {
 
       {/* ═══ 04 · CONTEXT B — CVC (mobile app DS) ═══ */}
       <section style={{ padding: pad, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 20% 25%, rgba(0,113,227,.09) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 20% 25%, rgba(0,200,160,.09) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <ScrollReveal>
             <Label>Context B · CVC — the mobile layer</Label>
             <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
-              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,113,227,.16)", border: "1px solid rgba(0,113,227,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3" }}><IconMobile /></div>
+              <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 12, background: "rgba(0,200,160,.16)", border: "1px solid rgba(0,200,160,.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00c8a0" }}><IconMobile /></div>
               <h2 style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2.2rem)" : "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.1 }}>
                 CVC had a design system.<br />It just wasn&apos;t built for the app.
               </h2>
             </div>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "1.25rem" }}>
-              CVC had a fresh design system — but it was web-first. The mobile app was running on web-ported components that never felt native. To deliver a genuinely <strong style={{ color: "#fff" }}>unique app experience</strong> and fix usability at the root, I built a <strong style={{ color: "#fff" }}>mobile app design system</strong> — and I was deliberate about scope: I only created the components that <em style={{ color: "#0071e3" }}>actually make a difference on mobile.</em>
+              CVC had a fresh design system — but it was web-first. The mobile app was running on web-ported components that never felt native. To deliver a genuinely <strong style={{ color: "#fff" }}>unique app experience</strong> and fix usability at the root, I built a <strong style={{ color: "#fff" }}>mobile app design system</strong> — and I was deliberate about scope: I only created the components that <em style={{ color: "#00c8a0" }}>actually make a difference on mobile.</em>
             </p>
             <p style={{ fontSize: isMobile ? ".95rem" : "1.05rem", color: "rgba(255,255,255,.6)", lineHeight: 1.85, maxWidth: 680, marginBottom: "2.5rem" }}>
               Native inputs, gesture-driven patterns, mobile navigation, loading and feedback states — the pieces a responsive web component simply can&apos;t replicate well. Everything else stayed shared with the web system, so the app felt native without fragmenting the brand.
@@ -263,8 +263,8 @@ export default function DesignSystemCasePage() {
                 { t: "A legacy for the app team", d: "The system outlived the project — it became the foundation the mobile team kept building on after I rolled off." },
                 { t: "Best practices for web too", d: "The mobile patterns fed back upstream — guidance the web teams adopted for their responsive versions." },
               ].map((c, i) => (
-                <div key={i} style={{ padding: "1.75rem", borderRadius: 16, background: "rgba(0,113,227,.05)", border: "1px solid rgba(0,113,227,.18)" }}>
-                  <div style={{ color: "#0071e3", marginBottom: ".9rem" }}><IconLayers /></div>
+                <div key={i} style={{ padding: "1.75rem", borderRadius: 16, background: "rgba(0,200,160,.05)", border: "1px solid rgba(0,200,160,.18)" }}>
+                  <div style={{ color: "#00c8a0", marginBottom: ".9rem" }}><IconLayers /></div>
                   <h4 style={{ fontSize: "1rem", fontWeight: 700, color: "#f5f5f7", marginBottom: ".5rem" }}>{c.t}</h4>
                   <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>{c.d}</p>
                 </div>
@@ -281,7 +281,7 @@ export default function DesignSystemCasePage() {
                 { n: "[ __ teams ]", l: "Adopting the system", sub: "App + web teams using it" },
               ].map((m, i) => (
                 <div key={i} style={{ padding: "2.25rem 1.75rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".6rem" }}>{m.n}</p>
+                  <p style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#00c8a0", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".6rem" }}>{m.n}</p>
                   <p style={{ fontSize: ".88rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem" }}>{m.l}</p>
                   <p style={{ fontSize: ".76rem", color: "rgba(255,255,255,.4)", lineHeight: 1.5 }}>{m.sub}</p>
                 </div>
@@ -291,7 +291,7 @@ export default function DesignSystemCasePage() {
 
           <ScrollReveal delay={160}>
             <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginTop: "2rem", padding: "1.5rem 1.75rem", borderRadius: 16, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
-              The result compounded: the mobile design system was a direct lever in lifting the CVC app&apos;s numbers, it left a <strong style={{ color: "#fff" }}>lasting foundation for the mobile app team</strong>, and the mobile-first patterns became <strong style={{ color: "#fff" }}>best practices the web teams adopted</strong> in their responsive builds. <Link href="/work/cvc" style={{ color: "#0071e3", textDecoration: "none" }}>See it in production — CVC Flights →</Link>
+              The result compounded: the mobile design system was a direct lever in lifting the CVC app&apos;s numbers, it left a <strong style={{ color: "#fff" }}>lasting foundation for the mobile app team</strong>, and the mobile-first patterns became <strong style={{ color: "#fff" }}>best practices the web teams adopted</strong> in their responsive builds. <Link href="/work/cvc" style={{ color: "#00c8a0", textDecoration: "none" }}>See it in production — CVC Flights →</Link>
             </p>
           </ScrollReveal>
         </div>
@@ -317,7 +317,7 @@ export default function DesignSystemCasePage() {
             ].map((p, i) => (
               <ScrollReveal key={i} delay={i * 60}>
                 <div style={{ padding: "2rem", borderRadius: 16, border: "1px solid rgba(255,255,255,.07)", height: "100%" }}>
-                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1rem" }}>{p.n}</p>
+                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#00c8a0", textTransform: "uppercase", marginBottom: "1rem" }}>{p.n}</p>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{p.t}</h3>
                   <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{p.d}</p>
                 </div>
@@ -331,12 +331,12 @@ export default function DesignSystemCasePage() {
 
       {/* ═══ CTA ═══ */}
       <section className="aurora-wrap" style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,113,227,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,200,160,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
         <ScrollReveal className="aurora-content">
-          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>See it in product</p>
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#00c8a0", marginBottom: "1.5rem" }}>See it in product</p>
           <h2 style={{ fontSize: "clamp(2rem,5vw,4.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            The systems behind<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>the products.</em>
+            The systems behind<br /><em style={{ color: "#00c8a0", fontStyle: "italic" }}>the products.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/work/cvc" className="btn-blue">CVC Flights →</Link>
@@ -350,7 +350,7 @@ export default function DesignSystemCasePage() {
         <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)" }}>© 2025 Rafael Guimarães</p>
         <div style={{ display: "flex", gap: "1.5rem" }}>
           {[["Home", "/"], ["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["Leadership", "/work/leadership"]].map(([l, h]) => (
-            <Link key={h} href={h} style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>{l}</Link>
+            <Link key={h} href={h} style={{ fontSize: ".72rem", color: "#00c8a0", textDecoration: "none" }}>{l}</Link>
           ))}
         </div>
       </footer>

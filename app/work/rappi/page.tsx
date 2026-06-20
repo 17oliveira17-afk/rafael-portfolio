@@ -52,8 +52,8 @@ function MediaPlaceholder({
       width: "100%",
       aspectRatio: height ? undefined : aspect,
       height: height ? height : undefined,
-      background: "rgba(0,113,227,.06)",
-      border: "2px dashed rgba(0,113,227,.4)",
+      background: "rgba(255,106,43,.06)",
+      border: "2px dashed rgba(255,106,43,.4)",
       borderRadius: 16,
       display: "flex",
       flexDirection: "column",
@@ -62,13 +62,13 @@ function MediaPlaceholder({
       gap: "0.75rem",
       padding: "2rem",
     }}>
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0071e3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6a2b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
       </svg>
-      <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#0071e3", textAlign: "center", letterSpacing: "-.01em" }}>
+      <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#ff6a2b", textAlign: "center", letterSpacing: "-.01em" }}>
         {label}
       </p>
-      <code style={{ fontSize: ".75rem", color: "rgba(0,113,227,.7)", background: "rgba(0,113,227,.1)", padding: ".25rem .6rem", borderRadius: 6 }}>
+      <code style={{ fontSize: ".75rem", color: "rgba(255,106,43,.7)", background: "rgba(255,106,43,.1)", padding: ".25rem .6rem", borderRadius: 6 }}>
         /public/{filename}
       </code>
       {hint && (
@@ -83,7 +83,7 @@ function MediaPlaceholder({
 /* ── Section label ── */
 function Label({ children }: { children: ReactNode }) {
   return (
-    <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>
+    <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ff6a2b", marginBottom: "1.5rem" }}>
       {children}
     </p>
   );
@@ -103,7 +103,7 @@ export default function RappiCasePage() {
   const padNarrow = isMobile ? "5rem 1.5rem" : "8rem max(6rem, calc(50% - 560px))";
 
   return (
-    <main className="page-in" style={{ background: "#000" }}>
+    <main className="page-in" style={{ background: "#000", "--blue": "#ff6a2b", "--blue-hover": "#e55a1f" } as React.CSSProperties}>
 
       {/* ═══ 01 · HERO ═══ */}
       <CaseHero
@@ -128,7 +128,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>01 — Context</Label>
             <h2 style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-              30% of merchants<br />never made it past<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>the menu step.</em>
+              30% of merchants<br />never made it past<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>the menu step.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
               Rappi operates across 9 countries, 250 cities, 100M app downloads. The merchant onboarding was the front door for every restaurant partner — and it was broken. 30% dropped at the menu step, 20% at documents, and the full process took 2 weeks from sign-up to first order.
@@ -146,7 +146,7 @@ export default function RappiCasePage() {
                 { n: "3", l: "Releases shipped" },
               ].map((s, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1 }}>{s.n}</p>
+                  <p style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 700, color: "#ff6a2b", letterSpacing: "-.04em", lineHeight: 1 }}>{s.n}</p>
                   <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".6rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{s.l}</p>
                 </div>
               ))}
@@ -163,7 +163,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>02 — The diagnosis</Label>
             <RevealText
-              lines={["144 problems. But the", <em key="r" style={{ color: "#0071e3", fontStyle: "italic" }}>roadmap was the real problem.</em>]}
+              lines={["144 problems. But the", <em key="r" style={{ color: "#ff6a2b", fontStyle: "italic" }}>roadmap was the real problem.</em>]}
               style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
             />
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
@@ -192,7 +192,7 @@ export default function RappiCasePage() {
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "center" }}>
               <div>
                 <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-                  I showed the cost<br />of <em style={{ color: "#0071e3", fontStyle: "italic" }}>waiting 6 months.</em>
+                  I showed the cost<br />of <em style={{ color: "#ff6a2b", fontStyle: "italic" }}>waiting 6 months.</em>
                 </h2>
                 <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
                   With a 30% drop-off at the menu step, every month of waiting was merchants lost permanently. I quantified the cost and proposed splitting into 3 releases — fix first, redesign after — delivering value from week 1 instead of month 3.
@@ -209,11 +209,11 @@ export default function RappiCasePage() {
                 ].map((r, i) => (
                   <div key={i} style={{
                     padding: "1.5rem",
-                    border: `1px solid ${r.active ? "rgba(0,113,227,.4)" : "rgba(255,255,255,.08)"}`,
+                    border: `1px solid ${r.active ? "rgba(255,106,43,.4)" : "rgba(255,255,255,.08)"}`,
                     borderRadius: 12,
-                    background: r.active ? "rgba(0,113,227,.06)" : "transparent",
+                    background: r.active ? "rgba(255,106,43,.06)" : "transparent",
                   }}>
-                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".12em", color: r.active ? "#0071e3" : "rgba(255,255,255,.3)", textTransform: "uppercase", marginBottom: ".5rem" }}>{r.tag}</p>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".12em", color: r.active ? "#ff6a2b" : "rgba(255,255,255,.3)", textTransform: "uppercase", marginBottom: ".5rem" }}>{r.tag}</p>
                     <p style={{ fontSize: "1rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem" }}>{r.label}</p>
                     <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.4)" }}>{r.sub}</p>
                   </div>
@@ -232,7 +232,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>04 — Release 1: Fix first</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 600 }}>
-              Broken stepper, duplicate buttons,<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>no patterns, no guidance.</em>
+              Broken stepper, duplicate buttons,<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>no patterns, no guidance.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               Release 1 targeted the highest-impact, lowest-effort problems. Fixed the broken stepper, removed duplicate actions, reduced cognitive load, and added guidance where there was none. Then ran a usability test with 6 users to validate and discover what to redesign next.
@@ -266,7 +266,7 @@ export default function RappiCasePage() {
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "center" }}>
               <div>
                 <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-                  CO ≠ MX ≠ BR.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>Testing all three prevented rework.</em>
+                  CO ≠ MX ≠ BR.<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>Testing all three prevented rework.</em>
                 </h2>
                 <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
                   Interviewed 10 merchants across Colombia (5), Mexico (3), and Brazil (2). The usability test revealed the architecture itself needed redesigning — not just the bugs. Key insight: restaurants with human support performed better, validating the dashboard concept.
@@ -282,8 +282,8 @@ export default function RappiCasePage() {
                   { country: "Brazil", n: 2, insight: "Menu management was the #1 time sink" },
                 ].map((c, i) => (
                   <div key={i} style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
-                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(0,113,227,.15)", border: "1px solid rgba(0,113,227,.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <span style={{ fontSize: ".9rem", fontWeight: 700, color: "#0071e3" }}>{c.n}</span>
+                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,106,43,.15)", border: "1px solid rgba(255,106,43,.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <span style={{ fontSize: ".9rem", fontWeight: 700, color: "#ff6a2b" }}>{c.n}</span>
                     </div>
                     <div>
                       <p style={{ fontSize: ".8rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem" }}>{c.country}</p>
@@ -305,7 +305,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>06 — The redesign</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              4 domains → 1.<br />Linear and forced → <em style={{ color: "#0071e3", fontStyle: "italic" }}>free dashboard.</em>
+              4 domains → 1.<br />Linear and forced → <em style={{ color: "#ff6a2b", fontStyle: "italic" }}>free dashboard.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               The old flow forced merchants through 4 separate platforms with broken transitions between them. The redesign unified everything into one domain, replaced the forced linear sequence with a free-order dashboard, and introduced qualified lead capture from sign-up — meaning we knew who was serious from day one.
@@ -325,15 +325,15 @@ export default function RappiCasePage() {
                 ))}
                 <p style={{ fontSize: ".8rem", color: "rgba(255,69,0,.7)", marginTop: "1.25rem", fontStyle: "italic" }}>Broken transitions between each domain</p>
               </div>
-              <div style={{ padding: "2rem", border: "1px solid rgba(0,113,227,.25)", borderRadius: 16, background: "rgba(0,113,227,.04)" }}>
-                <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".12em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1.25rem" }}>After</p>
+              <div style={{ padding: "2rem", border: "1px solid rgba(255,106,43,.25)", borderRadius: 16, background: "rgba(255,106,43,.04)" }}>
+                <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".12em", color: "#ff6a2b", textTransform: "uppercase", marginBottom: "1.25rem" }}>After</p>
                 {["Sign up · Qualified lead · 5 min", "Dashboard · merchants choose any order", "Bank · Hours · Logo · Docs · Menu", "Platform onboarding · Store live"].map((step, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: ".75rem" }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#0071e3", flexShrink: 0 }} />
+                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#ff6a2b", flexShrink: 0 }} />
                     <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.65)" }}>{step}</p>
                   </div>
                 ))}
-                <p style={{ fontSize: ".8rem", color: "#0071e3", marginTop: "1.25rem", fontStyle: "italic" }}>1 unified domain · no transitions</p>
+                <p style={{ fontSize: ".8rem", color: "#ff6a2b", marginTop: "1.25rem", fontStyle: "italic" }}>1 unified domain · no transitions</p>
               </div>
             </div>
           </ScrollReveal>
@@ -360,7 +360,7 @@ export default function RappiCasePage() {
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "center" }}>
               <div>
                 <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-                  4 broken pages → <br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>1 seamless animation.</em>
+                  4 broken pages → <br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>1 seamless animation.</em>
                 </h2>
                 <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
                   Account creation, login, and the transition to the dashboard used to span 4 separate pages with hard redirects. Merchants would lose their state, get confused, and abandon. I collapsed all of it into a single animated transition — sign-up flows directly into the dashboard with no interruption.
@@ -394,7 +394,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>08 — The catalog problem</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              Menu management went from<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>days to a few hours.</em>
+              Menu management went from<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>days to a few hours.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               The old catalog was a flat list with no category overview, no bulk actions, and editing opened a modal that hid everything else. Inspired by iFood's reusable complement groups and DoorDash's side panel, I redesigned it: collapsible categories, drag-to-reorder, a side panel that keeps the full menu visible while editing, and complement groups created once and linked to multiple products. The last one was the key driver of going from 2 weeks to 2 days.
@@ -421,7 +421,7 @@ export default function RappiCasePage() {
           <ScrollReveal>
             <Label>09 — Outcomes</Label>
             <RevealText
-              lines={["3 releases. 3 markets.", <em key="n" style={{ color: "#0071e3", fontStyle: "italic" }}>Numbers that moved the business.</em>]}
+              lines={["3 releases. 3 markets.", <em key="n" style={{ color: "#ff6a2b", fontStyle: "italic" }}>Numbers that moved the business.</em>]}
               style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}
             />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "4rem", letterSpacing: ".06em" }}>Tracked via Amplitude conversion funnels</p>
@@ -429,11 +429,11 @@ export default function RappiCasePage() {
 
           {/* Big metric */}
           <ScrollReveal delay={100}>
-            <div style={{ padding: "3rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 20, background: "rgba(0,113,227,.05)", marginBottom: "2rem", textAlign: "center" }}>
-              <p style={{ fontSize: ".75rem", fontWeight: 600, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1rem" }}>Time to open a store</p>
+            <div style={{ padding: "3rem", border: "1px solid rgba(255,106,43,.3)", borderRadius: 20, background: "rgba(255,106,43,.05)", marginBottom: "2rem", textAlign: "center" }}>
+              <p style={{ fontSize: ".75rem", fontWeight: 600, letterSpacing: ".15em", color: "#ff6a2b", textTransform: "uppercase", marginBottom: "1rem" }}>Time to open a store</p>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", flexWrap: "wrap" }}>
                 <p style={{ fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 700, color: "rgba(255,255,255,.3)", letterSpacing: "-.05em", lineHeight: 1 }}>2 weeks</p>
-                <p style={{ fontSize: "clamp(2rem,5vw,4rem)", color: "#0071e3" }}>→</p>
+                <p style={{ fontSize: "clamp(2rem,5vw,4rem)", color: "#ff6a2b" }}>→</p>
                 <p style={{ fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.05em", lineHeight: 1 }}>2 days</p>
               </div>
               <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.4)", marginTop: "1rem" }}>From sign-up to first order, across all 3 markets</p>
@@ -449,7 +449,7 @@ export default function RappiCasePage() {
             ].map((m, i) => (
               <ScrollReveal key={i} delay={i * 80}>
                 <div style={{ padding: "2.5rem 2rem", background: "#0a0a0a", height: "100%" }}>
-                  <p style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".75rem" }}>{m.n}</p>
+                  <p style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 700, color: "#ff6a2b", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".75rem" }}>{m.n}</p>
                   <p style={{ fontSize: ".9rem", fontWeight: 600, color: "#fff", marginBottom: ".4rem" }}>{m.l}</p>
                   <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.4)", lineHeight: 1.5 }}>{m.sub}</p>
                 </div>
@@ -474,7 +474,7 @@ export default function RappiCasePage() {
                 { n: "04", title: "Multi-country research was non-negotiable.", body: "CO ≠ MX ≠ BR. Testing across all three upfront prevented building for one market and reworking for the others." },
               ].map((l, i) => (
                 <div key={i} style={{ padding: "2rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 16 }}>
-                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1rem" }}>{l.n}</p>
+                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#ff6a2b", textTransform: "uppercase", marginBottom: "1rem" }}>{l.n}</p>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{l.title}</h3>
                   <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{l.body}</p>
                 </div>
@@ -488,12 +488,12 @@ export default function RappiCasePage() {
 
       {/* ═══ CTA ═══ */}
       <section className="aurora-wrap" style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,113,227,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,106,43,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
         <ScrollReveal className="aurora-content">
-          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Next case</p>
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ff6a2b", marginBottom: "1.5rem" }}>Next case</p>
           <h2 style={{ fontSize: "clamp(2rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            See the CVC<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>Flight Booking Redesign.</em>
+            See the CVC<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>Flight Booking Redesign.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/work/cvc" className="btn-blue">CVC Case Study →</Link>
@@ -505,8 +505,8 @@ export default function RappiCasePage() {
       <footer style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,.08)", padding: "2rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
         <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)" }}>© 2025 Rafael Guimarães</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          <Link href="/work/cvc" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>← CVC</Link>
-          <Link href="/" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>Home</Link>
+          <Link href="/work/cvc" style={{ fontSize: ".72rem", color: "#ff6a2b", textDecoration: "none" }}>← CVC</Link>
+          <Link href="/" style={{ fontSize: ".72rem", color: "#ff6a2b", textDecoration: "none" }}>Home</Link>
         </div>
       </footer>
     </main>

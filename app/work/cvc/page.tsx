@@ -46,13 +46,13 @@ function MediaPlaceholder({
   return (
     <div style={{
       width: "100%", aspectRatio: height ? undefined : aspect, height: height ?? undefined,
-      background: "rgba(0,113,227,.05)", border: "2px dashed rgba(0,113,227,.35)",
+      background: "rgba(234,179,8,.05)", border: "2px dashed rgba(234,179,8,.35)",
       borderRadius: 16, display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center", gap: ".75rem", padding: "2rem",
     }}>
-      <div style={{ color: "#0071e3", display: "flex" }}><Icon name="folder" size={32} /></div>
-      <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#0071e3", textAlign: "center", letterSpacing: "-.01em" }}>{label}</p>
-      <code style={{ fontSize: ".75rem", color: "rgba(0,113,227,.8)", background: "rgba(0,113,227,.1)", padding: ".25rem .6rem", borderRadius: 6 }}>
+      <div style={{ color: "#eab308", display: "flex" }}><Icon name="folder" size={32} /></div>
+      <p style={{ fontSize: ".9rem", fontWeight: 700, color: "#eab308", textAlign: "center", letterSpacing: "-.01em" }}>{label}</p>
+      <code style={{ fontSize: ".75rem", color: "rgba(234,179,8,.8)", background: "rgba(234,179,8,.1)", padding: ".25rem .6rem", borderRadius: 6 }}>
         /public/{filename}
       </code>
       {hint && <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", textAlign: "center", maxWidth: 380, lineHeight: 1.5 }}>{hint}</p>}
@@ -61,7 +61,7 @@ function MediaPlaceholder({
 }
 
 function Label({ children }: { children: ReactNode }) {
-  return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>{children}</p>;
+  return <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#eab308", marginBottom: "1.5rem" }}>{children}</p>;
 }
 
 function Divider() {
@@ -76,7 +76,7 @@ export default function CVCCasePage() {
   const pad = isMobile ? "5rem 1.5rem" : "8rem 6rem";
 
   return (
-    <main className="page-in dark-cursor" style={{ background: "#000" }}>
+    <main className="page-in dark-cursor" style={{ background: "#000", "--blue": "#eab308", "--blue-hover": "#d99400" } as React.CSSProperties}>
 
       {/* ═══ 01 · HERO ═══ */}
       <CaseHero
@@ -111,7 +111,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>01 — Context</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-              The problem was<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>deeper than performance.</em>
+              The problem was<br /><em style={{ color: "#eab308", fontStyle: "italic" }}>deeper than performance.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
               CVC is Brazil's largest travel company — 1,600 stores, 30M customers, R$17B in annual bookings. The app had a 2.0★ rating and the mobile team was treated as a backup to the website. No native experience, no GPS, no fluid interactions. The entire booking flow ran on webview.
@@ -129,7 +129,7 @@ export default function CVCCasePage() {
                 { n: "2.0★", l: "App Store rating" },
               ].map((s, i) => (
                 <div key={i} style={{ padding: "2rem 1.5rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1 }}>{s.n}</p>
+                  <p style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 700, color: "#eab308", letterSpacing: "-.04em", lineHeight: 1 }}>{s.n}</p>
                   <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".6rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{s.l}</p>
                 </div>
               ))}
@@ -146,7 +146,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>02 — Root cause</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-              Webview treated as backup.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>No reason to install the app.</em>
+              Webview treated as backup.<br /><em style={{ color: "#eab308", fontStyle: "italic" }}>No reason to install the app.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
               Most 1-star reviews cited freezing — not design. The entire booking flow ran on webview inside a native shell. No GPS, no haptics, no native rendering. Users had the same experience as the website but worse. There was no reason to install the app at all.
@@ -181,7 +181,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>03 — The strategy</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
-              I proposed a 1-month bet<br />instead of a <em style={{ color: "#0071e3", fontStyle: "italic" }}>6-month rebuild.</em>
+              I proposed a 1-month bet<br />instead of a <em style={{ color: "#eab308", fontStyle: "italic" }}>6-month rebuild.</em>
             </h2>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
               Go native on flights first — the most profitable product. Run a 50/50 A/B test in production for 1 month with metrics defined upfront. If it works, scale to hotels, packages, car rental. That's how I got stakeholders to say yes: smaller scope, contained risk, clear go/no-go criteria.
@@ -195,7 +195,7 @@ export default function CVCCasePage() {
                 { n: "03", title: "Validate first", body: "Usability test the riskiest decision. A/B test 50/50 in production for 1 month with clear success metrics." },
               ].map((s, i) => (
                 <div key={i} style={{ padding: "2.5rem 2rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1.25rem" }}>{s.n}</p>
+                  <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#eab308", textTransform: "uppercase", marginBottom: "1.25rem" }}>{s.n}</p>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem" }}>{s.title}</h3>
                   <p style={{ fontSize: ".88rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{s.body}</p>
                 </div>
@@ -215,7 +215,7 @@ export default function CVCCasePage() {
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "center" }}>
               <div>
                 <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-                  Separate outbound and return.<br /><em style={{ color: "#0071e3", fontStyle: "italic" }}>Stakeholders were against it.</em>
+                  Separate outbound and return.<br /><em style={{ color: "#eab308", fontStyle: "italic" }}>Stakeholders were against it.</em>
                 </h2>
                 <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "2rem" }}>
                   The combined outbound+return card was the default. Everyone assumed it was correct. I ran a Maze A/B test with 10 users before committing to hi-fi.
@@ -227,11 +227,11 @@ export default function CVCCasePage() {
                     <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: ".4rem" }}>Score: 40</p>
                     <p style={{ fontSize: ".78rem", color: "rgba(255,69,0,.7)", marginTop: ".5rem", fontStyle: "italic" }}>&ldquo;Too much info&rdquo;</p>
                   </div>
-                  <div style={{ padding: "1.5rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 12, background: "rgba(0,113,227,.05)" }}>
-                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".1em", color: "#0071e3", textTransform: "uppercase", marginBottom: ".75rem", display: "inline-flex", alignItems: "center", gap: ".4rem" }}>A — Separated <Icon name="trophy" size={14} /></p>
+                  <div style={{ padding: "1.5rem", border: "1px solid rgba(234,179,8,.3)", borderRadius: 12, background: "rgba(234,179,8,.05)" }}>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".1em", color: "#eab308", textTransform: "uppercase", marginBottom: ".75rem", display: "inline-flex", alignItems: "center", gap: ".4rem" }}>A — Separated <Icon name="trophy" size={14} /></p>
                     <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "#fff", letterSpacing: "-.03em" }}>9.4s</p>
                     <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.5)", marginTop: ".4rem" }}>Score: 97–100</p>
-                    <p style={{ fontSize: ".78rem", color: "#0071e3", marginTop: ".5rem", fontStyle: "italic" }}>&ldquo;Practical, no back and forth&rdquo;</p>
+                    <p style={{ fontSize: ".78rem", color: "#eab308", marginTop: ".5rem", fontStyle: "italic" }}>&ldquo;Practical, no back and forth&rdquo;</p>
                   </div>
                 </div>
                 <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.4)", marginTop: "1.25rem", fontStyle: "italic" }}>
@@ -264,7 +264,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>05 — The product</Label>
             <RevealText
-              lines={["Guided search. One flight at a time.", <em key="c" className="text-gradient" style={{ fontStyle: "italic" }}>Confirmation before checkout.</em>]}
+              lines={["Guided search. One flight at a time.", <em key="c" style={{ color: "#eab308", fontStyle: "italic" }}>Confirmation before checkout.</em>]}
               style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
             />
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, marginBottom: "4rem" }}>
@@ -346,7 +346,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>Behind the screens — the process</Label>
             <RevealText
-              lines={["Rigor before pixels.", <em key="p" className="text-gradient" style={{ fontStyle: "italic" }}>The work behind the work.</em>]}
+              lines={["Rigor before pixels.", <em key="p" style={{ color: "#eab308", fontStyle: "italic" }}>The work behind the work.</em>]}
               style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: isMobile ? "3rem" : "5rem", maxWidth: 700 }}
             />
           </ScrollReveal>
@@ -406,7 +406,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>06 — More of the product</Label>
             <RevealText
-              lines={["Five more screens.", <em key="o" className="text-gradient" style={{ fontStyle: "italic" }}>One focused device.</em>]}
+              lines={["Five more screens.", <em key="o" style={{ color: "#eab308", fontStyle: "italic" }}>One focused device.</em>]}
               style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}
             />
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 620 }}>
@@ -438,7 +438,7 @@ export default function CVCCasePage() {
           <ScrollReveal>
             <Label>07 — Outcomes</Label>
             <RevealText
-              lines={["Results after 1 month live.", <em key="ab" className="text-gradient" style={{ fontStyle: "italic" }}>A/B tested 50/50 in production.</em>]}
+              lines={["Results after 1 month live.", <em key="ab" style={{ color: "#eab308", fontStyle: "italic" }}>A/B tested 50/50 in production.</em>]}
               style={{ fontSize: "clamp(2rem,3.5vw,3.2rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1rem", maxWidth: 700 }}
             />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "4rem", letterSpacing: ".06em" }}>Tracked via Mixpanel</p>
@@ -446,14 +446,14 @@ export default function CVCCasePage() {
 
           {/* Big conversion metric */}
           <ScrollReveal delay={80}>
-            <div style={{ padding: "3rem", border: "1px solid rgba(0,113,227,.3)", borderRadius: 20, background: "rgba(0,113,227,.05)", marginBottom: "2rem", textAlign: "center" }}>
-              <p style={{ fontSize: ".75rem", fontWeight: 600, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase", marginBottom: "1rem" }}>Checkout conversion rate — end-to-end flight booking</p>
+            <div style={{ padding: "3rem", border: "1px solid rgba(234,179,8,.3)", borderRadius: 20, background: "rgba(234,179,8,.05)", marginBottom: "2rem", textAlign: "center" }}>
+              <p style={{ fontSize: ".75rem", fontWeight: 600, letterSpacing: ".15em", color: "#eab308", textTransform: "uppercase", marginBottom: "1rem" }}>Checkout conversion rate — end-to-end flight booking</p>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", flexWrap: "wrap" }}>
                 <div>
                   <p style={{ fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 700, color: "rgba(255,255,255,.3)", letterSpacing: "-.05em", lineHeight: 1 }}>6.4%</p>
                   <p style={{ fontSize: ".8rem", color: "rgba(255,255,255,.3)", marginTop: ".5rem" }}>Before</p>
                 </div>
-                <p style={{ fontSize: "clamp(2rem,5vw,4rem)", color: "#0071e3" }}>→</p>
+                <p style={{ fontSize: "clamp(2rem,5vw,4rem)", color: "#eab308" }}>→</p>
                 <div>
                   <p style={{ fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.05em", lineHeight: 1 }}>20%</p>
                   <p style={{ fontSize: ".8rem", color: "rgba(255,255,255,.5)", marginTop: ".5rem" }}>After</p>
@@ -471,7 +471,7 @@ export default function CVCCasePage() {
             ].map((m, i) => (
               <ScrollReveal key={i} delay={i * 80}>
                 <div style={{ padding: "2.5rem 2rem", background: "#0a0a0a", height: "100%" }}>
-                  <p style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 700, color: "#0071e3", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".75rem" }}>{m.n}</p>
+                  <p style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 700, color: "#eab308", letterSpacing: "-.04em", lineHeight: 1, marginBottom: ".75rem" }}>{m.n}</p>
                   <p style={{ fontSize: ".9rem", fontWeight: 600, color: "#fff", marginBottom: ".4rem" }}>{m.l}</p>
                   <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.4)", lineHeight: 1.5 }}>{m.sub}</p>
                 </div>
@@ -497,10 +497,10 @@ export default function CVCCasePage() {
               ] as const).map((l, i) => (
                 <div key={i} style={{ padding: "2rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 16 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: ".85rem", marginBottom: "1.25rem" }}>
-                    <div style={{ width: 42, height: 42, borderRadius: 11, background: "rgba(0,113,227,.1)", border: "1px solid rgba(0,113,227,.25)", display: "flex", alignItems: "center", justifyContent: "center", color: "#0071e3", flexShrink: 0 }}>
+                    <div style={{ width: 42, height: 42, borderRadius: 11, background: "rgba(234,179,8,.1)", border: "1px solid rgba(234,179,8,.25)", display: "flex", alignItems: "center", justifyContent: "center", color: "#eab308", flexShrink: 0 }}>
                       <Icon name={l.icon} size={20} />
                     </div>
-                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#0071e3", textTransform: "uppercase" }}>{l.n}</p>
+                    <p style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".15em", color: "#eab308", textTransform: "uppercase" }}>{l.n}</p>
                   </div>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#fff", marginBottom: ".75rem", letterSpacing: "-.01em" }}>{l.title}</h3>
                   <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.5)", lineHeight: 1.7 }}>{l.body}</p>
@@ -515,12 +515,12 @@ export default function CVCCasePage() {
 
       {/* ═══ CTA ═══ */}
       <section className="aurora-wrap" style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,113,227,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(234,179,8,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
         <ScrollReveal className="aurora-content">
-          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Next case</p>
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#eab308", marginBottom: "1.5rem" }}>Next case</p>
           <h2 style={{ fontSize: "clamp(2rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            See the Rappi<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>Merchant Onboarding.</em>
+            See the Rappi<br /><em style={{ color: "#eab308", fontStyle: "italic" }}>Merchant Onboarding.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/work/rappi" className="btn-blue">Rappi Case Study →</Link>
@@ -532,8 +532,8 @@ export default function CVCCasePage() {
       <footer style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,.08)", padding: "2rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
         <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)" }}>© 2025 Rafael Guimarães</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          <Link href="/work/rappi" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>Rappi Case →</Link>
-          <Link href="/" style={{ fontSize: ".72rem", color: "#0071e3", textDecoration: "none" }}>Home</Link>
+          <Link href="/work/rappi" style={{ fontSize: ".72rem", color: "#eab308", textDecoration: "none" }}>Rappi Case →</Link>
+          <Link href="/" style={{ fontSize: ".72rem", color: "#eab308", textDecoration: "none" }}>Home</Link>
         </div>
       </footer>
     </main>
