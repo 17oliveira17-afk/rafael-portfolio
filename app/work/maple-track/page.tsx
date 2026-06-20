@@ -108,7 +108,7 @@ export default function MapleTrackCasePage() {
         company="Personal Product · 0 → 1"
         titleLines={["MapleTrack —", <em key="t" style={{ color: ACC, fontStyle: "italic" }}>your GPS to Canada.</em>]}
         subtitle="No tool guides a couple through Canadian immigration end to end — so I designed and built one. A responsive product that scores your profile, ranks your pathways, and shows the next step every single day, from profile analysis to citizenship."
-        tags={["0 → 1 Product", "Web + Mobile", "Founder · Solo build", "Designed & shipped"]}
+        tags={["0 → 1 Product", "Web + Mobile", "Founder · Solo build", "Built with Claude Code"]}
         stats={[
           { n: "0 → 1", l: "Greenfield product" },
           { n: "9 phases", l: "Research → citizenship" },
@@ -178,7 +178,7 @@ export default function MapleTrackCasePage() {
             <Label>02 — The approach</Label>
             <Title lines={["One product.", em("Built solo in two weeks.")]} mb="1.5rem" />
             <Lead>
-              Instead of waiting on a consultancy, I gave myself a Shape-Up appetite — two weeks — and shipped a real, responsive product end to end: design system, front-end and data model, pair-building with AI. Three rules drove every decision.
+              Instead of waiting on a consultancy, I gave myself a Shape-Up appetite — two weeks — and shipped a real, responsive product end to end: design system, front-end and data model, pair-programming the whole build with <span style={{ color: "#fff" }}>Claude Code</span>, Anthropic’s AI. Three rules drove every decision.
             </Lead>
           </ScrollReveal>
           <ScrollReveal delay={100}>
@@ -371,15 +371,16 @@ export default function MapleTrackCasePage() {
             </div>
           </ScrollReveal>
           <ScrollReveal delay={140}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(5,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", marginTop: "1rem" }}>
               {[
-                ["Next.js 16", "App Router · RSC"],
-                ["shadcn/ui", "Accessible primitives"],
-                ["Drizzle + Neon", "Type-safe Postgres"],
-                ["Auth.js", "Household sessions"],
-              ].map(([n, l]) => (
-                <div key={n} style={{ padding: "1.75rem 1.5rem", background: "#0a0a0a" }}>
-                  <p style={{ fontSize: "1.05rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em" }}>{n}</p>
+                ["Claude Code", "AI pair-builder", true],
+                ["Next.js 16", "App Router · RSC", false],
+                ["shadcn/ui", "Accessible primitives", false],
+                ["Drizzle + Neon", "Type-safe Postgres", false],
+                ["Auth.js", "Household sessions", false],
+              ].map(([n, l, hi]) => (
+                <div key={n as string} style={{ padding: "1.75rem 1.5rem", background: hi ? a(0.08) : "#0a0a0a" }}>
+                  <p style={{ fontSize: "1.05rem", fontWeight: 700, color: hi ? ACC : "#fff", letterSpacing: "-.02em" }}>{n}</p>
                   <p style={{ fontSize: ".74rem", color: "rgba(255,255,255,.4)", marginTop: ".4rem" }}>{l}</p>
                 </div>
               ))}
@@ -426,7 +427,7 @@ export default function MapleTrackCasePage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "2rem" }}>
             {([
               { icon: "compass", title: "Designing for yourself is the ultimate brief.", body: "Being user zero meant every gap in the experience was a gap in my own life. The feedback loop was instant and ruthless — the best research I’ve ever had." },
-              { icon: "zap", title: "A designer can ship production code now.", body: "Pair-building with AI, I took this from Figma thinking to a deployed, database-backed product solo. The design-to-build handoff disappeared." },
+              { icon: "zap", title: "A designer can ship production code now.", body: "Pair-programming with Claude Code, I took this from Figma thinking to a deployed, database-backed product — solo. The design-to-build handoff simply disappeared." },
               { icon: "layers", title: "A design system pays off even at n=1.", body: "One token set and a small component library made ten feature areas feel like one product — and let me move at two-week speed without the UI drifting." },
               { icon: "target", title: "Guidance beats information.", body: "Consultancies hand you data and a bill. The unlock wasn’t more information — it was always showing the single next step. Direction is the product." },
             ] as const).map((l, i) => (
