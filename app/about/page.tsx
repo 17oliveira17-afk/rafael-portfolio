@@ -203,6 +203,91 @@ function CompanyInline({ name, logo, accent, info, isMobile }: {
   );
 }
 
+const PRINCIPLE_ICONS = ["◎", "⬡", "◈", "⊕"];
+
+function PrincipleCards({ principles, isMobile }: { principles: { n: string; title: string; desc: string }[]; isMobile: boolean }) {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  return (
+    <div
+      onMouseLeave={() => setHovered(null)}
+      style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? "1rem" : "1.25rem" }}
+    >
+      {principles.map((p, i) => {
+        const isActive = hovered === i;
+        const isDimmed = hovered !== null && hovered !== i;
+        return (
+          <ScrollReveal key={i} delay={i * 80}>
+            <div
+              onMouseEnter={() => setHovered(i)}
+              style={{
+                position: "relative",
+                padding: isMobile ? "1.75rem" : "2.25rem",
+                borderRadius: 22,
+                border: `1px solid ${isActive ? "rgba(0,113,227,.4)" : "rgba(255,255,255,.07)"}`,
+                background: isActive ? "rgba(0,113,227,.05)" : "#0a0a0a",
+                cursor: "default",
+                transition: "all .4s cubic-bezier(.16,1,.3,1)",
+                transform: isActive ? "translateY(-4px)" : "translateY(0)",
+                opacity: isDimmed ? 0.4 : 1,
+                boxShadow: isActive ? "0 24px 60px rgba(0,113,227,.12)" : "none",
+                overflow: "hidden",
+                minHeight: isMobile ? undefined : 200,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {/* accent glow on hover */}
+              {isActive && (
+                <div aria-hidden style={{ position: "absolute", top: 0, right: 0, width: "60%", height: "60%", background: "radial-gradient(ellipse at 100% 0%, rgba(0,113,227,.12), transparent 70%)", pointerEvents: "none" }} />
+              )}
+
+              {/* number + icon row */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem", position: "relative" }}>
+                <span style={{
+                  fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-.04em",
+                  color: isActive ? "#0071e3" : "rgba(255,255,255,.08)",
+                  transition: "color .3s ease",
+                  lineHeight: 1,
+                }}>
+                  {p.n}
+                </span>
+                <span style={{
+                  fontSize: "1.5rem",
+                  color: isActive ? "#0071e3" : "rgba(255,255,255,.12)",
+                  transition: "color .3s ease",
+                }}>
+                  {PRINCIPLE_ICONS[i] || "◎"}
+                </span>
+              </div>
+
+              {/* title */}
+              <h3 style={{
+                fontSize: isMobile ? "1.1rem" : "1.25rem",
+                fontWeight: 700, color: "#f5f5f7",
+                letterSpacing: "-.02em", lineHeight: 1.2,
+                marginBottom: ".85rem",
+              }}>
+                {p.title}
+              </h3>
+
+              {/* description */}
+              <p style={{
+                fontSize: isMobile ? ".88rem" : ".92rem",
+                color: "rgba(255,255,255,.5)",
+                lineHeight: 1.75,
+                flex: 1,
+              }}>
+                {p.desc}
+              </p>
+            </div>
+          </ScrollReveal>
+        );
+      })}
+    </div>
+  );
+}
+
 const FEATURED_COMPANIES = [
   {
     name: "Thoughtworks",
@@ -510,24 +595,13 @@ export default function AboutPage() {
       <section style={{ background: "#0a0a0a", padding: padSection, borderTop: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
-            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "3rem" }}>Design principles</p>
+            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>Design principles</p>
+            <RevealText
+              text="How I think."
+              style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.5rem)" : "clamp(2rem,4vw,4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "3rem" }}
+            />
           </ScrollReveal>
-          <div className="ptable">
-            <div className="prow phead">
-              <span>№</span>
-              <span>Principle</span>
-              <span>What it means</span>
-            </div>
-            {principles.map((p, i) => (
-              <ScrollReveal key={i} delay={i * 60}>
-                <div className="prow">
-                  <span className="pnum">{p.n}</span>
-                  <h3 className="ptitle">{p.title}</h3>
-                  <p className="pdesc">{p.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <PrincipleCards principles={principles} isMobile={isMobile} />
         </div>
       </section>
 
