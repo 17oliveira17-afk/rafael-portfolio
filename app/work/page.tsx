@@ -4,6 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import useIsMobile from "../components/useIsMobile";
 import { PROJECTS } from "../components/ProjectGallery";
 
+const PLATE_IMAGES: Record<string, string> = {
+  "/work/cvc": "/cinematic/airplane-wing.jpg",
+  "/work/rappi": "/cinematic/rappi-food.jpg",
+  "/work/design-system": "/cinematic/design-system.jpg",
+  "/work/leadership": "/cinematic/leadership-team.jpg",
+  "/work/maple-track": "/cinematic/maple-dashboard.jpg",
+};
+
 export default function WorkPage() {
   const isMobile = useIsMobile();
   const [activeIdx, setActiveIdx] = useState(0);
@@ -209,12 +217,17 @@ export default function WorkPage() {
 
                       <span style={{
                         display: "inline-flex", alignItems: "center", gap: ".5rem",
-                        fontSize: ".95rem", fontWeight: 600, color: p.glow,
+                        fontSize: ".88rem", fontWeight: 600, color: "#fff",
+                        padding: ".7rem 1.6rem",
+                        borderRadius: 100,
+                        background: p.glow,
                         opacity: 0,
                         animation: activeIdx === i ? "fadeUp .7s ease .85s forwards" : "none",
+                        transition: "transform .2s ease, box-shadow .2s ease",
+                        boxShadow: `0 4px 20px ${p.glow}40`,
                       }}>
                         Read case study
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                           <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                         </svg>
                       </span>
@@ -235,6 +248,10 @@ export default function WorkPage() {
                         background: p.grad,
                         boxShadow: `0 40px 100px ${p.glow}25`,
                       }}>
+                        {/* industry background image — very subtle behind the gradient */}
+                        {PLATE_IMAGES[p.href] && (
+                          <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: `url(${PLATE_IMAGES[p.href]})`, backgroundSize: "cover", backgroundPosition: "center", opacity: .15, mixBlendMode: "luminosity", pointerEvents: "none" }} />
+                        )}
                         {/* orbs */}
                         <div aria-hidden style={{ position: "absolute", width: "80%", aspectRatio: "1", borderRadius: "50%", top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(255,255,255,.5), transparent 60%)", filter: "blur(10px)", mixBlendMode: "soft-light", pointerEvents: "none" }} />
                         <div aria-hidden style={{ position: "absolute", width: "70%", aspectRatio: "1", borderRadius: "50%", bottom: "-25%", left: "-15%", background: "radial-gradient(circle, rgba(0,0,0,.4), transparent 60%)", filter: "blur(12px)", pointerEvents: "none" }} />
