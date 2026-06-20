@@ -7,9 +7,9 @@ import { PROJECTS } from "../components/ProjectGallery";
 const PLATE_IMAGES: Record<string, string> = {
   "/work/cvc": "/cinematic/airplane-wing.jpg",
   "/work/rappi": "/cinematic/rappi-food.jpg",
-  "/work/design-system": "/cinematic/design-system.jpg",
+  "/work/design-system": "/cinematic/design-system-components.jpg",
   "/work/leadership": "/cinematic/leadership-team.jpg",
-  "/work/maple-track": "/cinematic/maple-dashboard.jpg",
+  "/work/maple-track": "/cinematic/maple-canada.jpg",
 };
 
 export default function WorkPage() {
