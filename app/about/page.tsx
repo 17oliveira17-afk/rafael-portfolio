@@ -641,7 +641,7 @@ export default function AboutPage() {
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         .tcard { opacity: .82; transition: opacity .4s ease, transform .4s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
-        .tgrid:hover .tcard { opacity: .1; }
+        .tgrid:hover .tcard { opacity: .4; }
         .tcard:hover { opacity: 1 !important; transform: translateY(-6px) scale(1.015); border-color: rgba(0,113,227,.5); box-shadow: 0 28px 60px rgba(0,0,0,.5); }
         @media (hover: none) { .tcard { opacity: 1; } }
 
