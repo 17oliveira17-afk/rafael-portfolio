@@ -95,11 +95,11 @@ const principles = [
 ];
 
 const testimonials = [
-  { quote: "Rafael's dedication, strong design process, and proactive mindset consistently led to exceptional results. A top-tier designer.", name: "Allan Cardozo", role: "Design Manager, Delivery Hero · Ex-Rappi Director" },
-  { quote: "Rafa led a major revamp of restaurant onboarding, pushing the team toward first-principles thinking and delivering real impact.", name: "Nima Zahedi", role: "Product Director, Monzo" },
+  { quote: "Rafael's dedication, strong design process, and proactive mindset consistently led to exceptional results. A top-tier designer.", name: "Allan Cardozo", role: "Design Manager, Delivery Hero · Ex-Rappi Director", photo: "/photos/leaders/allan-cardozo.jpg" },
+  { quote: "Rafa led a major revamp of restaurant onboarding, pushing the team toward first-principles thinking and delivering real impact.", name: "Nima Zahedi", role: "Product Director, Monzo", photo: "/photos/leaders/nima-zahedi.jpg" },
   { quote: "Rafael's designs significantly improved usability and boosted conversion rates, aligning perfectly with business goals.", name: "German Sotelo", role: "Engineering Manager, Rappi" },
   { quote: "Rafa kept a complex project on track despite shifting deadlines, showing resilience and delivering outstanding results.", name: "Santiago Martinez", role: "Product Manager, Rappi" },
-  { quote: "Rafael is not only an exceptional designer but also a fantastic teammate — proactive, detail-oriented, and always raising the bar.", name: "Paula Lenis", role: "Design Lead, Rappi" },
+  { quote: "Rafael is not only an exceptional designer but also a fantastic teammate — proactive, detail-oriented, and always raising the bar.", name: "Paula Lenis", role: "Design Lead, Rappi", photo: "/photos/leaders/paula-lenis.jpg" },
   { quote: "From the moment I interviewed Rafa, I knew he had incredible potential. Seeing his growth and contributions over time has been inspiring.", name: "Carolina Ledesma", role: "Design Manager, CVC Corp" },
 ];
 
@@ -136,9 +136,9 @@ function CompanyInline({ name, logo, accent, info, isMobile }: {
           display: "inline-flex", alignItems: "center", gap: ".35rem",
           fontSize: ".66rem", fontWeight: 600, letterSpacing: ".04em",
           padding: ".3rem .75rem", borderRadius: 100,
-          background: open ? `${accent}1a` : "rgba(255,255,255,.05)",
-          border: `1px solid ${open ? accent + "50" : "rgba(255,255,255,.12)"}`,
-          color: open ? accent : "rgba(255,255,255,.45)",
+          background: open ? `${accent}1a` : `${accent}0d`,
+          border: `1px solid ${open ? accent + "50" : accent + "30"}`,
+          color: open ? accent : accent + "aa",
           transition: "all .35s ease",
           whiteSpace: "nowrap",
         }}>
@@ -604,7 +604,12 @@ export default function AboutPage() {
                   <span className="t-quote-mark" aria-hidden>&rdquo;</span>
                   <p style={{ fontSize: isMobile ? ".9rem" : ".95rem", color: "rgba(255,255,255,.72)", lineHeight: 1.75, marginBottom: "1.75rem", flex: 1, position: "relative" }}>&ldquo;{t.quote}&rdquo;</p>
                   <div style={{ display: "flex", alignItems: "center", gap: ".75rem" }}>
-                    <span className="t-avatar" aria-hidden>{t.name.split(" ").map(w => w[0]).slice(0, 2).join("")}</span>
+                    {(t as {photo?: string}).photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={(t as {photo?: string}).photo!} alt={t.name} style={{ width: 40, height: 40, borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid rgba(0,113,227,.35)" }} />
+                    ) : (
+                      <span className="t-avatar" aria-hidden>{t.name.split(" ").map(w => w[0]).slice(0, 2).join("")}</span>
+                    )}
                     <div>
                       <p style={{ fontSize: ".85rem", color: "#fff", fontWeight: 600 }}>{t.name}</p>
                       <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)", marginTop: ".15rem" }}>{t.role}</p>
