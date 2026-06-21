@@ -5,11 +5,11 @@ import useIsMobile from "../components/useIsMobile";
 import { PROJECTS } from "../components/ProjectGallery";
 
 const PLATE_IMAGES: Record<string, string> = {
-  "/work/cvc": "/cinematic/airplane-wing.jpg",
+  "/work/cvc": "/cinematic/cvc-app-screen.jpg",
   "/work/rappi": "/cinematic/rappi-food.jpg",
   "/work/design-system": "/cinematic/design-system-components.jpg",
   "/work/leadership": "/cinematic/leadership-team.jpg",
-  "/work/maple-track": "/cinematic/airport-window.jpg",
+  "/work/maple-track": "/cinematic/canada-documents.jpg",
 };
 
 export default function WorkPage() {
