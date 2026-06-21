@@ -5,7 +5,7 @@ import useIsMobile from "../components/useIsMobile";
 import { PROJECTS } from "../components/ProjectGallery";
 
 const PLATE_IMAGES: Record<string, string> = {
-  "/work/cvc": "/cinematic/cvc-app-screen.jpg",
+  "/work/cvc": "/cinematic/phone-travel.jpg",
   "/work/rappi": "/cinematic/rappi-food.jpg",
   "/work/design-system": "/cinematic/design-system-components.jpg",
   "/work/leadership": "/cinematic/leadership-team.jpg",
