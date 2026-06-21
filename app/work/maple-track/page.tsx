@@ -20,33 +20,50 @@ function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
-/* ── browser-window frame around a desktop screenshot ── */
-function BrowserFrame({ src, alt, url }: { src: string; alt: string; url: string }) {
+/* ── MacBook Pro frame around a desktop screenshot ── */
+function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) {
   return (
-    <div style={{ borderRadius: 14, overflow: "hidden", border: "1px solid rgba(255,255,255,.1)", background: "#15151a", boxShadow: "0 40px 90px rgba(0,0,0,.5)" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "10px 14px", background: "rgba(255,255,255,.04)", borderBottom: "1px solid rgba(255,255,255,.07)" }}>
-        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57" }} />
-        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#febc2e" }} />
-        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28c840" }} />
-        <div style={{ flex: 1, marginLeft: 8, height: 22, borderRadius: 7, background: "rgba(255,255,255,.05)", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 11, color: "rgba(255,255,255,.4)" }}>
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
-          {url}
+    <div style={{ boxShadow: "0 40px 90px rgba(0,0,0,.5)" }}>
+      {/* Screen */}
+      <div style={{ borderRadius: "12px 12px 0 0", overflow: "hidden", border: "1px solid rgba(255,255,255,.1)", borderBottom: "none", background: "#1a1a1e", padding: "6px 6px 0" }}>
+        {/* Notch */}
+        <div aria-hidden style={{ width: 72, height: 14, borderRadius: "0 0 10px 10px", background: "#1a1a1e", margin: "-6px auto 4px", position: "relative", zIndex: 2 }}>
+          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#0a0a0c", position: "absolute", top: 3, left: "50%", transform: "translateX(-50%)" }} />
+        </div>
+        <div style={{ position: "relative", aspectRatio: "1760 / 1100", borderRadius: "6px 6px 0 0", overflow: "hidden", background: "#0a0a0a" }}>
+          <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
         </div>
       </div>
-      <div style={{ position: "relative", aspectRatio: "1760 / 1100", background: "#0a0a0a" }}>
-        <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
+      {/* Base / hinge */}
+      <div style={{ height: 14, background: "linear-gradient(180deg, #2a2a2f 0%, #1a1a1e 100%)", borderRadius: "0 0 4px 4px", border: "1px solid rgba(255,255,255,.08)", borderTop: "1px solid rgba(255,255,255,.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 60, height: 4, borderRadius: 2, background: "rgba(255,255,255,.06)" }} />
       </div>
     </div>
   );
 }
 
-/* ── phone bezel around a mobile screenshot ── */
+/* ── iPhone 16 frame around a mobile screenshot ── */
 function PhoneFrame({ src, alt, width = "100%" }: { src: string; alt: string; width?: number | string }) {
   return (
-    <div style={{ width, borderRadius: 38, padding: 7, background: "linear-gradient(160deg,#2c2c33,#0b0b0d)", border: "1px solid rgba(255,255,255,.12)", boxShadow: "0 30px 70px rgba(0,0,0,.55)" }}>
-      <div style={{ position: "relative", borderRadius: 31, overflow: "hidden", aspectRatio: "693 / 1500", background: "#000" }}>
+    <div style={{
+      width, borderRadius: "22%/12%", padding: 8,
+      background: "linear-gradient(160deg, #2e2e33 0%, #1a1a1e 50%, #111114 100%)",
+      border: "1px solid rgba(255,255,255,.15)",
+      boxShadow: "0 30px 70px rgba(0,0,0,.55), inset 0 0.5px 0 rgba(255,255,255,.1)",
+      position: "relative",
+    }}>
+      {/* Side buttons */}
+      <div aria-hidden style={{ position: "absolute", left: -2, top: "22%", width: 2.5, height: 28, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
+      <div aria-hidden style={{ position: "absolute", left: -2, top: "32%", width: 2.5, height: 42, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
+      <div aria-hidden style={{ position: "absolute", left: -2, top: "42%", width: 2.5, height: 42, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
+      <div aria-hidden style={{ position: "absolute", right: -2, top: "30%", width: 2.5, height: 52, borderRadius: "0 2px 2px 0", background: "#2a2a2f" }} />
+
+      <div style={{ position: "relative", borderRadius: "18%/10%", overflow: "hidden", aspectRatio: "693 / 1500", background: "#000" }}>
         <Image src={src} alt={alt} fill sizes="260px" style={{ objectFit: "cover" }} />
-        <div aria-hidden style={{ position: "absolute", bottom: 7, left: "50%", transform: "translateX(-50%)", width: "32%", height: 4, borderRadius: 3, background: "rgba(0,0,0,.35)" }} />
+        {/* Dynamic Island */}
+        <div aria-hidden style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", width: "28%", height: 22, borderRadius: 14, background: "#000", zIndex: 2 }} />
+        {/* Home indicator */}
+        <div aria-hidden style={{ position: "absolute", bottom: 6, left: "50%", transform: "translateX(-50%)", width: "30%", height: 4, borderRadius: 3, background: "rgba(255,255,255,.25)", zIndex: 2 }} />
       </div>
     </div>
   );
