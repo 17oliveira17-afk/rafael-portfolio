@@ -111,6 +111,7 @@ export default function ProjectGallery({ exclude = [] }: { exclude?: string[] })
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const [active, setActive] = useState(0);
+  const [totalDots, setTotalDots] = useState(projects.length);
 
   const CARD = 360, GAP = 20, STEP = CARD + GAP;
 
@@ -119,8 +120,11 @@ export default function ProjectGallery({ exclude = [] }: { exclude?: string[] })
     if (!t) return;
     setAtStart(t.scrollLeft < 8);
     setAtEnd(t.scrollLeft + t.clientWidth >= t.scrollWidth - 8);
-    setActive(Math.round(t.scrollLeft / STEP));
-  }, [STEP]);
+    const visibleCards = Math.floor(t.clientWidth / STEP) || 1;
+    const dots = Math.max(1, projects.length - visibleCards + 1);
+    setTotalDots(dots);
+    setActive(Math.min(Math.round(t.scrollLeft / STEP), dots - 1));
+  }, [STEP, projects.length]);
 
   useEffect(() => {
     const t = trackRef.current;
@@ -220,7 +224,7 @@ export default function ProjectGallery({ exclude = [] }: { exclude?: string[] })
 
       {/* Progress dots */}
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: ".5rem" }}>
-        {projects.map((_, i) => (
+        {Array.from({ length: totalDots }).map((_, i) => (
           <button
             key={i}
             onClick={() => trackRef.current?.scrollTo({ left: i * STEP, behavior: "smooth" })}
