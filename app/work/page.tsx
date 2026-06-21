@@ -9,7 +9,7 @@ const PLATE_IMAGES: Record<string, string> = {
   "/work/rappi": "/cinematic/rappi-food.jpg",
   "/work/design-system": "/cinematic/design-system-components.jpg",
   "/work/leadership": "/cinematic/leadership-team.jpg",
-  "/work/maple-track": "/cinematic/maple-canada.jpg",
+  "/work/maple-track": "/cinematic/airport-window.jpg",
 };
 
 export default function WorkPage() {
