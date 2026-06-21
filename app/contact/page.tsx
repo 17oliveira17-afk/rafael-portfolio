@@ -78,37 +78,49 @@ export default function ContactPage() {
   return (
     <main className="page-in" style={{ background: "#000" }}>
 
-      {/* ═══ HERO ═══ */}
+      {/* ═══ HERO — centered, colorful ═══ */}
       <section style={{
-        minHeight: "60vh", display: "flex", flexDirection: "column", justifyContent: "flex-end",
-        padding: "10rem 6rem 6rem", position: "relative", overflow: "hidden",
-        borderBottom: "1px solid rgba(255,255,255,.08)",
+        minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "8rem 2rem 6rem", position: "relative", overflow: "hidden",
+        textAlign: "center",
       }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 60%, rgba(0,113,227,.12) 0%, transparent 60%)", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 1100, position: "relative", zIndex: 1 }}>
+        {/* multi-color glow */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <div style={{ position: "absolute", width: "60%", height: "60%", top: "-10%", left: "-10%", background: "radial-gradient(circle, rgba(0,113,227,.2), transparent 60%)", filter: "blur(40px)" }} />
+          <div style={{ position: "absolute", width: "50%", height: "50%", bottom: "-5%", right: "-5%", background: "radial-gradient(circle, rgba(126,72,255,.15), transparent 60%)", filter: "blur(40px)" }} />
+          <div style={{ position: "absolute", width: "40%", height: "40%", top: "30%", left: "50%", transform: "translateX(-50%)", background: "radial-gradient(circle, rgba(255,92,138,.1), transparent 60%)", filter: "blur(30px)" }} />
+        </div>
+        <div className="aurora" style={{ opacity: 0.3, mixBlendMode: "screen" }} />
+
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 700 }}>
           <ScrollReveal>
-            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "2rem" }}>Contact</p>
-            <RevealText
-              as="h1"
-              lines={["Got a project", "in mind?"]}
-              stagger={90}
-              style={{ fontSize: "clamp(3rem,7vw,7rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "2rem" }}
-            />
-            <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 480, lineHeight: 1.7, marginBottom: "2rem" }}>
-              Open to Product Design Lead roles in fintech and B2B. Currently pursuing opportunities in Canada.
-            </p>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: ".7rem", padding: ".55rem 1.1rem", borderRadius: 100, background: "rgba(52,199,89,.08)", border: "1px solid rgba(52,199,89,.25)", marginBottom: "2.75rem" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: ".7rem", padding: ".55rem 1.1rem", borderRadius: 100, background: "rgba(52,199,89,.08)", border: "1px solid rgba(52,199,89,.25)", marginBottom: "2.5rem" }}>
               <span className="pulse" style={{ width: 8, height: 8, borderRadius: "50%", background: "#34c759", flexShrink: 0 }} />
               <span style={{ fontSize: ".82rem", color: "rgba(255,255,255,.7)" }}>
                 Available for new work{now && <span style={{ color: "rgba(255,255,255,.4)" }}> · {now} in São Paulo</span>}
               </span>
             </div>
-            <div>
-              <a href="#message" className="btn-blue" style={{ fontSize: "1rem", padding: ".9rem 2.5rem" }}>
-                Send a message →
-              </a>
-            </div>
           </ScrollReveal>
+          <RevealText
+            as="h1"
+            lines={["Let's build", "something great."]}
+            stagger={90}
+            style={{ fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: "#fff", marginBottom: "2rem" }}
+          />
+          <ScrollReveal delay={100}>
+            <p style={{ fontSize: "1.15rem", color: "rgba(255,255,255,.55)", maxWidth: 520, margin: "0 auto 3rem", lineHeight: 1.7 }}>
+              Open to Product Design Lead roles in fintech and B2B. Currently pursuing opportunities in Canada.
+            </p>
+            <a href="#message" className="btn-blue" style={{ fontSize: "1rem", padding: "1rem 3rem" }}>
+              Send a message →
+            </a>
+          </ScrollReveal>
+        </div>
+
+        {/* scroll hint */}
+        <div style={{ position: "absolute", bottom: "2.5rem", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: ".5rem", opacity: 0.4 }}>
+          <p style={{ fontSize: ".62rem", letterSpacing: ".14em", textTransform: "uppercase", color: "#fff" }}>Scroll</p>
+          <div style={{ width: 1, height: 28, background: "rgba(255,255,255,.4)" }} />
         </div>
       </section>
 

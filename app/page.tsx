@@ -284,106 +284,146 @@ function CVCShowcase() {
    ══════════════════════════════════════════════════════════ */
 export default function Home() {
   const isMobile = useIsMobile();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroBgRef = useRef<HTMLDivElement>(null);
+  const splitRef = useRef<HTMLDivElement>(null);
+  const [sp, setSp] = useState(0);
 
   useEffect(() => {
-    if (isMobile) return; // skip parallax on mobile (perf + visual)
     const fn = () => {
-      const y = window.scrollY;
-      if (heroRef.current) {
-        heroRef.current.style.transform = `translateY(${y * .25}px)`;
-        heroRef.current.style.opacity = String(Math.max(0, 1 - y / 600));
-      }
-      if (heroBgRef.current) {
-        heroBgRef.current.style.transform = `translateY(${y * .4}px)`;
-      }
+      if (!splitRef.current) return;
+      const r = splitRef.current.getBoundingClientRect();
+      const h = splitRef.current.offsetHeight - window.innerHeight;
+      setSp(Math.max(0, Math.min(1, -r.top / (h || 1))));
     };
     window.addEventListener("scroll", fn, { passive: true });
+    fn();
     return () => window.removeEventListener("scroll", fn);
-  }, [isMobile]);
+  }, []);
 
   return (
     <main className="page-in">
 
       {/* ══════════════════════════════════════════════════
-          HERO — cinematic with floating phones
+          HERO — split-reveal on scroll
       ══════════════════════════════════════════════════ */}
-      <section className="section-black" style={{
-        height: "100svh", minHeight: 600, maxHeight: 1200, display: "flex", alignItems: "center", justifyContent: "center",
-        position: "relative", overflow: "hidden", padding: "clamp(5rem,10vh,9rem) 2rem clamp(4rem,8vh,6rem)",
-      }}>
-        {/* Background gradient layer */}
-        <div ref={heroBgRef} style={{
-          position: "absolute", inset: 0, willChange: "transform", pointerEvents: "none",
-          background: `
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,.18) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 20% 100%, rgba(0,113,227,.08) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 80% 100%, rgba(0,113,227,.08) 0%, transparent 50%)
-          `,
-        }} />
-
-        {/* Colorful aurora glow — breaks the black, Apple-style */}
-        <div className="aurora" style={{ opacity: 0.4, mixBlendMode: "screen" }} />
-
-        {/* Grain */}
+      <div ref={splitRef} style={{ height: isMobile ? "auto" : "250vh", position: "relative" }}>
         <div style={{
-          position: "absolute", inset: 0, opacity: 0.3, mixBlendMode: "overlay", pointerEvents: "none",
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
-        }} />
-
-        {/* Hero content */}
-        <div ref={heroRef} style={{ position: "relative", zIndex: 1, maxWidth: 920, textAlign: "center", willChange: "transform" }}>
-          <p style={{
-            fontSize: ".75rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase",
-            color: "#0071e3", marginBottom: "2rem",
-            opacity: 0, animation: "fadeUp .9s ease .3s forwards",
-          }}>
-            Product Design Lead · São Paulo → Globally
-          </p>
-          <h1 style={{
-            fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
-            letterSpacing: "-.035em", lineHeight: 0.95, color: "#fff",
-            marginBottom: "2rem",
-            opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
-          }}>
-            I design products<br />
-            <em className="text-gradient" style={{ fontStyle: "italic" }}>that move the needle.</em>
-          </h1>
-          <p style={{
-            fontSize: "clamp(1rem,1.4vw,1.2rem)", fontWeight: 300, lineHeight: 1.7,
-            color: "rgba(255,255,255,.65)", maxWidth: 580, margin: "0 auto 3rem",
-            opacity: 0, animation: "fadeUp .9s ease .75s forwards",
-          }}>
-            8+ years turning complex fintech and B2B systems into experiences that drive measurable conversion, activation, and retention.
-          </p>
-          <div style={{
-            display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap",
-            opacity: 0, animation: "fadeUp .8s ease .95s forwards",
-          }}>
-            <Link href="/#work" className="btn-blue" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>View case studies</Link>
-            <Link href="/about" className="btn-white-ghost" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>About me</Link>
-          </div>
-        </div>
-
-        {/* Scroll cue */}
-        <div style={{
-          position: "absolute", bottom: "2.5rem", left: 0, right: 0,
-          display: "flex", justifyContent: "center", pointerEvents: "none",
+          position: isMobile ? "relative" : "sticky", top: 0,
+          height: "100svh", minHeight: 600,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          overflow: "hidden", background: "#000",
         }}>
+          {/* Background glow */}
           <div style={{
-            width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.3)",
-            borderRadius: 12, position: "relative",
-            animation: "fadeIn 1s ease 1.5s both",
+            position: "absolute", inset: 0, pointerEvents: "none",
+            background: `radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,.18) 0%, transparent 50%)`,
+            opacity: 1 - sp * 2,
+          }} />
+          <div className="aurora" style={{ opacity: Math.max(0, 0.4 - sp * 1.5), mixBlendMode: "screen" }} />
+
+          {/* TOP HALF — slides up */}
+          <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, height: "50%",
+            display: "flex", alignItems: "flex-end", justifyContent: "center",
+            transform: isMobile ? "none" : `translateY(${-sp * 120}%)`,
+            transition: isMobile ? "none" : undefined,
+            overflow: "hidden", zIndex: 3,
+            background: "#000",
           }}>
-            <div style={{
-              position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)",
-              width: 3, height: 8, background: "rgba(255,255,255,.6)", borderRadius: 2,
-              animation: "scrollMouse 2s ease infinite",
-            }} />
+            <div style={{ textAlign: "center", paddingBottom: isMobile ? "1rem" : "2rem", opacity: Math.max(0, 1 - sp * 3) }}>
+              <p style={{
+                fontSize: ".75rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase",
+                color: "#0071e3", marginBottom: "1.5rem",
+                opacity: 0, animation: "fadeUp .9s ease .3s forwards",
+              }}>
+                Product Design Lead · São Paulo → Globally
+              </p>
+              <h1 style={{
+                fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
+                letterSpacing: "-.035em", lineHeight: 0.95, color: "#fff",
+                opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
+              }}>
+                I design products
+              </h1>
+            </div>
           </div>
+
+          {/* BOTTOM HALF — slides down */}
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
+            display: "flex", alignItems: "flex-start", justifyContent: "center",
+            transform: isMobile ? "none" : `translateY(${sp * 120}%)`,
+            overflow: "hidden", zIndex: 3,
+            background: "#000",
+          }}>
+            <div style={{ textAlign: "center", paddingTop: isMobile ? "1rem" : "2rem", opacity: Math.max(0, 1 - sp * 3) }}>
+              <h1 style={{
+                fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
+                letterSpacing: "-.035em", lineHeight: 0.95,
+                opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
+              }}>
+                <em className="text-gradient" style={{ fontStyle: "italic" }}>that move the needle.</em>
+              </h1>
+              <p style={{
+                fontSize: "clamp(1rem,1.4vw,1.2rem)", fontWeight: 300, lineHeight: 1.7,
+                color: "rgba(255,255,255,.65)", maxWidth: 580, margin: "1.5rem auto 2.5rem",
+                opacity: 0, animation: "fadeUp .9s ease .75s forwards",
+              }}>
+                8+ years turning complex fintech and B2B systems into experiences that drive measurable conversion, activation, and retention.
+              </p>
+              <div style={{
+                display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap",
+                opacity: 0, animation: "fadeUp .8s ease .95s forwards",
+              }}>
+                <Link href="/#work" className="btn-blue" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>View case studies</Link>
+                <Link href="/about" className="btn-white-ghost" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>About me</Link>
+              </div>
+            </div>
+          </div>
+
+          {/* REVEAL LAYER — the CVC phone that appears as the curtain parts */}
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+            zIndex: 1,
+            opacity: isMobile ? 0 : Math.min(1, sp * 4),
+            transform: `scale(${0.85 + Math.min(1, sp * 2) * 0.15})`,
+            transition: "opacity .1s linear",
+          }}>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? "1rem" : "2rem", marginBottom: "2.5rem", filter: "drop-shadow(0 40px 80px rgba(0,113,227,.3))" }}>
+                <Phone src="/screens-mobile/ip-guided-1.png" alt="CVC guided search" w={isMobile ? 100 : 160} />
+                <Phone src="/screens-mobile/ip-results-1.png" alt="CVC flight results" w={isMobile ? 130 : 220} />
+                <Phone src="/screens-mobile/ip-confirm-1.png" alt="CVC confirmation" w={isMobile ? 100 : 160} />
+              </div>
+              <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".75rem" }}>Featured case study</p>
+              <h2 style={{ fontSize: "clamp(1.5rem,3vw,2.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", marginBottom: "1.5rem" }}>
+                2.0★ → 4.6★ · +212% conversion
+              </h2>
+              <Link href="/work/cvc" className="btn-blue" style={{ fontSize: ".9rem", padding: ".75rem 2rem" }}>See full case study →</Link>
+            </div>
+          </div>
+
+          {/* Scroll cue — fades out as you scroll */}
+          {sp < 0.1 && (
+            <div style={{
+              position: "absolute", bottom: "2.5rem", left: 0, right: 0,
+              display: "flex", justifyContent: "center", pointerEvents: "none",
+              opacity: 1 - sp * 20,
+            }}>
+              <div style={{
+                width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.3)",
+                borderRadius: 12, position: "relative",
+                animation: "fadeIn 1s ease 1.5s both",
+              }}>
+                <div style={{
+                  position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)",
+                  width: 3, height: 8, background: "rgba(255,255,255,.6)", borderRadius: 2,
+                  animation: "scrollMouse 2s ease infinite",
+                }} />
+              </div>
+            </div>
+          )}
         </div>
-      </section>
+      </div>
 
       {/* ══════════════════════════════════════════════════
           CINEMATIC IMAGE — design at scale
@@ -436,9 +476,9 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           STATS STRIP
       ══════════════════════════════════════════════════ */}
-      <section className="section-off-white" style={{ padding: "5rem 2rem" }}>
+      <section style={{ background: "#000", padding: "5rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 1024, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: "1px", background: "#d2d2d7", borderRadius: 20, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden" }}>
             {[
               { n: 14, l: "Years in\ndigital design" },
               { n: 8,  l: "Years in\nproduct design" },
@@ -446,11 +486,11 @@ export default function Home() {
               { n: 12, l: "Countries\nserved" },
             ].map((s, i) => (
               <ScrollReveal key={i} delay={i * 80}>
-                <div style={{ background: "#f5f5f7", padding: "3.5rem 2rem", textAlign: "center" }}>
-                  <div className="t-num-giant" style={{ color: "#1d1d1f", marginBottom: ".75rem", fontSize: "clamp(3.5rem,8vw,7rem)" }}>
+                <div style={{ background: "#0a0a0a", padding: "3.5rem 2rem", textAlign: "center" }}>
+                  <div className="t-num-giant" style={{ color: "#fff", marginBottom: ".75rem", fontSize: "clamp(3.5rem,8vw,7rem)" }}>
                     <Counter n={s.n} />
                   </div>
-                  <p style={{ fontSize: ".82rem", color: "#86868b", whiteSpace: "pre-line", lineHeight: 1.4 }}>{s.l}</p>
+                  <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.45)", whiteSpace: "pre-line", lineHeight: 1.4 }}>{s.l}</p>
                 </div>
               </ScrollReveal>
             ))}
