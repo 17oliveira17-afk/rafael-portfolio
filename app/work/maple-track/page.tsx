@@ -20,16 +20,11 @@ function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
-/* ── MacBook frame (real PNG overlay) ── */
+/* ── MacBook mockup (pre-composited from Figma) ── */
 function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) {
   return (
-    <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
-      {/* screenshot fills full frame — bezel is semi-transparent and masks the edges */}
-      <div style={{ position: "absolute", top: "5.6%", left: 0, right: 0, bottom: 0, overflow: "hidden", background: "#f5f5f7" }}>
-        <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover", objectPosition: "top center" }} />
-      </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/devices/macbook-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
+    <div style={{ filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
+      <Image src={src} alt={alt} width={1408} height={853} sizes="(max-width:768px) 90vw, 62vw" style={{ width: "100%", height: "auto", display: "block" }} />
     </div>
   );
 }
