@@ -609,6 +609,7 @@ export default function AboutPage() {
                 {[
                   { year: "Now", school: "McKinsey · Forward Program", degree: "Leadership & Management", current: true },
                   { year: "Now", school: "UX Unicornio", degree: "AI for Product Design", current: true },
+                  { year: "Now", school: "UX Unicornio", degree: "Design Foundation AI", current: true },
                   { year: "2020", school: "UX Unicornio", degree: "Master-Level Product Design", current: false },
                   { year: "2019", school: "Belas Artes", degree: "Post-Graduation · Digital Design", current: false },
                   { year: "2016", school: "Universidade Anhembi Morumbi", degree: "Graduation · Digital Design", current: false },
@@ -663,7 +664,7 @@ export default function AboutPage() {
                 <div style={{ marginTop: "2.5rem" }}>
                   <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>Core tools</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
-                    {["Figma", "Maze", "Hotjar", "Mixpanel", "Jira", "Notion", "Claude Code", "ChatGPT", "Cursor", "Midjourney"].map(t => (
+                    {["Figma", "Maze", "Hotjar", "Dovetail", "Mixpanel", "Jira", "Notion", "Claude Code", "ChatGPT", "Cursor", "Midjourney"].map(t => (
                       <span key={t} style={{ fontSize: ".72rem", fontWeight: 500, padding: ".3rem .75rem", borderRadius: 100, border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.6)" }}>{t}</span>
                     ))}
                   </div>
