@@ -20,51 +20,32 @@ function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
-/* ── MacBook Pro frame around a desktop screenshot ── */
+/* ── MacBook frame (real PNG overlay) ── */
 function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) {
   return (
-    <div style={{ boxShadow: "0 40px 90px rgba(0,0,0,.5)" }}>
-      {/* Screen */}
-      <div style={{ borderRadius: "12px 12px 0 0", overflow: "hidden", border: "1px solid rgba(255,255,255,.1)", borderBottom: "none", background: "#1a1a1e", padding: "6px 6px 0" }}>
-        {/* Notch */}
-        <div aria-hidden style={{ width: 72, height: 14, borderRadius: "0 0 10px 10px", background: "#1a1a1e", margin: "-6px auto 4px", position: "relative", zIndex: 2 }}>
-          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#0a0a0c", position: "absolute", top: 3, left: "50%", transform: "translateX(-50%)" }} />
-        </div>
-        <div style={{ position: "relative", aspectRatio: "1760 / 1100", borderRadius: "6px 6px 0 0", overflow: "hidden", background: "#0a0a0a" }}>
-          <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
-        </div>
+    <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
+      {/* screenshot behind the frame — inset to match the screen area */}
+      <div style={{ position: "absolute", top: "5.6%", left: "4.8%", right: "4.8%", bottom: "5.5%", overflow: "hidden", borderRadius: 2, background: "#0a0a0a" }}>
+        <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
       </div>
-      {/* Base / hinge */}
-      <div style={{ height: 14, background: "linear-gradient(180deg, #2a2a2f 0%, #1a1a1e 100%)", borderRadius: "0 0 4px 4px", border: "1px solid rgba(255,255,255,.08)", borderTop: "1px solid rgba(255,255,255,.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, borderRadius: 2, background: "rgba(255,255,255,.06)" }} />
-      </div>
+      {/* device frame on top */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/devices/macbook-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
     </div>
   );
 }
 
-/* ── iPhone 16 frame around a mobile screenshot ── */
+/* ── iPhone 16 frame (real PNG overlay) ── */
 function PhoneFrame({ src, alt, width = "100%" }: { src: string; alt: string; width?: number | string }) {
   return (
-    <div style={{
-      width, borderRadius: "22%/12%", padding: 8,
-      background: "linear-gradient(160deg, #2e2e33 0%, #1a1a1e 50%, #111114 100%)",
-      border: "1px solid rgba(255,255,255,.15)",
-      boxShadow: "0 30px 70px rgba(0,0,0,.55), inset 0 0.5px 0 rgba(255,255,255,.1)",
-      position: "relative",
-    }}>
-      {/* Side buttons */}
-      <div aria-hidden style={{ position: "absolute", left: -2, top: "22%", width: 2.5, height: 28, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
-      <div aria-hidden style={{ position: "absolute", left: -2, top: "32%", width: 2.5, height: 42, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
-      <div aria-hidden style={{ position: "absolute", left: -2, top: "42%", width: 2.5, height: 42, borderRadius: "2px 0 0 2px", background: "#2a2a2f" }} />
-      <div aria-hidden style={{ position: "absolute", right: -2, top: "30%", width: 2.5, height: 52, borderRadius: "0 2px 2px 0", background: "#2a2a2f" }} />
-
-      <div style={{ position: "relative", borderRadius: "18%/10%", overflow: "hidden", aspectRatio: "693 / 1500", background: "#000" }}>
+    <div style={{ width, position: "relative", aspectRatio: "908 / 1880", filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+      {/* screenshot behind the frame */}
+      <div style={{ position: "absolute", top: "2.8%", left: "5.5%", right: "5.5%", bottom: "2.8%", overflow: "hidden", borderRadius: "8%", background: "#000" }}>
         <Image src={src} alt={alt} fill sizes="260px" style={{ objectFit: "cover" }} />
-        {/* Dynamic Island */}
-        <div aria-hidden style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", width: "28%", height: 22, borderRadius: 14, background: "#000", zIndex: 2 }} />
-        {/* Home indicator */}
-        <div aria-hidden style={{ position: "absolute", bottom: 6, left: "50%", transform: "translateX(-50%)", width: "30%", height: 4, borderRadius: 3, background: "rgba(255,255,255,.25)", zIndex: 2 }} />
       </div>
+      {/* device frame on top */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/devices/iphone-16-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
     </div>
   );
 }
