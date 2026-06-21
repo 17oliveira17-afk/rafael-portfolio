@@ -7,6 +7,7 @@ import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import CaseHero from "../../components/CaseHero";
+import FloatingProjectNav from "../../components/FloatingProjectNav";
 
 /* ── Scroll progress: 0 as the element enters from the bottom, 1 once it reaches the upper third ── */
 function useScrollProgress<T extends HTMLElement>() {
@@ -342,13 +343,7 @@ export default function LeadershipCasePage() {
   return (
     <main className="page-in dark-cursor" style={{ background: "#000", "--blue": "#ec6b86", "--blue-hover": "#d95c76" } as React.CSSProperties}>
 
-      {/* ═══ Floating project nav ═══ */}
-      <div style={{ position: "fixed", bottom: isMobile ? "1.25rem" : "2rem", left: "50%", transform: "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", gap: ".5rem", padding: ".4rem .5rem", borderRadius: 100, background: "rgba(20,20,24,.85)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,.1)", boxShadow: "0 12px 40px rgba(0,0,0,.5)" }}>
-        <Link href="/work" style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", textDecoration: "none", padding: ".35rem .75rem", borderRadius: 100 }}>← Work</Link>
-        {[["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["DS", "/work/design-system"]].map(([l, h]) => (
-          <Link key={h} href={h} style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", textDecoration: "none", padding: ".35rem .75rem", borderRadius: 100, transition: "background .2s ease" }}>{l}</Link>
-        ))}
-      </div>
+      <FloatingProjectNav />
 
       {/* ═══ 01 · HERO ═══ */}
       <CaseHero

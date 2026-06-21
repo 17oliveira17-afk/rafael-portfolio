@@ -7,6 +7,7 @@ import RevealText from "../../components/RevealText";
 import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
 import CaseHero from "../../components/CaseHero";
+import FloatingProjectNav from "../../components/FloatingProjectNav";
 
 const ACC = "#e31c5f";
 const a = (o: number) => `rgba(227,28,95,${o})`;
@@ -715,6 +716,7 @@ export default function MapleTrackCasePage() {
           <Link href="/" style={{ fontSize: ".72rem", color: ACC, textDecoration: "none" }}>Home</Link>
         </div>
       </footer>
+      <FloatingProjectNav />
     </main>
   );
 }

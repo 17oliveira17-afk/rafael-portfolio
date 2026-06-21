@@ -12,6 +12,7 @@ import SideShot from "../../components/SideShot";
 import PhoneSpotlight from "../../components/PhoneSpotlight";
 import PhoneTabs from "../../components/PhoneTabs";
 import CaseHero from "../../components/CaseHero";
+import FloatingProjectNav from "../../components/FloatingProjectNav";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -537,6 +538,7 @@ export default function CVCCasePage() {
           <Link href="/" style={{ fontSize: ".72rem", color: "#eab308", textDecoration: "none" }}>Home</Link>
         </div>
       </footer>
+      <FloatingProjectNav />
     </main>
   );
 }

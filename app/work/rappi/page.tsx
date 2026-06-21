@@ -7,6 +7,7 @@ import Icon from "../../components/Icon";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import CaseHero from "../../components/CaseHero";
+import FloatingProjectNav from "../../components/FloatingProjectNav";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -510,6 +511,7 @@ export default function RappiCasePage() {
           <Link href="/" style={{ fontSize: ".72rem", color: "#ff6a2b", textDecoration: "none" }}>Home</Link>
         </div>
       </footer>
+      <FloatingProjectNav />
     </main>
   );
 }

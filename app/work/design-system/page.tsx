@@ -7,6 +7,7 @@ import useIsMobile from "../../components/useIsMobile";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
 import CaseHero from "../../components/CaseHero";
+import FloatingProjectNav from "../../components/FloatingProjectNav";
 
 /* ── Animated counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -166,13 +167,7 @@ export default function DesignSystemCasePage() {
   return (
     <main className="page-in dark-cursor" style={{ background: "#000", "--blue": "#00c8a0", "--blue-hover": "#00a885" } as React.CSSProperties}>
 
-      {/* ═══ Floating project nav ═══ */}
-      <div style={{ position: "fixed", bottom: isMobile ? "1.25rem" : "2rem", left: "50%", transform: "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", gap: ".5rem", padding: ".4rem .5rem", borderRadius: 100, background: "rgba(20,20,24,.85)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,.1)", boxShadow: "0 12px 40px rgba(0,0,0,.5)" }}>
-        <Link href="/work" style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", textDecoration: "none", padding: ".35rem .75rem", borderRadius: 100 }}>← Work</Link>
-        {[["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["Leadership", "/work/leadership"]].map(([l, h]) => (
-          <Link key={h} href={h} style={{ fontSize: ".72rem", color: "rgba(255,255,255,.5)", textDecoration: "none", padding: ".35rem .75rem", borderRadius: 100, transition: "background .2s ease" }}>{l}</Link>
-        ))}
-      </div>
+      <FloatingProjectNav />
 
       {/* ═══ 01 · HERO ═══ */}
       <CaseHero
