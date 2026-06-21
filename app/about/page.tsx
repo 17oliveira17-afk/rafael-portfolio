@@ -97,10 +97,13 @@ const principles = [
 const testimonials = [
   { quote: "Rafael's dedication, strong design process, and proactive mindset consistently led to exceptional results. A top-tier designer.", name: "Allan Cardozo", role: "Design Manager, Delivery Hero · Ex-Rappi Director", photo: "/photos/leaders/allan-cardozo.jpg" },
   { quote: "Rafa led a major revamp of restaurant onboarding, pushing the team toward first-principles thinking and delivering real impact.", name: "Nima Zahedi", role: "Product Director, Monzo", photo: "/photos/leaders/nima-zahedi.jpg" },
-  { quote: "Rafael's designs significantly improved usability and boosted conversion rates, aligning perfectly with business goals.", name: "German Sotelo", role: "Engineering Manager, Rappi" },
-  { quote: "Rafa kept a complex project on track despite shifting deadlines, showing resilience and delivering outstanding results.", name: "Santiago Martinez", role: "Product Manager, Rappi" },
+  { quote: "Rafa's user-centered approach, adaptability, and high-quality solutions made him an invaluable asset to the team.", name: "Diego Villarroel", role: "Head of Design, Rappi", photo: "/photos/leaders/diego-villarroel.jpg" },
+  { quote: "Rafael's designs significantly improved usability and boosted conversion rates, aligning perfectly with business goals.", name: "German Sotelo", role: "Engineering Manager, Rappi", photo: "/photos/leaders/german-sotelo.jpg" },
+  { quote: "Rafa kept a complex project on track despite shifting deadlines, showing resilience and delivering outstanding results.", name: "Santiago Martinez", role: "Product Manager, Rappi", photo: "/photos/leaders/santiago-martinez.jpg" },
+  { quote: "Rafael played a key role in redesigning the Merchants Onboarding process, simplifying the flow and improving the user experience.", name: "Daniel Isael", role: "Product Manager, Scopely", photo: "/photos/leaders/daniel-isael.jpg" },
   { quote: "Rafael is not only an exceptional designer but also a fantastic teammate — proactive, detail-oriented, and always raising the bar.", name: "Paula Lenis", role: "Design Lead, Rappi", photo: "/photos/leaders/paula-lenis.jpg" },
-  { quote: "From the moment I interviewed Rafa, I knew he had incredible potential. Seeing his growth and contributions over time has been inspiring.", name: "Carolina Ledesma", role: "Design Manager, CVC Corp" },
+  { quote: "From the moment I interviewed Rafa, I knew he had incredible potential. Seeing his growth and contributions over time has been inspiring.", name: "Carolina Ledesma", role: "Design Manager, CVC Corp", photo: "/photos/leaders/carolina-ledesma.jpg" },
+  { quote: "I brought Rafa to Rappi for his strong work ethic and ability to turn complex challenges into impactful design solutions.", name: "Luis Alegria", role: "Founder & CEO, Storytime", photo: "/photos/leaders/luis-alegria.jpg" },
 ];
 
 const metrics = [
