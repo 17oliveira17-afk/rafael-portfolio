@@ -24,11 +24,9 @@ function Divider() {
 function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) {
   return (
     <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
-      {/* screenshot behind the frame — inset to match the screen area */}
-      <div style={{ position: "absolute", top: "5.6%", left: "4.8%", right: "4.8%", bottom: "5.5%", overflow: "hidden", borderRadius: 2, background: "#0a0a0a" }}>
+      <div style={{ position: "absolute", top: "5.7%", left: "0.1%", right: "0.1%", bottom: "0.2%", overflow: "hidden", background: "#0a0a0a" }}>
         <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
       </div>
-      {/* device frame on top */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/devices/macbook-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
     </div>
@@ -39,11 +37,9 @@ function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) 
 function PhoneFrame({ src, alt, width = "100%" }: { src: string; alt: string; width?: number | string }) {
   return (
     <div style={{ width, position: "relative", aspectRatio: "908 / 1880", filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-      {/* screenshot behind the frame */}
-      <div style={{ position: "absolute", top: "2.8%", left: "5.5%", right: "5.5%", bottom: "2.8%", overflow: "hidden", borderRadius: "8%", background: "#000" }}>
+      <div style={{ position: "absolute", top: "1.8%", left: "5.0%", right: "4.4%", bottom: "0.1%", overflow: "hidden", borderRadius: "12% / 6%", background: "#000" }}>
         <Image src={src} alt={alt} fill sizes="260px" style={{ objectFit: "cover" }} />
       </div>
-      {/* device frame on top */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/devices/iphone-16-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
     </div>
