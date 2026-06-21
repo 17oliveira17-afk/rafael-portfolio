@@ -607,16 +607,20 @@ export default function AboutPage() {
               </ScrollReveal>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 {[
-                  { year: "2020", school: "UX Unicornio", degree: "Master-Level Product Design" },
-                  { year: "2020", school: "UX Unicornio", degree: "Digital Design and Applied Arts" },
-                  { year: "2019", school: "Belas Artes", degree: "Post-Graduation · Digital Design for New Media" },
-                  { year: "2014", school: "S.A.G.A.", degree: "Professional Certification · Adobe & Autodesk" },
+                  { year: "Now", school: "McKinsey · Forward Program", degree: "Leadership & Management", current: true },
+                  { year: "Now", school: "UX Unicornio", degree: "AI for Product Design", current: true },
+                  { year: "2020", school: "UX Unicornio", degree: "Master-Level Product Design", current: false },
+                  { year: "2019", school: "Belas Artes", degree: "Post-Graduation · Digital Design", current: false },
+                  { year: "2016", school: "Universidade Anhembi Morumbi", degree: "Graduation · Digital Design", current: false },
                 ].map((e, i) => (
                   <ScrollReveal key={i} delay={i * 60}>
                     <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
-                      <span style={{ fontSize: ".72rem", fontWeight: 700, color: "#0071e3", letterSpacing: ".04em", flexShrink: 0, paddingTop: ".15rem", minWidth: 36 }}>{e.year}</span>
+                      <span style={{ fontSize: ".72rem", fontWeight: 700, color: e.current ? "#0071e3" : "rgba(255,255,255,.35)", letterSpacing: ".04em", flexShrink: 0, paddingTop: ".15rem", minWidth: 36 }}>{e.year}</span>
                       <div>
-                        <p style={{ fontSize: ".95rem", fontWeight: 600, color: "#fff", marginBottom: ".2rem" }}>{e.degree}</p>
+                        <div style={{ display: "flex", alignItems: "center", gap: ".5rem", marginBottom: ".2rem" }}>
+                          <p style={{ fontSize: ".95rem", fontWeight: 600, color: "#fff" }}>{e.degree}</p>
+                          {e.current && <span style={{ fontSize: ".58rem", fontWeight: 600, padding: ".12rem .5rem", borderRadius: 100, background: "rgba(0,113,227,.14)", border: "1px solid rgba(0,113,227,.3)", color: "#0071e3", letterSpacing: ".06em" }}>IN PROGRESS</span>}
+                        </div>
                         <p style={{ fontSize: ".8rem", color: "rgba(255,255,255,.4)" }}>{e.school}</p>
                       </div>
                     </div>
@@ -637,8 +641,8 @@ export default function AboutPage() {
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {[
                   { lang: "Portuguese", level: "Native", pct: 100, flag: "🇧🇷" },
-                  { lang: "Spanish", level: "Professional · B2–C1", pct: 82, flag: "🇨🇴" },
-                  { lang: "English", level: "Professional · B2–C1", pct: 82, flag: "🇨🇦" },
+                  { lang: "Spanish", level: "Professional · C1", pct: 88, flag: "🇨🇴" },
+                  { lang: "English", level: "Professional · C1", pct: 88, flag: "🇨🇦" },
                 ].map((l, i) => (
                   <ScrollReveal key={i} delay={i * 80}>
                     <div>
@@ -659,7 +663,7 @@ export default function AboutPage() {
                 <div style={{ marginTop: "2.5rem" }}>
                   <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>Core tools</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
-                    {["Figma", "Photoshop", "Illustrator", "After Effects", "Rive", "Maze", "Hotjar", "Mixpanel", "Jira", "Notion", "Claude Code", "Next.js"].map(t => (
+                    {["Figma", "Maze", "Hotjar", "Mixpanel", "Jira", "Notion", "Claude Code", "ChatGPT", "Cursor", "Midjourney"].map(t => (
                       <span key={t} style={{ fontSize: ".72rem", fontWeight: 500, padding: ".3rem .75rem", borderRadius: 100, border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.6)" }}>{t}</span>
                     ))}
                   </div>
