@@ -275,15 +275,15 @@ export default function MapleTrackCasePage() {
       <CaseHero
         accent={ACC}
         index="05"
-        company="Personal Product · 0 → 1"
-        titleLines={["MapleTrack —", <em key="t" style={{ color: ACC, fontStyle: "italic" }}>your GPS to Canada.</em>]}
-        subtitle="No tool guides a couple through Canadian immigration end to end — so I designed and built one. A responsive product that scores your profile, ranks your pathways, and shows the next step every single day, from profile analysis to citizenship."
-        tags={["0 → 1 Product", "Web + Mobile", "Founder · Solo build", "Built with Claude Code"]}
+        company="SaaS Platform · Claude · Personal Project"
+        titleLines={["Immigration", <em key="t" style={{ color: ACC, fontStyle: "italic" }}>Platform.</em>]}
+        subtitle="Immigration agencies are slow, expensive and opaque. No visibility into your own process, no clarity on pathways, no daily guidance. MapleTrack is a full SaaS platform that guides a couple through every step of Canadian immigration — from profile analysis to citizenship."
+        tags={["SaaS Platform", "Web + Mobile", "Claude Code", "9 Sections", "End-to-end"]}
         stats={[
-          { n: "0 → 1", l: "Greenfield product" },
-          { n: "9 phases", l: "Research → citizenship" },
-          { n: "Web + App", l: "Fully responsive" },
-          { n: "~2 weeks", l: "Design to ship, solo" },
+          { n: "9", l: "Platform sections" },
+          { n: "13", l: "Immigration pathways" },
+          { n: "27", l: "Tracked steps" },
+          { n: "2 weeks", l: "To ship, solo" },
         ]}
       />
 
@@ -295,7 +295,7 @@ export default function MapleTrackCasePage() {
           </ScrollReveal>
           <ScrollReveal delay={120}>
             <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.35)", marginTop: isMobile ? "1.5rem" : "3rem", letterSpacing: ".04em" }}>
-              One product, every screen — the daily cockpit that always answers “what do we do next?”
+              A daily cockpit that always answers "what do we do next?"
             </p>
           </ScrollReveal>
         </div>
@@ -303,37 +303,40 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 01 · THE PROBLEM ═══ */}
+      {/* ═══ 01 · THE CHALLENGE ═══ */}
       <section style={{ padding: pad, background: "#050505" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "start" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
-            <Label>01 — The problem</Label>
+            <Label>01 — The challenge</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-              Nobody could guide them.<br />{em("So nobody did.")}
+              How to simplify my<br />{em("immigration process?")}
             </h2>
-            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-              My wife Luana and I decided to immigrate to Canada. Every consultancy we found ran a closed back-office: we’d pay, we’d wait, and we’d never actually know where we stood. No clarity on the path, no idea of our score, no sense of what came next.
-            </p>
-            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>
-              And immigration law was tightening by the month. Every week without a plan was a week lost. There was no self-service product that simply <span style={{ color: "#fff" }}>guided a family through it</span> — so I decided to design and build the one I wished existed.
-            </p>
           </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {[
-                ["Where are we in the process?", "No single source of truth"],
-                ["What’s our CRS score?", "Never actually calculated"],
-                ["Who’s the stronger applicant?", "Rafael or Luana — unknown"],
-                ["Which path fits us?", "And what if the law changes?"],
-                ["What do we do today?", "No clear daily next step"],
-              ].map(([q, sub], i) => (
-                <div key={i} style={{ padding: "1.15rem 1.4rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 12, background: "#0a0a0a" }}>
-                  <p style={{ fontSize: ".92rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
-                    <span style={{ color: ACC, display: "flex" }}><Icon name="close" size={15} /></span> {q}
-                  </p>
-                  <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.4)", paddingLeft: "1.55rem" }}>{sub}</p>
-                </div>
-              ))}
+          <ScrollReveal delay={60}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2rem" : "5rem", alignItems: "start", marginTop: "1.5rem" }}>
+              <div>
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+                  Canadian immigration is one of the most complex bureaucratic journeys a family can face. Multiple pathways with different requirements, CRS scores that change monthly, documents that expire, language tests with specific benchmarks per program — and laws that tighten without warning.
+                </p>
+                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>
+                  Consultancies charge thousands but run closed back-offices: you pay, you wait, and you never actually know where you stand. There was <span style={{ color: "#fff" }}>no self-service product</span> that guided a family through it — showing the score, ranking the pathways, tracking every document, and telling you exactly what to do today.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                {[
+                  ["Real family needs", "Documents, deadlines and decisions that affect your entire life"],
+                  ["Complex journey", "9 phases, 27 steps, multiple pathways with different risks"],
+                  ["Constantly changing laws", "Immigration rules shift monthly — every week without a plan is a week lost"],
+                  ["Zero visibility", "No tool shows where you are, what's next, or who's the stronger applicant"],
+                ].map(([q, sub], i) => (
+                  <div key={i} style={{ padding: "1.15rem 1.4rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 12, background: "#0a0a0a" }}>
+                    <p style={{ fontSize: ".92rem", fontWeight: 600, color: "#fff", marginBottom: ".3rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
+                      <span style={{ color: ACC, display: "flex" }}><Icon name="close" size={15} /></span> {q}
+                    </p>
+                    <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.4)", paddingLeft: "1.55rem" }}>{sub}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -341,22 +344,22 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 02 · THE APPROACH ═══ */}
+      {/* ═══ 02 · THE SOLUTION ═══ */}
       {wrap(
         <>
           <ScrollReveal>
-            <Label>02 — The approach</Label>
-            <Title lines={["One product.", em("Built solo in two weeks.")]} mb="1.5rem" />
+            <Label>02 — The solution</Label>
+            <Title lines={["A complete SaaS platform", em("for immigration.")]} mb="1.5rem" />
             <Lead>
-              Instead of waiting on a consultancy, I gave myself a Shape-Up appetite — two weeks — and shipped a real, responsive product end to end: design system, front-end and data model, pair-programming the whole build with <span style={{ color: "#fff" }}>Claude Code</span>, Anthropic’s AI. Three rules drove every decision.
+              MapleTrack is a full product — not a prototype, not a dashboard. A responsive SaaS platform with 9 integrated sections covering every aspect of the immigration journey: profile analysis, CRS simulation, pathway ranking, multi-plan strategy, document management, language tracking, job search, gamification, and household management.
             </Lead>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,.06)", margin: "3.5rem 0" }}>
               {([
-                { icon: "compass", title: "Guide, don’t inform", body: "Every screen ends in a next step — never a wall of text. The product always knows what to do today." },
-                { icon: "layers", title: "Plan A, B and C", body: "Run parallel pathways at once and switch the moment a law shifts. The strategy never rests on one bet." },
-                { icon: "globe", title: "A couple, not a user", body: "Two applicants, one household, shared progress and separate logins. Designed for a family, not an account." },
+                { icon: "compass", title: "Always shows the next step", body: "Every screen ends in an action — never a wall of text. The product always knows what to do today, for each applicant." },
+                { icon: "layers", title: "Plan A, B and C in parallel", body: "Run multiple immigration pathways at once and switch the moment a law shifts. The strategy never rests on one bet." },
+                { icon: "globe", title: "Built for a couple, not a user", body: "Two applicants, one household, shared progress and separate logins. Each person's score, documents and tasks tracked individually." },
               ] as const).map((s, i) => (
                 <div key={i} style={{ padding: "2.5rem 2rem", background: "#0a0a0a" }}>
                   <div style={{ width: 44, height: 44, borderRadius: 12, background: a(0.1), border: `1px solid ${a(0.25)}`, display: "flex", alignItems: "center", justifyContent: "center", color: ACC, marginBottom: "1.25rem" }}>
@@ -371,10 +374,36 @@ export default function MapleTrackCasePage() {
           <ScrollReveal delay={120} type="scale">
             <DeviceDuo isMobile={isMobile} desktop={`${SHOT}/landing-desktop.png`} mobile={`${SHOT}/landing-mobile.png`} alt="MapleTrack landing page" url="mapletrack.io" />
           </ScrollReveal>
+
+          {/* HOW IT WAS BUILT — the AI angle */}
           <ScrollReveal delay={140}>
-            <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.32)", marginTop: isMobile ? "1.5rem" : "3rem", letterSpacing: ".04em" }}>
-              Built in Portuguese for a Brazilian audience — “Seu GPS para imigrar para o Canadá.”
-            </p>
+            <div style={{ marginTop: isMobile ? "3rem" : "4.5rem", padding: isMobile ? "1.75rem" : "2.25rem", borderRadius: 20, border: `1px solid ${a(0.25)}`, background: a(0.04) }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "1.5rem" : "3rem", alignItems: "center" }}>
+                <div>
+                  <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: ACC, marginBottom: ".9rem" }}>How it was built</p>
+                  <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.6rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em", lineHeight: 1.15, marginBottom: "1rem" }}>
+                    6+ months of work.<br />{em("Shipped in 2 weeks.")}
+                  </h3>
+                  <p style={{ fontSize: ".92rem", color: "rgba(255,255,255,.5)", lineHeight: 1.75 }}>
+                    Using <span style={{ color: "#fff", fontWeight: 600 }}>Claude Code</span> as a design partner — ideation, content strategy, UX writing, frontend and backend code. Every design decision was mine; Claude executed. The result: a complete squad&apos;s output from one designer.
+                  </p>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: `${a(0.15)}`, borderRadius: 14, overflow: "hidden" }}>
+                  {[
+                    { n: "1", l: "Designer", sub: "Full ownership" },
+                    { n: "2 weeks", l: "To ship", sub: "End to end" },
+                    { n: "9", l: "Sections", sub: "Complete platform" },
+                    { n: "Claude", l: "AI partner", sub: "Pair-programming" },
+                  ].map((s) => (
+                    <div key={s.l} style={{ padding: isMobile ? "1rem" : "1.25rem", background: "#0a0a0c", textAlign: "center" }}>
+                      <p style={{ fontSize: "1.15rem", fontWeight: 700, color: ACC, letterSpacing: "-.02em", lineHeight: 1 }}>{s.n}</p>
+                      <p style={{ fontSize: ".68rem", color: "rgba(255,255,255,.5)", marginTop: ".35rem", fontWeight: 600 }}>{s.l}</p>
+                      <p style={{ fontSize: ".6rem", color: "rgba(255,255,255,.3)", marginTop: ".2rem" }}>{s.sub}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </ScrollReveal>
         </>
       )}
@@ -498,9 +527,9 @@ export default function MapleTrackCasePage() {
           isMobile={isMobile}
           label="08 — Hit the targets"
           titleLines={["Language scores,", em("tracked to the point.")]}
-          body="Language is the biggest CRS lever, so it gets its own cockpit. Each applicant’s CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — “Plano A: atingido”, “Plano B: faltam 1 pt” — with test dates counting down to the booking."
+          body={`Language is the biggest CRS lever, so it gets its own cockpit. Each applicant's CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — "Plano A: atingido", "Plano B: faltam 1 pt" — with test dates counting down to the booking.`}
           chips={["CELPIP · IELTS · TEF", "Skill-by-skill", "Target per plan", "Test countdowns"]}
-          visual={<DetailZoom isMobile={isMobile} phone={`${SHOT}/languages-mobile.png`} zoomSrc={`${SHOT}/languages-desktop.png`} zoomPos="26% 56%" caption="CELPIP — every skill scored against each plan’s exact target" alt="Language preparation" />}
+          visual={<DetailZoom isMobile={isMobile} phone={`${SHOT}/languages-mobile.png`} zoomSrc={`${SHOT}/languages-desktop.png`} zoomPos="26% 56%" caption="CELPIP — every skill scored against each plan's exact target" alt="Language preparation" />}
         />,
         "#050505"
       )}
@@ -513,7 +542,7 @@ export default function MapleTrackCasePage() {
           isMobile={isMobile}
           label="09 — Stay ready"
           titleLines={["Every document,", em("every deadline.")]}
-          body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what’s expired, and keeps the couple’s paperwork audit-ready for whichever plan goes live first."
+          body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what's expired, and keeps the couple's paperwork audit-ready for whichever plan goes live first."
           chips={["By category", "Status tracking", "Translation flags", "Expiry alerts"]}
           visual={<Showcase isMobile={isMobile} desktop={`${SHOT}/documents-desktop.png`} url="app.mapletrack.io/documents" alt="Document hub" />}
         />
@@ -637,10 +666,10 @@ export default function MapleTrackCasePage() {
           <Label>13 — What I learned</Label>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "2rem" }}>
             {([
-              { icon: "compass", title: "Designing for yourself is the ultimate brief.", body: "Being user zero meant every gap in the experience was a gap in my own life. The feedback loop was instant and ruthless — the best research I’ve ever had." },
+              { icon: "compass", title: "Designing for yourself is the ultimate brief.", body: "Being user zero meant every gap in the experience was a gap in my own life. The feedback loop was instant and ruthless — the best research I've ever had." },
               { icon: "zap", title: "A designer can ship production code now.", body: "Pair-programming with Claude Code, I took this from Figma thinking to a deployed, database-backed product — solo. The design-to-build handoff simply disappeared." },
               { icon: "layers", title: "A design system pays off even at n=1.", body: "One token set and a small component library made ten feature areas feel like one product — and let me move at two-week speed without the UI drifting." },
-              { icon: "target", title: "Guidance beats information.", body: "Consultancies hand you data and a bill. The unlock wasn’t more information — it was always showing the single next step. Direction is the product." },
+              { icon: "target", title: "Guidance beats information.", body: "Consultancies hand you data and a bill. The unlock wasn't more information — it was always showing the single next step. Direction is the product." },
             ] as const).map((l, i) => (
               <div key={i} style={{ padding: "2rem", border: "1px solid rgba(255,255,255,.07)", borderRadius: 16 }}>
                 <div style={{ width: 42, height: 42, borderRadius: 11, background: a(0.1), border: `1px solid ${a(0.25)}`, display: "flex", alignItems: "center", justifyContent: "center", color: ACC, marginBottom: "1.25rem" }}>
@@ -664,7 +693,7 @@ export default function MapleTrackCasePage() {
         <ScrollReveal className="aurora-content">
           <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: ACC, marginBottom: "1.5rem" }}>More work</p>
           <h2 style={{ fontSize: "clamp(2rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            See how I redesigned<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>CVC’s flight app.</em>
+            See how I redesigned<br /><em className="text-gradient" style={{ fontStyle: "italic" }}>CVC's flight app.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/work/cvc" className="btn-blue">CVC Case Study →</Link>
