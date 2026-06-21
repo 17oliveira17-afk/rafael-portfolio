@@ -69,7 +69,6 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
 type DSSlide = { src: string; label: string; video?: boolean };
 
 const DS_CVC_SLIDES: DSSlide[] = [
-  { src: "/work/ds-cvc/ds-overview.png", label: "Overview" },
   { src: "/work/ds-cvc/ds-button.png", label: "Button" },
   { src: "/work/ds-cvc/ds-native.png", label: "Native Elements" },
   { src: "/work/ds-cvc/ds-checkbox.png", label: "Checkbox" },

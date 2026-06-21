@@ -491,12 +491,13 @@ export default function RappiCasePage() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,106,43,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
         <ScrollReveal className="aurora-content">
-          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ff6a2b", marginBottom: "1.5rem" }}>Next case</p>
-          <h2 style={{ fontSize: "clamp(2rem,5vw,5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
-            See the CVC<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>Flight Booking Redesign.</em>
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ff6a2b", marginBottom: "1.5rem" }}>See it in product</p>
+          <h2 style={{ fontSize: "clamp(2rem,5vw,4.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
+            The systems behind<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>the products.</em>
           </h2>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/work/cvc" className="btn-blue">CVC Case Study →</Link>
+            <Link href="/work/cvc" className="btn-blue">CVC Flights →</Link>
+            <Link href="/work/design-system" className="btn-white-ghost">Design Systems →</Link>
             <Link href="/contact" className="btn-white-ghost">Get in touch</Link>
           </div>
         </ScrollReveal>

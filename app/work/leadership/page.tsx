@@ -743,23 +743,31 @@ export default function LeadershipCasePage() {
 
       <Divider />
 
-      {/* ═══ NEXT ═══ */}
-      <section style={{ padding: pad }}>
-        <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center" }}>
-          <ScrollReveal>
-            <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ec6b86", marginBottom: "1.5rem" }}>Next case study</p>
-            <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,7vw,2.8rem)" : "clamp(2rem,5vw,4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "2.5rem" }}>
-              From two stars<br />to <em style={{ color: "#ec6b86", fontStyle: "italic" }}>category-defining.</em>
-            </h2>
-            <Link href="/work/cvc" className="btn-blue" style={{ padding: ".85rem 2.5rem", fontSize: ".92rem" }}>CVC · Flights App →</Link>
-          </ScrollReveal>
-        </div>
-        <footer style={{ marginTop: "5rem", paddingTop: "2.5rem", borderTop: "1px solid rgba(255,255,255,.06)", display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap" }}>
-          {[["Home", "/"], ["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["About", "/about"]].map(([l, h]) => (
-            <Link key={h} href={h} style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", textDecoration: "none" }}>{l}</Link>
-          ))}
-        </footer>
+      {/* ═══ CTA ═══ */}
+      <section className="aurora-wrap" style={{ padding: isMobile ? "6rem 1.5rem" : "10rem 6rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(236,107,134,.08) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div className="aurora aurora-soft" style={{ mixBlendMode: "screen" }} />
+        <ScrollReveal className="aurora-content">
+          <p style={{ fontSize: ".68rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#ec6b86", marginBottom: "1.5rem" }}>See it in product</p>
+          <h2 style={{ fontSize: "clamp(2rem,5vw,4.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.02, marginBottom: "3rem" }}>
+            The systems behind<br /><em style={{ color: "#ec6b86", fontStyle: "italic" }}>the products.</em>
+          </h2>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/work/cvc" className="btn-blue">CVC Flights →</Link>
+            <Link href="/work/rappi" className="btn-white-ghost">Rappi Onboarding →</Link>
+            <Link href="/contact" className="btn-white-ghost">Get in touch</Link>
+          </div>
+        </ScrollReveal>
       </section>
+
+      <footer style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,.08)", padding: "2rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+        <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.4)" }}>&copy; {new Date().getFullYear()} Rafael Guimar&atilde;es</p>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          {[["Home", "/"], ["CVC", "/work/cvc"], ["Rappi", "/work/rappi"], ["About", "/about"]].map(([l, h]) => (
+            <Link key={h} href={h} style={{ fontSize: ".72rem", color: "#ec6b86", textDecoration: "none" }}>{l}</Link>
+          ))}
+        </div>
+      </footer>
 
     </main>
   );
