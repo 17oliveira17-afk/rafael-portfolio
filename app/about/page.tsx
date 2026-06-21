@@ -591,6 +591,85 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ═══ EDUCATION & LANGUAGES ═══ */}
+      <section style={{ background: "#000", padding: padSection, borderTop: "1px solid rgba(255,255,255,.06)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "4rem" : "5rem" }}>
+
+            {/* Education */}
+            <div>
+              <ScrollReveal>
+                <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>Education</p>
+                <RevealText
+                  text="Academic foundation."
+                  style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2rem)" : "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "2rem" }}
+                />
+              </ScrollReveal>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                {[
+                  { year: "2020", school: "UX Unicornio", degree: "Master-Level Product Design" },
+                  { year: "2020", school: "UX Unicornio", degree: "Digital Design and Applied Arts" },
+                  { year: "2019", school: "Belas Artes", degree: "Post-Graduation · Digital Design for New Media" },
+                  { year: "2014", school: "S.A.G.A.", degree: "Professional Certification · Adobe & Autodesk" },
+                ].map((e, i) => (
+                  <ScrollReveal key={i} delay={i * 60}>
+                    <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+                      <span style={{ fontSize: ".72rem", fontWeight: 700, color: "#0071e3", letterSpacing: ".04em", flexShrink: 0, paddingTop: ".15rem", minWidth: 36 }}>{e.year}</span>
+                      <div>
+                        <p style={{ fontSize: ".95rem", fontWeight: 600, color: "#fff", marginBottom: ".2rem" }}>{e.degree}</p>
+                        <p style={{ fontSize: ".8rem", color: "rgba(255,255,255,.4)" }}>{e.school}</p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+
+            {/* Languages */}
+            <div>
+              <ScrollReveal>
+                <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>Languages</p>
+                <RevealText
+                  text="Working across LATAM."
+                  style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2rem)" : "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "2rem" }}
+                />
+              </ScrollReveal>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                {[
+                  { lang: "Portuguese", level: "Native", pct: 100, flag: "🇧🇷" },
+                  { lang: "Spanish", level: "Professional · B2–C1", pct: 82, flag: "🇨🇴" },
+                  { lang: "English", level: "Professional · B2–C1", pct: 82, flag: "🇨🇦" },
+                ].map((l, i) => (
+                  <ScrollReveal key={i} delay={i * 80}>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: ".5rem" }}>
+                        <span style={{ fontSize: ".95rem", fontWeight: 600, color: "#fff" }}>{l.lang}</span>
+                        <span style={{ fontSize: ".78rem", color: "rgba(255,255,255,.5)" }}>{l.level}</span>
+                      </div>
+                      <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,.08)", overflow: "hidden" }}>
+                        <div style={{ height: "100%", borderRadius: 3, background: l.pct === 100 ? "#0071e3" : "rgba(0,113,227,.6)", width: `${l.pct}%`, transition: "width 1s ease" }} />
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+
+              {/* Skills summary */}
+              <ScrollReveal delay={120}>
+                <div style={{ marginTop: "2.5rem" }}>
+                  <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>Core tools</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
+                    {["Figma", "Photoshop", "Illustrator", "After Effects", "Rive", "Maze", "Hotjar", "Mixpanel", "Jira", "Notion", "Claude Code", "Next.js"].map(t => (
+                      <span key={t} style={{ fontSize: ".72rem", fontWeight: 500, padding: ".3rem .75rem", borderRadius: 100, border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.6)" }}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ PRINCIPLES ═══ */}
       <section style={{ background: "#0a0a0a", padding: padSection, borderTop: "1px solid rgba(255,255,255,.06)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
