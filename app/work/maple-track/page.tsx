@@ -24,8 +24,8 @@ function Divider() {
 function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) {
   return (
     <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
-      <div style={{ position: "absolute", top: "5.7%", left: "0.1%", right: "0.1%", bottom: "0.2%", overflow: "hidden", background: "#0a0a0a" }}>
-        <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "cover" }} />
+      <div style={{ position: "absolute", top: "5.7%", left: "0.1%", right: "0.1%", bottom: "0.2%", overflow: "hidden", background: "#f5f5f5" }}>
+        <Image src={src} alt={alt} fill sizes="(max-width:768px) 90vw, 62vw" style={{ objectFit: "contain", objectPosition: "top center" }} />
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/devices/macbook-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
@@ -37,8 +37,22 @@ function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) 
 function PhoneFrame({ src, alt, width = "100%" }: { src: string; alt: string; width?: number | string }) {
   return (
     <div style={{ width, position: "relative", aspectRatio: "908 / 1880", filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-      <div style={{ position: "absolute", top: "1.8%", left: "5.0%", right: "4.4%", bottom: "0.1%", overflow: "hidden", borderRadius: "12% / 6%", background: "#000" }}>
+      <div style={{ position: "absolute", top: "1.8%", left: "5.0%", right: "4.4%", bottom: "0.1%", overflow: "hidden", borderRadius: "10% / 5%", background: "#fff" }}>
+        {/* Status bar */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4.5%", background: "#fff", zIndex: 3, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 6%" }}>
+          <span style={{ fontSize: "clamp(5px,1.2vw,11px)", fontWeight: 600, color: "#000" }}>9:41</span>
+          <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+            <svg width="12" height="9" viewBox="0 0 17 11" fill="#000"><rect x="0" y="4" width="3" height="7" rx="0.5"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="0.5"/><rect x="9" y="0.5" width="3" height="10.5" rx="0.5"/><rect x="13.5" y="0" width="3" height="11" rx="0.5" opacity=".3"/></svg>
+            <svg width="13" height="9" viewBox="0 0 16 12" fill="#000"><path d="M8 3.2a6.3 6.3 0 0 1 4.4 1.8l1.1-1.1A8 8 0 0 0 8 1.4a8 8 0 0 0-5.5 2.5L3.6 5A6.3 6.3 0 0 1 8 3.2zm0 3a3.6 3.6 0 0 1 2.5 1l1.1-1.1A5.2 5.2 0 0 0 8 4.6a5.2 5.2 0 0 0-3.6 1.5L5.5 7.2A3.6 3.6 0 0 1 8 6.2zm0 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+            <svg width="18" height="9" viewBox="0 0 25 11" fill="#000"><rect x="0" y="1" width="21" height="9" rx="2" stroke="#000" strokeWidth="1" fill="none"/><rect x="1.5" y="2.5" width="15" height="6" rx="1" fill="#000"/><path d="M23 4v3a1.5 1.5 0 0 0 0-3z"/></svg>
+          </div>
+        </div>
+        {/* Screenshot */}
         <Image src={src} alt={alt} fill sizes="260px" style={{ objectFit: "cover" }} />
+        {/* Home indicator */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3%", background: "#fff", zIndex: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: "35%", height: 4, borderRadius: 3, background: "#000" }} />
+        </div>
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/devices/iphone-16-frame.png" alt="" aria-hidden style={{ width: "100%", height: "auto", display: "block", position: "relative", zIndex: 2, pointerEvents: "none" }} />
