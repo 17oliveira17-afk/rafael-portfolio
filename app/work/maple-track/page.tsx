@@ -417,7 +417,7 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 03 · ONBOARDING — side-bleed right ═══ */}
+      {/* ═══ 03 · ONBOARDING — side-bleed desktop + 3 phones ═══ */}
       <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
         <SideShotShared side="right" accent={ACC}
           src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard"
@@ -425,11 +425,28 @@ export default function MapleTrackCasePage() {
           title="Ten questions that set the whole strategy."
           body="A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
         />
+        {/* Onboarding mobile showcase */}
+        <ScrollReveal delay={100}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "3rem" : "5rem", padding: "0 1.5rem" }}>
+            <div style={{ width: isMobile ? 120 : 220, transform: "rotate(-6deg)", marginTop: isMobile ? 20 : 40, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+              <Image src={`${SHOT}/mobile/Frame 7.png`} alt="Onboarding — welcome" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
+            <div style={{ width: isMobile ? 140 : 260, zIndex: 2, filter: "drop-shadow(0 40px 80px rgba(0,0,0,.6))" }}>
+              <Image src={`${SHOT}/mobile/Frame 2.png`} alt="Onboarding — personal profile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
+            <div style={{ width: isMobile ? 120 : 220, transform: "rotate(6deg)", marginTop: isMobile ? 20 : 40, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+              <Image src={`${SHOT}/mobile/Frame 3.png`} alt="Onboarding — simulator" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
+          </div>
+          <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "2rem", letterSpacing: ".04em" }}>
+            Welcome → Profile → Simulator — fully responsive, every step on any device
+          </p>
+        </ScrollReveal>
       </section>
 
       <Divider />
 
-      {/* ═══ 04 · SIMULATOR — full-width centered with text above ═══ */}
+      {/* ═══ 04 · SIMULATOR — desktop + mobile side by side ═══ */}
       <section style={{ padding: pad }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
@@ -438,13 +455,8 @@ export default function MapleTrackCasePage() {
             <Lead>MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant.</Lead>
           </ScrollReveal>
           <ScrollReveal delay={120} type="scale">
-            <div style={{ position: "relative", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <BrowserFrame src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator" />
-              {!isMobile && (
-                <div style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "18%", zIndex: 3 }}>
-                  <Image src={`${SHOT}/mobile/Frame 3.png`} alt="Simulator — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
-                </div>
-              )}
             </div>
           </ScrollReveal>
         </div>
@@ -464,7 +476,7 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 06+07 · PROGRAMS + PLANS — two-up grid ═══ */}
+      {/* ═══ 06–07 · PROGRAMS + PLANS — desktop then 3 phones ═══ */}
       <section style={{ padding: pad }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
@@ -473,24 +485,26 @@ export default function MapleTrackCasePage() {
             <Lead>Every major Canadian immigration program ranked by fit — then organised into Plan A, B and C running in parallel, so the strategy adapts the moment a law shifts.</Lead>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div style={{ position: "relative", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />
-              {!isMobile && (
-                <div style={{ position: "absolute", left: "-2%", bottom: "-10%", width: "16%", zIndex: 3 }}>
-                  <Image src={`${SHOT}/mobile/Frame 5.png`} alt="Programs — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
-                </div>
-              )}
             </div>
           </ScrollReveal>
-          <ScrollReveal delay={150}>
-            <div style={{ position: "relative", marginTop: "2rem" }}>
-              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans A, B and C" />
-              {!isMobile && (
-                <div style={{ position: "absolute", right: "-2%", bottom: "-10%", width: "16%", zIndex: 3 }}>
-                  <Image src={`${SHOT}/mobile/Frame 8.png`} alt="Plans — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
-                </div>
-              )}
+          {/* Mobile: programs, detail, plans */}
+          <ScrollReveal delay={140}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <div style={{ width: isMobile ? 110 : 200, transform: "rotate(-5deg)", marginTop: isMobile ? 14 : 30, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/Frame 5.png`} alt="Programs — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 130 : 240, zIndex: 2, filter: "drop-shadow(0 35px 70px rgba(0,0,0,.6))" }}>
+                <Image src={`${SHOT}/mobile/Frame 9.png`} alt="Program detail — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 110 : 200, transform: "rotate(5deg)", marginTop: isMobile ? 14 : 30, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/Frame 8.png`} alt="Plans — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
             </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+              Programs → Detail → Plans — the full decision flow on mobile
+            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -527,9 +541,9 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 09 · MOMENTUM ═══ */}
-      {wrap(
-        <>
+      {/* ═══ 10 · MOMENTUM — achievements desktop + mobile showcase ═══ */}
+      <section style={{ padding: pad, background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>10 — Keep the momentum</Label>
             <Title lines={["A process this long", em("needs motivation.")]} />
@@ -538,18 +552,35 @@ export default function MapleTrackCasePage() {
             </Lead>
           </ScrollReveal>
           <ScrollReveal delay={120}>
-            <div style={{ position: "relative", marginTop: "3.5rem" }}>
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <BrowserFrame src={`${SHOT}/achievements-desktop.png`} alt="Achievements & gamification" />
-              {!isMobile && (
-                <div style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "16%", zIndex: 3 }}>
-                  <Image src={`${SHOT}/mobile/Screen.png`} alt="Achievements — mobile" width={885} height={1858} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
-                </div>
-              )}
             </div>
           </ScrollReveal>
-        </>,
-        "#050505"
-      )}
+          {/* Full mobile experience showcase */}
+          <ScrollReveal delay={160}>
+            <div style={{ marginTop: isMobile ? "3rem" : "5rem", textAlign: "center" }}>
+              <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: ACC, marginBottom: "1rem" }}>The full mobile experience</p>
+              <h3 style={{ fontSize: isMobile ? "1.3rem" : "1.8rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em", marginBottom: isMobile ? "2rem" : "3rem" }}>
+                Every feature, {em("on every device.")}
+              </h3>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", gap: isMobile ? ".5rem" : "1.5rem", flexWrap: "nowrap", overflow: "hidden" }}>
+              {[
+                { src: "Frame 7.png", label: "Onboarding", w: isMobile ? 80 : 150, mt: 30 },
+                { src: "Frame 3.png", label: "Simulator", w: isMobile ? 90 : 170, mt: 15 },
+                { src: "Frame 5.png", label: "Programs", w: isMobile ? 100 : 200, mt: 0 },
+                { src: "Screen.png", label: "Achievements", w: isMobile ? 100 : 200, mt: 0 },
+                { src: "Frame 8.png", label: "Plans", w: isMobile ? 90 : 170, mt: 15 },
+                { src: "Frame 9.png", label: "Detail", w: isMobile ? 80 : 150, mt: 30 },
+              ].map((p) => (
+                <div key={p.src} style={{ width: p.w, flexShrink: 0, marginTop: p.mt, filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
+                  <Image src={`${SHOT}/mobile/${p.src}`} alt={p.label} width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
       <Divider />
 
