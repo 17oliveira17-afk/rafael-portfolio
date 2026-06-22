@@ -297,7 +297,7 @@ export default function MapleTrackCasePage() {
       <section style={{ padding: isMobile ? "1rem 1.5rem 4rem" : "0 6rem 6rem" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <ScrollReveal type="scale">
-            <Showcase isMobile={isMobile} desktop={`${SHOT}/dashboard-desktop.png`} url="app.mapletrack.io/dashboard" alt="MapleTrack dashboard" />
+            <BrowserFrame src={`${SHOT}/dashboard-desktop.png`} alt="MapleTrack dashboard" />
           </ScrollReveal>
           <ScrollReveal delay={120}>
             <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.35)", marginTop: isMobile ? "1.5rem" : "3rem", letterSpacing: ".04em" }}>
@@ -439,20 +439,7 @@ export default function MapleTrackCasePage() {
           titleLines={["A CRS simulator", em("for two.")]}
           body="The Comprehensive Ranking System decides who gets invited. MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant. Change one input and the whole breakdown recalculates live."
           chips={["1,200-point model", "Both applicants", "Spouse factors", "Live recalculation"]}
-          visual={
-            <Annotated
-              isMobile={isMobile}
-              desktop={`${SHOT}/simulator-desktop.png`}
-              url="app.mapletrack.io/simulator"
-              alt="CRS simulator"
-              
-              notes={[
-                { x: 75, y: 27, t: "Live CRS score" },
-                { x: 78, y: 56, t: "Factor breakdown" },
-                { x: 41, y: 64, t: "Add the spouse" },
-              ]}
-            />
-          }
+          visual={<BrowserFrame src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator" />}
         />,
         "#050505"
       )}
@@ -467,7 +454,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Nine phases, twenty-seven steps,", em("one clear next move.")]}
           body="The entire route — research and eligibility, language tests, documents, application, landing — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances. The progress bar runs the whole way from Início to Cidadania."
           chips={["9 phases", "27 tracked steps", "Per-person tasks", "Início → Cidadania"]}
-          visual={<Showcase isMobile={isMobile} desktop={`${SHOT}/journey-desktop.png`} url="app.mapletrack.io/journey" alt="Immigration journey" rail={<ProgressRail isMobile={isMobile} />} />}
+          visual={<BrowserFrame src={`${SHOT}/journey-desktop.png`} alt="Immigration journey" />}
         />
       )}
 
@@ -481,15 +468,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Thirteen pathways,", em("ranked by fit.")]}
           body="Express Entry (FSWP, CEC, FST), category-based draws, every major Provincial Nominee Program, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums. Compare them side by side, then open any one for the full breakdown."
           chips={["13 programs", "Ranked by fit", "Side-by-side compare", "Full detail view"]}
-          visual={
-            <TwoUp
-              isMobile={isMobile}
-              left={{ src: `${SHOT}/programs-desktop.png`, url: "app.mapletrack.io/programs" }}
-              right={{ src: `${SHOT}/programs-compare-desktop.png`, url: "app.mapletrack.io/programs/compare" }}
-              
-              alt="Immigration programs"
-            />
-          }
+          visual={<BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />}
         />,
         "#050505"
       )}
@@ -504,12 +483,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Plan A, B and C —", em("running in parallel.")]}
           body="Immigration law changes without warning, so the strategy never rests on one path. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit → PGWP → PR route. Each carries its own timeline, costs and language targets — and the couple can promote any plan to primary at any time."
           chips={["3 parallel plans", "Switch anytime", "Costs & timelines", "Risk-hedged"]}
-          visual={
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "2rem" : "2.5rem" }}>
-              <PlanColumns isMobile={isMobile} />
-              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans" url="app.mapletrack.io/plans" />
-            </div>
-          }
+          visual={<BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans" />}
         />
       )}
 
@@ -538,7 +512,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Every document,", em("every deadline.")]}
           body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what's expired, and keeps the couple's paperwork audit-ready for whichever plan goes live first."
           chips={["By category", "Status tracking", "Translation flags", "Expiry alerts"]}
-          visual={<Showcase isMobile={isMobile} desktop={`${SHOT}/documents-desktop.png`} url="app.mapletrack.io/documents" alt="Document hub" />}
+          visual={<BrowserFrame src={`${SHOT}/documents-desktop.png`} alt="Document hub" />}
         />
       )}
 
