@@ -346,34 +346,39 @@ export default function RappiCasePage() {
 
       <Divider />
 
-      {/* ═══ 08 · LOGIN ANIMATION ═══ */}
+      {/* ═══ 08 · LOGIN ANIMATION — before/after ═══ */}
       <section style={{ padding: pad, background: "#050505" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>07 — One of my favorite decisions</Label>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "5rem", alignItems: "center" }}>
+            <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", textAlign: "center" }}>
+              4 broken pages → <em style={{ color: "#ff6a2b", fontStyle: "italic" }}>1 seamless animation.</em>
+            </h2>
+            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 660, margin: "0 auto 1.5rem", textAlign: "center" }}>
+              Account creation, login, and the transition to the dashboard used to span 4 separate pages with hard redirects. Merchants would lose their state, get confused, and abandon. I collapsed all of it into a single animated transition — sign-up flows directly into the dashboard with no interruption.
+            </p>
+            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, textAlign: "center", marginBottom: isMobile ? "2.5rem" : "4rem" }}>
+              Result: <span style={{ color: "#ff6a2b", fontWeight: 600 }}>−60% support tickets</span> about &ldquo;navigation not working.&rdquo;
+            </p>
+          </ScrollReveal>
+
+          {/* Before / After comparison */}
+          <ScrollReveal delay={100}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2rem" : "3rem", alignItems: "start" }}>
+              {/* Before — broken pages stacked */}
               <div>
-                <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem" }}>
-                  4 broken pages → <br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>1 seamless animation.</em>
-                </h2>
-                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-                  Account creation, login, and the transition to the dashboard used to span 4 separate pages with hard redirects. Merchants would lose their state, get confused, and abandon. I collapsed all of it into a single animated transition — sign-up flows directly into the dashboard with no interruption.
-                </p>
-                <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>
-                  Result: −60% support tickets about "navigation not working."
-                </p>
+                <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,69,0,.7)", marginBottom: "1rem", textAlign: "center" }}>Before — 4 broken pages</p>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
+                  <Image src="/work/rappi-screens/broken-pages.png" alt="Before — 4 broken pages with hard redirects" width={1325} height={803} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                </div>
               </div>
-              {/* PLACEHOLDER: Login animation GIF */}
+              {/* After — seamless animation */}
               <div>
-                <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
-                  <Icon name="film" size={15} /> Login flow animation
-                </p>
-                <LoopVideo
-                  src="/videos/stock/restaurant-grill.mp4"
-                  label="Login flow animation"
-                  aspect="9 / 16"
-                  radius={20}
-                />
+                <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "#ff6a2b", marginBottom: "1rem", textAlign: "center" }}>After — 1 seamless flow</p>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))", borderRadius: 12, overflow: "hidden" }}>
+                  <video src="/work/rappi-screens/new-version.mp4" autoPlay loop muted playsInline
+                    style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
             </div>
           </ScrollReveal>
