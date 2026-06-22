@@ -438,8 +438,13 @@ export default function MapleTrackCasePage() {
             <Lead>MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant.</Lead>
           </ScrollReveal>
           <ScrollReveal delay={120} type="scale">
-            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+            <div style={{ position: "relative", marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <BrowserFrame src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator" />
+              {!isMobile && (
+                <div style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "18%", zIndex: 3 }}>
+                  <Image src={`${SHOT}/mobile/Frame 3.png`} alt="Simulator — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </div>
@@ -468,9 +473,23 @@ export default function MapleTrackCasePage() {
             <Lead>Every major Canadian immigration program ranked by fit — then organised into Plan A, B and C running in parallel, so the strategy adapts the moment a law shifts.</Lead>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+            <div style={{ position: "relative", marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />
+              {!isMobile && (
+                <div style={{ position: "absolute", left: "-2%", bottom: "-10%", width: "16%", zIndex: 3 }}>
+                  <Image src={`${SHOT}/mobile/Frame 5.png`} alt="Programs — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
+                </div>
+              )}
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={150}>
+            <div style={{ position: "relative", marginTop: "2rem" }}>
               <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans A, B and C" />
+              {!isMobile && (
+                <div style={{ position: "absolute", right: "-2%", bottom: "-10%", width: "16%", zIndex: 3 }}>
+                  <Image src={`${SHOT}/mobile/Frame 8.png`} alt="Plans — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </div>
@@ -519,8 +538,13 @@ export default function MapleTrackCasePage() {
             </Lead>
           </ScrollReveal>
           <ScrollReveal delay={120}>
-            <div style={{ marginTop: "3.5rem" }}>
+            <div style={{ position: "relative", marginTop: "3.5rem" }}>
               <BrowserFrame src={`${SHOT}/achievements-desktop.png`} alt="Achievements & gamification" />
+              {!isMobile && (
+                <div style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "16%", zIndex: 3 }}>
+                  <Image src={`${SHOT}/mobile/Screen.png`} alt="Achievements — mobile" width={885} height={1858} style={{ width: "100%", height: "auto", display: "block", filter: "drop-shadow(0 20px 50px rgba(0,0,0,.5))" }} />
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </>,
