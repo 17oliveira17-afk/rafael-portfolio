@@ -96,6 +96,42 @@ function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%)", margin: "0 2rem" }} />;
 }
 
+/* ── Tab switcher for catalog screens ── */
+function CatalogSwitcher() {
+  const [active, setActive] = useState(0);
+  const slides = [
+    { src: "/work/rappi-screens/catalog-detail.png", label: "Product detail" },
+    { src: "/work/rappi-screens/product-image.png", label: "Image preview" },
+    { src: "/work/rappi-screens/menu-creation.png", label: "Menu creation" },
+  ];
+  return (
+    <ScrollReveal delay={100}>
+      <div>
+        <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginBottom: "1.75rem" }}>
+          {slides.map((s, i) => (
+            <button key={i} onClick={() => setActive(i)} style={{
+              padding: ".4rem .9rem", borderRadius: 100, border: `1px solid ${i === active ? "#ff6a2b80" : "rgba(255,255,255,.1)"}`,
+              background: i === active ? "rgba(255,106,43,.12)" : "transparent",
+              color: i === active ? "#ff6a2b" : "rgba(255,255,255,.45)",
+              fontSize: ".74rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease",
+            }}>{s.label}</button>
+          ))}
+        </div>
+        <div style={{ position: "relative", aspectRatio: "1460 / 885", filter: "drop-shadow(0 30px 60px rgba(0,0,0,.4))" }}>
+          {slides.map((s, i) => (
+            <Image key={i} src={s.src} alt={s.label} width={1460} height={885}
+              style={{
+                position: i === 0 ? "relative" : "absolute", inset: 0,
+                width: "100%", height: "100%", objectFit: "contain", display: "block",
+                opacity: i === active ? 1 : 0, transition: "opacity .5s ease",
+              }} />
+          ))}
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+}
+
 /* ══════════════════════════════════════════
    RAPPI ONBOARDING CASE STUDY
    ══════════════════════════════════════════ */
@@ -400,16 +436,7 @@ export default function RappiCasePage() {
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.25rem" }}>
-              <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
-                <Image src="/work/rappi-screens/catalog-detail.png" alt="Product catalog with detail panel" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-              <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
-                <Image src="/work/rappi-screens/product-image.png" alt="Product with image preview" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-            </div>
-          </ScrollReveal>
+          <CatalogSwitcher />
         </div>
       </section>
 
