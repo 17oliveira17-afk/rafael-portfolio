@@ -405,7 +405,7 @@ export default function RappiCasePage() {
               <div>
                 <p style={{ fontSize: ".68rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,69,0,.7)", marginBottom: "1rem", textAlign: "center" }}>Before — 4 broken pages</p>
                 <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
-                  <Image src="/work/rappi-screens/broken-pages.png" alt="Before — 4 broken pages with hard redirects" width={1325} height={803} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                  <Image src="/work/rappi-screens/old-version.png" alt="Before — old broken onboarding flow" width={832} height={487} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
                 </div>
               </div>
               {/* After — seamless animation */}
