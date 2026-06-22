@@ -6,6 +6,7 @@ import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
 import RevealText from "../../components/RevealText";
 import LoopVideo from "../../components/LoopVideo";
+import Image from "next/image";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
 
@@ -172,13 +173,9 @@ export default function RappiCasePage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            {/* PLACEHOLDER: Impact matrix / 144 problems categorization */}
-            <MediaPlaceholder
-              label="Impact vs Effort Matrix — 144 Problems"
-              filename="rappi/rappi-impact-matrix.png"
-              hint="Screenshot do Figma com a matriz de priorização dos 144 problemas por impacto e esforço"
-              aspect="16/7"
-            />
+            <div style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,.4))" }}>
+              <Image src="/work/rappi-screens/impact-effort.png" alt="Impact vs effort matrix — 144 problems categorized" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -339,14 +336,10 @@ export default function RappiCasePage() {
             </div>
           </ScrollReveal>
 
-          {/* PLACEHOLDER: Sign up & Dashboard before/after screens */}
           <ScrollReveal delay={150}>
-            <MediaPlaceholder
-              label="Before / After — Sign up & Dashboard (Desktop)"
-              filename="rappi/rappi-dashboard-before-after.png"
-              hint="Screenshots do Figma mostrando old vs new solution do Dashboard. Slides 19/20 da apresentação Rappi."
-              aspect="21/9"
-            />
+            <div style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,.4))" }}>
+              <Image src="/work/rappi-screens/menu-creation.png" alt="Menu creation — merchant portal" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -402,14 +395,15 @@ export default function RappiCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* PLACEHOLDER: Catalog before/after */}
           <ScrollReveal delay={100}>
-            <MediaPlaceholder
-              label="Catalog Redesign — Before / After"
-              filename="rappi/rappi-catalog-before-after.png"
-              hint="Screenshots do Figma mostrando a estrutura antiga vs nova do catálogo. Slides 26-32 da apresentação Rappi."
-              aspect="21/9"
-            />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.25rem" }}>
+              <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
+                <Image src="/work/rappi-screens/catalog-detail.png" alt="Product catalog with detail panel" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.4))" }}>
+                <Image src="/work/rappi-screens/product-image.png" alt="Product with image preview" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </div>
           </ScrollReveal>
         </div>
       </section>

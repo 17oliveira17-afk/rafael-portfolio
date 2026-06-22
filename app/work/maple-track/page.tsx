@@ -378,7 +378,7 @@ export default function MapleTrackCasePage() {
             </div>
           </ScrollReveal>
           <ScrollReveal delay={120} type="scale">
-            <DeviceDuo isMobile={isMobile} desktop={`${SHOT}/landing-desktop.png`} mobile={`${SHOT}/landing-mobile.png`} alt="MapleTrack landing page" url="mapletrack.io" />
+            <BrowserFrame src={`${SHOT}/landing-desktop.png`} alt="MapleTrack landing page" />
           </ScrollReveal>
 
           {/* HOW IT WAS BUILT — the AI angle */}
@@ -424,19 +424,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Ten questions", em("that set the whole strategy.")]}
           body="Everything downstream — the score, the ranked programs, the plans — rests on one thing: a profile that truly reflects the applicant. A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
           chips={["10 guided steps", "Per applicant", "Powers every recommendation", "Minutes, not forms"]}
-          visual={
-            <>
-              <PhoneFan
-                isMobile={isMobile}
-                items={[
-                  { src: `${SHOT}/onb-welcome-mobile.png`, alt: "Onboarding — welcome" },
-                  { src: `${SHOT}/onb-personal-mobile.png`, alt: "Onboarding — personal profile" },
-                  { src: `${SHOT}/onb-education-mobile.png`, alt: "Onboarding — education" },
-                ]}
-              />
-              <OnboardingSteps />
-            </>
-          }
+          visual={<BrowserFrame src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard" />}
         />,
         "#050505"
       )}
@@ -457,7 +445,7 @@ export default function MapleTrackCasePage() {
               desktop={`${SHOT}/simulator-desktop.png`}
               url="app.mapletrack.io/simulator"
               alt="CRS simulator"
-              phone={`${SHOT}/simulator-mobile.png`}
+              
               notes={[
                 { x: 75, y: 27, t: "Live CRS score" },
                 { x: 78, y: 56, t: "Factor breakdown" },
@@ -498,7 +486,7 @@ export default function MapleTrackCasePage() {
               isMobile={isMobile}
               left={{ src: `${SHOT}/programs-desktop.png`, url: "app.mapletrack.io/programs" }}
               right={{ src: `${SHOT}/programs-compare-desktop.png`, url: "app.mapletrack.io/programs/compare" }}
-              phone={`${SHOT}/program-detail-mobile.png`}
+              
               alt="Immigration programs"
             />
           }
@@ -535,7 +523,7 @@ export default function MapleTrackCasePage() {
           titleLines={["Language scores,", em("tracked to the point.")]}
           body={`Language is the biggest CRS lever, so it gets its own cockpit. Each applicant's CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — "Plano A: atingido", "Plano B: faltam 1 pt" — with test dates counting down to the booking.`}
           chips={["CELPIP · IELTS · TEF", "Skill-by-skill", "Target per plan", "Test countdowns"]}
-          visual={<DetailZoom isMobile={isMobile} phone={`${SHOT}/languages-mobile.png`} zoomSrc={`${SHOT}/languages-desktop.png`} zoomPos="26% 56%" caption="CELPIP — every skill scored against each plan's exact target" alt="Language preparation" />}
+          visual={<BrowserFrame src={`${SHOT}/languages-desktop.png`} alt="Language preparation" />}
         />,
         "#050505"
       )}
@@ -567,17 +555,8 @@ export default function MapleTrackCasePage() {
             </Lead>
           </ScrollReveal>
           <ScrollReveal delay={120}>
-            <div style={{ display: "flex", gap: isMobile ? "1.25rem" : "2rem", justifyContent: "center", flexWrap: "wrap", marginTop: "3.5rem" }}>
-              {[
-                ["achievements-mobile", "Achievements & XP"],
-                ["notifications-mobile", "Smart notifications"],
-                ["settings-mobile", "Household & profile"],
-              ].map(([file, cap]) => (
-                <div key={file} style={{ width: isMobile ? 150 : 220, display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
-                  <PhoneFrame src={`${SHOT}/${file}.png`} alt={cap} />
-                  <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.4)", letterSpacing: ".04em" }}>{cap}</p>
-                </div>
-              ))}
+            <div style={{ marginTop: "3.5rem" }}>
+              <BrowserFrame src={`${SHOT}/achievements-desktop.png`} alt="Achievements & gamification" />
             </div>
           </ScrollReveal>
         </>,
