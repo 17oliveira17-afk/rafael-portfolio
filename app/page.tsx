@@ -436,21 +436,32 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           STATS STRIP
       ══════════════════════════════════════════════════ */}
-      <section style={{ background: "#000", padding: "5rem 2rem", borderTop: "1px solid rgba(255,255,255,.06)", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
-        <div style={{ maxWidth: 1024, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,.06)", borderRadius: 20, overflow: "hidden" }}>
+      <section style={{ background: "#0d0d10", padding: isMobile ? "5rem 1.5rem" : "6rem 2rem", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,113,227,.06) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 1024, margin: "0 auto", position: "relative" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? "1rem" : "1.5rem" }}>
             {[
-              { n: 14, l: "Years in\ndigital design" },
-              { n: 8,  l: "Years in\nproduct design" },
-              { n: 7,  l: "Years in\nglobal teams" },
-              { n: 12, l: "Countries\nserved" },
+              { n: 14, l: "Years in\ndigital design", icon: "◆" },
+              { n: 8,  l: "Years in\nproduct design", icon: "◎" },
+              { n: 7,  l: "Years in\nglobal teams", icon: "⬡" },
+              { n: 12, l: "Countries\nserved", icon: "◈" },
             ].map((s, i) => (
-              <ScrollReveal key={i} delay={i * 80}>
-                <div style={{ background: "#0a0a0a", padding: "3.5rem 2rem", textAlign: "center" }}>
-                  <div className="t-num-giant" style={{ color: "#fff", marginBottom: ".75rem", fontSize: "clamp(3.5rem,8vw,7rem)" }}>
+              <ScrollReveal key={i} delay={i * 100}>
+                <div style={{
+                  background: "rgba(255,255,255,.03)",
+                  border: "1px solid rgba(255,255,255,.06)",
+                  borderRadius: 20, padding: isMobile ? "2.5rem 1.5rem" : "3rem 2rem",
+                  textAlign: "center", position: "relative", overflow: "hidden",
+                  transition: "border-color .4s ease, background .4s ease",
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(0,113,227,.3)"; e.currentTarget.style.background = "rgba(0,113,227,.04)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,.06)"; e.currentTarget.style.background = "rgba(255,255,255,.03)"; }}
+                >
+                  <span style={{ position: "absolute", top: "1rem", right: "1.25rem", fontSize: "1rem", color: "rgba(0,113,227,.25)", transition: "color .4s ease" }}>{s.icon}</span>
+                  <div className="t-num-giant" style={{ color: "#fff", marginBottom: ".75rem", fontSize: "clamp(3rem,8vw,5.5rem)", letterSpacing: "-.04em", lineHeight: 1 }}>
                     <Counter n={s.n} />
                   </div>
-                  <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.45)", whiteSpace: "pre-line", lineHeight: 1.4 }}>{s.l}</p>
+                  <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.4)", whiteSpace: "pre-line", lineHeight: 1.4 }}>{s.l}</p>
                 </div>
               </ScrollReveal>
             ))}
