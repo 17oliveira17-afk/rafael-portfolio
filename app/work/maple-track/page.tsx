@@ -8,6 +8,7 @@ import useIsMobile from "../../components/useIsMobile";
 import Icon from "../../components/Icon";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
+import SideShotShared from "../../components/SideShotShared";
 
 const ACC = "#e31c5f";
 const a = (o: number) => `rgba(227,28,95,${o})`;
@@ -416,105 +417,53 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ 03 · ONBOARDING — DEFINE THE PROFILE ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="03 — Define the profile"
-          titleLines={["Ten questions", em("that set the whole strategy.")]}
-          body="Everything downstream — the score, the ranked programs, the plans — rests on one thing: a profile that truly reflects the applicant. A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
-          chips={["10 guided steps", "Per applicant", "Powers every recommendation", "Minutes, not forms"]}
-          visual={<BrowserFrame src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard" />}
-        />,
-        "#050505"
-      )}
-
-      <Divider />
-
-      {/* ═══ 04 · SIMULATOR ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="04 — Score the profile"
-          titleLines={["A CRS simulator", em("for two.")]}
-          body="The Comprehensive Ranking System decides who gets invited. MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant. Change one input and the whole breakdown recalculates live."
-          chips={["1,200-point model", "Both applicants", "Spouse factors", "Live recalculation"]}
-          visual={<BrowserFrame src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator" />}
-        />,
-        "#050505"
-      )}
-
-      <Divider />
-
-      {/* ═══ 04 · JOURNEY ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="05 — Map the path"
-          titleLines={["Nine phases, twenty-seven steps,", em("one clear next move.")]}
-          body="The entire route — research and eligibility, language tests, documents, application, landing — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances. The progress bar runs the whole way from Início to Cidadania."
-          chips={["9 phases", "27 tracked steps", "Per-person tasks", "Início → Cidadania"]}
-          visual={<BrowserFrame src={`${SHOT}/journey-desktop.png`} alt="Immigration journey" />}
-        />
-      )}
-
-      <Divider />
-
-      {/* ═══ 05 · PROGRAMS ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="06 — Choose the route"
-          titleLines={["Thirteen pathways,", em("ranked by fit.")]}
-          body="Express Entry (FSWP, CEC, FST), category-based draws, every major Provincial Nominee Program, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums. Compare them side by side, then open any one for the full breakdown."
-          chips={["13 programs", "Ranked by fit", "Side-by-side compare", "Full detail view"]}
-          visual={<BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />}
-        />,
-        "#050505"
-      )}
-
-      <Divider />
-
-      {/* ═══ 06 · PLANS ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="07 — Hedge the bet"
-          titleLines={["Plan A, B and C —", em("running in parallel.")]}
-          body="Immigration law changes without warning, so the strategy never rests on one path. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit → PGWP → PR route. Each carries its own timeline, costs and language targets — and the couple can promote any plan to primary at any time."
-          chips={["3 parallel plans", "Switch anytime", "Costs & timelines", "Risk-hedged"]}
-          visual={<BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans" />}
-        />
-      )}
-
-      <Divider />
-
-      {/* ═══ 07 · LANGUAGES ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="08 — Hit the targets"
-          titleLines={["Language scores,", em("tracked to the point.")]}
-          body={`Language is the biggest CRS lever, so it gets its own cockpit. Each applicant's CELPIP/IELTS scores are tracked skill by skill against the exact benchmark every plan requires — "Plano A: atingido", "Plano B: faltam 1 pt" — with test dates counting down to the booking.`}
-          chips={["CELPIP · IELTS · TEF", "Skill-by-skill", "Target per plan", "Test countdowns"]}
-          visual={<BrowserFrame src={`${SHOT}/languages-desktop.png`} alt="Language preparation" />}
-        />,
-        "#050505"
-      )}
-
-      <Divider />
-
-      {/* ═══ 08 · DOCUMENTS ═══ */}
-      {wrap(
-        <Feature
-          isMobile={isMobile}
-          label="09 — Stay ready"
-          titleLines={["Every document,", em("every deadline.")]}
-          body="A document hub organised by category — identity, education, language, finances, legal — that tracks status (submitted, translation pending), flags what's expired, and keeps the couple's paperwork audit-ready for whichever plan goes live first."
-          chips={["By category", "Status tracking", "Translation flags", "Expiry alerts"]}
-          visual={<BrowserFrame src={`${SHOT}/documents-desktop.png`} alt="Document hub" />}
-        />
-      )}
+      {/* ═══ FEATURE SECTIONS — side-bleed MacBook mockups ═══ */}
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "5rem" : "clamp(6rem,11vw,10rem)" }}>
+          <SideShotShared side="right" accent={ACC}
+            src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard"
+            eyebrow="03 · Define the profile"
+            title="Ten questions that set the whole strategy."
+            body="A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
+          />
+          <SideShotShared side="left" accent={ACC}
+            src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator"
+            eyebrow="04 · Score the profile"
+            title="A CRS simulator for two."
+            body="MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant."
+          />
+          <SideShotShared side="right" accent={ACC}
+            src={`${SHOT}/journey-desktop.png`} alt="Immigration journey"
+            eyebrow="05 · Map the path"
+            title="Nine phases, twenty-seven steps, one clear next move."
+            body="The entire route from research to citizenship — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances."
+          />
+          <SideShotShared side="left" accent={ACC}
+            src={`${SHOT}/programs-desktop.png`} alt="Immigration programs"
+            eyebrow="06 · Choose the route"
+            title="Thirteen pathways, ranked by fit."
+            body="Express Entry, Provincial Nominee Programs, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums."
+          />
+          <SideShotShared side="right" accent={ACC}
+            src={`${SHOT}/plans-desktop.png`} alt="Plans"
+            eyebrow="07 · Hedge the bet"
+            title="Plan A, B and C — running in parallel."
+            body="Immigration law changes without warning. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit route. Each carries its own timeline, costs and language targets."
+          />
+          <SideShotShared side="left" accent={ACC}
+            src={`${SHOT}/languages-desktop.png`} alt="Language preparation"
+            eyebrow="08 · Hit the targets"
+            title="Language scores, tracked to the point."
+            body="Each applicant's CELPIP/IELTS scores tracked skill by skill against the exact benchmark every plan requires — with test dates counting down to the booking."
+          />
+          <SideShotShared side="right" accent={ACC}
+            src={`${SHOT}/documents-desktop.png`} alt="Document hub"
+            eyebrow="09 · Stay ready"
+            title="Every document, every deadline."
+            body="A document hub organised by category — identity, education, language, finances, legal — tracking status, flagging what's expired, keeping paperwork audit-ready for whichever plan goes live first."
+          />
+        </div>
+      </section>
 
       <Divider />
 
