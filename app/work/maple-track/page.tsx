@@ -417,51 +417,92 @@ export default function MapleTrackCasePage() {
 
       <Divider />
 
-      {/* ═══ FEATURE SECTIONS — side-bleed MacBook mockups ═══ */}
+      {/* ═══ 03 · ONBOARDING — side-bleed right ═══ */}
       <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "5rem" : "clamp(6rem,11vw,10rem)" }}>
-          <SideShotShared side="right" accent={ACC}
-            src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard"
-            eyebrow="03 · Define the profile"
-            title="Ten questions that set the whole strategy."
-            body="A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
-          />
-          <SideShotShared side="left" accent={ACC}
-            src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator"
-            eyebrow="04 · Score the profile"
-            title="A CRS simulator for two."
-            body="MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant."
-          />
-          <SideShotShared side="right" accent={ACC}
-            src={`${SHOT}/journey-desktop.png`} alt="Immigration journey"
-            eyebrow="05 · Map the path"
-            title="Nine phases, twenty-seven steps, one clear next move."
-            body="The entire route from research to citizenship — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances."
-          />
-          <SideShotShared side="left" accent={ACC}
-            src={`${SHOT}/programs-desktop.png`} alt="Immigration programs"
-            eyebrow="06 · Choose the route"
-            title="Thirteen pathways, ranked by fit."
-            body="Express Entry, Provincial Nominee Programs, family sponsorship — 13 programs in the knowledge base, each with processing time, CRS cut-off, required funds and language minimums."
-          />
-          <SideShotShared side="right" accent={ACC}
-            src={`${SHOT}/plans-desktop.png`} alt="Plans"
-            eyebrow="07 · Hedge the bet"
-            title="Plan A, B and C — running in parallel."
-            body="Immigration law changes without warning. Plan A is the Atlantic Immigration Program; Plan B, Express Entry FSWP; Plan C, a Study Permit route. Each carries its own timeline, costs and language targets."
-          />
-          <SideShotShared side="left" accent={ACC}
-            src={`${SHOT}/languages-desktop.png`} alt="Language preparation"
-            eyebrow="08 · Hit the targets"
-            title="Language scores, tracked to the point."
-            body="Each applicant's CELPIP/IELTS scores tracked skill by skill against the exact benchmark every plan requires — with test dates counting down to the booking."
-          />
-          <SideShotShared side="right" accent={ACC}
-            src={`${SHOT}/documents-desktop.png`} alt="Document hub"
-            eyebrow="09 · Stay ready"
-            title="Every document, every deadline."
-            body="A document hub organised by category — identity, education, language, finances, legal — tracking status, flagging what's expired, keeping paperwork audit-ready for whichever plan goes live first."
-          />
+        <SideShotShared side="right" accent={ACC}
+          src={`${SHOT}/onboarding-desktop.png`} alt="Onboarding wizard"
+          eyebrow="03 · Define the profile"
+          title="Ten questions that set the whole strategy."
+          body="A guided 10-step onboarding walks each person through age, education, work history, language, family, finances and goals — so MapleTrack can recommend the right pathways from the very first session."
+        />
+      </section>
+
+      <Divider />
+
+      {/* ═══ 04 · SIMULATOR — full-width centered with text above ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>04 · Score the profile</Label>
+            <Title lines={["A CRS simulator", em("for two.")]} />
+            <Lead>MapleTrack scores Rafael and Luana separately across the full 1,200-point model — age, education, language, experience — then layers in spouse factors to surface the strongest principal applicant.</Lead>
+          </ScrollReveal>
+          <ScrollReveal delay={120} type="scale">
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <BrowserFrame src={`${SHOT}/simulator-desktop.png`} alt="CRS simulator" />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 05 · JOURNEY — side-bleed left ═══ */}
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
+        <SideShotShared side="left" accent={ACC}
+          src={`${SHOT}/journey-desktop.png`} alt="Immigration journey"
+          eyebrow="05 · Map the path"
+          title="Nine phases, twenty-seven steps, one clear next move."
+          body="The entire route from research to citizenship — broken into 9 phases and 27 tracked steps. Each task is assigned to Rafael or Luana, tagged to a plan, and checked off as the couple advances."
+        />
+      </section>
+
+      <Divider />
+
+      {/* ═══ 06+07 · PROGRAMS + PLANS — two-up grid ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>06–07 · Choose the route, hedge the bet</Label>
+            <Title lines={["Thirteen pathways.", em("Three parallel plans.")]} />
+            <Lead>Every major Canadian immigration program ranked by fit — then organised into Plan A, B and C running in parallel, so the strategy adapts the moment a law shifts.</Lead>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />
+              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans A, B and C" />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 08 · LANGUAGES — side-bleed right ═══ */}
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", background: "#050505", overflow: "hidden" }}>
+        <SideShotShared side="right" accent={ACC}
+          src={`${SHOT}/languages-desktop.png`} alt="Language preparation"
+          eyebrow="08 · Hit the targets"
+          title="Language scores, tracked to the point."
+          body="Each applicant's CELPIP/IELTS scores tracked skill by skill against the exact benchmark every plan requires — with test dates counting down to the booking."
+        />
+      </section>
+
+      <Divider />
+
+      {/* ═══ 09 · DOCUMENTS — full-width centered ═══ */}
+      <section style={{ padding: pad, background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>09 · Stay ready</Label>
+            <Title lines={["Every document,", em("every deadline.")]} />
+            <Lead>A document hub organised by category — identity, education, language, finances, legal — tracking status, flagging what expired, keeping paperwork audit-ready for whichever plan goes live first.</Lead>
+          </ScrollReveal>
+          <ScrollReveal delay={120} type="scale">
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <BrowserFrame src={`${SHOT}/documents-desktop.png`} alt="Document hub" />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
