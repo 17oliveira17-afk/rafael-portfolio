@@ -37,7 +37,7 @@ export default function SideShotShared({ src, alt, side, eyebrow, title, body, a
 
   const img = (
     <div ref={slideRef} style={{ position: "relative", zIndex: 0, ...slideStyle }}>
-      <div aria-hidden style={{ position: "absolute", inset: "-14%", background: `radial-gradient(ellipse at center, ${accent}22, transparent 65%)`, filter: "blur(65px)", pointerEvents: "none" }} />
+      <div aria-hidden style={{ position: "absolute", inset: "-20%", background: `radial-gradient(ellipse at center, ${accent}44, ${accent}18 40%, transparent 70%)`, filter: "blur(70px)", pointerEvents: "none" }} />
       <Image src={src} alt={alt} width={dims?.w ?? 1408} height={dims?.h ?? 853} sizes="70vw"
         style={{ width: "100%", height: "auto", display: "block", position: "relative", filter: "drop-shadow(0 40px 70px rgba(0,0,0,.55))" }} />
     </div>
