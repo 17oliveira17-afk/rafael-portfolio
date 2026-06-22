@@ -429,13 +429,13 @@ export default function MapleTrackCasePage() {
         <ScrollReveal delay={100}>
           <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "3rem" : "5rem", padding: "0 1.5rem" }}>
             <div style={{ width: isMobile ? 120 : 220, transform: "rotate(-6deg)", marginTop: isMobile ? 20 : 40, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-              <Image src={`${SHOT}/mobile/Frame 7.png`} alt="Onboarding — welcome" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              <Image src={`${SHOT}/mobile/onboarding.png`} alt="Onboarding — welcome" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
             <div style={{ width: isMobile ? 140 : 260, zIndex: 2, filter: "drop-shadow(0 40px 80px rgba(0,0,0,.6))" }}>
-              <Image src={`${SHOT}/mobile/Frame 2.png`} alt="Onboarding — personal profile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              <Image src={`${SHOT}/mobile/profile.png`} alt="Onboarding — personal profile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
             <div style={{ width: isMobile ? 120 : 220, transform: "rotate(6deg)", marginTop: isMobile ? 20 : 40, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-              <Image src={`${SHOT}/mobile/Frame 3.png`} alt="Onboarding — simulator" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+              <Image src={`${SHOT}/mobile/simulator.png`} alt="Onboarding — simulator" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
           </div>
           <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "2rem", letterSpacing: ".04em" }}>
@@ -493,13 +493,13 @@ export default function MapleTrackCasePage() {
           <ScrollReveal delay={140}>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
               <div style={{ width: isMobile ? 110 : 200, transform: "rotate(-5deg)", marginTop: isMobile ? 14 : 30, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/Frame 5.png`} alt="Programs — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src={`${SHOT}/mobile/programs.png`} alt="Programs — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
               <div style={{ width: isMobile ? 130 : 240, zIndex: 2, filter: "drop-shadow(0 35px 70px rgba(0,0,0,.6))" }}>
-                <Image src={`${SHOT}/mobile/Frame 9.png`} alt="Program detail — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src={`${SHOT}/mobile/plans.png`} alt="Program detail — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
               <div style={{ width: isMobile ? 110 : 200, transform: "rotate(5deg)", marginTop: isMobile ? 14 : 30, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/Frame 8.png`} alt="Plans — mobile" width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src={`${SHOT}/mobile/plans.png`} alt="Plans — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
@@ -566,15 +566,15 @@ export default function MapleTrackCasePage() {
             </div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", gap: isMobile ? ".5rem" : "1.5rem", flexWrap: "nowrap", overflow: "hidden" }}>
               {[
-                { src: "Frame 7.png", label: "Onboarding", w: isMobile ? 80 : 150, mt: 30 },
-                { src: "Frame 3.png", label: "Simulator", w: isMobile ? 90 : 170, mt: 15 },
-                { src: "Frame 5.png", label: "Programs", w: isMobile ? 100 : 200, mt: 0 },
-                { src: "Screen.png", label: "Achievements", w: isMobile ? 100 : 200, mt: 0 },
-                { src: "Frame 8.png", label: "Plans", w: isMobile ? 90 : 170, mt: 15 },
-                { src: "Frame 9.png", label: "Detail", w: isMobile ? 80 : 150, mt: 30 },
+                { src: "onboarding.png", label: "Onboarding", w: isMobile ? 80 : 150, mt: 30 },
+                { src: "simulator.png", label: "Simulator", w: isMobile ? 90 : 170, mt: 15 },
+                { src: "programs.png", label: "Programs", w: isMobile ? 100 : 200, mt: 0 },
+                { src: "achievements.png", label: "Achievements", w: isMobile ? 100 : 200, mt: 0 },
+                { src: "plans.png", label: "Plans", w: isMobile ? 90 : 170, mt: 15 },
+                { src: "documents.png", label: "Detail", w: isMobile ? 80 : 150, mt: 30 },
               ].map((p) => (
                 <div key={p.src} style={{ width: p.w, flexShrink: 0, marginTop: p.mt, filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
-                  <Image src={`${SHOT}/mobile/${p.src}`} alt={p.label} width={868} height={1841} style={{ width: "100%", height: "auto", display: "block" }} />
+                  <Image src={`${SHOT}/mobile/${p.src}`} alt={p.label} width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
               ))}
             </div>
