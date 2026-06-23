@@ -51,8 +51,8 @@ export default function DeviceSwitcher({
           borderRadius: bare ? 0 : 28,
           overflow: bare ? "visible" : "hidden",
           background: bare
-            ? "radial-gradient(ellipse 62% 58% at 50% 50%, rgba(0,113,227,.22) 0%, transparent 66%)"
-            : "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(0,113,227,.14) 0%, transparent 62%), #08080a",
+            ? "radial-gradient(ellipse 62% 58% at 50% 50%, rgba(234,179,8,.22) 0%, transparent 66%)"
+            : "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(234,179,8,.14) 0%, transparent 62%), #08080a",
           border: bare ? "none" : "1px solid rgba(255,255,255,.07)",
         }}
       >

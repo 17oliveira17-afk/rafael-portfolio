@@ -358,7 +358,7 @@ export default function CVCCasePage() {
           <SideShot
             isMobile={isMobile}
             side="right"
-            glow="blue"
+            glow="gold"
             src="/screens-desktop/mac-benchmark.png"
             alt="Competitive benchmark of leading flight apps"
             eyebrow="01 · The evidence"
@@ -369,7 +369,7 @@ export default function CVCCasePage() {
           <SideShot
             isMobile={isMobile}
             side="left"
-            glow="violet"
+            glow="amber"
             src="/screens-desktop/mac-user-flow.png"
             alt="Navigation flow remapped — current vs ideal"
             eyebrow="02 · The architecture"
@@ -418,7 +418,7 @@ export default function CVCCasePage() {
         <div style={{ maxWidth: 1100, margin: isMobile ? "3rem auto 0" : "0 auto" }}>
           <PhoneSpotlight
             isMobile={isMobile}
-            finish="blue"
+            finish="desert"
             baked
             items={[
               { src: "/screens-mobile/ip-bag-details.png", title: "Baggage details on search", body: "Personal item, carry-on and checked-bag rules surfaced right in the search filters — answered before the results, not after booking." },

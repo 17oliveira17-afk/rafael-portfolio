@@ -82,7 +82,7 @@ export default function PhoneSpotlight({
             )}
             <div style={{ textAlign: "center", maxWidth: 360 }}>
               {it.metric && (
-                <span style={{ display: "inline-block", marginBottom: ".75rem", padding: ".3rem .8rem", borderRadius: 100, fontSize: ".68rem", fontWeight: 700, letterSpacing: ".04em", color: "#0071e3", border: "1px solid rgba(0,113,227,.35)", background: "rgba(0,113,227,.06)" }}>{it.metric}</span>
+                <span style={{ display: "inline-block", marginBottom: ".75rem", padding: ".3rem .8rem", borderRadius: 100, fontSize: ".68rem", fontWeight: 700, letterSpacing: ".04em", color: "#eab308", border: "1px solid rgba(234,179,8,.35)", background: "rgba(234,179,8,.06)" }}>{it.metric}</span>
               )}
               <h3 style={{ fontSize: "1.2rem", fontWeight: 600, color: "#fff", marginBottom: ".6rem", letterSpacing: "-.01em" }}>{it.title}</h3>
               <p style={{ fontSize: ".92rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>{it.body}</p>
@@ -121,19 +121,19 @@ export default function PhoneSpotlight({
                   background: "transparent",
                   cursor: "pointer",
                   padding: "1rem 0 1rem 1.25rem",
-                  borderLeft: `2px solid ${on ? "#0071e3" : "rgba(255,255,255,.1)"}`,
+                  borderLeft: `2px solid ${on ? "#eab308" : "rgba(255,255,255,.1)"}`,
                   transition: "border-color .4s ease",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: on ? ".5rem" : 0 }}>
-                  <span style={{ fontSize: ".7rem", fontWeight: 700, letterSpacing: ".06em", color: on ? "#0071e3" : "rgba(255,255,255,.3)", transition: "color .4s ease" }}>
+                  <span style={{ fontSize: ".7rem", fontWeight: 700, letterSpacing: ".06em", color: on ? "#eab308" : "rgba(255,255,255,.3)", transition: "color .4s ease" }}>
                     0{i + 1}
                   </span>
                   <h3 style={{ fontSize: on ? "1.5rem" : "1.15rem", fontWeight: 600, letterSpacing: "-.02em", color: on ? "#fff" : "rgba(255,255,255,.4)", transition: "color .4s ease, font-size .4s ease" }}>
                     {it.title}
                   </h3>
                   {it.metric && on && (
-                    <span style={{ padding: ".25rem .7rem", borderRadius: 100, fontSize: ".66rem", fontWeight: 700, letterSpacing: ".04em", color: "#0071e3", border: "1px solid rgba(0,113,227,.35)", background: "rgba(0,113,227,.06)" }}>{it.metric}</span>
+                    <span style={{ padding: ".25rem .7rem", borderRadius: 100, fontSize: ".66rem", fontWeight: 700, letterSpacing: ".04em", color: "#eab308", border: "1px solid rgba(234,179,8,.35)", background: "rgba(234,179,8,.06)" }}>{it.metric}</span>
                   )}
                 </div>
                 <div style={{ overflow: "hidden", maxHeight: on ? 90 : 0, opacity: on ? 1 : 0, transition: "max-height .5s cubic-bezier(.16,1,.3,1), opacity .5s ease" }}>

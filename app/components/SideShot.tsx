@@ -39,10 +39,12 @@ function useScrollProgress<T extends HTMLElement>() {
 const easeOut = (p: number) => 1 - Math.pow(1 - p, 2);
 
 export const GLOWS: Record<string, string> = {
-  blue:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(0,113,227,.42), transparent 68%)",
-  violet: "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(126,72,255,.40), transparent 68%)",
+  blue:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(234,179,8,.42), transparent 68%)",
+  violet: "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(217,148,0,.40), transparent 68%)",
   green:  "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(0,200,160,.38), transparent 68%)",
   pink:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(255,82,140,.38), transparent 68%)",
+  gold:   "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(234,179,8,.42), transparent 68%)",
+  amber:  "radial-gradient(ellipse 60% 58% at 50% 42%, rgba(217,148,0,.40), transparent 68%)",
 };
 
 export default function SideShot({
@@ -94,12 +96,12 @@ export default function SideShot({
 
   const txt = (
     <div style={{ maxWidth: 440 }}>
-      {eyebrow && <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: ".9rem" }}>{eyebrow}</p>}
+      {eyebrow && <p style={{ fontSize: ".62rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "#eab308", marginBottom: ".9rem" }}>{eyebrow}</p>}
       <h3 style={{ fontSize: isMobile ? "1.5rem" : "clamp(1.6rem,2.6vw,2.4rem)", fontWeight: 700, color: "#f5f5f7", letterSpacing: "-.03em", lineHeight: 1.12, marginBottom: "1rem" }}>{title}</h3>
       <p style={{ fontSize: isMobile ? ".92rem" : "1.02rem", color: "rgba(255,255,255,.55)", lineHeight: 1.8 }}>{body}</p>
       {metric && (
-        <div style={{ marginTop: "1.75rem", display: "inline-flex", alignItems: "baseline", gap: ".6rem", padding: ".7rem 1.1rem", borderRadius: 12, border: "1px solid rgba(0,113,227,.3)", background: "rgba(0,113,227,.06)" }}>
-          <span style={{ fontSize: "1.6rem", fontWeight: 700, color: "#0071e3", letterSpacing: "-.03em", lineHeight: 1 }}>{metric.n}</span>
+        <div style={{ marginTop: "1.75rem", display: "inline-flex", alignItems: "baseline", gap: ".6rem", padding: ".7rem 1.1rem", borderRadius: 12, border: "1px solid rgba(234,179,8,.3)", background: "rgba(234,179,8,.06)" }}>
+          <span style={{ fontSize: "1.6rem", fontWeight: 700, color: "#eab308", letterSpacing: "-.03em", lineHeight: 1 }}>{metric.n}</span>
           <span style={{ fontSize: ".75rem", color: "rgba(255,255,255,.5)", letterSpacing: ".04em" }}>{metric.l}</span>
         </div>
       )}
