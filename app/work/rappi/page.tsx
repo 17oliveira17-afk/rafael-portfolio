@@ -9,6 +9,7 @@ import LoopVideo from "../../components/LoopVideo";
 import Image from "next/image";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
+import SideShotShared from "../../components/SideShotShared";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -287,47 +288,37 @@ export default function RappiCasePage() {
 
       <Divider />
 
-      {/* ═══ 04.5 · THE PROCESS ═══ */}
-      <section style={{ padding: pad, background: "#050505" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      {/* ═══ 04.5 · THE PROCESS — alternating side-bleed laptops ═══ */}
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", overflow: "hidden", background: "linear-gradient(165deg, rgba(255,106,43,.12) 0%, #070707 36%, #070707 64%, rgba(255,106,43,.09) 100%)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: isMobile ? "0 1.5rem" : "0 6rem" }}>
           <ScrollReveal>
             <Label>Behind the screens — the process</Label>
             <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
               Rigor before pixels.<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>The work behind the work.</em>
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={80}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: "2.5rem" }}>
-              <div>
-                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
-                  <Image src="/work/rappi-screens/roadmap.png" alt="Product roadmap" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
-                </div>
-                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Roadmap — 3 releases prioritized by impact</p>
-              </div>
-              <div>
-                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
-                  <Image src="/work/rappi-screens/sketches.png" alt="Early sketches and wireframes" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
-                </div>
-                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Sketches — exploring dashboard vs. stepper</p>
-              </div>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={120}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: "1.5rem" }}>
-              <div>
-                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
-                  <Image src="/work/rappi-screens/partner-stats.png" alt="Partner analytics dashboard" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
-                </div>
-                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Partner analytics — tracking merchant activation</p>
-              </div>
-              <div>
-                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
-                  <Image src="/work/rappi-screens/multi-language.png" alt="Multi-language support" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
-                </div>
-                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Multi-language — one product, 9 markets</p>
-              </div>
-            </div>
-          </ScrollReveal>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? "5rem" : "clamp(6rem,11vw,9rem)", marginTop: isMobile ? "3.5rem" : "6rem", padding: isMobile ? "0 1.5rem" : 0 }}>
+          <SideShotShared side="right" accent="#ff6a2b" dims={{ w: 1460, h: 885 }}
+            src="/work/rappi-screens/roadmap.png" alt="Product roadmap — 3 releases prioritized by impact"
+            eyebrow="01 · Roadmap"
+            title="Three releases, prioritized by impact."
+            body="Instead of a six-month redesign that delivered nothing until month three, I sequenced the work into three releases — fixing the highest-impact problems first, so value shipped from week one." />
+          <SideShotShared side="left" accent="#ff6a2b" dims={{ w: 1460, h: 885 }}
+            src="/work/rappi-screens/sketches.png" alt="Early sketches — dashboard vs. stepper exploration"
+            eyebrow="02 · Exploration"
+            title="Dashboard vs. stepper, explored on paper."
+            body="Before committing to hi-fi, I sketched the two competing structures — a forced linear stepper against a free-order dashboard — and pressure-tested both against the friction the data had surfaced." />
+          <SideShotShared side="right" accent="#ff6a2b" dims={{ w: 1460, h: 885 }}
+            src="/work/rappi-screens/partner-stats.png" alt="Partner analytics — tracking merchant activation"
+            eyebrow="03 · Measurement"
+            title="Tracking activation, market by market."
+            body="A partner analytics view tracked merchant activation across Colombia, Mexico and Brazil — so every release could be measured against the real funnel, not assumptions." />
+          <SideShotShared side="left" accent="#ff6a2b" dims={{ w: 1460, h: 885 }}
+            src="/work/rappi-screens/multi-language.png" alt="Multi-language — one product across 9 markets"
+            eyebrow="04 · Scale"
+            title="One product, nine markets."
+            body="Every screen was built to localize cleanly across nine countries — language, currency and legal copy — so the redesign scaled without forking the product per market." />
         </div>
       </section>
 

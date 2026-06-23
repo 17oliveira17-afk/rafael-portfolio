@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "./components/Nav";
 import Cursor from "./components/Cursor";
 import ScrollProgress from "./components/ScrollProgress";
+import ScrollToTop from "./components/ScrollToTop";
 
 const SITE = "https://rafael-portfolio-m275.vercel.app";
 const TITLE = "Rafael Guimarães — Product Design Lead";
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <ScrollToTop />
         <ScrollProgress />
         <Cursor />
         <Nav />

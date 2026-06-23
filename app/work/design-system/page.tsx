@@ -70,7 +70,7 @@ function Tag({ children, color = "#00c8a0" }: { children: ReactNode; color?: str
 type DSSlide = { src: string; label: string; video?: boolean };
 
 const DS_CVC_SLIDES: DSSlide[] = [
-  { src: "/work/ds-cvc/ds-button.png", label: "Button" },
+  { src: "/work/ds-cvc/ds-overview.png", label: "Button" },
   { src: "/work/ds-cvc/ds-native.png", label: "Native Elements" },
   { src: "/work/ds-cvc/ds-checkbox.png", label: "Checkbox" },
   { src: "/work/ds-cvc/ds-switch.png", label: "Switch" },
@@ -95,7 +95,7 @@ const DS_RAPPI_SLIDES: DSSlide[] = [
   { src: "/work/ds-rappi/definition-states.png", label: "States" },
 ];
 
-function DSCycler({ isMobile, slides, accent = "#00c8a0" }: { isMobile: boolean; slides: DSSlide[]; accent?: string }) {
+function DSCycler({ isMobile, slides, accent = "#00c8a0", fit = "contain" }: { isMobile: boolean; slides: DSSlide[]; accent?: string; fit?: "contain" | "cover" }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -115,15 +115,15 @@ function DSCycler({ isMobile, slides, accent = "#00c8a0" }: { isMobile: boolean;
 
   return (
     <div style={{ marginBottom: "1.5rem" }}>
-      <div style={{ position: "relative", aspectRatio: "1600 / 970", overflow: "hidden" }}>
+      <div style={{ position: "relative", aspectRatio: "1600 / 970", overflow: "hidden", borderRadius: isMobile ? 14 : 20, background: "#0a0a0c", border: "1px solid rgba(255,255,255,.07)", boxShadow: "0 30px 70px rgba(0,0,0,.45)" }}>
         {slides.map((s, i) => (
           <div key={i} style={{ position: i === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: "100%", opacity: i === active ? 1 : 0, transition: "opacity .6s ease" }}>
             {s.video ? (
               <video ref={el => { videoRefs.current[i] = el; }} src={s.src} muted loop playsInline
-                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+                style={{ width: "100%", height: "100%", objectFit: fit, display: "block" }} />
             ) : (
               <Image src={s.src} alt={s.label} width={1600} height={970}
-                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+                style={{ width: "100%", height: "100%", objectFit: fit, display: "block" }} />
             )}
           </div>
         ))}
@@ -284,7 +284,7 @@ export default function DesignSystemCasePage() {
           </ScrollReveal>
           <ScrollReveal delay={130}>
             <div style={{ marginBottom: "2.5rem" }}>
-              <DSCycler isMobile={isMobile} slides={DS_RAPPI_SLIDES} accent="#00c8a0" />
+              <DSCycler isMobile={isMobile} slides={DS_RAPPI_SLIDES} accent="#00c8a0" fit="cover" />
             </div>
           </ScrollReveal>
 
