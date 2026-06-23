@@ -284,13 +284,13 @@ export default function MapleTrackCasePage() {
         index="05"
         company="SaaS Platform · Claude · Personal Project"
         titleLines={["Immigration", <em key="t" style={{ color: ACC, fontStyle: "italic" }}>Platform.</em>]}
-        subtitle="Immigration agencies are slow, expensive and opaque. No visibility into your own process, no clarity on pathways, no daily guidance. MapleTrack is a full SaaS platform that guides a couple through every step of Canadian immigration — from profile analysis to citizenship."
-        tags={["SaaS Platform", "Web + Mobile", "Claude Code", "9 Sections", "End-to-end"]}
+        subtitle="Immigration to Canada is one of the most complex bureaucratic journeys a family can face — and consultancies charge thousands for an opaque back-office. MapleTrack is a full SaaS platform I designed and built solo that guides a couple through every step: profile analysis, CRS simulation, pathway ranking, document management, language prep, job search, and gamified progress — from first assessment to citizenship."
+        tags={["SaaS Platform", "Canadian Immigration", "Web + Mobile", "Claude Code", "0 → 1", "End-to-end"]}
         stats={[
           { n: "9", l: "Platform sections" },
           { n: "13", l: "Immigration pathways" },
           { n: "27", l: "Tracked steps" },
-          { n: "2 weeks", l: "To ship, solo" },
+          { n: "2 weeks", l: "Designed + shipped, solo" },
         ]}
       />
 
@@ -428,13 +428,13 @@ export default function MapleTrackCasePage() {
         {/* Onboarding mobile showcase */}
         <ScrollReveal delay={100}>
           <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "3rem" : "5rem", padding: "0 1.5rem" }}>
-            <div style={{ width: isMobile ? 120 : 220, marginTop: 0, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
               <Image src={`${SHOT}/mobile/onboarding.png`} alt="Onboarding — welcome" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
-            <div style={{ width: isMobile ? 140 : 260, zIndex: 2, filter: "drop-shadow(0 40px 80px rgba(0,0,0,.6))" }}>
+            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
               <Image src={`${SHOT}/mobile/profile.png`} alt="Onboarding — personal profile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
-            <div style={{ width: isMobile ? 120 : 220, marginTop: 0, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
               <Image src={`${SHOT}/mobile/simulator.png`} alt="Onboarding — simulator" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
           </div>
@@ -492,18 +492,18 @@ export default function MapleTrackCasePage() {
           {/* Mobile: programs, detail, plans */}
           <ScrollReveal delay={140}>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <div style={{ width: isMobile ? 110 : 200, marginTop: 0, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                 <Image src={`${SHOT}/mobile/programs.png`} alt="Programs — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
-              <div style={{ width: isMobile ? 130 : 240, zIndex: 2, filter: "drop-shadow(0 35px 70px rgba(0,0,0,.6))" }}>
-                <Image src={`${SHOT}/mobile/plans.png`} alt="Program detail — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/achievements.png`} alt="Program detail — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
-              <div style={{ width: isMobile ? 110 : 200, marginTop: 0, filter: "drop-shadow(0 25px 50px rgba(0,0,0,.5))" }}>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                 <Image src={`${SHOT}/mobile/plans.png`} alt="Plans — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
-              Programs → Detail → Plans — the full decision flow on mobile
+              Programs → Achievements → Plans — the full decision flow on mobile
             </p>
           </ScrollReveal>
         </div>
@@ -536,16 +536,109 @@ export default function MapleTrackCasePage() {
               <BrowserFrame src={`${SHOT}/documents-desktop.png`} alt="Document hub" />
             </div>
           </ScrollReveal>
+          {/* Documents mobile */}
+          <ScrollReveal delay={160}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/documents.png`} alt="Documents — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/languages.png`} alt="Languages — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/settings.png`} alt="Settings — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+              Documents → Languages → Settings — always accessible on mobile
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       <Divider />
 
-      {/* ═══ 10 · MOMENTUM — achievements desktop + mobile showcase ═══ */}
+      {/* ═══ 10 · JOBS — side-bleed left ═══ */}
+      <section style={{ padding: isMobile ? "5rem 0" : "8rem 0", overflow: "hidden" }}>
+        <SideShotShared side="left" accent={ACC}
+          src={`${SHOT}/jobs-desktop.png`} alt="Job search tracker"
+          eyebrow="10 · Land the offer"
+          title="Job search, integrated into the journey."
+          body="Canadian immigration often requires a valid job offer. MapleTrack tracks applications, interviews and offers — linked directly to the pathway that needs them. No spreadsheet, no guesswork."
+        />
+      </section>
+
+      <Divider />
+
+      {/* ═══ 11 · PLANS DESKTOP — compare side by side ═══ */}
       <section style={{ padding: pad, background: "#050505" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
-            <Label>10 — Keep the momentum</Label>
+            <Label>11 · Compare and decide</Label>
+            <Title lines={["Side-by-side programs.", em("No hidden trade-offs.")]} />
+            <Lead>Every pathway compared head-to-head — processing time, language requirements, CRS thresholds, costs — so the couple can make an informed decision instead of trusting a consultant&apos;s opinion.</Lead>
+          </ScrollReveal>
+          <ScrollReveal delay={120} type="scale">
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <BrowserFrame src={`${SHOT}/programs-compare-desktop.png`} alt="Programs comparison" />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={160} type="scale">
+            <div style={{ marginTop: isMobile ? "1.5rem" : "2.5rem" }}>
+              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans management" />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 12 · HOUSEHOLD — login, settings, notifications ═══ */}
+      <section style={{ padding: pad }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>12 · One household, two applicants</Label>
+            <Title lines={["Shared journey,", em("separate logins.")]} />
+            <Lead>Rafael and Luana each have their own session — scores, documents and tasks tracked individually — but share one household, one set of plans, and one immigration timeline. Notifications keep both in sync.</Lead>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "1.5rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <BrowserFrame src={`${SHOT}/login-desktop.png`} alt="Login — household access" />
+              <BrowserFrame src={`${SHOT}/notifications-desktop.png`} alt="Notifications — stay in sync" />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={140}>
+            <div style={{ marginTop: isMobile ? "1.5rem" : "2.5rem" }}>
+              <BrowserFrame src={`${SHOT}/settings-desktop.png`} alt="Settings — household management" />
+            </div>
+          </ScrollReveal>
+          {/* Household mobile */}
+          <ScrollReveal delay={180}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/login.png`} alt="Login — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/dashboard.png`} alt="Dashboard — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/landing.png`} alt="Landing — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+              Login → Dashboard → Landing — the household experience on mobile
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 13 · MOMENTUM — achievements desktop + mobile showcase ═══ */}
+      <section style={{ padding: pad, background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>13 — Keep the momentum</Label>
             <Title lines={["A process this long", em("needs motivation.")]} />
             <Lead>
               Immigration takes years, so MapleTrack is built to keep a couple moving — XP and achievements for each milestone, gentle nudges and notifications, and a household where Rafael and Luana share one journey under separate logins.
@@ -566,18 +659,23 @@ export default function MapleTrackCasePage() {
             </div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", gap: isMobile ? ".5rem" : "1.5rem", flexWrap: "nowrap", overflow: "hidden" }}>
               {[
-                { src: "onboarding.png", label: "Onboarding", w: isMobile ? 80 : 150, mt: 30 },
-                { src: "simulator.png", label: "Simulator", w: isMobile ? 90 : 170, mt: 15 },
-                { src: "programs.png", label: "Programs", w: isMobile ? 100 : 200, mt: 0 },
-                { src: "achievements.png", label: "Achievements", w: isMobile ? 100 : 200, mt: 0 },
-                { src: "plans.png", label: "Plans", w: isMobile ? 90 : 170, mt: 15 },
-                { src: "documents.png", label: "Detail", w: isMobile ? 80 : 150, mt: 30 },
+                { src: "onboarding.png", label: "Onboarding" },
+                { src: "simulator.png", label: "Simulator" },
+                { src: "programs.png", label: "Programs" },
+                { src: "dashboard.png", label: "Dashboard" },
+                { src: "achievements.png", label: "Achievements" },
+                { src: "plans.png", label: "Plans" },
+                { src: "documents.png", label: "Documents" },
+                { src: "languages.png", label: "Languages" },
               ].map((p) => (
-                <div key={p.src} style={{ width: p.w, flexShrink: 0, marginTop: p.mt, filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
+                <div key={p.src} style={{ width: isMobile ? 90 : 155, flexShrink: 0, filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
                   <Image src={`${SHOT}/mobile/${p.src}`} alt={p.label} width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
               ))}
             </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+              8 sections — every feature works on any device
+            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -588,7 +686,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <>
           <ScrollReveal>
-            <Label>11 — The craft</Label>
+            <Label>14 — The craft</Label>
             <Title lines={["One design system.", em("Every breakpoint.")]} />
             <Lead>
               The whole product runs on a single token set — the MapleTrack rose, Airbnb-grade spacing and type — with shadcn/ui primitives, keyboard and contrast accessibility, and layouts that hold from a 390px phone to a widescreen desktop. The same product, everywhere.
@@ -639,7 +737,7 @@ export default function MapleTrackCasePage() {
       {wrap(
         <>
           <ScrollReveal>
-            <Label>12 — Where it stands</Label>
+            <Label>15 — Where it stands</Label>
             <Title lines={["A working product —", em("the first of its kind.")]} mb="1rem" />
             <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.3)", marginBottom: "3.5rem", letterSpacing: ".06em" }}>Live MVP · in daily use by the household</p>
           </ScrollReveal>
@@ -667,7 +765,7 @@ export default function MapleTrackCasePage() {
       {/* ═══ 12 · WHAT I LEARNED ═══ */}
       {wrap(
         <ScrollReveal>
-          <Label>13 — What I learned</Label>
+          <Label>16 — What I learned</Label>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "2rem" }}>
             {([
               { icon: "compass", title: "Designing for yourself is the ultimate brief.", body: "Being user zero meant every gap in the experience was a gap in my own life. The feedback loop was instant and ruthless — the best research I've ever had." },

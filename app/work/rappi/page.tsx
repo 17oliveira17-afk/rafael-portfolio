@@ -273,18 +273,59 @@ export default function RappiCasePage() {
             </p>
           </ScrollReveal>
 
-          {/* PLACEHOLDER: Prototype high-fi test video */}
+          {/* Figma overview — the full workspace */}
           <ScrollReveal delay={100}>
-            <div style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: ".72rem", color: "rgba(255,255,255,.3)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
-                <Icon name="video" size={15} /> Usability test — prototype walkthrough
-              </p>
-              <LoopVideo
-                src="/videos/stock/restaurant-kitchen.mp4"
-                label="Usability test — prototype walkthrough"
-                aspect="16 / 9"
-                radius={16}
-              />
+            <div style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,.4))" }}>
+              <Image src="/work/rappi-screens/figma-overview.png" alt="Figma workspace — the full onboarding redesign" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block" }} />
+            </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.3)", marginTop: "1.25rem", letterSpacing: ".04em" }}>
+              The full Figma workspace — every screen, flow and variant for Release 1
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ═══ 04.5 · THE PROCESS ═══ */}
+      <section style={{ padding: pad, background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <ScrollReveal>
+            <Label>Behind the screens — the process</Label>
+            <h2 style={{ fontSize: "clamp(1.8rem,3vw,3rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: "1.5rem", maxWidth: 700 }}>
+              Rigor before pixels.<br /><em style={{ color: "#ff6a2b", fontStyle: "italic" }}>The work behind the work.</em>
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={80}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: "2.5rem" }}>
+              <div>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
+                  <Image src="/work/rappi-screens/roadmap.png" alt="Product roadmap" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                </div>
+                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Roadmap — 3 releases prioritized by impact</p>
+              </div>
+              <div>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
+                  <Image src="/work/rappi-screens/sketches.png" alt="Early sketches and wireframes" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                </div>
+                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Sketches — exploring dashboard vs. stepper</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1.5rem", marginTop: "1.5rem" }}>
+              <div>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
+                  <Image src="/work/rappi-screens/partner-stats.png" alt="Partner analytics dashboard" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                </div>
+                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Partner analytics — tracking merchant activation</p>
+              </div>
+              <div>
+                <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,.35))", marginBottom: ".75rem" }}>
+                  <Image src="/work/rappi-screens/multi-language.png" alt="Multi-language support" width={1460} height={885} style={{ width: "100%", height: "auto", display: "block", borderRadius: 12 }} />
+                </div>
+                <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.35)", letterSpacing: ".04em" }}>Multi-language — one product, 9 markets</p>
+              </div>
             </div>
           </ScrollReveal>
         </div>
