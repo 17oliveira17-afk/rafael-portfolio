@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import ScrollReveal from "../../components/ScrollReveal";
 import RevealText from "../../components/RevealText";
 import useIsMobile from "../../components/useIsMobile";
@@ -27,6 +27,45 @@ function BrowserFrame({ src, alt }: { src: string; alt: string; url?: string }) 
   return (
     <div style={{ filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
       <Image src={src} alt={alt} width={1408} height={853} sizes="(max-width:768px) 90vw, 62vw" style={{ width: "100%", height: "auto", display: "block" }} />
+    </div>
+  );
+}
+
+/* ── small eyebrow to title a device group (so it never feels orphaned) ── */
+function DeviceTag({ children }: { children: ReactNode }) {
+  return (
+    <p style={{ textAlign: "center", fontSize: ".64rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: ACC, marginBottom: "1.5rem" }}>
+      {children}
+    </p>
+  );
+}
+
+/* ── tabbed browser viewer — one notebook at a time, never side by side ── */
+function BrowserTabs({ items, isMobile }: { items: { src: string; alt: string; label: string }[]; isMobile: boolean }) {
+  const [active, setActive] = useState(0);
+  return (
+    <div>
+      <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginBottom: isMobile ? "1.5rem" : "2rem", flexWrap: "wrap" }}>
+        {items.map((s, i) => (
+          <button key={i} onClick={() => setActive(i)} style={{
+            padding: ".4rem .95rem", borderRadius: 100,
+            border: `1px solid ${i === active ? a(0.5) : "rgba(255,255,255,.12)"}`,
+            background: i === active ? a(0.12) : "transparent",
+            color: i === active ? ACC : "rgba(255,255,255,.45)",
+            fontSize: ".74rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease",
+          }}>{s.label}</button>
+        ))}
+      </div>
+      <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
+        {items.map((s, i) => (
+          <Image key={i} src={s.src} alt={s.alt} width={1408} height={853} sizes="(max-width:768px) 90vw, 62vw"
+            style={{
+              position: i === 0 ? "relative" : "absolute", inset: 0,
+              width: "100%", height: "100%", objectFit: "contain", display: "block",
+              opacity: i === active ? 1 : 0, transition: "opacity .5s ease",
+            }} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -427,20 +466,23 @@ export default function MapleTrackCasePage() {
         />
         {/* Onboarding mobile showcase */}
         <ScrollReveal delay={100}>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "3rem" : "5rem", padding: "0 1.5rem" }}>
-            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-              <Image src={`${SHOT}/mobile/onboarding.png`} alt="Onboarding — welcome" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+          <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem", padding: "0 1.5rem" }}>
+            <DeviceTag>On mobile</DeviceTag>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/onboarding.png`} alt="Onboarding — welcome" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/profile.png`} alt="Onboarding — personal profile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <Image src={`${SHOT}/mobile/simulator.png`} alt="Onboarding — simulator" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
             </div>
-            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-              <Image src={`${SHOT}/mobile/profile.png`} alt="Onboarding — personal profile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-            </div>
-            <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-              <Image src={`${SHOT}/mobile/simulator.png`} alt="Onboarding — simulator" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-            </div>
+            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+              Welcome → Profile → Simulator — fully responsive, every step on any device
+            </p>
           </div>
-          <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "2rem", letterSpacing: ".04em" }}>
-            Welcome → Profile → Simulator — fully responsive, every step on any device
-          </p>
         </ScrollReveal>
       </section>
 
@@ -486,25 +528,29 @@ export default function MapleTrackCasePage() {
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <DeviceTag>On desktop</DeviceTag>
               <BrowserFrame src={`${SHOT}/programs-desktop.png`} alt="Immigration programs" />
             </div>
           </ScrollReveal>
-          {/* Mobile: programs, detail, plans */}
+          {/* Mobile: programs, achievements, plans */}
           <ScrollReveal delay={140}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/programs.png`} alt="Programs — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+            <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
+              <DeviceTag>On mobile</DeviceTag>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem" }}>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/programs.png`} alt="Programs — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/achievements.png`} alt="Achievements — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/plans.png`} alt="Plans — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/achievements.png`} alt="Program detail — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/plans.png`} alt="Plans — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
+              <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+                Programs → Achievements → Plans — the full decision flow on mobile
+              </p>
             </div>
-            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
-              Programs → Achievements → Plans — the full decision flow on mobile
-            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -538,20 +584,23 @@ export default function MapleTrackCasePage() {
           </ScrollReveal>
           {/* Documents mobile */}
           <ScrollReveal delay={160}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/documents.png`} alt="Documents — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+            <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
+              <DeviceTag>On mobile</DeviceTag>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/documents.png`} alt="Documents — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/languages.png`} alt="Languages — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/settings.png`} alt="Settings — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/languages.png`} alt="Languages — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/settings.png`} alt="Settings — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
+              <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+                Documents → Languages → Settings — always accessible on mobile
+              </p>
             </div>
-            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
-              Documents → Languages → Settings — always accessible on mobile
-            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -575,17 +624,16 @@ export default function MapleTrackCasePage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <ScrollReveal>
             <Label>11 · Compare and decide</Label>
-            <Title lines={["Side-by-side programs.", em("No hidden trade-offs.")]} />
+            <Title lines={["Compare programs.", em("No hidden trade-offs.")]} />
             <Lead>Every pathway compared head-to-head — processing time, language requirements, CRS thresholds, costs — so the couple can make an informed decision instead of trusting a consultant&apos;s opinion.</Lead>
           </ScrollReveal>
-          <ScrollReveal delay={120} type="scale">
+          <ScrollReveal delay={120}>
             <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <BrowserFrame src={`${SHOT}/programs-compare-desktop.png`} alt="Programs comparison" />
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={160} type="scale">
-            <div style={{ marginTop: isMobile ? "1.5rem" : "2.5rem" }}>
-              <BrowserFrame src={`${SHOT}/plans-desktop.png`} alt="Plans management" />
+              <DeviceTag>On desktop · switch between views</DeviceTag>
+              <BrowserTabs isMobile={isMobile} items={[
+                { src: `${SHOT}/programs-compare-desktop.png`, alt: "Programs comparison", label: "Compare programs" },
+                { src: `${SHOT}/plans-desktop.png`, alt: "Plans management", label: "Manage plans" },
+              ]} />
             </div>
           </ScrollReveal>
         </div>
@@ -602,32 +650,34 @@ export default function MapleTrackCasePage() {
             <Lead>Rafael and Luana each have their own session — scores, documents and tasks tracked individually — but share one household, one set of plans, and one immigration timeline. Notifications keep both in sync.</Lead>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "1.5rem" : "2rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <BrowserFrame src={`${SHOT}/login-desktop.png`} alt="Login — household access" />
-              <BrowserFrame src={`${SHOT}/notifications-desktop.png`} alt="Notifications — stay in sync" />
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={140}>
-            <div style={{ marginTop: isMobile ? "1.5rem" : "2.5rem" }}>
-              <BrowserFrame src={`${SHOT}/settings-desktop.png`} alt="Settings — household management" />
+            <div style={{ marginTop: isMobile ? "2.5rem" : "4rem" }}>
+              <DeviceTag>On desktop · switch between views</DeviceTag>
+              <BrowserTabs isMobile={isMobile} items={[
+                { src: `${SHOT}/login-desktop.png`, alt: "Login — household access", label: "Login" },
+                { src: `${SHOT}/notifications-desktop.png`, alt: "Notifications — stay in sync", label: "Notifications" },
+                { src: `${SHOT}/settings-desktop.png`, alt: "Settings — household management", label: "Settings" },
+              ]} />
             </div>
           </ScrollReveal>
           {/* Household mobile */}
           <ScrollReveal delay={180}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem", marginTop: isMobile ? "2.5rem" : "4rem" }}>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/login.png`} alt="Login — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+            <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
+              <DeviceTag>On mobile</DeviceTag>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/login.png`} alt="Login — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/dashboard.png`} alt="Dashboard — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                  <Image src={`${SHOT}/mobile/landing.png`} alt="Landing — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/dashboard.png`} alt="Dashboard — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
-                <Image src={`${SHOT}/mobile/landing.png`} alt="Landing — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
+              <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
+                Login → Dashboard → Landing — the household experience on mobile
+              </p>
             </div>
-            <p style={{ textAlign: "center", fontSize: ".78rem", color: "rgba(255,255,255,.35)", marginTop: "1.75rem", letterSpacing: ".04em" }}>
-              Login → Dashboard → Landing — the household experience on mobile
-            </p>
           </ScrollReveal>
         </div>
       </section>
