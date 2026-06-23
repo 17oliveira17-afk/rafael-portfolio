@@ -612,7 +612,7 @@ export default function AboutPage() {
                 {[
                   { year: "Now", school: "McKinsey · Forward Program", degree: "Leadership & Management", current: true },
                   { year: "Now", school: "UX Unicornio", degree: "AI for Product Design", current: true },
-                  { year: "Now", school: "UX Unicornio", degree: "Design Foundation AI", current: true },
+                  { year: "2025", school: "IxDF · Interaction Design Foundation", degree: "AI for Designers — Top 10% Distinction", current: false },
                   { year: "2020", school: "UX Unicornio", degree: "Master-Level Product Design", current: false },
                   { year: "2019", school: "Belas Artes", degree: "Post-Graduation · Digital Design", current: false },
                   { year: "2016", school: "Universidade Anhembi Morumbi", degree: "Graduation · Digital Design", current: false },
