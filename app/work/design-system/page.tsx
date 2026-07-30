@@ -115,6 +115,15 @@ function DSCycler({ isMobile, slides, accent = "#00c8a0", fit = "contain" }: { i
 
   return (
     <div style={{ marginBottom: "1.5rem" }}>
+      {/* tabs on top — the floating project nav lives at the bottom of the viewport */}
+      <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginBottom: "1.25rem", flexWrap: "wrap" }}>
+        {slides.map((s, i) => (
+          <button key={i} onClick={() => go(i)}
+            style={{ padding: ".35rem .85rem", borderRadius: 100, border: `1px solid ${i === active ? accent + "80" : "rgba(255,255,255,.1)"}`, background: i === active ? accent + "1f" : "transparent", color: i === active ? accent : "rgba(255,255,255,.45)", fontSize: ".72rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease" }}>
+            {s.label}
+          </button>
+        ))}
+      </div>
       <div style={{ position: "relative", aspectRatio: "1600 / 970", overflow: "hidden", borderRadius: isMobile ? 14 : 20, background: "#0a0a0c", border: "1px solid rgba(255,255,255,.07)", boxShadow: "0 30px 70px rgba(0,0,0,.45)" }}>
         {slides.map((s, i) => (
           <div key={i} style={{ position: i === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: "100%", opacity: i === active ? 1 : 0, transition: "opacity .6s ease" }}>
@@ -126,14 +135,6 @@ function DSCycler({ isMobile, slides, accent = "#00c8a0", fit = "contain" }: { i
                 style={{ width: "100%", height: "100%", objectFit: fit, display: "block" }} />
             )}
           </div>
-        ))}
-      </div>
-      <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginTop: "1.25rem", flexWrap: "wrap" }}>
-        {slides.map((s, i) => (
-          <button key={i} onClick={() => go(i)}
-            style={{ padding: ".35rem .85rem", borderRadius: 100, border: `1px solid ${i === active ? accent + "80" : "rgba(255,255,255,.1)"}`, background: i === active ? accent + "1f" : "transparent", color: i === active ? accent : "rgba(255,255,255,.45)", fontSize: ".72rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease" }}>
-            {s.label}
-          </button>
         ))}
       </div>
     </div>
