@@ -10,6 +10,7 @@ import Image from "next/image";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
 import SideShotShared from "../../components/SideShotShared";
+import SegmentedTabs from "../../components/SegmentedTabs";
 
 /* ── Counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -108,15 +109,8 @@ function CatalogSwitcher() {
   return (
     <ScrollReveal delay={100}>
       <div>
-        <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginBottom: "1.75rem" }}>
-          {slides.map((s, i) => (
-            <button key={i} onClick={() => setActive(i)} style={{
-              padding: ".4rem .9rem", borderRadius: 100, border: `1px solid ${i === active ? "#ff6a2b80" : "rgba(255,255,255,.1)"}`,
-              background: i === active ? "rgba(255,106,43,.12)" : "transparent",
-              color: i === active ? "#ff6a2b" : "rgba(255,255,255,.45)",
-              fontSize: ".74rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease",
-            }}>{s.label}</button>
-          ))}
+        <div style={{ marginBottom: "1.75rem" }}>
+          <SegmentedTabs labels={slides.map((s) => s.label)} active={active} onChange={setActive} />
         </div>
         <div style={{ position: "relative", aspectRatio: "1460 / 885", filter: "drop-shadow(0 30px 60px rgba(0,0,0,.4))" }}>
           {slides.map((s, i) => (

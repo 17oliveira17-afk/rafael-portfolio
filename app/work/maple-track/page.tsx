@@ -9,6 +9,7 @@ import Icon from "../../components/Icon";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
 import SideShotShared from "../../components/SideShotShared";
+import SegmentedTabs from "../../components/SegmentedTabs";
 
 const ACC = "#e31c5f";
 const a = (o: number) => `rgba(227,28,95,${o})`;
@@ -45,16 +46,8 @@ function BrowserTabs({ items, isMobile }: { items: { src: string; alt: string; l
   const [active, setActive] = useState(0);
   return (
     <div>
-      <div style={{ display: "flex", gap: ".5rem", justifyContent: "center", marginBottom: isMobile ? "1.5rem" : "2rem", flexWrap: "wrap" }}>
-        {items.map((s, i) => (
-          <button key={i} onClick={() => setActive(i)} style={{
-            padding: ".4rem .95rem", borderRadius: 100,
-            border: `1px solid ${i === active ? a(0.5) : "rgba(255,255,255,.12)"}`,
-            background: i === active ? a(0.12) : "transparent",
-            color: i === active ? ACC : "rgba(255,255,255,.45)",
-            fontSize: ".74rem", fontWeight: 600, cursor: "pointer", transition: "all .3s ease",
-          }}>{s.label}</button>
-        ))}
+      <div style={{ marginBottom: isMobile ? "1.5rem" : "2rem" }}>
+        <SegmentedTabs labels={items.map((it) => it.label)} active={active} onChange={setActive} />
       </div>
       <div style={{ position: "relative", aspectRatio: "1408 / 853", filter: "drop-shadow(0 40px 80px rgba(0,0,0,.5))" }}>
         {items.map((s, i) => (
@@ -315,7 +308,7 @@ export default function MapleTrackCasePage() {
   );
 
   return (
-    <main className="page-in dark-cursor" style={{ background: "#000" }}>
+    <main className="page-in dark-cursor" style={{ background: "#000", "--blue": ACC, "--blue-hover": "#c81e4e" } as React.CSSProperties}>
 
       {/* ═══ 05 · HERO ═══ */}
       <CaseHero
@@ -469,13 +462,13 @@ export default function MapleTrackCasePage() {
           <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem", padding: "0 1.5rem" }}>
             <DeviceTag>On mobile</DeviceTag>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+              <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                 <Image src={`${SHOT}/mobile/onboarding.png`} alt="Onboarding — welcome" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+              <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                 <Image src={`${SHOT}/mobile/profile.png`} alt="Onboarding — personal profile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
-              <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+              <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                 <Image src={`${SHOT}/mobile/simulator.png`} alt="Onboarding — simulator" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
@@ -537,13 +530,13 @@ export default function MapleTrackCasePage() {
             <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
               <DeviceTag>On mobile</DeviceTag>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? ".75rem" : "2rem" }}>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/programs.png`} alt="Programs — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/achievements.png`} alt="Achievements — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/plans.png`} alt="Plans — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
               </div>
@@ -587,13 +580,13 @@ export default function MapleTrackCasePage() {
             <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
               <DeviceTag>On mobile</DeviceTag>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/documents.png`} alt="Documents — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/languages.png`} alt="Languages — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/settings.png`} alt="Settings — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
               </div>
@@ -664,13 +657,13 @@ export default function MapleTrackCasePage() {
             <div style={{ marginTop: isMobile ? "3.5rem" : "5.5rem" }}>
               <DeviceTag>On mobile</DeviceTag>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: isMobile ? "1rem" : "2.5rem" }}>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/login.png`} alt="Login — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/dashboard.png`} alt="Dashboard — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
-                <div style={{ width: isMobile ? 120 : 220, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
+                <div style={{ width: isMobile ? 130 : 300, filter: "drop-shadow(0 30px 60px rgba(0,0,0,.5))" }}>
                   <Image src={`${SHOT}/mobile/landing.png`} alt="Landing — mobile" width={908} height={1880} style={{ width: "100%", height: "auto", display: "block" }} />
                 </div>
               </div>
