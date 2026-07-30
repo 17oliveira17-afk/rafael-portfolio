@@ -5,6 +5,7 @@ import { useState } from "react";
 import ScrollReveal from "../components/ScrollReveal";
 import useIsMobile from "../components/useIsMobile";
 import RevealText from "../components/RevealText";
+import BigImageReveal from "../components/BigImageReveal";
 
 const exp = [
   {
@@ -692,19 +693,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ═══ PHOTO BREAK ═══ */}
-      <section style={{ position: "relative", height: isMobile ? "50vh" : "60vh", overflow: "hidden" }}>
-        <Image src="/rafael-working.jpg" alt="Rafael working" fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2, padding: "0 1.5rem" }}>
+      {/* ═══ PHOTO BREAK — cinematic quote ═══ */}
+      <BigImageReveal
+        src="/rafael-working.jpg"
+        alt="Rafael working"
+        minHeight={isMobile ? "50vh" : "60vh"}
+        objectPosition="center 30%"
+        overlay={
           <ScrollReveal>
-            <p style={{ fontSize: isMobile ? "clamp(1.2rem,5vw,1.6rem)" : "clamp(1.5rem,4vw,3.5rem)", fontWeight: 700, color: "#fff", textAlign: "center", letterSpacing: "-.03em", lineHeight: 1.3, textShadow: "0 2px 40px rgba(0,0,0,0.8)", maxWidth: 800 }}>
-              &ldquo;A top-tier designer with a strong process<br />and a proactive mindset.&rdquo;
+            <p style={{ fontSize: isMobile ? "clamp(1.35rem,6vw,1.8rem)" : "clamp(1.8rem,4vw,3.2rem)", fontWeight: 700, color: "#fff", textAlign: "center", letterSpacing: "-.03em", lineHeight: 1.22, textShadow: "0 2px 40px rgba(0,0,0,0.8)", maxWidth: 640, marginLeft: "auto", marginRight: "auto", textWrap: "balance" }}>
+              &ldquo;A top-tier designer with a strong process and a proactive mindset.&rdquo;
             </p>
-            <p style={{ textAlign: "center", color: "rgba(255,255,255,.5)", fontSize: isMobile ? ".75rem" : ".85rem", marginTop: "1.25rem" }}>Allan Cardozo · Design Manager, Delivery Hero</p>
+            <p style={{ textAlign: "center", color: "rgba(255,255,255,.6)", fontSize: isMobile ? ".75rem" : ".85rem", marginTop: "1.25rem" }}>Allan Cardozo · Design Manager, Delivery Hero</p>
           </ScrollReveal>
-        </div>
-      </section>
+        }
+      />
 
       {/* ═══ EXPERIENCE ═══ */}
       <section style={{ background: "#000", padding: padLarge }}>

@@ -14,7 +14,13 @@ export default function ScrollToTop() {
     const prev = root.style.scrollBehavior;
     root.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
-    requestAnimationFrame(() => { root.style.scrollBehavior = prev; });
+    // Second reset on the next frame catches late layout shifts (images/fonts
+    // finishing after the initial jump) that would otherwise nudge the page down.
+    const raf = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = prev;
+    });
+    return () => cancelAnimationFrame(raf);
   }, [pathname]);
   return null;
 }
