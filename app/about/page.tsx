@@ -639,7 +639,7 @@ export default function AboutPage() {
               <ScrollReveal>
                 <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem" }}>Languages</p>
                 <RevealText
-                  text="Working across the globe."
+                  text="Working globally."
                   style={{ fontSize: isMobile ? "clamp(1.5rem,6vw,2rem)" : "clamp(1.6rem,3vw,2.4rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: "2rem" }}
                 />
               </ScrollReveal>
