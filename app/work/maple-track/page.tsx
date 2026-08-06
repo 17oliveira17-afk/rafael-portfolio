@@ -10,6 +10,7 @@ import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
 import SideShotShared from "../../components/SideShotShared";
 import SegmentedTabs from "../../components/SegmentedTabs";
+import LoopVideo from "../../components/LoopVideo";
 
 const ACC = "#e31c5f";
 const a = (o: number) => `rgba(227,28,95,${o})`;
@@ -325,6 +326,16 @@ export default function MapleTrackCasePage() {
           { n: "2 weeks", l: "Designed + shipped, solo" },
         ]}
       />
+
+      {/* ═══ FULL-BLEED IMMIGRATION VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/maple-immigration.mp4"
+          label="A couple planning their move abroad, step by step"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
+      </section>
 
       {/* ═══ OPENING VISUAL — the cockpit ═══ */}
       <section style={{ padding: isMobile ? "1rem 1.5rem 4rem" : "0 6rem 6rem" }}>
