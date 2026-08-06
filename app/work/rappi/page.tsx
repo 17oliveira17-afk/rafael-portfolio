@@ -153,6 +153,16 @@ export default function RappiCasePage() {
         ]}
       />
 
+      {/* ═══ FULL-BLEED KITCHEN VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/rappi-kitchen.mp4"
+          label="A restaurant partner checking incoming orders from the kitchen"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
+      </section>
+
       <Divider />
 
       {/* ═══ 02 · CONTEXT ═══ */}
