@@ -365,8 +365,8 @@ export default function LeadershipCasePage() {
       {/* ═══ FULL-BLEED TEAM VIDEO ═══ */}
       <section style={{ width: "100%", position: "relative" }}>
         <LoopVideo
-          src="/videos/stock/team-working.mp4"
-          label="Design team working together"
+          src="/videos/leadership-workshop.mp4"
+          label="Leading a design workshop — the team aligned around one plan"
           aspect={isMobile ? "16 / 12" : "21 / 9"}
           radius={0}
         />
