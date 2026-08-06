@@ -339,7 +339,7 @@ export default function Home() {
             color: "#0071e3", marginBottom: "2rem",
             opacity: 0, animation: "fadeUp .9s ease .3s forwards",
           }}>
-            Product Design Lead · Brazil → Canada
+            AI-First Product Design Lead · Working Globally
           </p>
           <h1 style={{
             fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
@@ -355,7 +355,7 @@ export default function Home() {
             color: "rgba(255,255,255,.65)", maxWidth: 580, margin: "0 auto 3rem",
             opacity: 0, animation: "fadeUp .9s ease .75s forwards",
           }}>
-            8+ years turning complex fintech and B2B systems into experiences that drive measurable conversion, activation, and retention. Relocating to Canada.
+            8+ years turning complex fintech and B2B systems into experiences that drive measurable conversion, activation, and retention — now shipping production-grade products end-to-end with AI. Working globally.
           </p>
           <div style={{
             display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap",
@@ -599,7 +599,7 @@ export default function Home() {
                     Rafael Guimarães
                   </p>
                   <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.65)", marginTop: ".25rem", letterSpacing: ".02em" }}>
-                    Product Design Lead · Relocating to Canada
+                    AI-First Design Lead · Working Globally
                   </p>
                 </div>
               </div>
@@ -631,7 +631,7 @@ export default function Home() {
           <ScrollReveal delay={150}>
             <p className="t-eyebrow" style={{ color: "#0071e3", marginBottom: "1.5rem" }}>About</p>
             <RevealText
-              lines={["Brazilian designer.", <em key="g" style={{ color: "#0071e3", fontStyle: "italic" }}>Moving to Canada.</em>]}
+              lines={["Brazilian designer.", <em key="g" style={{ color: "#0071e3", fontStyle: "italic" }}>Global by nature.</em>]}
               style={{
                 fontSize: "clamp(2.2rem,4.5vw,4rem)", fontWeight: 700, color: "#fff",
                 letterSpacing: "-.035em", lineHeight: 1.02, marginBottom: "2rem",
@@ -641,7 +641,7 @@ export default function Home() {
               Currently Product Design Lead at <span style={{ color: "#fff", fontWeight: 500 }}>Thoughtworks Brasil</span>, designing URPI PRO — a B2B credit origination platform for MiBanco.
             </p>
             <p style={{ fontSize: "1rem", color: "rgba(255,255,255,.55)", lineHeight: 1.7, marginBottom: "2rem" }}>
-              Previously at Rappi (fintech/growth) and CVC Corp (travel). Currently relocating to Canada — I even built a full SaaS platform to manage the immigration process.
+              Previously at Rappi (fintech/growth) and CVC Corp (travel). I now ship production products end-to-end with AI — I even designed and built a full SaaS platform solo with Claude Code.
             </p>
 
             {/* Quick-fact cards */}
@@ -678,7 +678,7 @@ export default function Home() {
             }}
           />
           <p className="t-body" style={{ maxWidth: 480, margin: "0 auto 3rem" }}>
-            Open to Product Design Lead roles in fintech and B2B. Pursuing opportunities in Canada.
+            Open to Product Design Lead roles in fintech and B2B — remote or relocation, worldwide.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn-blue" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>Get in touch</Link>

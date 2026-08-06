@@ -431,13 +431,13 @@ export default function AboutPage() {
           </div>
           <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "5rem 1.5rem 3rem", maxWidth: 680 }}>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1rem", opacity: 0, animation: "fadeUp .9s ease .2s forwards" }}>
-              Product Design Lead · Relocating to Canada
+              AI-First Product Design Lead · Working Globally
             </p>
             <h1 style={{ fontSize: "clamp(2.6rem,10vw,3.5rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1, marginBottom: "1.25rem", opacity: 0, animation: "fadeUp 1.1s ease .4s forwards" }}>
               Rafael<br />Guimarães.
             </h1>
             <p style={{ fontSize: ".95rem", color: "rgba(255,255,255,.65)", lineHeight: 1.75, maxWidth: 420, marginBottom: "2rem", opacity: 0, animation: "fadeUp .9s ease .6s forwards" }}>
-              14+ years designing digital products. I turn complexity into clarity — fintech, B2B platforms, and mobile experiences that actually move metrics. Relocating to Canada.
+              14+ years designing digital products. I turn complexity into clarity — fintech, B2B platforms, and mobile experiences that actually move metrics. AI-first, working globally.
             </p>
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
               <Link href="/contact" className="btn-blue" style={{ fontSize: ".9rem" }}>Get in touch</Link>
@@ -450,13 +450,13 @@ export default function AboutPage() {
         <section style={{ minHeight: "100svh", background: "#000", display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden" }}>
           <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "10rem 4rem 6rem 6rem" }}>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem", opacity: 0, animation: "fadeUp .9s ease .2s forwards" }}>
-              Product Design Lead · Relocating to Canada
+              AI-First Product Design Lead · Working Globally
             </p>
             <h1 style={{ fontSize: "clamp(3rem,5vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1, marginBottom: "1.75rem", opacity: 0, animation: "fadeUp 1.1s ease .4s forwards" }}>
               Rafael<br />Guimarães.
             </h1>
             <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,.65)", lineHeight: 1.75, maxWidth: 420, marginBottom: "2.5rem", opacity: 0, animation: "fadeUp .9s ease .6s forwards" }}>
-              14+ years designing digital products. I turn complexity into clarity — fintech, B2B platforms, and mobile experiences that actually move metrics. Relocating to Canada.
+              14+ years designing digital products. I turn complexity into clarity — fintech, B2B platforms, and mobile experiences that actually move metrics. AI-first, working globally.
             </p>
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap", opacity: 0, animation: "fadeUp .9s ease .8s forwards" }}>
               <Link href="/contact" className="btn-blue" style={{ fontSize: ".9rem" }}>Get in touch</Link>
@@ -793,7 +793,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.5rem" }}>Open to opportunities</p>
             <RevealText
-              lines={["Relocating to Canada.", <em key="c" style={{ color: "#0071e3", fontStyle: "italic" }}>Ready for what&apos;s next.</em>]}
+              lines={["Open to the world.", <em key="c" style={{ color: "#0071e3", fontStyle: "italic" }}>Ready for what&apos;s next.</em>]}
               style={{ fontSize: isMobile ? "clamp(2rem,8vw,3rem)" : "clamp(2.5rem,6vw,6rem)", fontWeight: 700, color: "#fff", letterSpacing: "-.04em", lineHeight: 1.05, marginBottom: "1.25rem" }}
             />
             <p style={{ fontSize: isMobile ? ".93rem" : "1.1rem", color: "rgba(255,255,255,.55)", maxWidth: 440, margin: "0 auto 2.5rem", lineHeight: 1.7 }}>

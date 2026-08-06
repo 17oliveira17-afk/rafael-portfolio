@@ -6,15 +6,15 @@ import ScrollProgress from "./components/ScrollProgress";
 import ScrollToTop from "./components/ScrollToTop";
 
 const SITE = "https://rafael-portfolio-m275.vercel.app";
-const TITLE = "Rafael Guimarães — Product Design Lead";
+const TITLE = "Rafael Guimarães — AI-First Product Design Lead";
 const DESCRIPTION =
-  "Product Design Lead. Fintech & B2B. Turning complex systems into experiences that drive conversion, activation, and retention.";
+  "AI-first Product Design Lead. Fintech & B2B. I turn complex systems into experiences that drive conversion, activation and retention — and ship production-grade products end-to-end with AI (Claude Code). Working globally.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: TITLE,
   description: DESCRIPTION,
-  keywords: ["Product Design Lead", "UX", "Product Designer", "Design Systems", "Fintech", "Rafael Guimarães"],
+  keywords: ["AI-First Product Design", "AI Product Designer", "Claude Code", "Generative AI Design", "Product Design Lead", "UX", "Design Systems", "Fintech", "Rafael Guimarães"],
   authors: [{ name: "Rafael Guimarães" }],
   openGraph: {
     type: "website",
