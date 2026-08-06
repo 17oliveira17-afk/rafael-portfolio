@@ -97,8 +97,8 @@ export default function CVCCasePage() {
       {/* ═══ FULL-BLEED TRAVEL VIDEO ═══ */}
       <section style={{ width: "100%", position: "relative" }}>
         <LoopVideo
-          src="/videos/stock/travel-window.mp4"
-          label="Travel — booking a flight on the go"
+          src="/videos/cvc-airport.mp4"
+          label="Booking a flight on the go — at the airport gate"
           aspect={isMobile ? "16 / 12" : "21 / 9"}
           radius={0}
         />
