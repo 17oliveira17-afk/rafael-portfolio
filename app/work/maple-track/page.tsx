@@ -337,20 +337,6 @@ export default function MapleTrackCasePage() {
         />
       </section>
 
-      {/* ═══ OPENING VISUAL — the cockpit ═══ */}
-      <section style={{ padding: isMobile ? "1rem 1.5rem 4rem" : "0 6rem 6rem" }}>
-        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <ScrollReveal type="scale">
-            <BrowserFrame src={`${SHOT}/dashboard-desktop.png`} alt="MapleTrack dashboard" />
-          </ScrollReveal>
-          <ScrollReveal delay={120}>
-            <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.35)", marginTop: isMobile ? "1.5rem" : "3rem", letterSpacing: ".04em" }}>
-              A daily cockpit that always answers "what do we do next?"
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
       <Divider />
 
       {/* ═══ 01 · THE CHALLENGE ═══ */}
