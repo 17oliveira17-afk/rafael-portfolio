@@ -8,6 +8,7 @@ import RevealText from "../../components/RevealText";
 import CaseHero from "../../components/CaseHero";
 import FloatingProjectNav from "../../components/FloatingProjectNav";
 import SegmentedTabs from "../../components/SegmentedTabs";
+import LoopVideo from "../../components/LoopVideo";
 
 /* ── Animated counter ── */
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
@@ -184,21 +185,14 @@ export default function DesignSystemCasePage() {
         ]}
       />
 
-      {/* ═══ DESIGN SYSTEM SHOWCASE — the real thing, in Figma ═══ */}
-      <section style={{ width: "100%", background: "#050505", padding: isMobile ? "3.5rem 1.5rem" : "6rem 6rem", position: "relative", overflow: "hidden" }}>
-        <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 55% 55% at 50% 42%, rgba(0,200,160,.10) 0%, transparent 62%)", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 1080, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <ScrollReveal type="scale">
-            <div style={{ filter: "drop-shadow(0 44px 90px rgba(0,0,0,.55))" }}>
-              <Image src="/cinematic/design-system-components.jpg" alt="A design system built in Figma — the full component library with every variant" width={800} height={484} sizes="(max-width:768px) 92vw, 1080px" style={{ width: "100%", height: "auto", display: "block", borderRadius: isMobile ? 12 : 18 }} />
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={120}>
-            <p style={{ textAlign: "center", fontSize: ".8rem", color: "rgba(255,255,255,.4)", marginTop: isMobile ? "1.5rem" : "2.25rem", letterSpacing: ".04em" }}>
-              A real component library — every variant, state and doc, governed in one Figma source of truth.
-            </p>
-          </ScrollReveal>
-        </div>
+      {/* ═══ FULL-BLEED DESIGN SYSTEM VIDEO ═══ */}
+      <section style={{ width: "100%", position: "relative" }}>
+        <LoopVideo
+          src="/videos/ds-components.mp4"
+          label="Building the component library, screen by screen"
+          aspect={isMobile ? "16 / 12" : "21 / 9"}
+          radius={0}
+        />
       </section>
 
       <Divider />
