@@ -54,34 +54,16 @@ export default function HeroTransform() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const imgA = new Image(), imgB = new Image();
     let loaded = 0, raf = 0, target = 0, cur = 0;
-    let cleanA: HTMLCanvasElement | null = null, cleanB: HTMLCanvasElement | null = null;
     const t0 = performance.now();
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
     const offA = document.createElement("canvas"), offB = document.createElement("canvas"), offC = document.createElement("canvas");
 
-    /* Cut-outs carry a faint coloured fringe in their semi-transparent edge
-       pixels (matte left over from the old background). Push low alphas to
-       zero once, at load, so no halo survives around the figure. */
-    const clean = (img: HTMLImageElement) => {
-      const c = document.createElement("canvas");
-      c.width = img.naturalWidth || img.width; c.height = img.naturalHeight || img.height;
-      const g = c.getContext("2d", { willReadFrequently: true })!;
-      g.drawImage(img, 0, 0);
-      const d = g.getImageData(0, 0, c.width, c.height);
-      const px = d.data;
-      for (let i = 3; i < px.length; i += 4) {
-        const a = px[i] / 255;
-        // remap: everything under ~0.55 alpha disappears, the rest ramps back to solid
-        const na = a <= 0.55 ? 0 : Math.min(1, (a - 0.55) / 0.3);
-        px[i] = na * 255;
-      }
-      g.putImageData(d, 0, 0);
-      return c;
-    };
-
-    const fit = (img: HTMLCanvasElement, c: CanvasRenderingContext2D, w: number, h: number) => {
-      const ar = img.width / img.height, r = w / h;
+    /* Both sources are already clean transparent cut-outs — they are drawn
+       exactly as delivered, alpha untouched. */
+    const fit = (img: HTMLImageElement, c: CanvasRenderingContext2D, w: number, h: number) => {
+      const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+      const ar = iw / ih, r = w / h;
       let dw = w, dh = h, dx = 0, dy = 0;
       if (ar > r) { dh = h; dw = h * ar; dx = (w - dw) / 2; } else { dw = w; dh = w / ar; dy = (h - dh) / 2; }
       c.drawImage(img, dx, dy, dw, dh);
@@ -92,7 +74,7 @@ export default function HeroTransform() {
       o.width = COLS; o.height = ROWS;
       const c = o.getContext("2d", { willReadFrequently: true });
       if (!c) return;
-      fit(cleanA!, c, COLS, ROWS);
+      fit(imgA, c, COLS, ROWS);
       const d = c.getImageData(0, 0, COLS, ROWS).data;
       mask = new Uint8Array(COLS * ROWS);
       // the cutout has a real alpha channel — the silhouette is exact
@@ -132,7 +114,7 @@ export default function HeroTransform() {
         // photo, disintegrating
         const ca = offA.getContext("2d")!;
         ca.clearRect(0, 0, W, H); ca.globalAlpha = 1;
-        fit(cleanA!, ca, W, H);
+        fit(imgA, ca, W, H);
         if (dissolve > 0) {
           ca.globalCompositeOperation = "destination-out";
           for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
@@ -147,7 +129,7 @@ export default function HeroTransform() {
         if (reveal > 0) {
           const cb = offB.getContext("2d")!;
           cb.clearRect(0, 0, W, H);
-          fit(cleanB!, cb, W, H);
+          fit(imgB, cb, W, H);
           cb.globalCompositeOperation = "destination-out";
           for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
             if (noise[y * COLS + x] > reveal) { cb.fillStyle = "#000"; cb.fillRect(x * cell, y * cell, cell + 1, cell + 1); }
@@ -207,8 +189,7 @@ export default function HeroTransform() {
       setP(target);
     };
     const ready = () => { loaded++; if (loaded === 2) { buildMask(); onScroll(); if (reduce) cur = target; } };
-    imgA.onload = () => { cleanA = clean(imgA); ready(); };
-    imgB.onload = () => { cleanB = clean(imgB); ready(); };
+    imgA.onload = ready; imgB.onload = ready;
     imgA.src = PHOTO; imgB.src = AVATAR;
 
     build(); onScroll();
