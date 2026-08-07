@@ -13,8 +13,8 @@ import { useEffect, useRef, useState } from "react";
    while the photo disintegrates → Act 3 the 3D avatar remains.
    ────────────────────────────────────────────── */
 
-const PHOTO = "/photos/rafael-real.jpg";
-const AVATAR = "/photos/rafael-avatar.jpg";
+const PHOTO = "/photos/rafael-real-cut.png";     // transparent cutout
+const AVATAR = "/photos/rafael-avatar-cut.png";  // transparent cutout
 
 const CODE = [
   '<section className="hero">',
@@ -73,15 +73,8 @@ export default function HeroTransform() {
       fit(imgA, c, COLS, ROWS);
       const d = c.getImageData(0, 0, COLS, ROWS).data;
       mask = new Uint8Array(COLS * ROWS);
-      for (let y = 0; y < ROWS; y++) {
-        let lo = -1, hi = -1, count = 0;
-        for (let x = 0; x < COLS; x++) {
-          const i = y * COLS + x;
-          const l = (d[i * 4] * 0.299 + d[i * 4 + 1] * 0.587 + d[i * 4 + 2] * 0.114) / 255;
-          if (l > 0.085) { if (lo < 0) lo = x; hi = x; count++; }
-        }
-        if (count > 2 && lo >= 0) for (let x = lo; x <= hi; x++) mask[y * COLS + x] = 1;
-      }
+      // the cutout has a real alpha channel — the silhouette is exact
+      for (let i = 0; i < COLS * ROWS; i++) mask[i] = d[i * 4 + 3] > 90 ? 1 : 0;
     };
 
     const build = () => {
@@ -216,7 +209,8 @@ export default function HeroTransform() {
           <div className="orb o2" aria-hidden />
 
           {/* GIANT TYPE BEHIND THE FIGURE */}
-          <div className="behind" aria-hidden style={{ opacity: 0.5 + p * 0.5, transform: `translate(-50%,-50%) scale(${1 + p * 0.06})` }}>
+          {/* rises as you scroll, so the page feels like it's travelling down past it */}
+          <div className="behind" aria-hidden style={{ opacity: 0.55 + p * 0.45, transform: `translate(-50%, calc(-50% - ${p * 52}vh)) scale(${1 + p * 0.1})` }}>
             <span>PRODUCT</span>
             <span>DESIGN</span>
           </div>
@@ -285,12 +279,13 @@ export default function HeroTransform() {
       <style jsx>{`
         .behind { position: absolute; left: 50%; top: 46%; z-index: 1; display: flex; flex-direction: column; align-items: center;
           font-weight: 900; letter-spacing: -.05em; line-height: .82; color: rgba(255,255,255,.055); white-space: nowrap;
-          font-size: clamp(4rem, 17vw, 17rem); pointer-events: none; transition: opacity .4s ease; }
+          font-size: clamp(4rem, 17vw, 17rem); pointer-events: none; will-change: transform;
+          transition: opacity .4s ease, transform .18s linear; }
 
         .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; }
-        .portrait { position: relative; width: min(66vh, 54vw, 620px); aspect-ratio: 1/1; margin-bottom: -6vh;
-          -webkit-mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.55) 84%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.55) 84%, transparent 100%); }
+        .portrait { position: relative; width: min(96vh, 68vw, 840px); aspect-ratio: 1/1; margin-bottom: -12vh;
+          -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
         .halo { position: absolute; inset: -18%; z-index: 1; border-radius: 50%; pointer-events: none;
           background: radial-gradient(circle, rgba(0,113,227,.30), rgba(227,28,95,.14) 46%, transparent 68%); filter: blur(52px); }
