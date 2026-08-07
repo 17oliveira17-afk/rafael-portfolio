@@ -31,7 +31,8 @@ const CODE = [
   'const { data } = useResearch()',
   '@media (min-width: 768px) {',
 ];
-const CODE_TINT = ["#7fb6ff", "#00c8a0", "#8f9bb3", "#ffd166", "#ff9e7a"];
+/* neutral only — greys and blues, no accent colours */
+const CODE_TINT = ["#8ea6c4", "#6d87a8", "#a6b4c6", "#5d7ea6", "#93a3b8", "#7b93b0"];
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const smooth = (e0: number, e1: number, x: number) => { const t = clamp((x - e0) / (e1 - e0)); return t * t * (3 - 2 * t); };
@@ -64,6 +65,7 @@ export default function HeroTransform() {
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
     const offA = document.createElement("canvas"), offB = document.createElement("canvas");
+    const offC = document.createElement("canvas"); // code layer (blurred + faded on exit)
 
     const fit = (img: HTMLImageElement, c: CanvasRenderingContext2D, w: number, h: number) => {
       const ar = img.width / img.height, r = w / h;
@@ -96,7 +98,7 @@ export default function HeroTransform() {
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.floor(W * dpr); canvas.height = Math.floor(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      offA.width = W; offA.height = H; offB.width = W; offB.height = H;
+      offA.width = W; offA.height = H; offB.width = W; offB.height = H; offC.width = W; offC.height = H;
       cell = W < 620 ? 9 : 11;
       COLS = Math.max(10, Math.ceil(W / cell)); ROWS = Math.max(10, Math.ceil(H / cell));
       noise = new Float32Array(COLS * ROWS);
@@ -112,7 +114,6 @@ export default function HeroTransform() {
       // act curves
       const dissolve = smooth(0.16, 0.62, q);   // photo breaks apart
       const reveal = smooth(0.42, 0.88, q);     // avatar materialises
-      const codeAmt = Math.sin(clamp(smooth(0.10, 0.92, q)) * Math.PI); // bell peak mid-scroll
 
       ctx.clearRect(0, 0, W, H);
 
@@ -148,30 +149,49 @@ export default function HeroTransform() {
           ctx.drawImage(offB, 0, 0);
         }
 
-        // ── code running through the silhouette only
-        if (codeAmt > 0.01) {
-          ctx.globalAlpha = 1;
-          ctx.font = `${cell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-          ctx.textBaseline = "top";
+        // ── code through the silhouette: rows type in one by one, then
+        //    the whole layer leaves with transparency + blur
+        const codeIn = smooth(0.10, 0.58, q);   // how many rows have arrived
+        const codeOut = smooth(0.60, 0.94, q);  // fade + blur out
+        const layer = clamp(codeIn) * (1 - codeOut);
+        if (layer > 0.01) {
+          const cc = offC.getContext("2d")!;
+          cc.clearRect(0, 0, W, H);
+          cc.font = `${cell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+          cc.textBaseline = "top";
           const speed = reduce ? 0 : t * 9;
           for (let y = 0; y < ROWS; y++) {
+            // staggered per-row arrival — the code writes itself top to bottom
+            const rowT = ROWS > 1 ? y / (ROWS - 1) : 0;
+            const rowIn = clamp((codeIn * 1.35 - rowT) * 3.2);
+            if (rowIn < 0.02) continue;
             const line = CODE[y % CODE.length];
             const dir = y % 2 === 0 ? 1 : -1;
             const off = Math.floor(speed * dir + y * 3);
             const tint = CODE_TINT[y % CODE_TINT.length];
+            // the row types in left→right as it arrives
+            const typed = Math.floor(COLS * clamp(rowIn * 1.15));
             for (let x = 0; x < COLS; x++) {
+              if (x > typed) break;
               if (!mask[y * COLS + x]) continue;
               const n = noise[y * COLS + x];
-              // brightest where the photo has already dissolved but avatar hasn't landed
-              const local = clamp(codeAmt * (0.55 + n * 0.9));
-              if (local < 0.06) continue;
+              const local = clamp(rowIn * (0.5 + n * 0.85));
+              if (local < 0.05) continue;
               const ch = line[((x + off) % line.length + line.length) % line.length];
               if (ch === " ") continue;
-              ctx.fillStyle = tint;
-              ctx.globalAlpha = local * 0.85;
-              ctx.fillText(ch, x * cell, y * cell);
+              cc.fillStyle = tint;
+              cc.globalAlpha = local * 0.9;
+              cc.fillText(ch, x * cell, y * cell);
             }
           }
+          cc.globalAlpha = 1;
+          // composite the whole code layer with a growing blur as it leaves
+          const blur = codeOut * 7;
+          ctx.save();
+          if (blur > 0.15) ctx.filter = `blur(${blur.toFixed(2)}px)`;
+          ctx.globalAlpha = layer;
+          ctx.drawImage(offC, 0, 0);
+          ctx.restore();
           ctx.globalAlpha = 1;
         }
       }
