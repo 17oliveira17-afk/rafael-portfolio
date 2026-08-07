@@ -193,9 +193,13 @@ export default function HeroTransform() {
 
   // act 1 chrome fades out as the side columns build
   const intro = 1 - smooth(0.06, 0.24, p);
+  // side columns arrive and then STAY — they're the resting state next to the avatar
   const sideIn = smooth(0.18, 0.42, p);
-  const sideOut = 1 - smooth(0.9, 1, p);
-  const side = sideIn * sideOut;
+  const side = sideIn;
+  // background type must be fully gone and fully travelled up before the
+  // avatar finishes materialising (reveal completes at ~0.88)
+  const bgRise = clamp(p / 0.74) * 120;              // vh travelled, done by 74%
+  const bgFade = 1 - smooth(0.28, 0.70, p);          // invisible from 70%
 
   return (
     <main style={{ background: "#06060a", color: "#fff" }}>
@@ -210,7 +214,7 @@ export default function HeroTransform() {
 
           {/* GIANT TYPE BEHIND THE FIGURE */}
           {/* rises as you scroll, so the page feels like it's travelling down past it */}
-          <div className="behind" aria-hidden style={{ opacity: 0.55 + p * 0.45, transform: `translate(-50%, calc(-50% - ${p * 52}vh)) scale(${1 + p * 0.1})` }}>
+          <div className="behind" aria-hidden style={{ opacity: bgFade, transform: `translate(-50%, calc(-50% - ${bgRise}vh)) scale(${1 + p * 0.1})` }}>
             <span>PRODUCT</span>
             <span>DESIGN</span>
           </div>
@@ -314,6 +318,12 @@ export default function HeroTransform() {
         .col hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.4rem 0 1.1rem; }
         .pills { display: flex; flex-wrap: wrap; gap: .4rem; }
         .pills.r { justify-content: flex-end; }
+        .col :global(.ht-pill) { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 500;
+          color: rgba(255,255,255,.78); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.11);
+          border-radius: 100px; padding: .32rem .7rem; white-space: nowrap; cursor: default;
+          transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
+        .col :global(.ht-pill:hover) { background: rgba(255,255,255,.1); border-color: rgba(127,182,255,.5); color: #fff; transform: translateY(-2px); }
+        .col :global(.ht-dot) { width: 5px; height: 5px; border-radius: 50%; background: rgba(127,182,255,.75); flex-shrink: 0; }
         .quote { font-size: .8rem; line-height: 1.65; color: rgba(255,255,255,.7); background: rgba(255,255,255,.045);
           border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: .85rem .95rem; margin-bottom: .8rem; text-align: left; }
         .quote strong { color: #fff; font-weight: 700; }
@@ -342,10 +352,8 @@ export default function HeroTransform() {
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: ".4rem", fontSize: ".72rem", fontWeight: 500,
-      color: "rgba(255,255,255,.78)", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.11)",
-      borderRadius: 100, padding: ".32rem .7rem", whiteSpace: "nowrap" }}>
-      <span style={{ width: 5, height: 5, borderRadius: "50%", background: "rgba(127,182,255,.75)", flexShrink: 0 }} />
+    <span className="ht-pill">
+      <span className="ht-dot" />
       {children}
     </span>
   );
