@@ -41,6 +41,7 @@ const smooth = (e0: number, e1: number, x: number) => { const t = clamp((x - e0)
 export default function HeroTransform() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const behindRef = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(0);
 
   useEffect(() => {
@@ -53,12 +54,33 @@ export default function HeroTransform() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const imgA = new Image(), imgB = new Image();
     let loaded = 0, raf = 0, target = 0, cur = 0;
+    let cleanA: HTMLCanvasElement | null = null, cleanB: HTMLCanvasElement | null = null;
     const t0 = performance.now();
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
     const offA = document.createElement("canvas"), offB = document.createElement("canvas"), offC = document.createElement("canvas");
 
-    const fit = (img: HTMLImageElement, c: CanvasRenderingContext2D, w: number, h: number) => {
+    /* Cut-outs carry a faint coloured fringe in their semi-transparent edge
+       pixels (matte left over from the old background). Push low alphas to
+       zero once, at load, so no halo survives around the figure. */
+    const clean = (img: HTMLImageElement) => {
+      const c = document.createElement("canvas");
+      c.width = img.naturalWidth || img.width; c.height = img.naturalHeight || img.height;
+      const g = c.getContext("2d", { willReadFrequently: true })!;
+      g.drawImage(img, 0, 0);
+      const d = g.getImageData(0, 0, c.width, c.height);
+      const px = d.data;
+      for (let i = 3; i < px.length; i += 4) {
+        const a = px[i] / 255;
+        // remap: everything under ~0.55 alpha disappears, the rest ramps back to solid
+        const na = a <= 0.55 ? 0 : Math.min(1, (a - 0.55) / 0.3);
+        px[i] = na * 255;
+      }
+      g.putImageData(d, 0, 0);
+      return c;
+    };
+
+    const fit = (img: HTMLCanvasElement, c: CanvasRenderingContext2D, w: number, h: number) => {
       const ar = img.width / img.height, r = w / h;
       let dw = w, dh = h, dx = 0, dy = 0;
       if (ar > r) { dh = h; dw = h * ar; dx = (w - dw) / 2; } else { dw = w; dh = w / ar; dy = (h - dh) / 2; }
@@ -70,7 +92,7 @@ export default function HeroTransform() {
       o.width = COLS; o.height = ROWS;
       const c = o.getContext("2d", { willReadFrequently: true });
       if (!c) return;
-      fit(imgA, c, COLS, ROWS);
+      fit(cleanA!, c, COLS, ROWS);
       const d = c.getImageData(0, 0, COLS, ROWS).data;
       mask = new Uint8Array(COLS * ROWS);
       // the cutout has a real alpha channel — the silhouette is exact
@@ -96,12 +118,21 @@ export default function HeroTransform() {
       const dissolve = smooth(0.16, 0.62, q);
       const reveal = smooth(0.42, 0.88, q);
 
+      /* Background type is driven here, off the smoothed value and straight
+         onto the node — no React re-render per scroll event, so it glides. */
+      if (behindRef.current) {
+        const rise = clamp(q / 0.74) * 120;
+        const fade = 1 - smooth(0.28, 0.70, q);
+        behindRef.current.style.opacity = String(fade);
+        behindRef.current.style.transform = `translate(-50%, calc(-50% - ${rise.toFixed(2)}vh)) scale(${(1 + q * 0.1).toFixed(4)})`;
+      }
+
       ctx.clearRect(0, 0, W, H);
       if (loaded === 2 && mask && noise) {
         // photo, disintegrating
         const ca = offA.getContext("2d")!;
         ca.clearRect(0, 0, W, H); ca.globalAlpha = 1;
-        fit(imgA, ca, W, H);
+        fit(cleanA!, ca, W, H);
         if (dissolve > 0) {
           ca.globalCompositeOperation = "destination-out";
           for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
@@ -116,7 +147,7 @@ export default function HeroTransform() {
         if (reveal > 0) {
           const cb = offB.getContext("2d")!;
           cb.clearRect(0, 0, W, H);
-          fit(imgB, cb, W, H);
+          fit(cleanB!, cb, W, H);
           cb.globalCompositeOperation = "destination-out";
           for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
             if (noise[y * COLS + x] > reveal) { cb.fillStyle = "#000"; cb.fillRect(x * cell, y * cell, cell + 1, cell + 1); }
@@ -176,7 +207,8 @@ export default function HeroTransform() {
       setP(target);
     };
     const ready = () => { loaded++; if (loaded === 2) { buildMask(); onScroll(); if (reduce) cur = target; } };
-    imgA.onload = ready; imgB.onload = ready;
+    imgA.onload = () => { cleanA = clean(imgA); ready(); };
+    imgB.onload = () => { cleanB = clean(imgB); ready(); };
     imgA.src = PHOTO; imgB.src = AVATAR;
 
     build(); onScroll();
@@ -198,8 +230,6 @@ export default function HeroTransform() {
   const side = sideIn;
   // background type must be fully gone and fully travelled up before the
   // avatar finishes materialising (reveal completes at ~0.88)
-  const bgRise = clamp(p / 0.74) * 120;              // vh travelled, done by 74%
-  const bgFade = 1 - smooth(0.28, 0.70, p);          // invisible from 70%
 
   return (
     <main style={{ background: "#06060a", color: "#fff" }}>
@@ -214,9 +244,9 @@ export default function HeroTransform() {
 
           {/* GIANT TYPE BEHIND THE FIGURE */}
           {/* rises as you scroll, so the page feels like it's travelling down past it */}
-          <div className="behind" aria-hidden style={{ opacity: bgFade, transform: `translate(-50%, calc(-50% - ${bgRise}vh)) scale(${1 + p * 0.1})` }}>
-            <span>PRODUCT</span>
-            <span>DESIGN</span>
+          <div ref={behindRef} className="behind" aria-hidden>
+            <span>AI PRODUCT</span>
+            <span>DESIGNER</span>
           </div>
 
           {/* CENTRE FIGURE */}
@@ -283,8 +313,8 @@ export default function HeroTransform() {
       <style jsx>{`
         .behind { position: absolute; left: 50%; top: 46%; z-index: 1; display: flex; flex-direction: column; align-items: center;
           font-weight: 900; letter-spacing: -.05em; line-height: .82; color: rgba(255,255,255,.055); white-space: nowrap;
-          font-size: clamp(4rem, 17vw, 17rem); pointer-events: none; will-change: transform;
-          transition: opacity .4s ease, transform .18s linear; }
+          font-size: clamp(2.6rem, 12.5vw, 13rem); pointer-events: none; will-change: transform, opacity;
+          transform: translate(-50%, -50%); }
 
         .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; }
         .portrait { position: relative; width: min(96vh, 68vw, 840px); aspect-ratio: 1/1; margin-bottom: -12vh;
