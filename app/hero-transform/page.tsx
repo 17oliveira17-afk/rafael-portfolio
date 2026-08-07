@@ -292,8 +292,11 @@ export default function HeroTransform() {
       </section>
 
       <style jsx>{`
+        /* knockout type: filled with the stage black, so it blocks the coloured
+           lights behind it instead of carrying any colour of its own — it only
+           reads where the light washes past it */
         .behind { position: absolute; left: 50%; top: 46%; z-index: 1; display: flex; flex-direction: column; align-items: center;
-          font-weight: 900; letter-spacing: -.05em; line-height: .82; color: rgba(255,255,255,.055); white-space: nowrap;
+          font-weight: 900; letter-spacing: -.05em; line-height: .82; color: #06060a; white-space: nowrap;
           font-size: clamp(2.6rem, 12.5vw, 13rem); pointer-events: none; will-change: transform, opacity;
           transform: translate(-50%, -50%); }
 
@@ -340,9 +343,12 @@ export default function HeroTransform() {
         .quote strong { color: #fff; font-weight: 700; }
         @media (max-width: 1180px) { .col { display: none; } }
 
-        .orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; }
-        .o1 { width: 46vw; height: 46vw; background: #0071e3; opacity: .14; left: -10%; top: -12%; }
-        .o2 { width: 42vw; height: 42vw; background: #e31c5f; opacity: .10; right: -8%; bottom: -16%; }
+        /* studio lights: cool blue from the left, hot pink-red from the right,
+           washing across a black stage — same key/fill as the portrait */
+        .orb { position: absolute; top: 50%; height: 118vh; width: 76vw; z-index: 0;
+          transform: translateY(-50%); filter: blur(70px); pointer-events: none; }
+        .o1 { left: -24%; background: radial-gradient(ellipse at 34% 50%, rgba(26,96,224,.62), rgba(14,44,120,.30) 44%, transparent 72%); }
+        .o2 { right: -24%; background: radial-gradient(ellipse at 66% 50%, rgba(214,22,88,.55), rgba(126,16,62,.28) 44%, transparent 72%); }
         .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.07); z-index: 10; }
         .prog span { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg,#7fb6ff,#a6b4c6,#e31c5f); }
         .hint { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 10; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); transition: opacity .4s ease; }
