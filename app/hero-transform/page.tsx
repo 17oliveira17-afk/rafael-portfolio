@@ -382,8 +382,13 @@ export default function HeroTransform() {
            there is no element edge that can show up as a rectangle. */
         .lights { position: absolute; inset: 0; z-index: 0; pointer-events: none;
           background:
-            radial-gradient(ellipse 40% 82% at 0% 50%, rgba(28,102,232,.60), rgba(16,52,132,.26) 38%, rgba(10,28,74,.08) 58%, transparent 74%),
-            radial-gradient(ellipse 40% 82% at 100% 50%, rgba(220,24,92,.54), rgba(132,16,64,.24) 38%, rgba(74,10,38,.07) 58%, transparent 74%); }
+            /* a soft black pool at the centre, painted last-on-top, so the two
+               washes dissolve into blackness as they meet behind the figure */
+            radial-gradient(ellipse 44% 66% at 50% 50%, rgba(6,6,10,.72), rgba(6,6,10,.34) 48%, transparent 82%),
+            /* long, very gradual falloff — the light reaches toward the middle
+               but is all but gone by the time it gets there */
+            radial-gradient(ellipse 72% 104% at 0% 50%, rgba(30,106,236,.58), rgba(23,82,190,.33) 18%, rgba(17,56,132,.17) 34%, rgba(12,36,88,.075) 52%, rgba(10,26,66,.025) 68%, transparent 88%),
+            radial-gradient(ellipse 72% 104% at 100% 50%, rgba(222,26,94,.52), rgba(178,21,77,.30) 18%, rgba(130,16,60,.15) 34%, rgba(80,10,40,.065) 52%, rgba(58,7,29,.022) 68%, transparent 88%); }
         .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.07); z-index: 10; }
         .prog span { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg,#7fb6ff,#a6b4c6,#e31c5f); }
         .hint { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 10; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); transition: opacity .4s ease; }
