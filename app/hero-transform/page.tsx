@@ -313,9 +313,15 @@ export default function HeroTransform() {
           mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
 
-        .intro { position: absolute; left: 0; right: 0; bottom: clamp(2.4rem,7vh,5rem); z-index: 8; text-align: center; padding: 0 1.5rem; transition: opacity .5s ease; }
+        .intro { position: absolute; left: 0; right: 0; bottom: clamp(2.4rem,7vh,5rem); z-index: 8; text-align: center; padding: 0 1.5rem;
+          transition: opacity .5s ease; isolation: isolate; }
+        /* soft shadow pooled behind the copy so it reads over the figure,
+           with no visible box — just a blurred falloff */
+        .intro::before { content: ""; position: absolute; left: 50%; top: 48%; transform: translate(-50%,-50%);
+          width: min(980px, 94vw); height: 235%; z-index: -1; pointer-events: none; filter: blur(22px);
+          background: radial-gradient(ellipse 52% 50% at 50% 50%, rgba(0,0,0,.80), rgba(0,0,0,.52) 42%, rgba(0,0,0,.22) 62%, transparent 78%); }
         .intro h1 { font-size: clamp(1.5rem,3.1vw,2.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.18; margin: 0 0 1.5rem;
-          text-shadow: 0 4px 40px rgba(0,0,0,.75); }
+          text-shadow: 0 2px 12px rgba(0,0,0,.65), 0 6px 46px rgba(0,0,0,.8); }
         .intro h1 :global(em) { font-style: italic; font-weight: 500; background-image: linear-gradient(100deg,#7fb6ff,#a6b4c6 55%,#e31c5f); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .btns { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
         .b-primary, .b-ghost { font-size: .84rem; font-weight: 600; padding: .62rem 1.5rem; border-radius: 100px; text-decoration: none;
