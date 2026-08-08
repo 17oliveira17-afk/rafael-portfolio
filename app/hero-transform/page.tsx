@@ -473,7 +473,7 @@ export default function HeroTransform() {
           .portrait { width: min(138vw, 92svh); margin-bottom: 0;
             -webkit-mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%); }
-          .stage { align-items: flex-end; padding-top: 0; }
+          .stage { align-items: center; padding-top: 0; }
           .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 42%; }
           .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
           .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
