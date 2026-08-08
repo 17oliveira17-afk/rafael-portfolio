@@ -335,12 +335,20 @@ export default function HeroTransform() {
           transition: opacity .5s ease, transform .6s cubic-bezier(.16,1,.3,1); }
         .left { left: clamp(1.5rem, 5vw, 5.5rem); margin-top: -8vh; transform: translateY(-50%); }
         .right { right: clamp(1.5rem, 5vw, 5.5rem); margin-top: -8vh; text-align: right; }
-        .col :global(h2), .col h2 { font-size: clamp(1.1rem,1.9vw,1.7rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.15; margin: 0 0 .7rem; }
-        .eyebrow { font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7fb6ff; margin: 0 0 .8rem; }
-        .eyebrow.r { margin-bottom: 1.1rem; }
+        .col :global(h2), .col h2 { font-size: clamp(1.2rem,2.05vw,1.85rem); font-weight: 800; letter-spacing: -.032em; line-height: 1.1; margin: 0 0 .45rem; }
+        /* eyebrow gets a short accent rule, matching the section labels used
+           across the rest of the site */
+        .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .58rem; font-weight: 700;
+          letter-spacing: .2em; text-transform: uppercase; color: #7fb6ff; margin: 0 0 .95rem; }
+        .eyebrow::before { content: ""; width: 16px; height: 1px; background: currentColor; opacity: .7; }
+        .right .eyebrow { flex-direction: row-reverse; }
+        .eyebrow.r { margin-bottom: 1.15rem; }
         .body { font-size: .8rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.55); margin: 0; }
-        .label { font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.38); margin: 0 0 .75rem; }
-        .col hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.4rem 0 1.1rem; }
+        .label { font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.45); margin: 0 0 .8rem; }
+        /* dividers fade out toward the page edge, like the rest of the site */
+        .col hr { border: none; height: 1px; margin: 1.5rem 0 1.2rem; }
+        .left hr { background: linear-gradient(90deg, rgba(255,255,255,.16), transparent); }
+        .right hr { background: linear-gradient(270deg, rgba(255,255,255,.16), transparent); }
         .pills { display: flex; flex-wrap: wrap; gap: .4rem; }
         .pills.r { justify-content: flex-end; }
         .col :global(.ht-pill) { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 500;
@@ -349,15 +357,21 @@ export default function HeroTransform() {
           transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
         .col :global(.ht-pill:hover) { background: rgba(255,255,255,.1); border-color: rgba(127,182,255,.5); color: #fff; transform: translateY(-2px); }
         .col :global(.ht-dot) { width: 5px; height: 5px; border-radius: 50%; background: rgba(127,182,255,.75); flex-shrink: 0; }
-        .role { font-size: .78rem; font-weight: 500; letter-spacing: .01em; color: rgba(255,255,255,.5); margin: 0; }
-        .stats { display: flex; flex-direction: column; gap: .85rem; }
-        .stat { display: flex; align-items: baseline; gap: .6rem; }
-        .stat strong { font-size: 1.45rem; font-weight: 800; letter-spacing: -.03em; color: #fff; min-width: 2.6ch; }
-        .stat span { font-size: .74rem; color: rgba(255,255,255,.5); line-height: 1.35; }
-        .firms { display: flex; flex-direction: column; gap: .6rem; }
-        .firm { display: flex; align-items: baseline; justify-content: flex-end; gap: .7rem; }
-        .f-name { font-size: 1rem; font-weight: 700; letter-spacing: -.02em; color: #fff; }
-        .f-year { font-size: .68rem; color: rgba(255,255,255,.38); font-variant-numeric: tabular-nums; }
+        .role { font-size: .76rem; font-weight: 500; letter-spacing: .015em; color: rgba(255,255,255,.58); margin: 0; }
+        .stats { display: flex; flex-direction: column; gap: .95rem; }
+        .stat { display: flex; align-items: baseline; gap: .7rem; }
+        .stat strong { font-size: 1.6rem; font-weight: 800; letter-spacing: -.035em; min-width: 2.8ch;
+          font-variant-numeric: tabular-nums; background-image: linear-gradient(160deg,#ffffff,#9fb6d4);
+          -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .stat span { font-size: .73rem; color: rgba(255,255,255,.5); line-height: 1.4; }
+        .firms { display: flex; flex-direction: column; gap: .1rem; }
+        .firm { display: flex; align-items: baseline; justify-content: flex-end; gap: .75rem; padding: .42rem 0;
+          border-bottom: 1px solid rgba(255,255,255,.06); transition: border-color .25s ease; }
+        .firm:last-child { border-bottom: none; }
+        .firm:hover { border-color: rgba(127,182,255,.35); }
+        .firm:hover .f-name { color: #fff; }
+        .f-name { font-size: 1.02rem; font-weight: 700; letter-spacing: -.022em; color: rgba(255,255,255,.92); transition: color .25s ease; }
+        .f-year { font-size: .66rem; color: rgba(255,255,255,.35); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
         @media (max-width: 1180px) { .col { display: none; } }
 
         /* Studio lights painted as one full-viewport layer. Two radial
