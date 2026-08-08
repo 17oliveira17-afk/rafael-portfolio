@@ -111,10 +111,10 @@ export default function HeroTransform() {
       if (behindRef.current) {
         const rise = clamp(q / 0.74) * 120;
         const fade = 1 - smooth(0.28, 0.70, q);
-        // the type drifts against the pointer, a touch less than the figure
+        // the background type stays put — only the figure follows the pointer
         behindRef.current.style.opacity = String(fade);
         behindRef.current.style.transform =
-          `translate(calc(-50% + ${(pt.x * -14).toFixed(2)}px), calc(-50% - ${rise.toFixed(2)}vh + ${(pt.y * -8).toFixed(2)}px)) scale(${(1 + q * 0.1).toFixed(4)})`;
+          `translate(-50%, calc(-50% - ${rise.toFixed(2)}vh)) scale(${(1 + q * 0.1).toFixed(4)})`;
       }
       if (portraitRef.current) {
         // figure leans toward the pointer with a slight 3D tilt
