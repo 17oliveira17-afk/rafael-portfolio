@@ -225,7 +225,7 @@ export default function HeroTransform() {
           {/* GIANT TYPE BEHIND THE FIGURE */}
           {/* rises as you scroll, so the page feels like it's travelling down past it */}
           <div ref={behindRef} className="behind" aria-hidden>
-            <span>AI PRODUCT</span>
+            <span>PRODUCT</span>
             <span>DESIGNER</span>
           </div>
 
