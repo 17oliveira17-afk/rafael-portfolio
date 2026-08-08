@@ -218,7 +218,8 @@ export default function HeroTransform() {
         Hero Transform · scroll
       </div>
 
-      <div ref={wrapRef} style={{ height: "420svh", position: "relative" }}>
+      {/* nav stays in its at-the-top state for the whole transformation */}
+      <div ref={wrapRef} data-nav-transparent style={{ height: "420svh", position: "relative" }}>
         <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
           <div className="lights" aria-hidden />
 

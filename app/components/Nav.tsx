@@ -17,7 +17,12 @@ export default function Nav() {
       return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.55;
     };
     const fn = () => {
-      setScrolled(window.scrollY > 10);
+      // A page can mark a full-height hero with [data-nav-transparent]; while
+      // that block still covers the nav, the bar stays in its at-the-top state
+      // and only picks up its background once the hero has scrolled past.
+      const lock = document.querySelector("[data-nav-transparent]") as HTMLElement | null;
+      const inHero = lock ? lock.getBoundingClientRect().bottom > 80 : false;
+      setScrolled(!inHero && window.scrollY > 10);
       // sample just below the nav, then walk up to the first opaque background
       let node = document.elementFromPoint(window.innerWidth / 2, 64) as HTMLElement | null;
       let dark = true; // pages default to dark backgrounds
