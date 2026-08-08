@@ -292,35 +292,40 @@ export default function Home() {
       <HeroTransform />
 
       {/* ══════════════════════════════════════════════════
-          INTRO — dark statement
+          STATEMENT + NUMBERS — one dark block
       ══════════════════════════════════════════════════ */}
-      <section className="section-black" style={{ padding: "10rem 2rem" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-          <ScrollReveal>
-            <p className="t-eyebrow" style={{ marginBottom: "2rem" }}>The work</p>
-            <RevealText
-              lines={[
-                "Complex systems.",
-                <em key="ce" style={{ color: "#0071e3", fontStyle: "italic" }}>Clear experiences.</em>,
-              ]}
-              style={{
-                fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.03em",
-                lineHeight: 1.05, color: "#f5f5f7", marginBottom: "2rem",
-              }}
-            />
-            <p className="t-body" style={{ maxWidth: 580, margin: "0 auto", fontSize: "1.15rem", color: "rgba(255,255,255,.62)" }}>
-              I lead design for fintech, travel, and growth products — turning architectural decisions into outcomes that ship and scale.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <section className="section-black" style={{ padding: isMobile ? "6rem 1.5rem 5rem" : "10rem 2rem 8rem", position: "relative", overflow: "hidden" }}>
+        {/* one glow tying the copy and the numbers together */}
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 62% 62% at 50% 42%, rgba(0,113,227,.07) 0%, transparent 62%)", pointerEvents: "none" }} />
 
-      {/* ══════════════════════════════════════════════════
-          STATS STRIP
-      ══════════════════════════════════════════════════ */}
-      <section style={{ background: "#0d0d10", padding: isMobile ? "5rem 1.5rem" : "6rem 2rem", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,113,227,.06) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1024, margin: "0 auto", position: "relative" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+            <ScrollReveal>
+              <p className="t-eyebrow" style={{ marginBottom: "2rem" }}>The work</p>
+              <RevealText
+                lines={[
+                  "Complex systems.",
+                  <em key="ce" style={{ color: "#0071e3", fontStyle: "italic" }}>Clear experiences.</em>,
+                ]}
+                style={{
+                  fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.03em",
+                  lineHeight: 1.05, color: "#f5f5f7", marginBottom: "2rem",
+                }}
+              />
+              <p className="t-body" style={{ maxWidth: 580, margin: "0 auto", fontSize: "1.15rem", color: "rgba(255,255,255,.62)" }}>
+                I lead design for fintech, travel, and growth products — turning architectural decisions into outcomes that ship and scale.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* a hairline carries the eye from the copy down into the numbers */}
+          <ScrollReveal delay={140}>
+            <div aria-hidden style={{
+              width: 1, height: isMobile ? 48 : 84, margin: isMobile ? "2.5rem auto 2.25rem" : "3.5rem auto 3rem",
+              background: "linear-gradient(to bottom, transparent, rgba(0,113,227,.55), rgba(255,255,255,.12))",
+            }} />
+          </ScrollReveal>
+
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? "1rem" : "1.5rem" }}>
             {[
               { n: 14, l: "Years in\ndigital design", icon: "◆" },
@@ -328,19 +333,19 @@ export default function Home() {
               { n: 7,  l: "Years in\nglobal teams", icon: "⬡" },
               { n: 12, l: "Countries\nserved", icon: "◈" },
             ].map((s, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
+              <ScrollReveal key={i} delay={220 + i * 90}>
                 <div style={{
                   background: "rgba(255,255,255,.03)",
                   border: "1px solid rgba(255,255,255,.06)",
-                  borderRadius: 20, padding: isMobile ? "2.5rem 1.5rem" : "3rem 2rem",
-                  textAlign: "center", position: "relative", overflow: "hidden",
-                  transition: "border-color .4s ease, background .4s ease",
+                  borderRadius: 20, padding: isMobile ? "2rem 1rem" : "2.5rem 2rem",
+                  textAlign: "center", position: "relative", overflow: "hidden", height: "100%",
+                  transition: "border-color .4s ease, background .4s ease, transform .4s cubic-bezier(.16,1,.3,1)",
                 }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(0,113,227,.3)"; e.currentTarget.style.background = "rgba(0,113,227,.04)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,.06)"; e.currentTarget.style.background = "rgba(255,255,255,.03)"; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(0,113,227,.3)"; e.currentTarget.style.background = "rgba(0,113,227,.04)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,.06)"; e.currentTarget.style.background = "rgba(255,255,255,.03)"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
-                  <span style={{ position: "absolute", top: "1rem", right: "1.25rem", fontSize: "1rem", color: "rgba(0,113,227,.25)", transition: "color .4s ease" }}>{s.icon}</span>
-                  <div className="t-num-giant" style={{ color: "#fff", marginBottom: ".75rem", fontSize: "clamp(3rem,8vw,5.5rem)", letterSpacing: "-.04em", lineHeight: 1 }}>
+                  <span style={{ position: "absolute", top: "1rem", right: "1.25rem", fontSize: "1rem", color: "rgba(0,113,227,.25)" }}>{s.icon}</span>
+                  <div className="t-num-giant" style={{ color: "#fff", marginBottom: ".6rem", fontSize: "clamp(2.4rem,6vw,4.2rem)", letterSpacing: "-.04em", lineHeight: 1 }}>
                     <Counter n={s.n} />
                   </div>
                   <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.4)", whiteSpace: "pre-line", lineHeight: 1.4 }}>{s.l}</p>
