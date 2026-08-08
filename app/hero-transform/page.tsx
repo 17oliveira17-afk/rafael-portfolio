@@ -220,8 +220,7 @@ export default function HeroTransform() {
 
       <div ref={wrapRef} style={{ height: "420svh", position: "relative" }}>
         <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
-          <div className="orb o1" aria-hidden />
-          <div className="orb o2" aria-hidden />
+          <div className="lights" aria-hidden />
 
           {/* GIANT TYPE BEHIND THE FIGURE */}
           {/* rises as you scroll, so the page feels like it's travelling down past it */}
@@ -234,7 +233,6 @@ export default function HeroTransform() {
           <div className="stage">
             <div className="portrait">
               <canvas ref={canvasRef} />
-              <div className="halo" aria-hidden style={{ opacity: 0.22 + smooth(0.3, 1, p) * 0.45 }} />
             </div>
           </div>
 
@@ -248,30 +246,39 @@ export default function HeroTransform() {
           </div>
 
           {/* SIDE COLUMNS — build around the figure on scroll */}
+          {/* LEFT — who I am */}
           <div className="col left" style={{ opacity: side, transform: `translateX(${(1 - sideIn) * -26}px)` }}>
-            <p className="eyebrow">The human part</p>
-            <h2>Judgement doesn&apos;t come from a model.</h2>
-            <p className="body">14+ years deciding what to build and why — research, architecture and systems for fintech, B2B and mobile products used by millions.</p>
+            <p className="eyebrow">Profile</p>
+            <h2>Rafael Guimarães</h2>
+            <p className="role">AI-First Product Design Lead</p>
             <hr />
-            <p className="label">Craft</p>
-            <div className="pills">
-              {["Research", "Design systems", "Prototyping", "Leading teams"].map((s) => <Pill key={s}>{s}</Pill>)}
+            <div className="stats">
+              {[["14+", "years in product design"], ["3", "languages · PT / EN / ES"], ["9", "markets shipped to"]].map(([n, l]) => (
+                <div className="stat" key={l}><strong>{n}</strong><span>{l}</span></div>
+              ))}
             </div>
+            <hr />
+            <p className="label">Currently</p>
+            <div className="pills"><Pill>Design Lead @ Thoughtworks</Pill></div>
           </div>
 
+          {/* RIGHT — where I've been and what I do */}
           <div className="col right" style={{ opacity: side, transform: `translateX(${(1 - sideIn) * 26}px)` }}>
-            <p className="eyebrow r">The proof</p>
-            <p className="label r">Outcomes</p>
-            <div className="quote">
-              <strong>+212%</strong> checkout conversion on Brazil&apos;s largest travel app — 2.0★ to 4.6★ after the rebuild.
-            </div>
-            <div className="pills r">
-              {["2 weeks → 2 days", "8-week cycle → 3", "30M+ users"].map((s) => <Pill key={s}>{s}</Pill>)}
+            <p className="eyebrow r">Track record</p>
+            <div className="firms">
+              {[["Thoughtworks", "2025 —"], ["Rappi", "2022 – 25"], ["CVC Corp", "2018 – 22"]].map(([c, y]) => (
+                <div className="firm" key={c}><span className="f-name">{c}</span><span className="f-year">{y}</span></div>
+              ))}
             </div>
             <hr />
-            <p className="label r">Toolkit</p>
+            <p className="label r">Impact</p>
             <div className="pills r">
-              {["Figma", "Claude Code", "Mixpanel", "Maze"].map((s) => <Pill key={s}>{s}</Pill>)}
+              {["30M+ users", "+212% conversion", "8 weeks → 3"].map((s) => <Pill key={s}>{s}</Pill>)}
+            </div>
+            <hr />
+            <p className="label r">Skills</p>
+            <div className="pills r">
+              {["Product strategy", "Design systems", "Research", "AI-first delivery"].map((s) => <Pill key={s}>{s}</Pill>)}
             </div>
           </div>
 
@@ -292,11 +299,10 @@ export default function HeroTransform() {
       </section>
 
       <style jsx>{`
-        /* knockout type: filled with the stage black, so it blocks the coloured
-           lights behind it instead of carrying any colour of its own — it only
-           reads where the light washes past it */
+        /* dark grey type sitting in front of the lights — reads as a shape
+           blocking the wash rather than a coloured headline */
         .behind { position: absolute; left: 50%; top: 46%; z-index: 1; display: flex; flex-direction: column; align-items: center;
-          font-weight: 900; letter-spacing: -.05em; line-height: .82; color: #06060a; white-space: nowrap;
+          font-weight: 900; letter-spacing: -.05em; line-height: .82; color: #22262f; white-space: nowrap;
           font-size: clamp(2.6rem, 12.5vw, 13rem); pointer-events: none; will-change: transform, opacity;
           transform: translate(-50%, -50%); }
 
@@ -305,8 +311,6 @@ export default function HeroTransform() {
           -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%);
           mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
-        .halo { position: absolute; inset: -18%; z-index: 1; border-radius: 50%; pointer-events: none;
-          background: radial-gradient(circle, rgba(0,113,227,.30), rgba(227,28,95,.14) 46%, transparent 68%); filter: blur(52px); }
 
         .intro { position: absolute; left: 0; right: 0; bottom: clamp(2.4rem,7vh,5rem); z-index: 8; text-align: center; padding: 0 1.5rem; transition: opacity .5s ease; }
         .intro h1 { font-size: clamp(1.5rem,3.1vw,2.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.18; margin: 0 0 1.5rem;
@@ -338,17 +342,27 @@ export default function HeroTransform() {
           transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
         .col :global(.ht-pill:hover) { background: rgba(255,255,255,.1); border-color: rgba(127,182,255,.5); color: #fff; transform: translateY(-2px); }
         .col :global(.ht-dot) { width: 5px; height: 5px; border-radius: 50%; background: rgba(127,182,255,.75); flex-shrink: 0; }
-        .quote { font-size: .8rem; line-height: 1.65; color: rgba(255,255,255,.7); background: rgba(255,255,255,.045);
-          border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: .85rem .95rem; margin-bottom: .8rem; text-align: left; }
-        .quote strong { color: #fff; font-weight: 700; }
+        .role { font-size: .78rem; font-weight: 500; letter-spacing: .01em; color: rgba(255,255,255,.5); margin: 0; }
+        .stats { display: flex; flex-direction: column; gap: .85rem; }
+        .stat { display: flex; align-items: baseline; gap: .6rem; }
+        .stat strong { font-size: 1.45rem; font-weight: 800; letter-spacing: -.03em; color: #fff; min-width: 2.6ch; }
+        .stat span { font-size: .74rem; color: rgba(255,255,255,.5); line-height: 1.35; }
+        .firms { display: flex; flex-direction: column; gap: .6rem; }
+        .firm { display: flex; align-items: baseline; justify-content: flex-end; gap: .7rem; }
+        .f-name { font-size: 1rem; font-weight: 700; letter-spacing: -.02em; color: #fff; }
+        .f-year { font-size: .68rem; color: rgba(255,255,255,.38); font-variant-numeric: tabular-nums; }
         @media (max-width: 1180px) { .col { display: none; } }
 
-        /* studio lights: cool blue from the left, hot pink-red from the right,
-           washing across a black stage — same key/fill as the portrait */
-        .orb { position: absolute; top: 50%; height: 118vh; width: 76vw; z-index: 0;
-          transform: translateY(-50%); filter: blur(70px); pointer-events: none; }
-        .o1 { left: -24%; background: radial-gradient(ellipse at 34% 50%, rgba(26,96,224,.62), rgba(14,44,120,.30) 44%, transparent 72%); }
-        .o2 { right: -24%; background: radial-gradient(ellipse at 66% 50%, rgba(214,22,88,.55), rgba(126,16,62,.28) 44%, transparent 72%); }
+        /* Studio lights painted as one full-viewport layer. Two radial
+           gradients pinned to the far edges — blue key on the left, hot
+           pink-red on the right — both falling to transparent well before
+           the centre, so behind the figure the stage stays black. Drawn as
+           background on a single full-bleed element (not blurred boxes), so
+           there is no element edge that can show up as a rectangle. */
+        .lights { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+          background:
+            radial-gradient(ellipse 40% 82% at 0% 50%, rgba(28,102,232,.60), rgba(16,52,132,.26) 38%, rgba(10,28,74,.08) 58%, transparent 74%),
+            radial-gradient(ellipse 40% 82% at 100% 50%, rgba(220,24,92,.54), rgba(132,16,64,.24) 38%, rgba(74,10,38,.07) 58%, transparent 74%); }
         .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.07); z-index: 10; }
         .prog span { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg,#7fb6ff,#a6b4c6,#e31c5f); }
         .hint { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 10; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); transition: opacity .4s ease; }
