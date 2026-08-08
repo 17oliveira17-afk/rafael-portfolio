@@ -59,7 +59,6 @@ export default function HeroTransform() {
     const pt = { x: 0, y: 0, tx: 0, ty: 0 };
     const t0 = performance.now();
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
-    let narrow = false;   // phones: the figure lifts to make room for the copy
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
     const offA = document.createElement("canvas"), offB = document.createElement("canvas"), offC = document.createElement("canvas");
 
@@ -86,7 +85,6 @@ export default function HeroTransform() {
     };
 
     const build = () => {
-      narrow = window.innerWidth <= 860;
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.floor(W * dpr); canvas.height = Math.floor(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -120,15 +118,13 @@ export default function HeroTransform() {
           `translate(-50%, calc(-50% - ${rise.toFixed(2)}vh)) scale(${(1 + q * 0.1).toFixed(4)})`;
       }
       if (portraitRef.current) {
-        // phones: as the avatar resolves, the figure rises and eases back so the
-        // columns below get real room instead of fighting it for space
-        const lift = narrow ? smooth(0.26, 0.72, q) : 0;
-        const sc = 1 - lift * 0.05;
-        // moves opposite the cursor: pointer right, figure drifts left
+        // Both cut-outs are bottom-anchored in their source art, so leaving the
+        // stage alone is what keeps the photo and the avatar on one baseline —
+        // no per-act lift or rescale, or they'd drift apart.
+        // Moves opposite the cursor: pointer right, figure drifts left.
         portraitRef.current.style.transform =
-          `translate3d(${(pt.x * -26).toFixed(2)}px, calc(${(pt.y * -16).toFixed(2)}px - ${(lift * 5).toFixed(2)}svh), 0)` +
-          ` rotateY(${(pt.x * -4).toFixed(2)}deg) rotateX(${(pt.y * 2.6).toFixed(2)}deg)` +
-          ` scale(${sc.toFixed(4)})`;
+          `translate3d(${(pt.x * -26).toFixed(2)}px, ${(pt.y * -16).toFixed(2)}px, 0)` +
+          ` rotateY(${(pt.x * -4).toFixed(2)}deg) rotateX(${(pt.y * 2.6).toFixed(2)}deg)`;
       }
 
       ctx.clearRect(0, 0, W, H);
@@ -461,9 +457,11 @@ export default function HeroTransform() {
           /* paint past the bottom so no black band shows when Safari's
              URL bar retracts and the viewport grows past 100svh */
           .lights { inset: -1px -1px -18svh -1px; }
-          .portrait { width: min(112vw, 70svh); margin-bottom: 0; }
-          .stage { align-items: flex-start; padding-top: 3svh; }
-          .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 24%; }
+          .portrait { width: min(138vw, 92svh); margin-bottom: 0;
+            -webkit-mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%); }
+          .stage { align-items: flex-end; padding-top: 0; }
+          .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 42%; }
           .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
           .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
           .intro::before { width: 124vw; height: 200%; }
