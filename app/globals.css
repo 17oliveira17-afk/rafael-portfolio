@@ -43,7 +43,11 @@ body {
   background: #fff;
   color: var(--black);
   font-family: var(--font);
+  /* `hidden` on body makes it a scroll container, which kills position:sticky
+     in Safari. `clip` guards against horizontal overflow without that side
+     effect; the hidden line stays as a fallback for browsers without clip. */
   overflow-x: hidden;
+  overflow-x: clip;
   cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

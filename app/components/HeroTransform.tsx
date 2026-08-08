@@ -228,7 +228,16 @@ export default function HeroTransform() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     let rt: ReturnType<typeof setTimeout>;
-    const onResize = () => { clearTimeout(rt); rt = setTimeout(() => { build(); onScroll(); }, 180); };
+    let lastW = window.innerWidth;
+    const onResize = () => {
+      // Mobile Safari fires resize every time the URL bar slides; the stage is
+      // sized in svh so nothing actually changed. Only rebuild on a real width
+      // change, otherwise the canvas resets mid-scroll and the scene flickers.
+      if (window.innerWidth === lastW) { onScroll(); return; }
+      lastW = window.innerWidth;
+      clearTimeout(rt);
+      rt = setTimeout(() => { build(); onScroll(); }, 180);
+    };
     window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(raf); clearTimeout(rt);
