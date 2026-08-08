@@ -107,8 +107,9 @@ export default function HeroTransform() {
 
       /* Background type is driven here, off the smoothed value and straight
          onto the node — no React re-render per scroll event, so it glides. */
-      pt.x += (pt.tx - pt.x) * 0.06;
-      pt.y += (pt.ty - pt.y) * 0.06;
+      // very slow drift toward the target
+      pt.x += (pt.tx - pt.x) * 0.012;
+      pt.y += (pt.ty - pt.y) * 0.012;
 
       if (behindRef.current) {
         const rise = clamp(q / 0.74) * 120;
@@ -123,9 +124,10 @@ export default function HeroTransform() {
         // columns below get real room instead of fighting it for space
         const lift = narrow ? smooth(0.26, 0.72, q) : 0;
         const sc = 1 - lift * 0.2;
+        // moves opposite the cursor: pointer right, figure drifts left
         portraitRef.current.style.transform =
-          `translate3d(${(pt.x * 22).toFixed(2)}px, calc(${(pt.y * 14).toFixed(2)}px - ${(lift * 13).toFixed(2)}svh), 0)` +
-          ` rotateY(${(pt.x * 4.5).toFixed(2)}deg) rotateX(${(pt.y * -3).toFixed(2)}deg)` +
+          `translate3d(${(pt.x * -26).toFixed(2)}px, calc(${(pt.y * -16).toFixed(2)}px - ${(lift * 13).toFixed(2)}svh), 0)` +
+          ` rotateY(${(pt.x * -4).toFixed(2)}deg) rotateX(${(pt.y * 2.6).toFixed(2)}deg)` +
           ` scale(${sc.toFixed(4)})`;
       }
 
