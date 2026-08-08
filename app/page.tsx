@@ -7,6 +7,7 @@ import useIsMobile from "./components/useIsMobile";
 import BigImageReveal from "./components/BigImageReveal";
 import ProjectGallery from "./components/ProjectGallery";
 import RevealText from "./components/RevealText";
+import HeroTransform from "./components/HeroTransform";
 
 /* ══════════════════════════════════════════════════════════
    Counter
@@ -284,106 +285,11 @@ function CVCShowcase() {
    ══════════════════════════════════════════════════════════ */
 export default function Home() {
   const isMobile = useIsMobile();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroBgRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isMobile) return; // skip parallax on mobile (perf + visual)
-    const fn = () => {
-      const y = window.scrollY;
-      if (heroRef.current) {
-        heroRef.current.style.transform = `translateY(${y * .25}px)`;
-        heroRef.current.style.opacity = String(Math.max(0, 1 - y / 600));
-      }
-      if (heroBgRef.current) {
-        heroBgRef.current.style.transform = `translateY(${y * .4}px)`;
-      }
-    };
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
-  }, [isMobile]);
 
   return (
     <main className="page-in">
 
-      {/* ══════════════════════════════════════════════════
-          HERO — cinematic with floating phones
-      ══════════════════════════════════════════════════ */}
-      <section className="section-black" style={{
-        height: "100svh", minHeight: 600, maxHeight: 1200, display: "flex", alignItems: "center", justifyContent: "center",
-        position: "relative", overflow: "hidden", padding: "clamp(5rem,10vh,9rem) 2rem clamp(4rem,8vh,6rem)",
-      }}>
-        {/* Background gradient layer */}
-        <div ref={heroBgRef} style={{
-          position: "absolute", inset: 0, willChange: "transform", pointerEvents: "none",
-          background: `
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,.18) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 20% 100%, rgba(0,113,227,.08) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 80% 100%, rgba(0,113,227,.08) 0%, transparent 50%)
-          `,
-        }} />
-
-        {/* Colorful aurora glow — breaks the black, Apple-style */}
-        <div className="aurora" style={{ opacity: 0.4, mixBlendMode: "screen" }} />
-
-        {/* Grain */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.3, mixBlendMode: "overlay", pointerEvents: "none",
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
-        }} />
-
-        {/* Hero content */}
-        <div ref={heroRef} style={{ position: "relative", zIndex: 1, maxWidth: 920, textAlign: "center", willChange: "transform" }}>
-          <p style={{
-            fontSize: ".75rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase",
-            color: "#0071e3", marginBottom: "2rem",
-            opacity: 0, animation: "fadeUp .9s ease .3s forwards",
-          }}>
-            AI-First Product Design Lead · Working Globally
-          </p>
-          <h1 style={{
-            fontSize: "clamp(2.8rem, 7.5vw, 7.5rem)", fontWeight: 700,
-            letterSpacing: "-.035em", lineHeight: 0.95, color: "#fff",
-            marginBottom: "2rem",
-            opacity: 0, animation: "fadeUp 1.1s ease .5s forwards",
-          }}>
-            I design products<br />
-            <em className="text-gradient" style={{ fontStyle: "italic" }}>that move the needle.</em>
-          </h1>
-          <p style={{
-            fontSize: "clamp(1rem,1.4vw,1.2rem)", fontWeight: 300, lineHeight: 1.7,
-            color: "rgba(255,255,255,.65)", maxWidth: 580, margin: "0 auto 3rem",
-            opacity: 0, animation: "fadeUp .9s ease .75s forwards",
-          }}>
-            8+ years turning complex fintech and B2B systems into experiences that drive measurable conversion, activation, and retention — now shipping production-grade products end-to-end with AI. Working globally.
-          </p>
-          <div style={{
-            display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap",
-            opacity: 0, animation: "fadeUp .8s ease .95s forwards",
-          }}>
-            <Link href="/#work" className="btn-blue" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>View case studies</Link>
-            <Link href="/about" className="btn-white-ghost" style={{ fontSize: ".95rem", padding: ".85rem 2.25rem" }}>About me</Link>
-          </div>
-        </div>
-
-        {/* Scroll cue */}
-        <div style={{
-          position: "absolute", bottom: "2.5rem", left: 0, right: 0,
-          display: "flex", justifyContent: "center", pointerEvents: "none",
-        }}>
-          <div style={{
-            width: 24, height: 40, border: "1.5px solid rgba(255,255,255,.3)",
-            borderRadius: 12, position: "relative",
-            animation: "fadeIn 1s ease 1.5s both",
-          }}>
-            <div style={{
-              position: "absolute", top: 6, left: "50%", transform: "translateX(-50%)",
-              width: 3, height: 8, background: "rgba(255,255,255,.6)", borderRadius: 2,
-              animation: "scrollMouse 2s ease infinite",
-            }} />
-          </div>
-        </div>
-      </section>
+      <HeroTransform />
 
       {/* ══════════════════════════════════════════════════
           CINEMATIC IMAGE — design at scale

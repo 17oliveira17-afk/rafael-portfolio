@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 /* ──────────────────────────────────────────────
-   HERO TRANSFORM — test page, NOT linked anywhere.
+   HERO TRANSFORM — the home hero.
    ClickUp-style composition with Rafael's identity:
      · giant type sitting BEHIND the figure
      · large centred portrait, fading out at the bottom
@@ -220,10 +220,7 @@ export default function HeroTransform() {
   // avatar finishes materialising (reveal completes at ~0.88)
 
   return (
-    <main style={{ background: "#06060a", color: "#fff" }}>
-      <div style={{ position: "fixed", top: "5.5rem", left: "1.5rem", zIndex: 40, fontSize: ".6rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.4)", border: "1px solid rgba(255,255,255,.16)", borderRadius: 100, padding: ".3rem .7rem" }}>
-        Hero Transform · scroll
-      </div>
+    <section style={{ background: "#06060a", color: "#fff" }}>
 
       {/* nav stays in its at-the-top state for the whole transformation */}
       <div ref={wrapRef} data-nav-transparent style={{ height: "420svh", position: "relative" }}>
@@ -308,16 +305,6 @@ export default function HeroTransform() {
         </div>
       </div>
 
-      <section className="outro">
-        <p className="o-eyebrow">The thesis</p>
-        <h2>Human judgement.<br /><em>Machine speed.</em></h2>
-        <p className="o-lead">Everything below is the proof — real products, real numbers, real teams.</p>
-        <div className="o-stats">
-          {[["30M+", "users reached"], ["+212%", "checkout conversion"], ["5", "case studies"], ["3", "languages"]].map(([n, l]) => (
-            <div key={l}><strong>{n}</strong><span>{l}</span></div>
-          ))}
-        </div>
-      </section>
 
       <style jsx>{`
         /* dark grey type sitting in front of the lights — reads as a shape
@@ -414,17 +401,8 @@ export default function HeroTransform() {
         @keyframes htScrollMouse { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 80% { opacity: 0; transform: translateY(14px); } 100% { opacity: 0; } }
         @media (prefers-reduced-motion: reduce) { .wheel { animation: none; } }
 
-        .outro { min-height: 88svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 5rem 1.5rem; }
-        .o-eyebrow { font-size: .62rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 1.2rem; }
-        .outro h2 { font-size: clamp(2rem,6vw,4.4rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.02; margin: 0 0 1.2rem; }
-        .outro h2 :global(em) { font-style: italic; font-weight: 500; background-image: linear-gradient(100deg,#7fb6ff,#a6b4c6 50%,#e31c5f); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .o-lead { color: rgba(255,255,255,.55); max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; }
-        .o-stats { display: flex; gap: clamp(1.5rem,5vw,4rem); flex-wrap: wrap; justify-content: center; }
-        .o-stats div { display: flex; flex-direction: column; gap: .3rem; }
-        .o-stats strong { font-size: clamp(1.4rem,3vw,2.2rem); font-weight: 800; letter-spacing: -.03em; }
-        .o-stats span { font-size: .72rem; color: rgba(255,255,255,.42); letter-spacing: .06em; }
       `}</style>
-    </main>
+    </section>
   );
 }
 
