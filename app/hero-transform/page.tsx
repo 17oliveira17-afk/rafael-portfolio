@@ -368,7 +368,7 @@ export default function HeroTransform() {
            blocking the wash rather than a coloured headline */
         .behind { position: absolute; left: 50%; top: 46%; z-index: 1; display: flex; flex-direction: column; align-items: center;
           font-weight: 900; letter-spacing: -.05em; line-height: .82; color: #171a20; white-space: nowrap;
-          font-size: clamp(2.6rem, 12.5vw, 13rem); pointer-events: none; will-change: transform, opacity;
+          font-size: clamp(2.4rem, 11.4vw, 11.9rem); pointer-events: none; will-change: transform, opacity;
           transform: translate(-50%, -50%); }
         /* second line runs larger so the two lines don't read as one block */
         .behind span:last-child { font-size: 1.16em; }
@@ -474,7 +474,7 @@ export default function HeroTransform() {
             -webkit-mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%); }
           .stage { align-items: center; padding-top: 0; }
-          .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 42%; }
+          .behind { font-size: clamp(2.4rem, 16.6vw, 6.6rem); top: 42%; }
           .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
           .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
           .intro::before { width: 124vw; height: 200%; }
