@@ -424,6 +424,7 @@ export default function Home() {
         src="/rafael-working.jpg"
         alt="Rafael designing"
         minHeight="85vh"
+        objectPositionMobile="78% center"
         overlay={
           <ScrollReveal>
             <p style={{ fontSize: ".72rem", fontWeight: 600, letterSpacing: ".2em", textTransform: "uppercase", color: "#0071e3", marginBottom: "1.25rem" }}>

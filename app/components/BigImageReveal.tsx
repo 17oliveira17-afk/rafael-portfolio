@@ -17,6 +17,7 @@ export default function BigImageReveal({
   overlay,
   minHeight = "70vh",
   objectPosition = "center",
+  objectPositionMobile,
 }: {
   src: string;
   alt: string;
@@ -24,10 +25,13 @@ export default function BigImageReveal({
   overlay?: ReactNode;
   minHeight?: string;
   objectPosition?: string;
+  /** focal point on phones — the desktop crop often loses the subject */
+  objectPositionMobile?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const effectiveHeight = isMobile ? "100svh" : minHeight;
+  const focal = isMobile && objectPositionMobile ? objectPositionMobile : objectPosition;
 
   // Scroll progress: 0 as the section enters, 1 when it sits at viewport center.
   const [prog, setProg] = useState(0);
@@ -73,7 +77,7 @@ export default function BigImageReveal({
             src={src}
             alt={alt}
             fill
-            style={{ objectFit: "cover", objectPosition, transform: `scale(${scale})`, willChange: "transform" }}
+            style={{ objectFit: "cover", objectPosition: focal, transform: `scale(${scale})`, willChange: "transform" }}
             sizes="100vw"
             priority={false}
           />
