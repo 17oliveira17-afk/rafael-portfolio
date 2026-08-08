@@ -306,6 +306,8 @@ export default function HeroTransform() {
           font-weight: 900; letter-spacing: -.05em; line-height: .82; color: #22262f; white-space: nowrap;
           font-size: clamp(2.6rem, 12.5vw, 13rem); pointer-events: none; will-change: transform, opacity;
           transform: translate(-50%, -50%); }
+        /* second line runs larger so the two lines don't read as one block */
+        .behind span:last-child { font-size: 1.16em; }
 
         .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; }
         .portrait { position: relative; width: min(96vh, 68vw, 840px); aspect-ratio: 1/1; margin-bottom: -12vh;
