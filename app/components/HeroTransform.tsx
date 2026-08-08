@@ -307,7 +307,7 @@ export default function HeroTransform() {
               <p className="mini">Designing URPI PRO, a B2B credit platform for MiBanco — previously Rappi and CVC Corp.</p>
             </div>
             <div className="cta-block" style={blk(0.66, -1)}>
-              <Link href="/about" className="full-story">Full story <span aria-hidden>→</span></Link>
+              <Link href="/about" className="btn-blue full-story">Full story →</Link>
             </div>
           </div>
 
@@ -405,11 +405,9 @@ export default function HeroTransform() {
         .col :global(.ht-pill:hover) { background: rgba(255,255,255,.1); border-color: rgba(127,182,255,.5); color: #fff; transform: translateY(-2px); }
         .col :global(.ht-dot) { width: 5px; height: 5px; border-radius: 50%; background: rgba(127,182,255,.75); flex-shrink: 0; }
         .mini { font-size: .74rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,.45); margin: .85rem 0 0; }
-        .full-story { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.35rem;
-          font-size: .82rem; font-weight: 600; color: #fff; text-decoration: none;
-          background: rgba(0,113,227,.9); border-radius: 100px; padding: .55rem 1.25rem;
-          transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease; }
-        .full-story:hover { transform: translateY(-2px); background: #0071e3; }
+        .col :global(.full-story) { margin-top: 1.35rem; font-size: .84rem; padding: .58rem 1.35rem;
+          transition: transform .3s cubic-bezier(.16,1,.3,1), background .15s ease; }
+        .col :global(.full-story:hover) { transform: translateY(-2px); }
         .role { font-size: .76rem; font-weight: 500; letter-spacing: .015em; color: rgba(255,255,255,.58); margin: 0; }
         .stats { display: flex; flex-direction: column; gap: .95rem; }
         .stat { display: flex; align-items: baseline; gap: .7rem; }
