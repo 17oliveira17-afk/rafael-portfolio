@@ -445,7 +445,11 @@ export default function HeroTransform() {
         .firm:hover .f-name { color: #fff; }
         .f-name { font-size: 1.02rem; font-weight: 700; letter-spacing: -.022em; color: rgba(255,255,255,.92); transition: color .25s ease; }
         .f-year { font-size: .66rem; color: rgba(255,255,255,.35); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
-        .wrap { height: 420svh; position: relative; }
+        /* Force true edge-to-edge regardless of any ancestor width or padding.
+           Uses the margin trick, not transform — a transformed ancestor would
+           break position:sticky on the stage inside. */
+        .wrap { height: 420svh; position: relative;
+          width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); }
 
         /* ── Tablets: same composition, tighter ───────────────────── */
         @media (max-width: 1180px) {
@@ -508,7 +512,7 @@ export default function HeroTransform() {
            the centre, so behind the figure the stage stays black. Drawn as
            background on a single full-bleed element (not blurred boxes), so
            there is no element edge that can show up as a rectangle. */
-        .lights { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        .lights { position: absolute; inset: -1px; z-index: 0; pointer-events: none;
           background:
             /* a soft black pool at the centre, painted last-on-top, so the two
                washes dissolve into blackness as they meet behind the figure */
