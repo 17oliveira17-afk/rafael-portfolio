@@ -42,6 +42,7 @@ export default function HeroTransform() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const behindRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(0);
 
   useEffect(() => {
@@ -54,6 +55,8 @@ export default function HeroTransform() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const imgA = new Image(), imgB = new Image();
     let loaded = 0, raf = 0, target = 0, cur = 0;
+    // pointer parallax: -1..1 from the centre of the viewport, eased each frame
+    const pt = { x: 0, y: 0, tx: 0, ty: 0 };
     const t0 = performance.now();
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
@@ -102,11 +105,22 @@ export default function HeroTransform() {
 
       /* Background type is driven here, off the smoothed value and straight
          onto the node — no React re-render per scroll event, so it glides. */
+      pt.x += (pt.tx - pt.x) * 0.06;
+      pt.y += (pt.ty - pt.y) * 0.06;
+
       if (behindRef.current) {
         const rise = clamp(q / 0.74) * 120;
         const fade = 1 - smooth(0.28, 0.70, q);
+        // the type drifts against the pointer, a touch less than the figure
         behindRef.current.style.opacity = String(fade);
-        behindRef.current.style.transform = `translate(-50%, calc(-50% - ${rise.toFixed(2)}vh)) scale(${(1 + q * 0.1).toFixed(4)})`;
+        behindRef.current.style.transform =
+          `translate(calc(-50% + ${(pt.x * -14).toFixed(2)}px), calc(-50% - ${rise.toFixed(2)}vh + ${(pt.y * -8).toFixed(2)}px)) scale(${(1 + q * 0.1).toFixed(4)})`;
+      }
+      if (portraitRef.current) {
+        // figure leans toward the pointer with a slight 3D tilt
+        portraitRef.current.style.transform =
+          `translate3d(${(pt.x * 22).toFixed(2)}px, ${(pt.y * 14).toFixed(2)}px, 0)` +
+          ` rotateY(${(pt.x * 4.5).toFixed(2)}deg) rotateX(${(pt.y * -3).toFixed(2)}deg)`;
       }
 
       ctx.clearRect(0, 0, W, H);
@@ -194,6 +208,16 @@ export default function HeroTransform() {
 
     build(); onScroll();
     raf = requestAnimationFrame(draw);
+    const onPointer = (e: PointerEvent) => {
+      pt.tx = (e.clientX / window.innerWidth) * 2 - 1;
+      pt.ty = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    const onLeave = () => { pt.tx = 0; pt.ty = 0; };
+    if (!reduce && window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", onPointer, { passive: true });
+      window.addEventListener("pointerleave", onLeave);
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     let rt: ReturnType<typeof setTimeout>;
     const onResize = () => { clearTimeout(rt); rt = setTimeout(() => { build(); onScroll(); }, 180); };
@@ -201,6 +225,7 @@ export default function HeroTransform() {
     return () => {
       cancelAnimationFrame(raf); clearTimeout(rt);
       window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize);
+      window.removeEventListener("pointermove", onPointer); window.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 
@@ -239,7 +264,7 @@ export default function HeroTransform() {
 
           {/* CENTRE FIGURE */}
           <div className="stage">
-            <div className="portrait">
+            <div className="portrait" ref={portraitRef}>
               <canvas ref={canvasRef} />
             </div>
           </div>
@@ -331,8 +356,8 @@ export default function HeroTransform() {
         /* second line runs larger so the two lines don't read as one block */
         .behind span:last-child { font-size: 1.16em; }
 
-        .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; }
-        .portrait { position: relative; width: min(96vh, 68vw, 840px); aspect-ratio: 1/1; margin-bottom: -12vh;
+        .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; perspective: 1400px; }
+        .portrait { position: relative; width: min(96vh, 68vw, 840px); aspect-ratio: 1/1; margin-bottom: -12vh; will-change: transform;
           -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%);
           mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
