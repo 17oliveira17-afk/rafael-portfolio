@@ -206,9 +206,16 @@ export default function HeroTransform() {
 
   // act 1 chrome fades out as the side columns build
   const intro = 1 - smooth(0.06, 0.24, p);
-  // side columns arrive and then STAY — they're the resting state next to the avatar
-  const sideIn = smooth(0.18, 0.42, p);
-  const side = sideIn;
+  /* Each block gets its own entrance, alternating left/right, so the two
+     columns assemble in a cascade while the avatar materialises — then stay. */
+  const blk = (start: number, dir: -1 | 1) => {
+    const t = smooth(start, start + 0.11, p);
+    return {
+      opacity: t,
+      transform: `translate(${((1 - t) * 20 * dir).toFixed(2)}px, ${((1 - t) * 16).toFixed(2)}px)`,
+      willChange: "transform, opacity",
+    } as const;
+  };
   // background type must be fully gone and fully travelled up before the
   // avatar finishes materialising (reveal completes at ~0.88)
 
@@ -241,49 +248,60 @@ export default function HeroTransform() {
           <div className="intro" style={{ opacity: intro, pointerEvents: intro < 0.3 ? "none" : "auto" }}>
             <h1>I design products that move the needle —<br /><em>and now I ship them with AI.</em></h1>
             <div className="btns">
-              <Link href="/#work" className="b-primary">View case studies</Link>
-              <Link href="/about" className="b-ghost">About me</Link>
+              <Link href="/#work" className="btn-blue">View case studies</Link>
+              <Link href="/about" className="btn-white-ghost">About me</Link>
             </div>
           </div>
 
           {/* SIDE COLUMNS — build around the figure on scroll */}
-          {/* LEFT — who I am */}
-          <div className="col left" style={{ opacity: side, transform: `translateX(${(1 - sideIn) * -26}px)` }}>
-            <p className="eyebrow">Profile</p>
-            <h2>Rafael Guimarães</h2>
-            <p className="role">AI-First Product Design Lead</p>
-            <hr />
-            <div className="stats">
-              {[["14+", "years in product design"], ["3", "languages · PT / EN / ES"], ["9", "markets shipped to"]].map(([n, l]) => (
-                <div className="stat" key={l}><strong>{n}</strong><span>{l}</span></div>
-              ))}
+          {/* LEFT — who I am · blocks 1, 3, 5, 7 of the cascade */}
+          <div className="col left">
+            <div style={blk(0.30, -1)}>
+              <p className="eyebrow">Profile</p>
+              <h2>Rafael Guimarães</h2>
+              <p className="role">AI-First Product Design Lead</p>
             </div>
-            <hr />
-            <p className="label">Currently</p>
-            <div className="pills"><Pill>Design Lead @ Thoughtworks</Pill></div>
-          </div>
-
-          {/* RIGHT — where I've been and what I do */}
-          <div className="col right" style={{ opacity: side, transform: `translateX(${(1 - sideIn) * 26}px)` }}>
-            <p className="eyebrow r">Track record</p>
-            <div className="firms">
-              {[["Thoughtworks", "2025 —"], ["Rappi", "2022 – 25"], ["CVC Corp", "2018 – 22"]].map(([c, y]) => (
-                <div className="firm" key={c}><span className="f-name">{c}</span><span className="f-year">{y}</span></div>
-              ))}
+            <div style={blk(0.42, -1)}>
+              <hr />
+              <div className="stats">
+                {[["14+", "years in product design"], ["3", "languages · PT / EN / ES"], ["9", "markets shipped to"]].map(([n, l]) => (
+                  <div className="stat" key={l}><strong>{n}</strong><span>{l}</span></div>
+                ))}
+              </div>
             </div>
-            <hr />
-            <p className="label r">Impact</p>
-            <div className="pills r">
-              {["30M+ users", "+212% conversion", "8 weeks → 3"].map((s) => <Pill key={s}>{s}</Pill>)}
-            </div>
-            <hr />
-            <p className="label r">Skills</p>
-            <div className="pills r">
-              {["Product strategy", "Design systems", "Research", "AI-first delivery"].map((s) => <Pill key={s}>{s}</Pill>)}
+            <div style={blk(0.54, -1)}>
+              <hr />
+              <p className="label">Currently</p>
+              <div className="pills"><Pill>Design Lead @ Thoughtworks</Pill></div>
             </div>
           </div>
 
-          <div className="prog" aria-hidden><span style={{ transform: `scaleX(${p})` }} /></div>
+          {/* RIGHT — where I've been and what I do · blocks 2, 4, 6 */}
+          <div className="col right">
+            <div style={blk(0.36, 1)}>
+              <p className="eyebrow r">Track record</p>
+              <div className="firms">
+                {[["Thoughtworks", "2025 —"], ["Rappi", "2022 – 25"], ["CVC Corp", "2018 – 22"]].map(([c, y]) => (
+                  <div className="firm" key={c}><span className="f-name">{c}</span><span className="f-year">{y}</span></div>
+                ))}
+              </div>
+            </div>
+            <div style={blk(0.48, 1)}>
+              <hr />
+              <p className="label r">Impact</p>
+              <div className="pills r">
+                {["30M+ users", "+212% conversion", "8 weeks → 3"].map((s) => <Pill key={s}>{s}</Pill>)}
+              </div>
+            </div>
+            <div style={blk(0.60, 1)}>
+              <hr />
+              <p className="label r">Skills</p>
+              <div className="pills r">
+                {["Product strategy", "Design systems", "Research", "AI-first delivery"].map((s) => <Pill key={s}>{s}</Pill>)}
+              </div>
+            </div>
+          </div>
+
           <div className="hint" aria-hidden style={{ opacity: intro }}>Scroll to transform ↓</div>
         </div>
       </div>
@@ -326,12 +344,6 @@ export default function HeroTransform() {
           text-shadow: 0 2px 12px rgba(0,0,0,.65), 0 6px 46px rgba(0,0,0,.8); }
         .intro h1 :global(em) { font-style: italic; font-weight: 500; background-image: linear-gradient(100deg,#7fb6ff,#a6b4c6 55%,#e31c5f); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .btns { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
-        .b-primary, .b-ghost { font-size: .84rem; font-weight: 600; padding: .62rem 1.5rem; border-radius: 100px; text-decoration: none;
-          transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease; }
-        .b-primary { background: rgba(255,255,255,.92); color: #111; }
-        .b-primary:hover { transform: translateY(-2px); background: #fff; }
-        .b-ghost { background: rgba(255,255,255,.08); color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(10px); }
-        .b-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,.14); }
 
         .col { position: absolute; top: 50%; z-index: 7; width: min(27vw, 330px); transform-origin: center;
           transition: opacity .5s ease, transform .6s cubic-bezier(.16,1,.3,1); }
@@ -386,13 +398,11 @@ export default function HeroTransform() {
           background:
             /* a soft black pool at the centre, painted last-on-top, so the two
                washes dissolve into blackness as they meet behind the figure */
-            radial-gradient(ellipse 30% 46% at 50% 50%, rgba(6,6,10,.60), rgba(6,6,10,.24) 52%, transparent 84%),
-            /* wide washes that carry well past the sides and only give out
-               near the middle, so the colour spreads across the screen */
-            radial-gradient(ellipse 105% 118% at -4% 50%, rgba(30,106,236,.62), rgba(25,88,200,.42) 22%, rgba(20,66,152,.26) 40%, rgba(15,46,108,.14) 56%, rgba(11,32,76,.055) 72%, transparent 92%),
-            radial-gradient(ellipse 105% 118% at 104% 50%, rgba(222,26,94,.56), rgba(190,22,82,.38) 22%, rgba(150,18,68,.23) 40%, rgba(108,13,52,.125) 56%, rgba(70,9,35,.05) 72%, transparent 92%); }
-        .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.07); z-index: 10; }
-        .prog span { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg,#7fb6ff,#a6b4c6,#e31c5f); }
+            radial-gradient(ellipse 44% 66% at 50% 50%, rgba(6,6,10,.72), rgba(6,6,10,.34) 48%, transparent 82%),
+            /* long, very gradual falloff — the light reaches toward the middle
+               but is all but gone by the time it gets there */
+            radial-gradient(ellipse 72% 104% at 0% 50%, rgba(30,106,236,.58), rgba(23,82,190,.33) 18%, rgba(17,56,132,.17) 34%, rgba(12,36,88,.075) 52%, rgba(10,26,66,.025) 68%, transparent 88%),
+            radial-gradient(ellipse 72% 104% at 100% 50%, rgba(222,26,94,.52), rgba(178,21,77,.30) 18%, rgba(130,16,60,.15) 34%, rgba(80,10,40,.065) 52%, rgba(58,7,29,.022) 68%, transparent 88%); }
         .hint { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 10; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); transition: opacity .4s ease; }
 
         .outro { min-height: 88svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 5rem 1.5rem; }
