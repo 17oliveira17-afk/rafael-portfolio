@@ -59,6 +59,7 @@ export default function HeroTransform() {
     const pt = { x: 0, y: 0, tx: 0, ty: 0 };
     const t0 = performance.now();
     let W = 0, H = 0, cell = 10, COLS = 0, ROWS = 0;
+    let narrow = false;   // phones: the figure lifts to make room for the copy
     let mask: Uint8Array | null = null, noise: Float32Array | null = null;
     const offA = document.createElement("canvas"), offB = document.createElement("canvas"), offC = document.createElement("canvas");
 
@@ -85,6 +86,7 @@ export default function HeroTransform() {
     };
 
     const build = () => {
+      narrow = window.innerWidth <= 860;
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.floor(W * dpr); canvas.height = Math.floor(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -117,10 +119,14 @@ export default function HeroTransform() {
           `translate(-50%, calc(-50% - ${rise.toFixed(2)}vh)) scale(${(1 + q * 0.1).toFixed(4)})`;
       }
       if (portraitRef.current) {
-        // figure leans toward the pointer with a slight 3D tilt
+        // phones: as the avatar resolves, the figure rises and eases back so the
+        // columns below get real room instead of fighting it for space
+        const lift = narrow ? smooth(0.26, 0.72, q) : 0;
+        const sc = 1 - lift * 0.2;
         portraitRef.current.style.transform =
-          `translate3d(${(pt.x * 22).toFixed(2)}px, ${(pt.y * 14).toFixed(2)}px, 0)` +
-          ` rotateY(${(pt.x * 4.5).toFixed(2)}deg) rotateX(${(pt.y * -3).toFixed(2)}deg)`;
+          `translate3d(${(pt.x * 22).toFixed(2)}px, calc(${(pt.y * 14).toFixed(2)}px - ${(lift * 13).toFixed(2)}svh), 0)` +
+          ` rotateY(${(pt.x * 4.5).toFixed(2)}deg) rotateX(${(pt.y * -3).toFixed(2)}deg)` +
+          ` scale(${sc.toFixed(4)})`;
       }
 
       ctx.clearRect(0, 0, W, H);
@@ -299,6 +305,10 @@ export default function HeroTransform() {
               <hr />
               <p className="label">Currently</p>
               <div className="pills"><Pill>Design Lead @ Thoughtworks</Pill></div>
+              <p className="mini">Designing URPI PRO, a B2B credit platform for MiBanco — previously Rappi and CVC Corp.</p>
+            </div>
+            <div className="cta-block" style={blk(0.66, -1)}>
+              <Link href="/about" className="full-story">Full story <span aria-hidden>→</span></Link>
             </div>
           </div>
 
@@ -405,6 +415,12 @@ export default function HeroTransform() {
           transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
         .col :global(.ht-pill:hover) { background: rgba(255,255,255,.1); border-color: rgba(127,182,255,.5); color: #fff; transform: translateY(-2px); }
         .col :global(.ht-dot) { width: 5px; height: 5px; border-radius: 50%; background: rgba(127,182,255,.75); flex-shrink: 0; }
+        .mini { font-size: .74rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,.45); margin: .85rem 0 0; }
+        .full-story { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.35rem;
+          font-size: .82rem; font-weight: 600; color: #fff; text-decoration: none;
+          background: rgba(0,113,227,.9); border-radius: 100px; padding: .55rem 1.25rem;
+          transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease; }
+        .full-story:hover { transform: translateY(-2px); background: #0071e3; }
         .role { font-size: .76rem; font-weight: 500; letter-spacing: .015em; color: rgba(255,255,255,.58); margin: 0; }
         .stats { display: flex; flex-direction: column; gap: .95rem; }
         .stat { display: flex; align-items: baseline; gap: .7rem; }
@@ -422,39 +438,59 @@ export default function HeroTransform() {
         .f-year { font-size: .66rem; color: rgba(255,255,255,.35); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
         .wrap { height: 420svh; position: relative; }
 
-        /* ── Phones / tablets ─────────────────────────────────────────
-           Desktop is untouched. Here the figure gets the width it needs,
-           the copy scales up so it stays readable, and the two side
-           columns condense into a centred stack under the avatar:
-           identity first, then the impact pills. The denser blocks
-           (stats, company list, skills) are dropped so the screen keeps
-           breathing. */
+        /* ── Tablets: same composition, tighter ───────────────────── */
         @media (max-width: 1180px) {
-          .wrap { height: 330svh; }
-          .portrait { width: min(88vw, 62svh); margin-bottom: -6vh; }
-          .behind { font-size: clamp(2.2rem, 15vw, 6rem); top: 40%; }
-          .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
-          .hint { bottom: 1.1rem; }
-          .intro h1 { font-size: clamp(1.55rem, 7.2vw, 2.4rem); line-height: 1.12; margin-bottom: 1.15rem; }
-          .intro::before { width: 118vw; height: 210%; }
-          .btns :global(.btn-blue), .btns :global(.btn-white-ghost) { font-size: .85rem; padding: .6rem 1.35rem; }
-
-          .cols { top: auto; bottom: 3rem; transform: none; flex-direction: column;
-            align-items: center; gap: 1.4rem; padding: 0 1.25rem; }
-          .col { width: 100%; text-align: center; }
-          .right { text-align: center; }
-          /* keep identity + impact only */
-          .left  > div:nth-child(n+2) { display: none; }
-          .right > div:nth-child(1), .right > div:nth-child(3) { display: none; }
-          .right hr { display: none; }
-          .col .eyebrow, .right .eyebrow { justify-content: center; }
-          .pills, .pills.r { justify-content: center; }
-          .col :global(h2), .col h2 { font-size: 1.5rem; }
-          .label { margin-bottom: .6rem; }
+          .wrap { height: 380svh; }
+          .cols { padding: 0 1.25rem; }
+          .col { width: 30vw; }
+          .col :global(h2), .col h2 { font-size: 1.25rem; }
+          .body, .mini { font-size: .72rem; }
+          .stat strong { font-size: 1.25rem; }
+          .f-name { font-size: .88rem; }
+          .col :global(.ht-pill) { font-size: .66rem; padding: .28rem .6rem; }
+          .portrait { width: min(80vh, 56vw); }
         }
-        @media (max-width: 1180px) and (orientation: landscape) {
-          .portrait { width: min(52vw, 74svh); }
-          .cols { bottom: 1.6rem; gap: 1rem; }
+
+        /* ── Phones: the same three acts, stacked to fit ───────────────
+           The figure keeps the stage; the two columns become one centred
+           column that sits under it, so the story reads the same as on
+           desktop rather than turning into a different page. */
+        @media (max-width: 860px) {
+          .wrap { height: 400svh; }
+          .portrait { width: min(94vw, 52svh); margin-bottom: 0; }
+          .stage { align-items: flex-start; padding-top: 12svh; }
+          .behind { font-size: clamp(2.4rem, 17vw, 7rem); top: 26%; }
+          .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
+          .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
+          .intro::before { width: 124vw; height: 200%; }
+          .btns :global(.btn-blue), .btns :global(.btn-white-ghost) { font-size: .82rem; padding: .58rem 1.3rem; }
+          .hint { bottom: 1.1rem; }
+
+          .cols { top: auto; bottom: 0; transform: none; flex-direction: column;
+            align-items: stretch; gap: 1rem; padding: 0 1.4rem 2rem; }
+          .col { width: 100%; text-align: left; }
+          .right { text-align: left; }
+          .right .eyebrow { flex-direction: row; }
+          .firm { justify-content: flex-start; }
+          .pills, .pills.r { justify-content: flex-start; }
+          .col :global(h2), .col h2 { font-size: 1.4rem; }
+          .col hr { margin: .9rem 0 .8rem; }
+          .stats { flex-direction: row; gap: 1.1rem; flex-wrap: wrap; }
+          .stat { flex-direction: column; gap: .1rem; align-items: flex-start; }
+          .stat strong { font-size: 1.3rem; min-width: 0; }
+          .stat span { font-size: .66rem; }
+          /* trim to what fits: identity + CTA on the left, impact on the right */
+          .left  > div:nth-child(2) { display: none; }
+          .right > div:nth-child(3) { display: none; }
+          .mini { display: none; }
+          .full-story { margin-top: .9rem; }
+        }
+
+        /* ── Short/landscape phones ───────────────────────────────── */
+        @media (max-width: 860px) and (orientation: landscape) {
+          .portrait { width: min(46vw, 76svh); }
+          .stage { align-items: center; padding-top: 0; }
+          .cols { max-height: 70svh; }
         }
 
         /* Studio lights painted as one full-viewport layer. Two radial
