@@ -349,7 +349,7 @@ export default function HeroTransform() {
           mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
 
-        .intro { position: absolute; left: 0; right: 0; bottom: clamp(2.4rem,7vh,5rem); z-index: 8; text-align: center; padding: 0 1.5rem;
+        .intro { position: absolute; left: 0; right: 0; bottom: clamp(5.6rem,11vh,8.5rem); z-index: 8; text-align: center; padding: 0 1.5rem;
           transition: opacity .5s ease; isolation: isolate; }
         /* soft shadow pooled behind the copy so it reads over the figure,
            with no visible box — just a blurred falloff */
@@ -420,7 +420,8 @@ export default function HeroTransform() {
           .wrap { height: 330svh; }
           .portrait { width: min(88vw, 62svh); margin-bottom: -6vh; }
           .behind { font-size: clamp(2.2rem, 15vw, 6rem); top: 40%; }
-          .intro { bottom: clamp(1.5rem, 5vh, 3rem); }
+          .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
+          .hint { bottom: 1.1rem; }
           .intro h1 { font-size: clamp(1.55rem, 7.2vw, 2.4rem); line-height: 1.12; margin-bottom: 1.15rem; }
           .intro::before { width: 118vw; height: 210%; }
           .btns :global(.btn-blue), .btns :global(.btn-white-ghost) { font-size: .85rem; padding: .6rem 1.35rem; }
@@ -459,7 +460,7 @@ export default function HeroTransform() {
             radial-gradient(ellipse 72% 104% at 0% 50%, rgba(30,106,236,.58), rgba(23,82,190,.33) 18%, rgba(17,56,132,.17) 34%, rgba(12,36,88,.075) 52%, rgba(10,26,66,.025) 68%, transparent 88%),
             radial-gradient(ellipse 72% 104% at 100% 50%, rgba(222,26,94,.52), rgba(178,21,77,.30) 18%, rgba(130,16,60,.15) 34%, rgba(80,10,40,.065) 52%, rgba(58,7,29,.022) 68%, transparent 88%); }
         /* same animated mouse cue the home hero used */
-        .hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; transition: opacity .4s ease; }
+        .hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 10; transition: opacity .4s ease; }
         .mouse { display: block; width: 24px; height: 40px; border: 1.5px solid rgba(255,255,255,.3); border-radius: 12px; position: relative; }
         .wheel { position: absolute; top: 6px; left: 50%; margin-left: -1.5px; width: 3px; height: 8px;
           background: rgba(255,255,255,.6); border-radius: 2px; animation: htScrollMouse 2s ease infinite; }

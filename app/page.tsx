@@ -292,33 +292,9 @@ export default function Home() {
       <HeroTransform />
 
       {/* ══════════════════════════════════════════════════
-          CINEMATIC IMAGE — design at scale
+          INTRO — dark statement
       ══════════════════════════════════════════════════ */}
-      <BigImageReveal
-        src="/cinematic/leadership-team-3.jpg"
-        alt="Design at scale — leading a discovery session with the team"
-        minHeight="70vh"
-        overlay={
-          <ScrollReveal>
-            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.85)", marginBottom: "1.25rem" }}>
-              Design at scale
-            </p>
-            <RevealText
-              lines={["Where strategy", "meets the craft."]}
-              style={{
-                fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
-                letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
-                maxWidth: 900, margin: "0 auto",
-              }}
-            />
-          </ScrollReveal>
-        }
-      />
-
-      {/* ══════════════════════════════════════════════════
-          INTRO — white, statement
-      ══════════════════════════════════════════════════ */}
-      <section className="section-white" style={{ padding: "10rem 2rem" }}>
+      <section className="section-black" style={{ padding: "10rem 2rem" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <ScrollReveal>
             <p className="t-eyebrow" style={{ marginBottom: "2rem" }}>The work</p>
@@ -329,10 +305,10 @@ export default function Home() {
               ]}
               style={{
                 fontSize: "clamp(2.2rem,5vw,5rem)", fontWeight: 700, letterSpacing: "-.03em",
-                lineHeight: 1.05, color: "#1d1d1f", marginBottom: "2rem",
+                lineHeight: 1.05, color: "#f5f5f7", marginBottom: "2rem",
               }}
             />
-            <p className="t-body" style={{ maxWidth: 580, margin: "0 auto", fontSize: "1.15rem" }}>
+            <p className="t-body" style={{ maxWidth: 580, margin: "0 auto", fontSize: "1.15rem", color: "rgba(255,255,255,.62)" }}>
               I lead design for fintech, travel, and growth products — turning architectural decisions into outcomes that ship and scale.
             </p>
           </ScrollReveal>
@@ -374,6 +350,30 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════
+          CINEMATIC IMAGE — design at scale
+      ══════════════════════════════════════════════════ */}
+      <BigImageReveal
+        src="/cinematic/leadership-team-3.jpg"
+        alt="Design at scale — leading a discovery session with the team"
+        minHeight="70vh"
+        overlay={
+          <ScrollReveal>
+            <p style={{ fontSize: ".7rem", fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.85)", marginBottom: "1.25rem" }}>
+              Design at scale
+            </p>
+            <RevealText
+              lines={["Where strategy", "meets the craft."]}
+              style={{
+                fontSize: "clamp(1.8rem, 5vw, 4.5rem)", fontWeight: 700,
+                letterSpacing: "-.03em", lineHeight: 1.05, color: "#fff",
+                maxWidth: 900, margin: "0 auto",
+              }}
+            />
+          </ScrollReveal>
+        }
+      />
 
       {/* ══════════════════════════════════════════════════
           WORK INTRO — building anticipation
