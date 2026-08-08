@@ -123,10 +123,10 @@ export default function HeroTransform() {
         // phones: as the avatar resolves, the figure rises and eases back so the
         // columns below get real room instead of fighting it for space
         const lift = narrow ? smooth(0.26, 0.72, q) : 0;
-        const sc = 1 - lift * 0.2;
+        const sc = 1 - lift * 0.05;
         // moves opposite the cursor: pointer right, figure drifts left
         portraitRef.current.style.transform =
-          `translate3d(${(pt.x * -26).toFixed(2)}px, calc(${(pt.y * -16).toFixed(2)}px - ${(lift * 13).toFixed(2)}svh), 0)` +
+          `translate3d(${(pt.x * -26).toFixed(2)}px, calc(${(pt.y * -16).toFixed(2)}px - ${(lift * 5).toFixed(2)}svh), 0)` +
           ` rotateY(${(pt.x * -4).toFixed(2)}deg) rotateX(${(pt.y * 2.6).toFixed(2)}deg)` +
           ` scale(${sc.toFixed(4)})`;
       }
@@ -474,8 +474,8 @@ export default function HeroTransform() {
           /* paint past the bottom so no black band shows when Safari's
              URL bar retracts and the viewport grows past 100svh */
           .lights { inset: -1px -1px -18svh -1px; }
-          .portrait { width: min(104vw, 62svh); margin-bottom: 0; }
-          .stage { align-items: flex-start; padding-top: 7svh; }
+          .portrait { width: min(112vw, 70svh); margin-bottom: 0; }
+          .stage { align-items: flex-start; padding-top: 3svh; }
           .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 24%; }
           .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
           .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
