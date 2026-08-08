@@ -319,7 +319,7 @@ export default function HeroTransform() {
             <div style={blk(0.36, 1)}>
               <p className="eyebrow r">Track record</p>
               <div className="firms">
-                {[["Thoughtworks", "2025 —"], ["Rappi", "2022 – 25"], ["CVC Corp", "2018 – 22"]].map(([c, y]) => (
+                {[["Thoughtworks", "2025 – now"], ["Rappi", "2022 – 25"], ["CVC Corp", "2018 – 22"]].map(([c, y]) => (
                   <div className="firm" key={c}><span className="f-name">{c}</span><span className="f-year">{y}</span></div>
                 ))}
               </div>
