@@ -311,6 +311,11 @@ export default function HeroTransform() {
               <div className="pills"><Pill>Design Lead @ Thoughtworks</Pill></div>
               <p className="mini">Designing URPI PRO, a B2B credit platform for MiBanco — previously Rappi and CVC Corp.</p>
             </div>
+            <div className="mob-summary" style={blk(0.60, -1)}>
+              {[["14+", "years designing"], ["30M+", "users reached"], ["+212%", "conversion"], ["9", "markets"]].map(([n, l]) => (
+                <span key={l}><strong>{n}</strong>{l}</span>
+              ))}
+            </div>
             <div className="cta-block" style={blk(0.66, -1)}>
               <Link href="/about" className="btn-blue full-story">Full story →</Link>
             </div>
@@ -413,6 +418,7 @@ export default function HeroTransform() {
         .col :global(.full-story) { margin-top: 1.35rem; font-size: .84rem; padding: .58rem 1.35rem;
           transition: transform .3s cubic-bezier(.16,1,.3,1), background .15s ease; }
         .col :global(.full-story:hover) { transform: translateY(-2px); }
+        .mob-summary { display: none; }
         .role { font-size: .76rem; font-weight: 500; letter-spacing: .015em; color: rgba(255,255,255,.58); margin: 0; }
         .stats { display: flex; flex-direction: column; gap: .95rem; }
         .stat { display: flex; align-items: baseline; gap: .7rem; }
@@ -481,7 +487,12 @@ export default function HeroTransform() {
           .role { font-size: .82rem; }
           .label { margin: .9rem 0 .5rem; }
           .pills { justify-content: flex-start; }
-          .full-story { margin-top: 1rem; }
+          .mob-summary { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .9rem; margin-top: .95rem; }
+          .mob-summary span { display: flex; align-items: baseline; gap: .38rem;
+            font-size: .68rem; color: rgba(255,255,255,.5); line-height: 1.25; }
+          .mob-summary strong { font-size: .96rem; font-weight: 800; letter-spacing: -.02em;
+            color: #fff; font-variant-numeric: tabular-nums; }
+          .full-story { margin-top: 1.15rem; }
           /* a soft pool so the copy always reads over the figure */
           .cols::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; top: -16%;
             background: linear-gradient(to top, rgba(6,6,10,.94) 42%, rgba(6,6,10,.72) 70%, transparent 100%);
