@@ -464,15 +464,19 @@ export default function HeroTransform() {
           .portrait { width: min(80vh, 56vw); }
         }
 
-        /* ── Phones: the same three acts, stacked to fit ───────────────
-           The figure keeps the stage; the two columns become one centred
-           column that sits under it, so the story reads the same as on
-           desktop rather than turning into a different page. */
+        /* ── Phones ────────────────────────────────────────────────────
+           Same three acts, but the figure is the point: it gets the screen,
+           and the only copy that survives is identity → one fact → CTA.
+           Everything else (stats grid, track record, impact, skills) is cut
+           so nothing lands on top of the avatar. */
         @media (max-width: 860px) {
-          .wrap { height: 400svh; }
-          .portrait { width: min(94vw, 52svh); margin-bottom: 0; }
-          .stage { align-items: flex-start; padding-top: 12svh; }
-          .behind { font-size: clamp(2.4rem, 17vw, 7rem); top: 26%; }
+          .wrap { height: 380svh; }
+          /* paint past the bottom so no black band shows when Safari's
+             URL bar retracts and the viewport grows past 100svh */
+          .lights { inset: -1px -1px -18svh -1px; }
+          .portrait { width: min(104vw, 62svh); margin-bottom: 0; }
+          .stage { align-items: flex-start; padding-top: 7svh; }
+          .behind { font-size: clamp(2.6rem, 19vw, 7.5rem); top: 24%; }
           .intro { bottom: clamp(4.6rem, 9vh, 6rem); }
           .intro h1 { font-size: clamp(1.5rem, 6.6vw, 2.1rem); line-height: 1.14; margin-bottom: 1.1rem; }
           .intro::before { width: 124vw; height: 200%; }
@@ -480,30 +484,30 @@ export default function HeroTransform() {
           .hint { bottom: 1.1rem; }
 
           .cols { top: auto; bottom: 0; transform: none; flex-direction: column;
-            align-items: stretch; gap: 1rem; padding: 0 1.4rem 2rem; }
+            align-items: stretch; gap: 0; padding: 0 1.4rem 2.2rem; }
           .col { width: 100%; text-align: left; }
-          .right { text-align: left; }
-          .right .eyebrow { flex-direction: row; }
-          .firm { justify-content: flex-start; }
-          .pills, .pills.r { justify-content: flex-start; }
-          .col :global(h2), .col h2 { font-size: 1.4rem; }
-          .col hr { margin: .9rem 0 .8rem; }
-          .stats { flex-direction: row; gap: 1.1rem; flex-wrap: wrap; }
-          .stat { flex-direction: column; gap: .1rem; align-items: flex-start; }
-          .stat strong { font-size: 1.3rem; min-width: 0; }
-          .stat span { font-size: .66rem; }
-          /* trim to what fits: identity + CTA on the left, impact on the right */
-          .left  > div:nth-child(2) { display: none; }
-          .right > div:nth-child(3) { display: none; }
+          /* keep only: profile · currently · full story */
+          .right { display: none; }
+          .left > div:nth-child(2) { display: none; }
           .mini { display: none; }
-          .full-story { margin-top: .9rem; }
+          .col hr { display: none; }
+          .col .eyebrow { justify-content: flex-start; margin-bottom: .55rem; }
+          .col :global(h2), .col h2 { font-size: 1.6rem; margin-bottom: .2rem; }
+          .role { font-size: .82rem; }
+          .label { margin: .9rem 0 .5rem; }
+          .pills { justify-content: flex-start; }
+          .full-story { margin-top: 1rem; }
+          /* a soft pool so the copy always reads over the figure */
+          .cols::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; top: -16%;
+            background: linear-gradient(to top, rgba(6,6,10,.94) 42%, rgba(6,6,10,.72) 70%, transparent 100%);
+            pointer-events: none; z-index: -1; }
         }
 
         /* ── Short/landscape phones ───────────────────────────────── */
         @media (max-width: 860px) and (orientation: landscape) {
-          .portrait { width: min(46vw, 76svh); }
+          .portrait { width: min(52vw, 84svh); }
           .stage { align-items: center; padding-top: 0; }
-          .cols { max-height: 70svh; }
+          .cols { padding-bottom: 1.4rem; }
         }
 
         /* Studio lights painted as one full-viewport layer. Two radial
