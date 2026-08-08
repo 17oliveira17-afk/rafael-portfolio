@@ -254,6 +254,7 @@ export default function HeroTransform() {
           </div>
 
           {/* SIDE COLUMNS — build around the figure on scroll */}
+          <div className="cols">
           {/* LEFT — who I am · blocks 1, 3, 5, 7 of the cascade */}
           <div className="col left">
             <div style={blk(0.30, -1)}>
@@ -300,6 +301,7 @@ export default function HeroTransform() {
                 {["Product strategy", "Design systems", "Research", "AI-first delivery"].map((s) => <Pill key={s}>{s}</Pill>)}
               </div>
             </div>
+          </div>
           </div>
 
           <div className="hint" aria-hidden style={{ opacity: intro }}>
@@ -348,11 +350,14 @@ export default function HeroTransform() {
         .intro h1 :global(em) { font-style: italic; font-weight: 800; text-shadow: none; }
         .btns { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
 
-        .col { position: absolute; top: 50%; z-index: 7; width: min(27vw, 330px); transform-origin: center;
+        /* one row holding both columns: they share a top line so the two
+           groups read as aligned, and the row itself is centred on the figure */
+        .cols { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); z-index: 7;
+          display: flex; align-items: flex-start; justify-content: space-between;
+          padding: 0 clamp(1.5rem, 5vw, 5.5rem); pointer-events: none; }
+        .col { width: min(27vw, 330px); pointer-events: auto;
           transition: opacity .5s ease, transform .6s cubic-bezier(.16,1,.3,1); }
-        /* both columns centred on the same axis as the figure */
-        .left { left: clamp(1.5rem, 5vw, 5.5rem); transform: translateY(-50%); }
-        .right { right: clamp(1.5rem, 5vw, 5.5rem); transform: translateY(-50%); text-align: right; }
+        .right { text-align: right; }
         .col :global(h2), .col h2 { font-size: clamp(1.2rem,2.05vw,1.85rem); font-weight: 800; letter-spacing: -.032em; line-height: 1.1; margin: 0 0 .45rem; }
         /* eyebrow gets a short accent rule, matching the section labels used
            across the rest of the site */
@@ -408,10 +413,10 @@ export default function HeroTransform() {
           .intro::before { width: 118vw; height: 210%; }
           .btns :global(.btn-blue), .btns :global(.btn-white-ghost) { font-size: .85rem; padding: .6rem 1.35rem; }
 
-          .col { position: absolute; left: 0; right: 0; width: auto; padding: 0 1.25rem;
-            text-align: center; transform: none; }
-          .left  { top: auto; bottom: 7.5rem; }
-          .right { top: auto; bottom: 3.2rem; text-align: center; }
+          .cols { top: auto; bottom: 3rem; transform: none; flex-direction: column;
+            align-items: center; gap: 1.4rem; padding: 0 1.25rem; }
+          .col { width: 100%; text-align: center; }
+          .right { text-align: center; }
           /* keep identity + impact only */
           .left  > div:nth-child(n+2) { display: none; }
           .right > div:nth-child(1), .right > div:nth-child(3) { display: none; }
@@ -423,7 +428,7 @@ export default function HeroTransform() {
         }
         @media (max-width: 1180px) and (orientation: landscape) {
           .portrait { width: min(52vw, 74svh); }
-          .left { bottom: 5.5rem; } .right { bottom: 2rem; }
+          .cols { bottom: 1.6rem; gap: 1rem; }
         }
 
         /* Studio lights painted as one full-viewport layer. Two radial
