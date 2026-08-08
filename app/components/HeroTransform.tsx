@@ -460,9 +460,14 @@ export default function HeroTransform() {
            so nothing lands on top of the avatar. */
         @media (max-width: 860px) {
           .wrap { height: 380svh; }
-          /* paint past the bottom so no black band shows when Safari's
-             URL bar retracts and the viewport grows past 100svh */
-          .lights { inset: -1px -1px -18svh -1px; }
+          /* Runs the full height: taller ellipses seated slightly low, strongest
+             through the middle and thinning at both ends — and painting past
+             the bottom so no band shows when Safari's URL bar retracts. */
+          .lights { inset: -1px -1px -22svh -1px;
+            background:
+              radial-gradient(ellipse 38% 50% at 50% 46%, rgba(6,6,10,.58), rgba(6,6,10,.24) 54%, transparent 88%),
+              radial-gradient(ellipse 90% 126% at -8% 48%, rgba(30,106,236,.58), rgba(23,82,190,.34) 20%, rgba(17,56,132,.18) 38%, rgba(12,36,88,.085) 56%, rgba(10,26,66,.03) 74%, transparent 93%),
+              radial-gradient(ellipse 90% 126% at 108% 48%, rgba(222,26,94,.52), rgba(178,21,77,.31) 20%, rgba(130,16,60,.16) 38%, rgba(80,10,40,.075) 56%, rgba(58,7,29,.026) 74%, transparent 93%); }
           .portrait { width: min(138vw, 92svh); margin-bottom: 0;
             -webkit-mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 86%, rgba(0,0,0,.5) 95%, transparent 100%); }
@@ -494,8 +499,8 @@ export default function HeroTransform() {
             color: #fff; font-variant-numeric: tabular-nums; }
           .full-story { margin-top: 1.15rem; }
           /* a soft pool so the copy always reads over the figure */
-          .cols::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; top: -16%;
-            background: linear-gradient(to top, rgba(6,6,10,.94) 42%, rgba(6,6,10,.72) 70%, transparent 100%);
+          .cols::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; top: -26%;
+            background: linear-gradient(to top, rgba(6,6,10,.80) 24%, rgba(6,6,10,.52) 55%, rgba(6,6,10,.22) 78%, transparent 100%);
             pointer-events: none; z-index: -1; }
         }
 
