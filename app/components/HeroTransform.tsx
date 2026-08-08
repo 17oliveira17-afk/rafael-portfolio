@@ -223,7 +223,7 @@ export default function HeroTransform() {
     <section style={{ background: "#06060a", color: "#fff" }}>
 
       {/* nav stays in its at-the-top state for the whole transformation */}
-      <div ref={wrapRef} data-nav-transparent style={{ height: "420svh", position: "relative" }}>
+      <div ref={wrapRef} data-nav-transparent className="wrap">
         <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
           <div className="lights" aria-hidden />
 
@@ -337,8 +337,9 @@ export default function HeroTransform() {
 
         .col { position: absolute; top: 50%; z-index: 7; width: min(27vw, 330px); transform-origin: center;
           transition: opacity .5s ease, transform .6s cubic-bezier(.16,1,.3,1); }
-        .left { left: clamp(1.5rem, 5vw, 5.5rem); margin-top: -8vh; transform: translateY(-50%); }
-        .right { right: clamp(1.5rem, 5vw, 5.5rem); margin-top: -8vh; text-align: right; }
+        /* both columns centred on the same axis as the figure */
+        .left { left: clamp(1.5rem, 5vw, 5.5rem); transform: translateY(-50%); }
+        .right { right: clamp(1.5rem, 5vw, 5.5rem); transform: translateY(-50%); text-align: right; }
         .col :global(h2), .col h2 { font-size: clamp(1.2rem,2.05vw,1.85rem); font-weight: 800; letter-spacing: -.032em; line-height: 1.1; margin: 0 0 .45rem; }
         /* eyebrow gets a short accent rule, matching the section labels used
            across the rest of the site */
@@ -376,7 +377,41 @@ export default function HeroTransform() {
         .firm:hover .f-name { color: #fff; }
         .f-name { font-size: 1.02rem; font-weight: 700; letter-spacing: -.022em; color: rgba(255,255,255,.92); transition: color .25s ease; }
         .f-year { font-size: .66rem; color: rgba(255,255,255,.35); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
-        @media (max-width: 1180px) { .col { display: none; } }
+        .wrap { height: 420svh; position: relative; }
+
+        /* ── Phones / tablets ─────────────────────────────────────────
+           Desktop is untouched. Here the figure gets the width it needs,
+           the copy scales up so it stays readable, and the two side
+           columns condense into a centred stack under the avatar:
+           identity first, then the impact pills. The denser blocks
+           (stats, company list, skills) are dropped so the screen keeps
+           breathing. */
+        @media (max-width: 1180px) {
+          .wrap { height: 330svh; }
+          .portrait { width: min(88vw, 62svh); margin-bottom: -6vh; }
+          .behind { font-size: clamp(2.2rem, 15vw, 6rem); top: 40%; }
+          .intro { bottom: clamp(1.5rem, 5vh, 3rem); }
+          .intro h1 { font-size: clamp(1.55rem, 7.2vw, 2.4rem); line-height: 1.12; margin-bottom: 1.15rem; }
+          .intro::before { width: 118vw; height: 210%; }
+          .btns :global(.btn-blue), .btns :global(.btn-white-ghost) { font-size: .85rem; padding: .6rem 1.35rem; }
+
+          .col { position: absolute; left: 0; right: 0; width: auto; padding: 0 1.25rem;
+            text-align: center; transform: none; }
+          .left  { top: auto; bottom: 7.5rem; }
+          .right { top: auto; bottom: 3.2rem; text-align: center; }
+          /* keep identity + impact only */
+          .left  > div:nth-child(n+2) { display: none; }
+          .right > div:nth-child(1), .right > div:nth-child(3) { display: none; }
+          .right hr { display: none; }
+          .col .eyebrow, .right .eyebrow { justify-content: center; }
+          .pills, .pills.r { justify-content: center; }
+          .col :global(h2), .col h2 { font-size: 1.5rem; }
+          .label { margin-bottom: .6rem; }
+        }
+        @media (max-width: 1180px) and (orientation: landscape) {
+          .portrait { width: min(52vw, 74svh); }
+          .left { bottom: 5.5rem; } .right { bottom: 2rem; }
+        }
 
         /* Studio lights painted as one full-viewport layer. Two radial
            gradients pinned to the far edges — blue key on the left, hot
