@@ -366,7 +366,7 @@ export default function HeroTransform() {
         .behind span:last-child { font-size: 1.16em; }
 
         .stage { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; z-index: 3; perspective: 1400px; }
-        .portrait { position: relative; width: min(114vh, 79vw, 990px); aspect-ratio: 1/1; margin-bottom: -12vh; will-change: transform;
+        .portrait { position: relative; width: min(107vh, 74vw, 930px); aspect-ratio: 1/1; margin-bottom: -12vh; will-change: transform;
           -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%);
           mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,.6) 90%, transparent 100%); }
         .portrait canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
